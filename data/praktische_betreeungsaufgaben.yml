@@ -1,152 +1,4 @@
 sections:
-  title: Angaben zur demenzerkrankten Person
-  fields:
-
-    verhaeltnis:
-      label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
-      type: text
-      required: true
-
-    alter:
-      label: Wie alt ist er/sie?
-      type: number
-      required: true
-
-    pflegebedarf:
-      label: Seit wann hat er/sie verstärkten Unterstützungs- und/oder Pflegebedarf?
-      type: text
-      required: true
-
-    diagnose:
-      label: Gibt es eine ärztliche Demenzdiagnose?
-      type: toggle
-      subfields:
-        diagnosedetail:
-          label: Welche Demenzdiagnose gibt es?
-          type: text
-          when:
-            diagnose: true
-
-    pflegegeld:
-      label: Bekommt er/sie Pflegegeld?
-      type: toggle
-      subfields:
-        pflegegelddetail:
-          label: Welche Stufe Pflegegeld erhält er/sie?
-          type: radio
-          options:
-            - 1
-            - 2
-            - 3
-            - 4
-            - 5
-          when:
-            pflegegeld: true
-
-    haushalt:
-      label: Leben Sie in einem gemeinsamen Haushalt?
-      type: toggle
-
-    unterstuetzungsangebot:
-      label: Nimmt er/sie derzeit Unterstützungsangebote für demenzerkrankte Personen in Anspruch?
-      type: toggle
-      subfield:
-        unterstuetzungsangebotdetail:
-          label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
-          type: text
-          when:
-            diagnose: true
-
-
-sections:
-  title: Angaben zur betreuende Person
-  fields:
-
-    alter:
-      label: Wie alt sind Sie?
-      type: number
-      required: true
-
-    beruf:
-      label: Sind Sie berufstätig?
-      type: toggle
-      subfield:
-        berufdetail:
-          label: In welchen wöchentlichen Stundenausmaß sind Sie berufstätig?
-          type: number
-          when:
-            beruf: true
-
-    sorgepflichten:
-      label: Haben Sie noch weitere Betreuungs- oder Sorgepflichten, etwa für Kinder oder andere (pflegebedürftige) Angehörige?
-      type: toggle
-      subfield:
-        sorgepflichtendetail:
-          label: Welche Betreuungs- oder Sorgepflichten haben Sie?
-          type: text
-          when:
-            sorgepflichten: true
-
-    unterstuetzungsangebote:
-      label: Nehmen Sie derzeit Unterstützungsangebote für pflegende Angehörige in Anspruch?
-      type: toggle
-      subfield:
-        unterstuetzungsangebotedetails:
-          label: Welche Unterstützungsangebote nehmen Sie in Anspruch (etwa Angehörigenstammtisch, Gespräche mit professionellen HelferInnen)
-          type: text
-          when:
-            unterstuetzungsangebote: true
-
-    demenz:
-      label: Haben Sie bereits Vorwissen über die Erkrankung Demenz und ihren Verlauf?
-      type: toggle
-      subfield:
-        demenzdetails:
-          label: Welches Vorwissen besitzen Sie über die Erkrankung Demenz?
-          type: text
-          when:
-            demenz: true
-
-    beratungsgespraech:
-      label: Welche Erwartungen an das Beratungsgespräch haben Sie für sich selbst und für Ihre/n Angehörige/n?
-      type: text
-      required: true
-
-    situationseinschaetzung:
-      label: Offene Fragen zur Situationseinschätzung
-      type: heading
-      size: medium
-
-    pflege:
-      label: Wie ist es dazu gekommen, dass Sie selbst für Ihre/n Angehörige/n sorgen und wie lange machen Sie das schon?
-      type: text
-      required: true
-
-    verantwortung:
-      label: Wer fühlt sich sonst noch verantwortlich für Ihre/n Angehörige/n?
-      type: text
-      required: true
-
-    professionelleHilfe:
-      label: Wird Ihr/e Angehörige/r auch von professionellen HelferInnen unterstützt, beispielsweise Hauskrankenhilfe, Heimhilfe, 24h-Betreuung oder in Tageszentren?
-      type: text
-      required: true
-
-    zufriedenheit:
-      label: Wie zufrieden sind sie persönlich mit der derzeitigen Unterstützung?
-      type: range
-      step: 1
-      min: 1
-      max: 10
-      required: true
-      subfield:
-        zufriedenheitdetail:
-          label: Was sind die Gründe Ihrer Einschätzung?
-          type: text
-          required: true
-
-
-sections:
   title: Praktische Betreeungsaufgaben
   fields:
 
@@ -231,7 +83,7 @@ sections:
             when:
               unterstuetzungzahnpflegehaarhautnagelpflege: true
 
- unterstuetzungtoilette:
+  unterstuetzungtoilette:
         label: Unterstützung bei der Nahrungsaufnahme
         type: toggle
         text:
@@ -250,7 +102,7 @@ sections:
             when:
                unterstuetzungtoilette: true
 
-   unterstuetzungkleidung:
+    unterstuetzungkleidung:
         label: Unterstützung beim An- und Auskleiden bzw. Zurechtlegen der Kleidung
         type: toggle
         text:
@@ -269,24 +121,24 @@ sections:
             when:
                unterstuetzungkleidung: true
 
-     unterstuetzunghaushalt:
-        label: Unterstützung bei der Haushaltsführung bzw. Einkäufen
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzunghaushaltdetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzunghaushalt: true
+    unterstuetzunghaushalt:
+      label: Unterstützung bei der Haushaltsführung bzw. Einkäufen
+      type: toggle
+      text:
+        - nein, keine Unterstützung notwendig
+        - ja, Unterstützung ist notwendig
+      required: true
+      subfield:
+          unterstuetzunghaushaltdetail:
+          label:  Von wem wird diese Unterstützung geleistet?
+          type: checkboxes
+          options:
+            anderer:  Jemand anderer leistet die Unterstützung.
+            teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+            ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+            ich:  Ich leiste die gesamte Unterstützung.
+          when:
+              unterstuetzunghaushalt: true
 
     unterstuetzungweglaufen:
         label: Vermeiden des Weglaufens
@@ -346,7 +198,7 @@ sections:
             when:
                unterstuetzunganwesend: true
 
-      unterstuetzungbehoerdenwege:
+    unterstuetzungbehoerdenwege:
         label: Behördenwege erledigen, sich über Unterstützungsleistungen informieren und/oder diese organisieren
         type: toggle
         text:
@@ -364,119 +216,3 @@ sections:
               ich:  Ich leiste die gesamte Unterstützung.
             when:
                unterstuetzungbehoerdenwege: true
-
-
-  sections:
-    title: Umgang mit Verhaltensveränderungen des/der Demenzerkrankten Angehörigen?
-    fields:
-
-      veränderungen:
-        label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch bei Ihrem/Ihrer Angehörigen auftreten und wie Sie damit zurechtkommen. Die Skala, auf der Sie das einschätzen können, reicht von „sehr gut“ bis „schlecht“.
-        type: heading
-        size: medium
-
-      wiederholung:
-        label: Der/die Angehörige … wiederholt sich oft (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
-        type: toggle
-        required: true
-        subfield:
-          wiederholungdetail:
-            label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
-            type: radio
-            options:
-              sehr gut: sehr gut
-              gut: gut
-              mittelmäßig: mittelmäßig
-              schlecht: schlecht
-            when:
-              wiederholung: true
-
-      sachverhalte:
-        label: Der/die Angehörige … begreift schwierige Sachverhalte nicht mehr (z. B. kann einer längeren Erklärung nicht folgen)
-        type: toggle
-        required: true
-        subfield:
-          sachverhaltedetail:
-            label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
-            type: radio
-            options:
-              sehr gut: sehr gut
-              gut: gut
-              mittelmäßig: mittelmäßig
-              schlecht: schlecht
-            when:
-              sachverhalte: true
-
-      erzaehltes:
-        label: Der/die Angehörige … vergisst Erzähltes schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
-        type: toggle
-        required: true
-        subfield:
-          erzaehltesdetail:
-            label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
-            type: radio
-            options:
-              sehr gut: sehr gut
-              gut: gut
-              mittelmäßig: mittelmäßig
-              schlecht: schlecht
-            when:
-              erzaehltes: true
-
-      merkwuerdigedinge:
-        label: Der/die Angehörige … tut Dinge, die mir merkwürdig oder unlogisch erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
-        type: toggle
-        required: true
-        subfield:
-          merkwuerdigedingedetail:
-            label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
-            type: radio
-            options:
-              sehr gut: sehr gut
-              gut: gut
-              mittelmäßig: mittelmäßig
-              schlecht: schlecht
-            when:
-              merkwuerdigedinge: true
-
-      unruhig:
-        label: Der/die Angehörige … ist unruhig (z. B. hat einen erhöhten Bewegungsdrang)
-        type: toggle
-        required: true
-        subfield:
-          unruhigdetail:
-            label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
-            type: radio
-            options:
-              sehr gut: sehr gut
-              gut: gut
-              mittelmäßig: mittelmäßig
-              schlecht: schlecht
-            when:
-              unruhig: true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

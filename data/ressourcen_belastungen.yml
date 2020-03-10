@@ -1,0 +1,72 @@
+sections:
+  title: Persönliche Ressourcen und Belastungen
+  fields:
+
+    kraftausdauer:
+      label: Alles in allem, was ist Ihrer Meinung nach hilfreich und gibt Ihnen Kraft und Ausdauer?
+      type: list
+      required: true
+
+    belastend:
+      label: Welche drei Aspekte sind Ihrer Einschätzung nach besonders belastend für Sie?
+      type: list
+      required: true
+
+    individuelleSituation:
+      label: Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
+      type: heading
+      size: medium
+
+    rueckzugsmoeglichkeit:
+      label: Ich habe das Gefühl, dass ich genügend Rückzugsmöglichkeiten habe.
+      type: radio
+      options:
+        stimmt: stimmt
+        stimmt teilweise: stimmt teilweise
+        stimmt nicht: stimmt nicht
+      required: true
+
+    hobbysinteressen:
+      label: Mir steht ausreichend Zeit für meine Hobbys und Interessen zur Verfügung.
+      type: radio
+      options:
+        stimmt: stimmt
+        stimmt teilweise: stimmt teilweise
+        stimmt nicht: stimmt nicht
+      required: true
+
+    freizeitaktivitaeten:
+      label: Es ist mir regelmäßig möglich, mich mit anderen Menschen zu treffen (z. B. Freizeitaktivitäten, Ausflüge, Kaffee trinken etc.).
+      type: radio
+      options:
+        stimmt: stimmt
+        stimmt teilweise: stimmt teilweise
+        stimmt nicht: stimmt nicht
+      required: true
+
+     zeitfuermichselbst:
+      label: Ich habe genug Zeit für mich selbst, um mich zu erholen.
+      type: radio
+      options:
+        stimmt: stimmt
+        stimmt teilweise: stimmt teilweise
+        stimmt nicht: stimmt nicht
+      required: true
+
+    beziehungen:
+      label: Es ist mir regelmäßig möglich, meine Beziehung zu Familienangehörigen, Verwandten, FreundInnen und Bekannten zu pflegen.
+      type: radio
+      options:
+        stimmt: stimmt
+        stimmt teilweise: stimmt teilweise
+        stimmt nicht: stimmt nicht
+      required: true
+
+    anforderungen:
+      label: Ich kann die Anforderungen meiner Umgebung (z. B. Familie, Arbeitsplatz) und die Anforderungen durch die Pflege gut vereinbaren.
+      type: radio
+      options:
+        stimmt: stimmt
+        stimmt teilweise: stimmt teilweise
+        stimmt nicht: stimmt nicht
+      required: true

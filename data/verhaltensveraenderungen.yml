@@ -1,0 +1,168 @@
+sections:
+  title: Umgang mit Verhaltensveränderungen des/der Demenzerkrankten Angehörigen?
+  fields:
+
+    veränderungen:
+      label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch bei Ihrem/Ihrer Angehörigen auftreten und wie Sie damit zurechtkommen. Die Skala, auf der Sie das einschätzen können, reicht von „sehr gut“ bis „schlecht“.
+      type: heading
+      size: medium
+
+    wiederholung:
+      label: Der/die Angehörige … wiederholt sich oft (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
+      type: toggle
+      required: true
+      subfield:
+        wiederholungdetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            wiederholung: true
+
+    sachverhalte:
+      label: Der/die Angehörige … begreift schwierige Sachverhalte nicht mehr (z. B. kann einer längeren Erklärung nicht folgen)
+      type: toggle
+      required: true
+      subfield:
+        sachverhaltedetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            sachverhalte: true
+
+    erzaehltes:
+      label: Der/die Angehörige … vergisst Erzähltes schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
+      type: toggle
+      required: true
+      subfield:
+        erzaehltesdetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            erzaehltes: true
+
+    merkwuerdigedinge:
+      label: Der/die Angehörige … tut Dinge, die mir merkwürdig oder unlogisch erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
+      type: toggle
+      required: true
+      subfield:
+        merkwuerdigedingedetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            merkwuerdigedinge: true
+
+    unruhig:
+      label: Der/die Angehörige … ist unruhig (z. B. hat einen erhöhten Bewegungsdrang)
+      type: toggle
+      required: true
+      subfield:
+        unruhigdetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            unruhig: true
+
+    aggresiv:
+      label: Der/die Angehörige … wird verbal aggresiv (z.B. schimpft, wird laut)
+      type: toggle
+      required: true
+      subfield:
+        aggresivdetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            aggresiv: true
+
+    handgfreilich:
+      label: Der/die Angehörige … wird handgreiflich (z. B. hält mich stark fest und/oder schlägt mich)
+      type: toggle
+      required: true
+      subfield:
+        handgfreilichdetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            handgfreilich: true
+
+    wahnhafteideen:
+      label: Der/die Angehörige … sieht/hört Dinge, die nicht da sind (z. B. wahnhafte Ideen)
+      type: toggle
+      required: true
+      subfield:
+        wahnhafteideendetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            wahnhafteideen: true
+
+    schwankendeverfassung:
+      label: Der/die Angehörige … zeigt schwankende Verfassung (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
+      type: toggle
+      required: true
+      subfield:
+        schwankendeverfassungdetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            schwankendeverfassung: true
+
+    verhaltenweise:
+      label: Der/die Angehörige … zeigt Verhaltensweisen, die ihn/sie selbst gefährden (z. B. schaltet den Herd ein und vergisst darauf)
+      type: toggle
+      required: true
+      subfield:
+        verhaltenweisedetail:
+          label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+          type: radio
+          options:
+            sehr gut: sehr gut
+            gut: gut
+            mittelmäßig: mittelmäßig
+            schlecht: schlecht
+          when:
+            verhaltenweise: true
