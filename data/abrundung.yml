@@ -1,8 +1,7 @@
-sections:
-  title: Abrundung des Gesprächs
-  fields:
+title: Abrundung des Gesprächs
+fields:
 
-    hoffnung:
-      label: Haben Sie noch Anmerkungen zu unserem Gespräch oder gibt es noch Dinge, die Sie fragen möchten?
-      type: text
-      required: true
+  hoffnung:
+    label: Haben Sie noch Anmerkungen zu unserem Gespräch oder gibt es noch Dinge, die Sie fragen möchten?
+    type: text
+    required: true

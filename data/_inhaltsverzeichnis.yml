@@ -1,10 +1,9 @@
-order:
-  - demenzerkrankte_person
-  - betreuende_person
-  - praktische_betreeungsaufgaben
-  - verhaltensveraenderungen
-  - gesundheit
-  - ressourcen_belastungen
-  - finanzen_wohnsituation
-  - zukunft
-  - abrundung
+- demenzerkrankte_person
+- betreuende_person
+- praktische_betreeungsaufgaben
+- verhaltensveraenderungen
+- gesundheit
+- ressourcen_belastungen
+- finanzen_wohnsituation
+- zukunft
+- abrundung

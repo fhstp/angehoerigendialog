@@ -1,58 +1,57 @@
-sections:
-  title: Angaben zur demenzerkrankten Person
-  fields:
+title: Angaben zur demenzerkrankten Person
+fields:
 
-    verhaeltnis:
-      label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
-      type: text
-      required: true
+  verhaeltnis:
+    label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
+    type: text
+    required: true
 
-    alter:
-      label: Wie alt ist er/sie?
-      type: number
-      required: true
+  alter:
+    label: Wie alt ist er/sie?
+    type: number
+    required: true
 
-    pflegebedarf:
-      label: Seit wann hat er/sie verstärkten Unterstützungs- und/oder Pflegebedarf?
-      type: text
-      required: true
+  pflegebedarf:
+    label: Seit wann hat er/sie verstärkten Unterstützungs- und/oder Pflegebedarf?
+    type: text
+    required: true
 
-    diagnose:
-      label: Gibt es eine ärztliche Demenzdiagnose?
-      type: toggle
-      subfields:
-        diagnosedetail:
-          label: Welche Demenzdiagnose gibt es?
-          type: text
-          when:
-            diagnose: true
+  diagnose:
+    label: Gibt es eine ärztliche Demenzdiagnose?
+    type: toggle
+    subfields:
+      diagnosedetail:
+        label: Welche Demenzdiagnose gibt es?
+        type: text
+        when:
+          diagnose: true
 
-    pflegegeld:
-      label: Bekommt er/sie Pflegegeld?
-      type: toggle
-      subfields:
-        pflegegelddetail:
-          label: Welche Stufe Pflegegeld erhält er/sie?
-          type: radio
-          options:
-            - 1
-            - 2
-            - 3
-            - 4
-            - 5
-          when:
-            pflegegeld: true
+  pflegegeld:
+    label: Bekommt er/sie Pflegegeld?
+    type: toggle
+    subfields:
+      pflegegelddetail:
+        label: Welche Stufe Pflegegeld erhält er/sie?
+        type: radio
+        options:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+        when:
+          pflegegeld: true
 
-    haushalt:
-      label: Leben Sie in einem gemeinsamen Haushalt?
-      type: toggle
+  haushalt:
+    label: Leben Sie in einem gemeinsamen Haushalt?
+    type: toggle
 
-    unterstuetzungsangebot:
-      label: Nimmt er/sie derzeit Unterstützungsangebote für demenzerkrankte Personen in Anspruch?
-      type: toggle
-      subfield:
-        unterstuetzungsangebotdetail:
-          label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
-          type: text
-          when:
-            diagnose: true
+  unterstuetzungsangebot:
+    label: Nimmt er/sie derzeit Unterstützungsangebote für demenzerkrankte Personen in Anspruch?
+    type: toggle
+    subfield:
+      unterstuetzungsangebotdetail:
+        label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
+        type: text
+        when:
+          diagnose: true

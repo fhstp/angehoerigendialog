@@ -1,14 +1,13 @@
-sections:
-  title: Blick in die Zukunft
-  fields:
+title: Blick in die Zukunft
+fields:
 
-    hoffnung:
-      label: Wenn Sie an die Zukunft denken, was gibt Ihnen Hoffnung?
-      type: text
-      required: true
+  hoffnung:
+    label: Wenn Sie an die Zukunft denken, was gibt Ihnen Hoffnung?
+    type: text
+    required: true
 
-    zukunft:
-      label: Was würden Sie sich für die Zukunft wünschen?
-      required: true
+  zukunft:
+    label: Was würden Sie sich für die Zukunft wünschen?
+    required: true
 
 

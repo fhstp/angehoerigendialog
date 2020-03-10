@@ -1,218 +1,217 @@
-sections:
-  title: Praktische Betreeungsaufgaben
-  fields:
+title: Praktische Betreeungsaufgaben
+fields:
 
-    situationseinschaetzung:
-      label: Benötigen Sie Ihrer Einschätzung nach bei der Durchführung oder Organisation in folgenden Bereichen Unterstützung?
-      type: heading
-      size: medium
+  situationseinschaetzung:
+    label: Benötigen Sie Ihrer Einschätzung nach bei der Durchführung oder Organisation in folgenden Bereichen Unterstützung?
+    type: heading
+    size: medium
 
-    unterstuetzungmahlzeit:
-        label: Unterstützung beim Zubereiten der Mahlzeiten
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwenidg
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-          unterstuetzungmahlzeitdetail:
-            label: Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-              unterstuetzungmahlzeit: true
+  unterstuetzungmahlzeit:
+    label: Unterstützung beim Zubereiten der Mahlzeiten
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwenidg
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+      unterstuetzungmahlzeitdetail:
+        label: Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungmahlzeit: true
 
-    unterstuetzungnahrungsaufnahme:
-        label: Unterstützung bei der Nahrungsaufnahme
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-          unterstuetzungnahrungsaufnahmedetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-              unterstuetzungnahrungsaufnahme: true
+  unterstuetzungnahrungsaufnahme:
+    label: Unterstützung bei der Nahrungsaufnahme
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+      unterstuetzungnahrungsaufnahmedetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungnahrungsaufnahme: true
 
-    unterstuetzungbadenwaschenduschen:
-        label: Unterstützung bei der Nahrungsaufnahme
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-          unterstuetzungbadenwaschenduschendetail:
-            label: Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-              unterstuetzungbadenwaschenduschen: true
+  unterstuetzungbadenwaschenduschen:
+    label: Unterstützung bei der Nahrungsaufnahme
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+      unterstuetzungbadenwaschenduschendetail:
+        label: Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungbadenwaschenduschen: true
 
-    unterstuetzungzahnpflegehaarhautnagelpflege:
-        label: Unterstützung bei der Nahrungsaufnahme
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-          unterstuetzungzahnpflegehaarhautnagelpflegedetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-              unterstuetzungzahnpflegehaarhautnagelpflege: true
+  unterstuetzungzahnpflegehaarhautnagelpflege:
+    label: Unterstützung bei der Nahrungsaufnahme
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+      unterstuetzungzahnpflegehaarhautnagelpflegedetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungzahnpflegehaarhautnagelpflege: true
 
   unterstuetzungtoilette:
-        label: Unterstützung bei der Nahrungsaufnahme
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzungtoilettedetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzungtoilette: true
+    label: Unterstützung bei der Nahrungsaufnahme
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+      unterstuetzungtoilettedetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungtoilette: true
 
-    unterstuetzungkleidung:
-        label: Unterstützung beim An- und Auskleiden bzw. Zurechtlegen der Kleidung
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzungkleidungdetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzungkleidung: true
+  unterstuetzungkleidung:
+    label: Unterstützung beim An- und Auskleiden bzw. Zurechtlegen der Kleidung
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+      unterstuetzungkleidungdetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+            unterstuetzungkleidung: true
 
-    unterstuetzunghaushalt:
-      label: Unterstützung bei der Haushaltsführung bzw. Einkäufen
-      type: toggle
-      text:
-        - nein, keine Unterstützung notwendig
-        - ja, Unterstützung ist notwendig
-      required: true
-      subfield:
-          unterstuetzunghaushaltdetail:
-          label:  Von wem wird diese Unterstützung geleistet?
-          type: checkboxes
-          options:
-            anderer:  Jemand anderer leistet die Unterstützung.
-            teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-            ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-            ich:  Ich leiste die gesamte Unterstützung.
-          when:
-              unterstuetzunghaushalt: true
+  unterstuetzunghaushalt:
+    label: Unterstützung bei der Haushaltsführung bzw. Einkäufen
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+        unterstuetzunghaushaltdetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+            unterstuetzunghaushalt: true
 
-    unterstuetzungweglaufen:
-        label: Vermeiden des Weglaufens
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzungweglaufendetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzungweglaufen: true
+  unterstuetzungweglaufen:
+    label: Vermeiden des Weglaufens
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+        unterstuetzungweglaufendetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungweglaufen: true
 
-    unterstuetzungverletzungen:
-        label: Vermeiden von Stürzen und Verletzungen
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzungverletzungendetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzungverletzungen: true
+  unterstuetzungverletzungen:
+    label: Vermeiden von Stürzen und Verletzungen
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+        unterstuetzungverletzungendetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungverletzungen: true
 
 
-    unterstuetzunganwesend:
-        label: Persönlich verfügbar/anwesend sein
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzunganwesenddetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzunganwesend: true
+  unterstuetzunganwesend:
+    label: Persönlich verfügbar/anwesend sein
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+        unterstuetzunganwesenddetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzunganwesend: true
 
-    unterstuetzungbehoerdenwege:
-        label: Behördenwege erledigen, sich über Unterstützungsleistungen informieren und/oder diese organisieren
-        type: toggle
-        text:
-          - nein, keine Unterstützung notwendig
-          - ja, Unterstützung ist notwendig
-        required: true
-        subfield:
-           unterstuetzungbehoerdenwegedetail:
-            label:  Von wem wird diese Unterstützung geleistet?
-            type: checkboxes
-            options:
-              anderer:  Jemand anderer leistet die Unterstützung.
-              teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
-              ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
-              ich:  Ich leiste die gesamte Unterstützung.
-            when:
-               unterstuetzungbehoerdenwege: true
+  unterstuetzungbehoerdenwege:
+    label: Behördenwege erledigen, sich über Unterstützungsleistungen informieren und/oder diese organisieren
+    type: toggle
+    text:
+      - nein, keine Unterstützung notwendig
+      - ja, Unterstützung ist notwendig
+    required: true
+    subfield:
+        unterstuetzungbehoerdenwegedetail:
+        label:  Von wem wird diese Unterstützung geleistet?
+        type: checkboxes
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.
+        when:
+          unterstuetzungbehoerdenwege: true

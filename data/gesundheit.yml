@@ -1,145 +1,144 @@
-sections:
-  title: Gesundheit
-  fields:
+title: Gesundheit
+fields:
 
-    gesundheit:
-      label: Offene Fragen zur Gesundheit der angehörigen Person
-      type: heading
-      size: medium
+  gesundheit:
+    label: Offene Fragen zur Gesundheit der angehörigen Person
+    type: heading
+    size: medium
 
-    gesundheitszustand:
-      label: Wenn Sie auf die letzten zwei Wochen zurückblicken, wie gesund fühlen Sie sich derzeit?
-      type: range
-      step: 1
-      min:
-        - 1
-        - sehr schlecht
-      max:
-        - 10
-        - sehr gesund
-      required: true
+  gesundheitszustand:
+    label: Wenn Sie auf die letzten zwei Wochen zurückblicken, wie gesund fühlen Sie sich derzeit?
+    type: range
+    step: 1
+    min:
+      - 1
+      - sehr schlecht
+    max:
+      - 10
+      - sehr gesund
+    required: true
 
-    nervlichebelastung:
-      label: Wie schätzen Sie Ihre nervliche Belastung ein?
-      type: range
-      step: 1
-      min:
-        - 1
-        - nicht belastend
-      max:
-        - 10
-        - sehr stark belastend
-      required: true
+  nervlichebelastung:
+    label: Wie schätzen Sie Ihre nervliche Belastung ein?
+    type: range
+    step: 1
+    min:
+      - 1
+      - nicht belastend
+    max:
+      - 10
+      - sehr stark belastend
+    required: true
 
-    energiereserven:
-      label: Wie schätzen Sie Ihre Energiereserven ein?
-      type: range
-      step: 1
-      min:
-        - 1
-        - beinahe vollständig verbraucht
-      max:
-        - 10
-        - sehr gute Energiereserven
-      required: true
+  energiereserven:
+    label: Wie schätzen Sie Ihre Energiereserven ein?
+    type: range
+    step: 1
+    min:
+      - 1
+      - beinahe vollständig verbraucht
+    max:
+      - 10
+      - sehr gute Energiereserven
+    required: true
 
-    einschaetzung:
-      label: Sorgen Sie Ihrer Einschätzung nach gut dafür, dass es Ihnen selbst gut geht?
-      type: text
-      required: true
+  einschaetzung:
+    label: Sorgen Sie Ihrer Einschätzung nach gut dafür, dass es Ihnen selbst gut geht?
+    type: text
+    required: true
 
-    kraefte:
-      label: Ich nehme an, Sie haben sich schon überlegt, wie Sie für sich selbst sorgen können. Was hilft Ihnen, Ihre Kräfte zu erhalten?
-      type: text
-      required: true
+  kraefte:
+    label: Ich nehme an, Sie haben sich schon überlegt, wie Sie für sich selbst sorgen können. Was hilft Ihnen, Ihre Kräfte zu erhalten?
+    type: text
+    required: true
 
-    koerperlichebeschwerden:
-      label: Haben Sie körperliche Beschwerden, die Ihnen bei der Pflege und Betreuung Ihres/Ihrer Angehörigen im Wege stehen? Zum Beispiel Probleme beim Gehen oder Rückenschmerzen?
-      type: text
-      required: true
+  koerperlichebeschwerden:
+    label: Haben Sie körperliche Beschwerden, die Ihnen bei der Pflege und Betreuung Ihres/Ihrer Angehörigen im Wege stehen? Zum Beispiel Probleme beim Gehen oder Rückenschmerzen?
+    type: text
+    required: true
 
-    gefuehle:
-      label: Welche Gefühle kommen bei Ihnen während der Betreuung manchmal zum Vorschein?
-      type: text
-      required: true
+  gefuehle:
+    label: Welche Gefühle kommen bei Ihnen während der Betreuung manchmal zum Vorschein?
+    type: text
+    required: true
 
-    erschoepfung:
-      label: Ich fühle mich oft körperlich erschöpft.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  erschoepfung:
+    label: Ich fühle mich oft körperlich erschöpft.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    gesundheit:
-      label: Durch die Pflege wird meine Gesundheit angegriffen.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  pflegegesundheit:
+    label: Durch die Pflege wird meine Gesundheit angegriffen.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    eigenekraft:
-      label: Die Pflege kostet viel von meiner eigenen Kraft.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  eigenekraft:
+    label: Die Pflege kostet viel von meiner eigenen Kraft.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    eigenegesundheit:
-      label: Ich kann mich zu wenig um meine eigene Gesundheit kümmern.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  eigenegesundheit:
+    label: Ich kann mich zu wenig um meine eigene Gesundheit kümmern.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    schlafstoerung:
-      label: Ich leide unter Schlafstörungen.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  schlafstoerung:
+    label: Ich leide unter Schlafstörungen.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    eindruck:
-      label: Habe den Eindruck alles alleine schaffen zu müssen.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  eindruck:
+    label: Habe den Eindruck alles alleine schaffen zu müssen.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    zuviel:
-      label: Es fällt mir schwer zuzugeben, dass es mir manchmal zuviel wird.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  zuviel:
+    label: Es fällt mir schwer zuzugeben, dass es mir manchmal zuviel wird.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    hemmungen:
-      label: Habe Hemmungen um Hilfe zu bitten.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  hemmungen:
+    label: Habe Hemmungen um Hilfe zu bitten.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
 
-    betreuungsaufgaben:
-      label: Es fällt mir schwer Betreuungsaufgaben abzugeben.
-      type: radio
-      options:
-        stimmt: stimmt
-        stimmt teilweise: stimmt teilweise
-        stimmt nicht: stimmt nicht
-      required: true
+  betreuungsaufgaben:
+    label: Es fällt mir schwer Betreuungsaufgaben abzugeben.
+    type: radio
+    options:
+      stimmt: stimmt
+      stimmt teilweise: stimmt teilweise
+      stimmt nicht: stimmt nicht
+    required: true
