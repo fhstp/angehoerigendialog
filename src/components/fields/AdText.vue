@@ -11,13 +11,11 @@
 </template>
 
 <script>
+import field from '@/mixins/field'
+
 export default {
   name: 'AdText',
-  props: {
-    fieldId: String,
-    fieldLabel: String,
-    fieldRequired: Boolean
-  }
+  mixins: [field]
 };
 </script>
 
