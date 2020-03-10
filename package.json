@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -16,18 +17,15 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-plugin-pwa": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
     "@vue/cli-plugin-vuex": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^6.1.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-vue": "^6.2.2",
     "husky": "^4.2.3",
-    "prettier": "^1.19.1",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
@@ -43,16 +41,21 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/recommended",
       "eslint:recommended",
-      "@vue/prettier"
+      "plugin:vue/recommended"
+    ],
+    "plugins": [
+      "vue"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ]
     }
-  },
-  "prettier": {
-    "singleQuote": true
   },
   "browserslist": [
     "> 1%",
