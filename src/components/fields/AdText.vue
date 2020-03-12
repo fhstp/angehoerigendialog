@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label :for="fieldId">{{ fieldLabel }}</label>
+    <label :for="fieldId">{{ field_label }}</label>
     <textarea
-      :id="fieldId"
+      :id="field_id"
       :required="fieldRequired"
       cols="50"
       rows="3"

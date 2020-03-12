@@ -1,7 +1,7 @@
 export default {
   props: {
-    fieldId: {type: String, default: undefined},
-    fieldLabel: {type: String, default: undefined},
-    fieldRequired: {type:Boolean, default: undefined}
-  }
+    field_id: {type: String, default: undefined},
+    field_label: {type: String, default: undefined},
+    field_required: {type: Boolean, default: false}
+  },
 }

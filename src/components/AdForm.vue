@@ -11,16 +11,11 @@
         :key="fieldId"
         class="question"
       >
-        <component
-          :is="mapping['text']"
-          v-if="field.type === 'text'"
-          :field-id="`${sectionId}-${fieldId}`"
-          :field-label="field.label"
-          :field-required="field.required"
+        <!-- TODO prepare field props -->
+        <AdField
+          v-bind="prepareFieldProps(field)"
+          :field_id="`${sectionId}-${fieldId}`"
         />
-        <div v-else>
-          Frage von Typ: {{ field.type }}
-        </div>
       </div>
     </section>
   </div>
@@ -28,21 +23,28 @@
 
 <script>
 import form from '@/data/form.json'
-
-// Question Types
-import AdText from './fields/AdText';
+import AdField from '@/components/fields/AdField.vue';
 
 export default {
   name: 'AdForm',
   components: {
-    AdText
+    AdField
   },
   created() {
-    this.mapping = {
-      text: 'AdText'
-    };
-
     this.form = form
+  },
+  methods: {
+    prepareFieldProps: field => {
+      const newField = {};
+      for (const key in field) {
+        if (key === 'subfields') {
+          newField['subquestions'] = field[key];
+        } else {
+          newField[`field_${key}`] = field[key];
+        }
+      }
+      return newField;
+    }
   }
 };
 </script>
