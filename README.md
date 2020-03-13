@@ -1,4 +1,4 @@
-# prototype
+# Angehörigendialog
 
 ## Project setup
 ```
