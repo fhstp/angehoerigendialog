@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <label :for="fieldId">{{ field_label }}</label>
+  <div class="an-text">
+    <label :for="field_id">{{ field_label }}</label>
     <textarea
       :id="field_id"
-      :required="fieldRequired"
+      :required="field_required"
       cols="50"
       rows="3"
     />
@@ -14,9 +14,7 @@
 import field from '@/mixins/field'
 
 export default {
-  name: 'AdText',
+  name: 'AnText',
   mixins: [field]
 };
 </script>
-
-<style lang="scss" scoped></style>

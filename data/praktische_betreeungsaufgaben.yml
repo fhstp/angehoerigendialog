@@ -13,7 +13,7 @@ fields:
       - nein, keine Unterstützung notwenidg
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
+    subfields:
       unterstuetzungmahlzeitdetail:
         label: Von wem wird diese Unterstützung geleistet?
         type: checkboxes
@@ -32,7 +32,7 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
+    subfields:
       unterstuetzungnahrungsaufnahmedetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
@@ -51,7 +51,7 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
+    subfields:
       unterstuetzungbadenwaschenduschendetail:
         label: Von wem wird diese Unterstützung geleistet?
         type: checkboxes
@@ -70,7 +70,7 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
+    subfields:
       unterstuetzungzahnpflegehaarhautnagelpflegedetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
@@ -89,7 +89,7 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
+    subfields:
       unterstuetzungtoilettedetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
@@ -108,7 +108,7 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
+    subfields:
       unterstuetzungkleidungdetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
@@ -127,8 +127,8 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
-        unterstuetzunghaushaltdetail:
+    subfields:
+      unterstuetzunghaushaltdetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
         options:
@@ -146,8 +146,8 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
-        unterstuetzungweglaufendetail:
+    subfields:
+      unterstuetzungweglaufendetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
         options:
@@ -165,8 +165,8 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
-        unterstuetzungverletzungendetail:
+    subfields:
+      unterstuetzungverletzungendetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
         options:
@@ -185,8 +185,8 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
-        unterstuetzunganwesenddetail:
+    subfields:
+      unterstuetzunganwesenddetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
         options:
@@ -204,8 +204,8 @@ fields:
       - nein, keine Unterstützung notwendig
       - ja, Unterstützung ist notwendig
     required: true
-    subfield:
-        unterstuetzungbehoerdenwegedetail:
+    subfields:
+      unterstuetzungbehoerdenwegedetail:
         label:  Von wem wird diese Unterstützung geleistet?
         type: checkboxes
         options:

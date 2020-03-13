@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <AdForm />
-    <AdVisualisation />
+    <AnForm />
+    <AnVisualisation />
   </div>
 </template>
 
 <script>
-import AdForm from '@/components/AdForm.vue';
-import AdVisualisation from '@/components/AdVisualisation.vue';
+import AnForm from '@/components/AnForm.vue';
+import AnVisualisation from '@/components/AnVisualisation.vue';
 
 export default {
   components: {
-    AdForm,
-    AdVisualisation
+    AnForm,
+    AnVisualisation
   }
 };
 </script>

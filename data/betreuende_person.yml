@@ -9,7 +9,7 @@ fields:
   beruf:
     label: Sind Sie berufstätig?
     type: toggle
-    subfield:
+    subfields:
       berufdetail:
         label: In welchen wöchentlichen Stundenausmaß sind Sie berufstätig?
         type: number
@@ -19,7 +19,7 @@ fields:
   sorgepflichten:
     label: Haben Sie noch weitere Betreuungs- oder Sorgepflichten, etwa für Kinder oder andere (pflegebedürftige) Angehörige?
     type: toggle
-    subfield:
+    subfields:
       sorgepflichtendetail:
         label: Welche Betreuungs- oder Sorgepflichten haben Sie?
         type: text
@@ -29,7 +29,7 @@ fields:
   unterstuetzungsangebote:
     label: Nehmen Sie derzeit Unterstützungsangebote für pflegende Angehörige in Anspruch?
     type: toggle
-    subfield:
+    subfields:
       unterstuetzungsangebotedetails:
         label: Welche Unterstützungsangebote nehmen Sie in Anspruch (etwa Angehörigenstammtisch, Gespräche mit professionellen HelferInnen)
         type: text
@@ -39,7 +39,7 @@ fields:
   demenz:
     label: Haben Sie bereits Vorwissen über die Erkrankung Demenz und ihren Verlauf?
     type: toggle
-    subfield:
+    subfields:
       demenzdetails:
         label: Welches Vorwissen besitzen Sie über die Erkrankung Demenz?
         type: text
@@ -82,7 +82,7 @@ fields:
       - 10
       - sehr zufrieden
     required: true
-    subfield:
+    subfields:
       zufriedenheitdetail:
         label: Was sind die Gründe Ihrer Einschätzung?
         type: text

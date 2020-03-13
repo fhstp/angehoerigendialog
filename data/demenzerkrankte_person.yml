@@ -49,7 +49,7 @@ fields:
   unterstuetzungsangebot:
     label: Nimmt er/sie derzeit Unterstützungsangebote für demenzerkrankte Personen in Anspruch?
     type: toggle
-    subfield:
+    subfields:
       unterstuetzungsangebotdetail:
         label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
         type: text

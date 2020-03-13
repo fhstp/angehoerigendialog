@@ -8,6 +8,5 @@ fields:
 
   zukunft:
     label: Was würden Sie sich für die Zukunft wünschen?
+    type: text
     required: true
-
-
