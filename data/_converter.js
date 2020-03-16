@@ -1,5 +1,5 @@
-const YAML = require('yaml');
 const fs = require('fs');
+const YAML = require('yaml');
 
 const contentYaml = fs.readFileSync('./data/_inhaltsverzeichnis.yml', 'utf8');
 const content = YAML.parse(contentYaml);
