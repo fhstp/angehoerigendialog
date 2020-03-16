@@ -4,7 +4,6 @@ fields:
   alter:
     label: Wie alt sind Sie?
     type: number
-    required: true
 
   beruf:
     label: Sind Sie berufstätig?
@@ -49,7 +48,6 @@ fields:
   beratungsgespraech:
     label: Welche Erwartungen an das Beratungsgespräch haben Sie für sich selbst und für Ihre/n Angehörige/n?
     type: text
-    required: true
 
   situationseinschaetzung:
     label: Offene Fragen zur Situationseinschätzung
@@ -59,17 +57,14 @@ fields:
   pflege:
     label: Wie ist es dazu gekommen, dass Sie selbst für Ihre/n Angehörige/n sorgen und wie lange machen Sie das schon?
     type: text
-    required: true
 
   verantwortung:
     label: Wer fühlt sich sonst noch verantwortlich für Ihre/n Angehörige/n?
     type: text
-    required: true
 
   professionelleHilfe:
     label: Wird Ihr/e Angehörige/r auch von professionellen HelferInnen unterstützt, beispielsweise Hauskrankenhilfe, Heimhilfe, 24h-Betreuung oder in Tageszentren?
     type: text
-    required: true
 
   zufriedenheit:
     label: Wie zufrieden sind sie persönlich mit der derzeitigen Unterstützung?
@@ -81,9 +76,7 @@ fields:
     max:
       - 10
       - sehr zufrieden
-    required: true
     subfields:
       zufriedenheitdetail:
         label: Was sind die Gründe Ihrer Einschätzung?
         type: text
-        required: true

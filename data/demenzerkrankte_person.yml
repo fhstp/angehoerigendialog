@@ -4,17 +4,14 @@ fields:
   verhaeltnis:
     label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
     type: text
-    required: true
 
   alter:
     label: Wie alt ist er/sie?
     type: number
-    required: true
 
   pflegebedarf:
     label: Seit wann hat er/sie verstärkten Unterstützungs- und/oder Pflegebedarf?
     type: text
-    required: true
 
   diagnose:
     label: Gibt es eine ärztliche Demenzdiagnose?

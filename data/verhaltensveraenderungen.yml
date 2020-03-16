@@ -9,13 +9,12 @@ fields:
   wiederholung:
     label: Der/die Angehörige … wiederholt sich oft (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
     type: toggle
-    required: true
     subfields:
       wiederholungdetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -25,13 +24,12 @@ fields:
   sachverhalte:
     label: Der/die Angehörige … begreift schwierige Sachverhalte nicht mehr (z. B. kann einer längeren Erklärung nicht folgen)
     type: toggle
-    required: true
     subfields:
       sachverhaltedetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -41,13 +39,12 @@ fields:
   erzaehltes:
     label: Der/die Angehörige … vergisst Erzähltes schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
     type: toggle
-    required: true
     subfields:
       erzaehltesdetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -57,13 +54,12 @@ fields:
   merkwuerdigedinge:
     label: Der/die Angehörige … tut Dinge, die mir merkwürdig oder unlogisch erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
     type: toggle
-    required: true
     subfields:
       merkwuerdigedingedetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -73,13 +69,12 @@ fields:
   unruhig:
     label: Der/die Angehörige … ist unruhig (z. B. hat einen erhöhten Bewegungsdrang)
     type: toggle
-    required: true
     subfields:
       unruhigdetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -89,13 +84,12 @@ fields:
   aggresiv:
     label: Der/die Angehörige … wird verbal aggresiv (z.B. schimpft, wird laut)
     type: toggle
-    required: true
     subfields:
       aggresivdetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -105,13 +99,12 @@ fields:
   handgfreilich:
     label: Der/die Angehörige … wird handgreiflich (z. B. hält mich stark fest und/oder schlägt mich)
     type: toggle
-    required: true
     subfields:
       handgfreilichdetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -121,13 +114,12 @@ fields:
   wahnhafteideen:
     label: Der/die Angehörige … sieht/hört Dinge, die nicht da sind (z. B. wahnhafte Ideen)
     type: toggle
-    required: true
     subfields:
       wahnhafteideendetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -137,13 +129,12 @@ fields:
   schwankendeverfassung:
     label: Der/die Angehörige … zeigt schwankende Verfassung (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
     type: toggle
-    required: true
     subfields:
       schwankendeverfassungdetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
@@ -153,13 +144,12 @@ fields:
   verhaltenweise:
     label: Der/die Angehörige … zeigt Verhaltensweisen, die ihn/sie selbst gefährden (z. B. schaltet den Herd ein und vergisst darauf)
     type: toggle
-    required: true
     subfields:
       verhaltenweisedetail:
         label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
         type: radio
         options:
-          sehr gut: sehr gut
+          sehr_gut: sehr gut
           gut: gut
           mittelmäßig: mittelmäßig
           schlecht: schlecht
