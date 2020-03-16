@@ -1,8 +1,8 @@
 <template>
   <div class="an-field">
     <component
-      :is="genComponentName(fieldData.type)"
-      v-if="fieldData.type === 'text'"
+      :is="fieldComponentName"
+      v-if="fieldComponentAvailable"
       v-bind="preparedFieldProps"
       :field_id="fieldId"
     />
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import AnText from '@/components/fields/AnText.vue';
+import * as fields from '@/components/fields/index.js';
 
 export default {
   name: 'AnField',
   components: {
-    AnText
+    ...fields
   },
   props: {
     fieldData: {
@@ -49,11 +49,11 @@ export default {
       }
     }
     this.preparedFieldProps = newFieldData;
-  },
-  methods: {
-    genComponentName: type => {
-     return `An${type.charAt(0).toUpperCase()}${type.slice(1)}`
-    }
+
+    const componentType = this.fieldData.type;
+    this.fieldComponentName = `An${componentType.charAt(0).toUpperCase()}${componentType.slice(1)}`;
+
+    this.fieldComponentAvailable = Object.hasOwnProperty.call(fields, this.fieldComponentName);
   }
 };
 </script>
