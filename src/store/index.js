@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 import form from '@/data/form.json';
 
 Vue.use(Vuex);
@@ -29,6 +30,7 @@ export default new Vuex.Store({
       commit('initAnswers');
     }
   },
-  strict: process.env.NODE_ENV !== 'production'
+  strict: process.env.NODE_ENV !== 'production',
+  plugins: [createPersistedState()]
   // https://vuex.vuejs.org/guide/getters.html#method-style-access
 });
