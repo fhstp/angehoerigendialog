@@ -7,7 +7,7 @@
       :field_id="fieldId"
     />
     <div v-else>
-      Frage von Typ: {{ fieldData.type }}
+      Not supported field of type: {{ fieldData.type }}
     </div>
     <div
       v-if="fieldData.subfields"
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import * as fields from '@/components/fields/index.js';
+import * as fieldComponents from '@/components/fields/index.js';
 
 export default {
   name: 'AnField',
   components: {
-    ...fields
+    ...fieldComponents
   },
   props: {
     fieldData: {
@@ -53,7 +53,7 @@ export default {
     const componentType = this.fieldData.type;
     this.fieldComponentName = `An${componentType.charAt(0).toUpperCase()}${componentType.slice(1)}`;
 
-    this.fieldComponentAvailable = Object.hasOwnProperty.call(fields, this.fieldComponentName);
+    this.fieldComponentAvailable = Object.hasOwnProperty.call(fieldComponents, this.fieldComponentName);
   }
 };
 </script>
