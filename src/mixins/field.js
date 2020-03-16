@@ -17,7 +17,7 @@ export default {
       set(value) {
         this.$store.commit('updateAnswer', {
           fieldId: this.field_id,
-          value: value
+          value
         })
       }
     }
