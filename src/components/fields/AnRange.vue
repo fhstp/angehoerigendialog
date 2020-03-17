@@ -13,7 +13,7 @@
         :min="minValue"
         :max="maxValue"
         :step="field_step"
-      >
+      />
       <span class="an-range_max-value">
         {{ maxDescription }}
       </span>
@@ -28,32 +28,32 @@ export default {
   name: 'AnRange',
   mixins: [field],
   props: {
-    field_step: {type: Number, default: 1},
-    field_min: {type: Array, required: true },
-    field_max: {type: Array, required: true},
+    field_step: { type: Number, default: 1 },
+    field_min: { type: Array, required: true },
+    field_max: { type: Array, required: true }
   },
   computed: {
     minValue() {
-      return this.field_min[0]
+      return this.field_min[0];
     },
     minDescription() {
-      return this.field_min[1]
+      return this.field_min[1];
     },
     maxValue() {
-      return this.field_max[0]
+      return this.field_max[0];
     },
     maxDescription() {
-      return this.field_max[1]
+      return this.field_max[1];
     },
-    value:{
-      get(){
+    value: {
+      get() {
         if (this.field_data !== undefined) {
           return this.field_data;
         } else {
           return this.minValue;
         }
       },
-      set(value){
+      set(value) {
         this.field_data = parseFloat(value);
       }
     }
