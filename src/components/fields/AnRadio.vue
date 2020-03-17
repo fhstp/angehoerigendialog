@@ -2,7 +2,7 @@
   <fieldset>
     <legend>{{ field_label }}</legend>
     <div
-      v-for="(optionValue, optionKey) in radioOptions"
+      v-for="(optionValue, optionKey) in field_options"
       :key="`${field_id}-${optionKey}`"
     >
       <label :for="`${field_id}-${optionKey}`">{{ optionValue }}</label>
@@ -24,7 +24,7 @@ export default {
   name: 'AnRadio',
   mixins: [field],
   props: {
-  radioOptions: {type: Object, default: undefined}
+  field_options: {type: Object, default: undefined}
 }
 };
 
