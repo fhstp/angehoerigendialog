@@ -4,6 +4,7 @@
     <label :for="`${field_id}--0`">{{ answerText[0] }}</label>
     <input
       :id="`${field_id}--0`"
+      v-model="field_data"
       type="radio"
       :name="field_id"
       value="false"
@@ -12,6 +13,7 @@
     <label :for="`${field_id}--1`">{{ answerText[1] }}</label>
     <input
       :id="`${field_id}--1`"
+      v-model="field_data"
       type="radio"
       :name="field_id"
       value="true"

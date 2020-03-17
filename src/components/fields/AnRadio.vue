@@ -8,6 +8,7 @@
       <label :for="`${field_id}-${optionKey}`">{{ optionValue }}</label>
       <input
         :id="`${field_id}-${optionKey}`"
+        v-model="field_data"
         type="radio"
         :name="field_id"
         :value="optionValue"
