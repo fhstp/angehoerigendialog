@@ -22,6 +22,9 @@ export default {
   mixins: [field],
   props: {
     fieldOptions: { type: Object, default: () => ({}) }
+  },
+  created() {
+    if (!this.field_data) this.field_data = [];
   }
 };
 </script>

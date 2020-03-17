@@ -1,10 +1,3 @@
-const genDefaultValue = type => {
-  switch (type) {
-    case 'checkboxes':
-      return [];
-  }
-};
-
 export default {
   props: {
     field_id: { type: String, default: undefined },
@@ -19,8 +12,7 @@ export default {
         const fieldParts = this.field_id.split('-');
         const section = fieldParts.shift();
         const key = fieldParts.join('-');
-        const storedValue = this.$store.state.answers[section][key];
-        return storedValue ?? genDefaultValue(this.field_type);
+        return this.$store.state.answers[section][key];
       },
       set(value) {
         this.$store.commit('updateAnswer', {
