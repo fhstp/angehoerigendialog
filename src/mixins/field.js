@@ -1,5 +1,5 @@
-const genDefaultValue = (type) => {
-  switch(type) {
+const genDefaultValue = type => {
+  switch (type) {
     case 'checkboxes':
       return [];
   }
@@ -7,12 +7,12 @@ const genDefaultValue = (type) => {
 
 export default {
   props: {
-    field_type: {type: String, required: true},
-    field_id: {type: String, default: undefined},
-    field_label: {type: String, default: undefined},
-    field_options: {type: Object, default: undefined},
-    field_required: {type: Boolean, default: true},
-    field_when: {type: Object, default: undefined}
+    field_type: { type: String, required: true },
+    field_id: { type: String, default: undefined },
+    field_label: { type: String, default: undefined },
+    field_options: { type: Object, default: undefined },
+    field_required: { type: Boolean, default: true },
+    field_when: { type: Object, default: undefined }
   },
   computed: {
     field_data: {
@@ -31,4 +31,4 @@ export default {
       }
     }
   }
-}
+};

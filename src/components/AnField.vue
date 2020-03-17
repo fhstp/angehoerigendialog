@@ -6,13 +6,8 @@
       v-bind="preparedFieldProps"
       :field_id="fieldId"
     />
-    <div v-else>
-      Not supported field of type: {{ fieldData.type }}
-    </div>
-    <div
-      v-if="fieldData.subfields"
-      class="an-field__subfields"
-    >
+    <div v-else>Not supported field of type: {{ fieldData.type }}</div>
+    <div v-if="fieldData.subfields" class="an-field__subfields">
       <AnField
         v-for="(subfield, subfieldId) in fieldData.subfields"
         :key="subfieldId"
@@ -51,9 +46,14 @@ export default {
     this.preparedFieldProps = newFieldData;
 
     const componentType = this.fieldData.type;
-    this.fieldComponentName = `An${componentType.charAt(0).toUpperCase()}${componentType.slice(1)}`;
+    this.fieldComponentName = `An${componentType
+      .charAt(0)
+      .toUpperCase()}${componentType.slice(1)}`;
 
-    this.fieldComponentAvailable = Object.hasOwnProperty.call(fieldComponents, this.fieldComponentName);
+    this.fieldComponentAvailable = Object.hasOwnProperty.call(
+      fieldComponents,
+      this.fieldComponentName
+    );
   }
 };
 </script>
