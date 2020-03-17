@@ -24,6 +24,8 @@
     "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config": "^2.0.2",
+    "@nuxtjs/eslint-module": "^1.1.0",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-pwa": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
@@ -31,9 +33,13 @@
     "@vue/cli-service": "~4.2.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-loader": "^3.0.3",
+    "eslint-plugin-nuxt": "^0.5.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-vue": "^6.2.2",
     "husky": "^4.2.3",
+    "prettier": "^1.19.1",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11",
@@ -50,21 +56,26 @@
       "node": true
     },
     "extends": [
-      "eslint:recommended",
-      "plugin:vue/recommended"
+      "@nuxtjs",
+      "prettier",
+      "prettier/vue",
+      "prettier/standard",
+      "plugin:prettier/recommended",
+      "plugin:nuxt/recommended"
     ],
     "plugins": [
+      "prettier",
       "vue"
     ],
+    "rules": {
+      "vue/component-name-in-template-casing": ["error", "PascalCase"]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
-    },
-    "rules": {
-      "quotes": [
-        "error",
-        "single"
-      ]
     }
+  },
+  "prettier": {
+    "singleQuote": true
   },
   "browserslist": [
     "> 1%",
