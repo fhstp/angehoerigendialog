@@ -6,7 +6,7 @@
       v-model="field_data"
       type="number"
       :required="field_required"
-    >
+    />
   </div>
 </template>
 
@@ -18,4 +18,3 @@ export default {
   mixins: [field]
 };
 </script>
-

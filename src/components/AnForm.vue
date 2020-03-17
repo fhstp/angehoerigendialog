@@ -1,9 +1,6 @@
 <template>
   <div>
-    <section
-      v-for="(section, sectionId) in form"
-      :key="sectionId"
-    >
+    <section v-for="(section, sectionId) in form" :key="sectionId">
       <h2>{{ section.title }}</h2>
 
       <AnField
@@ -37,11 +34,11 @@ section:nth-child(odd) {
   margin: 1rem;
 }
 .an-field:nth-child(odd) {
-  background-color: greenyellow
+  background-color: greenyellow;
 }
 
 .an-field:nth-child(even) {
-  background-color: palevioletred
+  background-color: palevioletred;
 }
 
 pre {
