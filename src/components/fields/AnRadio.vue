@@ -1,5 +1,5 @@
 <template>
-  <fieldset>
+  <fieldset class="an-radio">
     <legend>{{ field_label }}</legend>
     <div
       v-for="(optionValue, optionKey) in fieldOptions"
@@ -11,14 +11,14 @@
         v-model="field_data"
         type="radio"
         :name="field_id"
-        :value="optionValue"
+        :value="optionKey"
       />
     </div>
   </fieldset>
 </template>
 
 <script>
-import field from '@/mixins/field';
+import field from '@/mixins/field.js';
 
 export default {
   name: 'AnRadio',

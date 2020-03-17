@@ -1,5 +1,5 @@
 <template>
-  <fieldset>
+  <fieldset class="an-toggle">
     <legend>{{ field_label }}</legend>
     <label :for="`${field_id}--0`">{{ fieldText[0] }}</label>
     <input
@@ -7,22 +7,22 @@
       v-model="field_data"
       type="radio"
       :name="field_id"
-      value="false"
+      :value="false"
     />
-    <!-- Achtung: value="false" bzw. value="true" erfordert, dass im YML-File immer als erster Wert "Nein" und als zweiter Wert "Ja" steht -->
+
     <label :for="`${field_id}--1`">{{ fieldText[1] }}</label>
     <input
       :id="`${field_id}--1`"
       v-model="field_data"
       type="radio"
       :name="field_id"
-      value="true"
+      :value="true"
     />
   </fieldset>
 </template>
 
 <script>
-import field from '@/mixins/field';
+import field from '@/mixins/field.js';
 
 export default {
   name: 'AnToggle',
@@ -30,9 +30,7 @@ export default {
   props: {
     fieldText: {
       type: Array,
-      default: () => {
-        return ['Nein', 'Ja'];
-      }
+      default: () => ['Nein', 'Ja']
     }
   }
 };
