@@ -6,6 +6,7 @@
       v-bind="preparedFieldProps"
       :field_id="fieldId"
       :radio-options="fieldData.options"
+      :toggle-text="fieldData.text"
     />
     <div v-else>
       Not supported field of type: {{ fieldData.type }}

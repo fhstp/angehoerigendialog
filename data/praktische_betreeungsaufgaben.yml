@@ -43,7 +43,7 @@ fields:
           unterstuetzungnahrungsaufnahme: true
 
   unterstuetzungbadenwaschenduschen:
-    label: Unterstützung bei der Nahrungsaufnahme
+    label: Unterstützung beim Baden, Waschen, Duschen
     type: toggle
     text:
       - nein, keine Unterstützung notwendig
@@ -61,7 +61,7 @@ fields:
           unterstuetzungbadenwaschenduschen: true
 
   unterstuetzungzahnpflegehaarhautnagelpflege:
-    label: Unterstützung bei der Nahrungsaufnahme
+    label: Unterstützung bei der Zahnpflege, Haar-, Haut- und Nagelpflege
     type: toggle
     text:
       - nein, keine Unterstützung notwendig
@@ -79,7 +79,7 @@ fields:
           unterstuetzungzahnpflegehaarhautnagelpflege: true
 
   unterstuetzungtoilette:
-    label: Unterstützung bei der Nahrungsaufnahme
+    label: Unterstützung bei Toilettengängen bzw. Inkontinenzvorlagen wechseln, Intimpflege
     type: toggle
     text:
       - nein, keine Unterstützung notwendig

@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="radio">
+  <fieldset>
     <legend>{{ field_label }}</legend>
     <div
       v-for="(optionValue, optionKey) in radioOptions"
@@ -31,9 +31,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.radio{
-  background: blue;
-}
 
 </style>
