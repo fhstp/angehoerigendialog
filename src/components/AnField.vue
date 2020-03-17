@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { string_toTitleCase } from '@/helpers/string.js';
 import * as fieldComponents from '@/components/fields/index.js';
 
 export default {
@@ -38,17 +39,27 @@ export default {
   },
   created() {
     const newFieldData = {};
-    for (const key in this.fieldData) {
-      if (key !== 'subfields') {
-        newFieldData[`field_${key}`] = this.fieldData[key];
+    const transformFieldKey = oldKey => {
+      switch (oldKey) {
+        case 'subfields':
+          return oldKey;
+        case 'id':
+        case 'label':
+        case 'required':
+        case 'type':
+        case 'when':
+          return `field_${oldKey}`;
+        default:
+          return `field${string_toTitleCase(oldKey)}`;
       }
+    };
+    for (const key in this.fieldData) {
+      newFieldData[transformFieldKey(key)] = this.fieldData[key];
     }
     this.preparedFieldProps = newFieldData;
 
     const componentType = this.fieldData.type;
-    this.fieldComponentName = `An${componentType
-      .charAt(0)
-      .toUpperCase()}${componentType.slice(1)}`;
+    this.fieldComponentName = `An${string_toTitleCase(componentType)}`;
 
     this.fieldComponentAvailable = Object.hasOwnProperty.call(
       fieldComponents,

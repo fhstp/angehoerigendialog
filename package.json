@@ -68,7 +68,11 @@
       "vue"
     ],
     "rules": {
-      "vue/component-name-in-template-casing": ["error", "PascalCase"]
+      "vue/component-name-in-template-casing": [
+        "error",
+        "PascalCase"
+      ],
+      "camelcase": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
