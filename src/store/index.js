@@ -5,7 +5,7 @@ import form from '@/data/form.json';
 
 Vue.use(Vuex);
 
-const emptyForm = {}
+const emptyForm = {};
 for (const section in form) {
   emptyForm[section] = {};
 }
@@ -18,7 +18,7 @@ export default new Vuex.Store({
     initAnswers(state) {
       state.answers = emptyForm;
     },
-    updateAnswer(state, {fieldId, value}) {
+    updateAnswer(state, { fieldId, value }) {
       const fieldParts = fieldId.split('-');
       const section = fieldParts.shift();
       const key = fieldParts.join('-');
@@ -26,7 +26,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    resetForm({commit}) {
+    resetForm({ commit }) {
       commit('initAnswers');
     }
   },

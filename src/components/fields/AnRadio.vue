@@ -2,7 +2,7 @@
   <fieldset>
     <legend>{{ field_label }}</legend>
     <div
-      v-for="(optionValue, optionKey) in field_options"
+      v-for="(optionValue, optionKey) in fieldOptions"
       :key="`${field_id}-${optionKey}`"
     >
       <label :for="`${field_id}-${optionKey}`">{{ optionValue }}</label>
@@ -12,7 +12,7 @@
         type="radio"
         :name="field_id"
         :value="optionValue"
-      >
+      />
     </div>
   </fieldset>
 </template>
@@ -24,13 +24,9 @@ export default {
   name: 'AnRadio',
   mixins: [field],
   props: {
-  field_options: {type: Object, default: undefined}
-}
+    fieldOptions: { type: Object, default: undefined }
+  }
 };
-
-
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
