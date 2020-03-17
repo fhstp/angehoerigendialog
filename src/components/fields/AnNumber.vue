@@ -3,7 +3,7 @@
     <label :for="field_id">{{ field_label }}</label>
     <input
       :id="field_id"
-      v-model="field_data"
+      v-model="value"
       type="number"
       :required="field_required"
     />
@@ -15,6 +15,16 @@ import field from '@/mixins/field';
 
 export default {
   name: 'AnNumber',
-  mixins: [field]
+  mixins: [field],
+  computed: {
+    value: {
+      get() {
+        return this.field_data;
+      },
+      set(value) {
+        this.field_data = parseFloat(value);
+      }
+    }
+  }
 };
 </script>
