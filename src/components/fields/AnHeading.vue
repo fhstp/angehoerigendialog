@@ -1,6 +1,6 @@
 <template>
-  <div class="an-text">
-    <h3 :for="field_id">
+  <div class="an-heading">
+    <h3>
       {{ field_label }}
     </h3>
   </div>
