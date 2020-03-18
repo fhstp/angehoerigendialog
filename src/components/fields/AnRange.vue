@@ -7,7 +7,7 @@
       </span>
       <input
         :id="field_id"
-        v-model="value"
+        v-model.number="field_data"
         type="range"
         :required="field_required"
         :min="minValue"
@@ -44,19 +44,10 @@ export default {
     },
     maxDescription() {
       return this.fieldMax[1];
-    },
-    value: {
-      get() {
-        if (this.field_data !== undefined) {
-          return this.field_data;
-        } else {
-          return this.minValue;
-        }
-      },
-      set(value) {
-        this.field_data = parseFloat(value);
-      }
     }
+  },
+  created() {
+    if (!this.field_data) this.field_data = this.minValue;
   }
 };
 </script>
