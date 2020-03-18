@@ -22,7 +22,7 @@ export default new Vuex.Store({
       const fieldParts = fieldId.split('-');
       const section = fieldParts.shift();
       const key = fieldParts.join('-');
-      state.answers[section][key] = value;
+      Vue.set(state.answers[section], key, value);
     }
   },
   actions: {
