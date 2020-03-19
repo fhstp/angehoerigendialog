@@ -1,6 +1,6 @@
 <template>
   <fieldset class="an-radio">
-    <legend class="field_question">{{ field_label }}</legend>
+    <legend class="field__question">{{ field_label }}</legend>
     <div
       v-for="(optionValue, optionKey) in fieldOptions"
       :key="`${field_id}-${optionKey}`"

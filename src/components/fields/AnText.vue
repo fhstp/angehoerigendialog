@@ -1,6 +1,6 @@
 <template>
   <div class="an-text">
-    <label :for="field_id" class="field_question">{{ field_label }}</label>
+    <label :for="field_id" class="field__question">{{ field_label }}</label>
     <textarea
       :id="field_id"
       v-model="field_data"
