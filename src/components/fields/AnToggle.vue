@@ -1,6 +1,6 @@
 <template>
   <fieldset class="an-toggle">
-    <legend class="field_question">{{ field_label }}</legend>
+    <legend class="field__question">{{ field_label }}</legend>
     <input
       :id="`${field_id}--0`"
       v-model="field_data"

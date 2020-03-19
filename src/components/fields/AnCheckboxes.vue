@@ -1,6 +1,6 @@
 <template>
   <fieldset class="an-checkboxes">
-    <legend class="field_question">{{ field_label }}</legend>
+    <legend class="field__question">{{ field_label }}</legend>
     <div
       v-for="(option, optionId) in fieldOptions"
       :key="optionId"

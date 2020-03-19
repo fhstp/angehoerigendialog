@@ -8,6 +8,9 @@ fields:
   belastend:
     label: Welche drei Aspekte sind Ihrer Einschätzung nach besonders belastend für Sie?
     type: list
+    actiontext: Aspekt hinzufügen
+    min: 3
+    max: 3
 
   individuelleSituation:
     label: Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
