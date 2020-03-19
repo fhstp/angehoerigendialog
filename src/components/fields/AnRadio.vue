@@ -1,11 +1,11 @@
 <template>
   <fieldset class="an-radio">
-    <legend>{{ field_label }}</legend>
+    <legend class="field_question">{{ field_label }}</legend>
     <div
       v-for="(optionValue, optionKey) in fieldOptions"
       :key="`${field_id}-${optionKey}`"
+      class="an-radio__option"
     >
-      <label :for="`${field_id}-${optionKey}`">{{ optionValue }}</label>
       <input
         :id="`${field_id}-${optionKey}`"
         v-model="field_data"
@@ -13,6 +13,7 @@
         :name="field_id"
         :value="optionKey"
       />
+      <label :for="`${field_id}-${optionKey}`">{{ optionValue }}</label>
     </div>
   </fieldset>
 </template>
@@ -29,4 +30,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.an-radio__option {
+  padding-top: $spacer;
+  padding-bottom: $spacer;
+}
+</style>

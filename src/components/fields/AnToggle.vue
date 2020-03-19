@@ -1,7 +1,6 @@
 <template>
   <fieldset class="an-toggle">
-    <legend>{{ field_label }}</legend>
-    <label :for="`${field_id}--0`">{{ fieldText[0] }}</label>
+    <legend class="field_question">{{ field_label }}</legend>
     <input
       :id="`${field_id}--0`"
       v-model="field_data"
@@ -9,8 +8,8 @@
       :name="field_id"
       :value="false"
     />
+    <label :for="`${field_id}--0`">{{ fieldText[0] }}</label>
 
-    <label :for="`${field_id}--1`">{{ fieldText[1] }}</label>
     <input
       :id="`${field_id}--1`"
       v-model="field_data"
@@ -18,6 +17,7 @@
       :name="field_id"
       :value="true"
     />
+    <label :for="`${field_id}--1`">{{ fieldText[1] }}</label>
   </fieldset>
 </template>
 
@@ -36,4 +36,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+label:first-of-type {
+  margin-right: $spacer * 2;
+}
+</style>

@@ -1,7 +1,11 @@
 <template>
   <fieldset class="an-checkboxes">
-    <legend>{{ field_label }}</legend>
-    <div v-for="(option, optionId) in fieldOptions" :key="optionId">
+    <legend class="field_question">{{ field_label }}</legend>
+    <div
+      v-for="(option, optionId) in fieldOptions"
+      :key="optionId"
+      class="an-checkboxes__option"
+    >
       <input
         :id="`${field_id}-${optionId}`"
         v-model="field_data"
@@ -28,3 +32,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.an-checkboxes__option {
+  padding-top: $spacer;
+  padding-bottom: $spacer;
+}
+</style>

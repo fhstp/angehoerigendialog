@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <section v-for="(section, sectionId) in form" :key="sectionId">
-      <h2>{{ section.title }}</h2>
+  <div class="an-form container">
+    <section
+      v-for="(section, sectionId) in form"
+      :key="sectionId"
+      class="an-form__section"
+    >
+      <h2 class="an-form__section-heading">{{ section.title }}</h2>
 
       <AnField
         v-for="(field, fieldId) in section.fields"
@@ -27,21 +31,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section:nth-child(odd) {
-  background-color: crimson;
+.an-form {
+  margin-top: $spacer;
+
+  &__section {
+    margin-bottom: $spacer * 4;
+  }
+
+  &__section-heading {
+    margin-bottom: $spacer;
+  }
 }
+
 .an-field {
-  margin: 1rem;
-}
-.an-field:nth-child(odd) {
-  background-color: greenyellow;
-}
-
-.an-field:nth-child(even) {
-  background-color: palevioletred;
-}
-
-pre {
-  white-space: normal;
+  margin-bottom: $spacer * 2;
 }
 </style>

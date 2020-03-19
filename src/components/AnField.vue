@@ -1,20 +1,26 @@
 <template>
-  <div class="an-field">
-    <component
-      :is="fieldComponentName"
-      v-if="fieldComponentAvailable"
-      v-bind="preparedFieldProps"
-      :field_id="fieldId"
-    />
-    <div v-else>Not supported field of type: {{ fieldData.type }}</div>
-    <div v-if="fieldData.subfields" class="an-field__subfields">
-      <AnField
-        v-for="(subfield, subfieldId) in fieldData.subfields"
-        :key="subfieldId"
-        :field-data="subfield"
-        :field-id="`${fieldId}-${subfieldId}`"
+  <div
+    :class="{ 'an-field--not-supported': !fieldComponentAvailable }"
+    class="an-field"
+  >
+    <template v-if="fieldComponentAvailable">
+      <component
+        :is="fieldComponentName"
+        v-bind="preparedFieldProps"
+        :field_id="fieldId"
       />
-    </div>
+      <div v-if="fieldData.subfields" class="an-field__subfields">
+        <AnField
+          v-for="(subfield, subfieldId) in fieldData.subfields"
+          :key="subfieldId"
+          :field-data="subfield"
+          :field-id="`${fieldId}-${subfieldId}`"
+        />
+      </div>
+    </template>
+    <template v-else>
+      Not supported field of type: {{ fieldData.type }}
+    </template>
   </div>
 </template>
 
@@ -68,3 +74,27 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+section > .an-field {
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  padding: $spacer * 2;
+}
+.an-field {
+  transition: background-color 100ms ease-in-out;
+
+  &:focus-within {
+    background-color: #eee;
+  }
+
+  &--not-supported {
+    background: darkred;
+    color: white;
+  }
+
+  &__subfields {
+    margin-top: $spacer * 4;
+  }
+}
+</style>
