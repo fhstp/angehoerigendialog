@@ -57,7 +57,7 @@ export default {
     }
   },
   created() {
-    if (this.field_data) {
+    if (this.field_data?.length) {
       this.listData = [...this.field_data];
       if (this.fieldMin && this.fieldMin > this.field_data.length) {
         this.listData.push(
