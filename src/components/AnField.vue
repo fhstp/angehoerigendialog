@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="isVisible"
     :class="{ 'an-field--not-supported': !fieldComponentAvailable }"
     class="an-field"
   >
@@ -14,7 +15,8 @@
           v-for="(subfield, subfieldId) in fieldData.subfields"
           :key="subfieldId"
           :field-data="subfield"
-          :field-id="`${fieldId}-${subfieldId}`"
+          :section-id="sectionId"
+          :field-id="`${sectionId}-${subfieldId}`"
         />
       </div>
     </template>
@@ -41,6 +43,24 @@ export default {
     fieldId: {
       type: String,
       required: true
+    },
+    sectionId: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    isVisible() {
+      if (!this.fieldData.when) return true;
+      for (const key in this.fieldData.when) {
+        if (
+          this.$store.getters.getField(`${this.sectionId}-${key}`) !==
+          this.fieldData.when[key]
+        ) {
+          return false;
+        }
+      }
+      return true;
     }
   },
   created() {

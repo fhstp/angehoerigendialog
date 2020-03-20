@@ -11,6 +11,7 @@
         v-for="(field, fieldId) in section.fields"
         :key="fieldId"
         :field-data="field"
+        :section-id="sectionId"
         :field-id="`${sectionId}-${fieldId}`"
       />
     </section>
