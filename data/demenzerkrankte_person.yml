@@ -51,4 +51,4 @@ fields:
         label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
         type: text
         when:
-          diagnose: true
+          unterstuetzungsangebot: true

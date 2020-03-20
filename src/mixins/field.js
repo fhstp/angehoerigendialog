@@ -9,10 +9,7 @@ export default {
   computed: {
     field_data: {
       get() {
-        const fieldParts = this.field_id.split('-');
-        const section = fieldParts.shift();
-        const key = fieldParts.join('-');
-        return this.$store.state.answers[section][key];
+        return this.$store.getters.getField(this.field_id);
       },
       set(value) {
         this.$store.commit('updateAnswer', {
