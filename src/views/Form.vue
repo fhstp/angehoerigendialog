@@ -23,7 +23,7 @@ import form from '@/data/form.json';
 import AnField from '@/components/AnField.vue';
 
 export default {
-  name: 'AnForm',
+  name: 'Form',
   components: { AnField },
   created() {
     this.form = form;

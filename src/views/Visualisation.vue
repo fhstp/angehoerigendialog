@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'AnVisualisation'
+  name: 'Visualisation'
 };
 </script>
