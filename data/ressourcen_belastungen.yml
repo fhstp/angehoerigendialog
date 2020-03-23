@@ -12,6 +12,15 @@ fields:
     min: 3
     max: 3
 
+  einschraenkungenhinweis:
+    label: Andere pflegende Angehörige von demenzerkrankten Menschen berichten
+          häufig davon, dass sie durch die Pflege- und Betreuungsaufgaben, die
+          sie oft über Jahre hinweg leisten, persönliche Einschränkungen erleben.
+          Beispielsweise ist es nicht immer einfach, sich Zeit für sich selbst und die
+          eigenen Interessen nehmen zu können.
+    type: hint
+    size: medium
+
   individuelleSituation:
     label: Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
     type: heading

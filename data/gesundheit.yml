@@ -1,5 +1,14 @@
 title: Gesundheit
+description:
 fields:
+
+  gesundheithinweis:
+    label: Wir haben bisher über die Pflege und Unterstützung gesprochen, die Sie
+           für Ihre/n Angehörige/n leisten. Ich möchte in der Folge mit Ihnen darüber
+           sprechen, wie es Ihnen selbst geht. Zum Beispiel über Ihre eigene Gesundheit
+           und die Hilfe, die Sie von anderen erhalten oder benötigen.
+    type: hint
+    size: medium
 
   gesundheit:
     label: Offene Fragen zur Gesundheit der angehörigen Person
@@ -54,6 +63,14 @@ fields:
   gefuehle:
     label: Welche Gefühle kommen bei Ihnen während der Betreuung manchmal zum Vorschein?
     type: text
+
+  gesundheitszustandhinweis:
+    label: Andere pflegende Angehörige berichten davon, dass die Pflege und
+          Betreuung den eigenen Gesundheitszustand beeinflussen. Können
+          Sie bitte ankreuzen, inwiefern folgende Aussagen auf Sie zutreffend sind?
+          Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
+    type: hint
+    size: medium
 
   erschoepfung:
     label: Ich fühle mich oft körperlich erschöpft.

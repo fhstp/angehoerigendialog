@@ -1,5 +1,14 @@
-title: Umgang mit Verhaltensveränderungen des/der Demenzerkrankten Angehörigen?
+title: Umgang mit Verhaltensveränderungen des/der Demenzerkrankten Angehörigen
 fields:
+
+  verhaltensveraenderungenhinweis:
+    label: Häufig treten bei Demenz bestimmte Denk- oder Verhaltensveränderungen
+          auf. Oft ist es sehr irritierend und belastend, solche Persönlichkeitsveränderungen
+          bei bisher vertrauten Menschen zu erleben. Ich nenne Ihnen
+          nun einige Veränderungen im Denken oder Handeln, die bei demenzerkrankten
+          Menschen auftreten können.
+    type: hint
+    size: medium
 
   veraenderungen:
     label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch bei Ihrem/Ihrer Angehörigen auftreten und wie Sie damit zurechtkommen. Die Skala, auf der Sie das einschätzen können, reicht von „sehr gut“ bis „schlecht“.

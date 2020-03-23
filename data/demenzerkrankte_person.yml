@@ -1,6 +1,14 @@
 title: Angaben zur demenzerkrankten Person
 fields:
 
+  angabenpersonhinweis:
+    label: Zu Beginn des Gesprächs bitte ich Sie um kurze Informationen zu der
+          demenzerkrankten Person, die Sie pflegen und/oder betreuen und zu
+          Ihnen selbst, um einen ersten Überblick über Ihre individuelle Situation
+          zu bekommen. Alle Ihre Angaben werden vertraulich behandelt.
+    type: hint
+    size: medium
+
   verhaeltnis:
     label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
     type: text
