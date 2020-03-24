@@ -29,7 +29,11 @@ export default {
     }
   },
   created() {
-    if (!this.$route.query.step) {
+    if (
+      !this.$route.query.step &&
+      Array.isArray(this.steps) &&
+      this.steps.length
+    ) {
       this.$router.replace({ query: { step: this.steps[0].id } });
     }
 
@@ -47,12 +51,20 @@ export default {
 .an-stepper {
   overflow: hidden;
 
+  @media #{map-get($query, 'lg-and-up')} {
+    height: 100%;
+  }
+
   &__list {
     display: flex;
     width: 100%;
-    padding-bottom: 5rem; // hide scrollbar hack
-    margin-bottom: -5rem;
     overflow: auto;
+    scrollbar-width: thin;
+
+    @media #{map-get($query, 'lg-and-up')} {
+      flex-direction: column;
+      height: 100%;
+    }
   }
 
   &__step {
@@ -61,12 +73,18 @@ export default {
     width: 66%;
     list-style: none;
 
-    @media (min-width: 500px) {
-      width: 40%;
+    @media #{map-get($query, 'sm-and-up')} {
+      width: 29%;
+      padding: $spacer * 2;
     }
 
-    @media (min-width: 750px) {
-      width: 28%;
+    @media #{map-get($query, 'md-and-up')} {
+      width: 22%;
+    }
+
+    @media #{map-get($query, 'lg-and-up')} {
+      width: 100%;
+      height: 19%;
     }
 
     > a {

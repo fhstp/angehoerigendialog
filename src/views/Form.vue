@@ -1,23 +1,25 @@
 <template>
   <div class="an-form">
     <AnStepper :steps="steps" />
-    <template v-for="(section, sectionId) in form">
-      <section
-        v-if="$route.query.step === sectionId"
-        :key="sectionId"
-        class="an-form__section container"
-      >
-        <h2 class="an-form__section-heading">{{ section.title }}</h2>
+    <main class="an-form__content">
+      <template v-for="(section, sectionId) in form">
+        <section
+          v-if="$route.query.step === sectionId"
+          :key="sectionId"
+          class="an-form__section container"
+        >
+          <h2 class="an-form__section-heading">{{ section.title }}</h2>
 
-        <AnField
-          v-for="(field, fieldId) in section.fields"
-          :key="fieldId"
-          :field-data="field"
-          :section-id="sectionId"
-          :field-id="`${sectionId}-${fieldId}`"
-        />
-      </section>
-    </template>
+          <AnField
+            v-for="(field, fieldId) in section.fields"
+            :key="fieldId"
+            :field-data="field"
+            :section-id="sectionId"
+            :field-id="`${sectionId}-${fieldId}`"
+          />
+        </section>
+      </template>
+    </main>
   </div>
 </template>
 
@@ -46,7 +48,20 @@ export default {
 
 <style lang="scss" scoped>
 .an-form {
-  margin-top: $spacer;
+  @media #{map-get($query, 'lg-and-up')} {
+    display: flex;
+    height: 100vh;
+  }
+
+  &__content {
+    padding-top: $spacer;
+
+    @media #{map-get($query, 'lg-and-up')} {
+      flex-grow: 1;
+      height: 100%;
+      overflow: auto;
+    }
+  }
 
   &__section {
     margin-bottom: $spacer * 4;
