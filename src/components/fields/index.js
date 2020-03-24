@@ -1,6 +1,7 @@
 import AnCheckboxes from './AnCheckboxes.vue';
 import AnHeading from './AnHeading.vue';
 import AnList from './AnList.vue';
+import AnMegacheckboxes from './AnMegacheckboxes.vue';
 import AnNumber from './AnNumber.vue';
 import AnRadio from './AnRadio.vue';
 import AnRange from './AnRange.vue';
@@ -11,6 +12,7 @@ export {
   AnCheckboxes,
   AnHeading,
   AnList,
+  AnMegacheckboxes,
   AnNumber,
   AnRadio,
   AnRange,
