@@ -2,7 +2,7 @@
   <div class="an-accordion">
     <router-link
       v-if="!accordionOpen"
-      :to="{ query: { step: sectionId, field: fieldId } }"
+      :to="{ query: { ...$route.query, field: fieldId } }"
       class="an-accordion__link"
       >{{ field.label }}</router-link
     >
@@ -18,9 +18,6 @@ export default {
     field: { type: Object, required: true }
   },
   computed: {
-    sectionId() {
-      return this.$route.query.step;
-    },
     accordionOpen() {
       const alwaysOpen = ['heading', 'hint'].includes(this.field.type);
       const accordionDisabled = this.field.hideAccordion === true;

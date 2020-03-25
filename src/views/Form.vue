@@ -30,13 +30,13 @@
 
 <script>
 import form from '@/data/form.json';
+import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnField from '@/components/AnField.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
-import AnAccordion from '@/components/ui/AnAccordion.vue';
 
 export default {
   name: 'Form',
-  components: { AnField, AnStepper, AnAccordion },
+  components: { AnAccordion, AnField, AnStepper },
   created() {
     this.form = form;
 
