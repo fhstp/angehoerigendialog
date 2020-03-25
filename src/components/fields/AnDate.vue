@@ -11,25 +11,9 @@ import field from '@/mixins/field.js';
 export default {
   name: 'AnDate',
   mixins: [field],
-  mounted() {
-    const date = new Date();
-    const today = `${date.getFullYear()}-${this.formatDate(
-      date.getMonth() + 1
-    )}-${this.formatDate(date.getDate())}`;
-    if (this.field_data === undefined) {
-      this.field_data = today;
-    }
-  },
-  methods: {
-    formatDate: value => {
-      value = String(value);
-      if (value.length === 2) {
-        return value;
-      }
-      return '0' + value;
-    }
+  created() {
+    if (!this.field_data)
+      this.field_data = new Date().toISOString().slice(0, 10);
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

@@ -11,25 +11,13 @@ import field from '@/mixins/field.js';
 export default {
   name: 'AnTime',
   mixins: [field],
-  mounted() {
-    const today = new Date();
-    const time = `${this.formatTime(today.getHours())}:${this.formatTime(
-      today.getMinutes()
-    )}`;
-    if (this.field_data === undefined) {
-      this.field_data = time;
-    }
-  },
-  methods: {
-    formatTime: value => {
-      value = String(value);
-      if (value.length === 2) {
-        return value;
-      }
-      return '0' + value;
+  created() {
+    if (!this.field_data) {
+      const currentTime = new Date();
+      const hour = String(currentTime.getHours()).padStart(2, '0');
+      const minute = String(currentTime.getMinutes()).padStart(2, '0');
+      this.field_data = `${hour}:${minute}`;
     }
   }
 };
 </script>
-
-<style lang="scss" scoped></style>
