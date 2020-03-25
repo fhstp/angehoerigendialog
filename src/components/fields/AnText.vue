@@ -19,3 +19,9 @@ export default {
   mixins: [field]
 };
 </script>
+
+<style lang="scss" scoped>
+textarea {
+  width: 100%;
+}
+</style>

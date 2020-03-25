@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section > .an-field {
+section > .an-accordion > .an-field {
   border: 1px solid lightgrey;
   border-radius: 3px;
   padding: $spacer * 2;
