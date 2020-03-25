@@ -1,13 +1,9 @@
 <template>
-  <div class="an-hint">
-    <p>
-      {{ field_label }}
-    </p>
-  </div>
+  <p class="an-hint" v-html="field_label"></p>
 </template>
 
 <script>
-import field from '@/mixins/field';
+import field from '@/mixins/field.js';
 
 export default {
   name: 'AnHint',

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const sanitizeHtml = require('sanitize-html');
 const YAML = require('yaml');
 
 const contentYaml = fs.readFileSync('./data/_inhaltsverzeichnis.yml', 'utf8');
@@ -11,4 +12,6 @@ for (const section of content) {
   form[section] = YAML.parse(sectionYaml);
 }
 
-fs.writeFileSync('./src/data/form.json', JSON.stringify(form), 'utf8');
+const jsonFileSanitized = sanitizeHtml(JSON.stringify(form));
+
+fs.writeFileSync('./src/data/form.json', jsonFileSanitized, 'utf8');

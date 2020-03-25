@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import field from '@/mixins/field';
+import field from '@/mixins/field.js';
 
 export default {
   name: 'AnRange',
