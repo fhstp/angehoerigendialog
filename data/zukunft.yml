@@ -5,7 +5,9 @@ fields:
   hoffnung:
     label: Wenn Sie an die Zukunft denken, was gibt Ihnen Hoffnung?
     type: text
+    hideAccordion: true
 
   zukunft:
     label: Was würden Sie sich für die Zukunft wünschen?
     type: text
+    hideAccordion: true
