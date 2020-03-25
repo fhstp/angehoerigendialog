@@ -16,7 +16,9 @@ export default {
     const time = `${this.formatTime(today.getHours())}:${this.formatTime(
       today.getMinutes()
     )}`;
-    this.field_data = time;
+    if (this.field_data === undefined) {
+      this.field_data = time;
+    }
   },
   methods: {
     formatTime: value => {

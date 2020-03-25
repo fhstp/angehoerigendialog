@@ -16,7 +16,9 @@ export default {
     const today = `${date.getFullYear()}-${this.formatDate(
       date.getMonth() + 1
     )}-${this.formatDate(date.getDate())}`;
-    this.field_data = today;
+    if (this.field_data === undefined) {
+      this.field_data = today;
+    }
   },
   methods: {
     formatDate: value => {
