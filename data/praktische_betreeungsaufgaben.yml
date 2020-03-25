@@ -19,7 +19,8 @@ fields:
     type: heading
     size: medium
 
-  testfeld:
+  aufgaben:
+    label: Aufgaben
     type: megacheckboxes
     options:
       mahlzeit: Zubereiten der Mahlzeiten
