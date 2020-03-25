@@ -10,13 +10,18 @@
         >
           <h2 class="an-form__section-heading">{{ section.title }}</h2>
 
-          <AnField
+          <AnAccordion
             v-for="(field, fieldId) in section.fields"
             :key="fieldId"
-            :field-data="field"
-            :section-id="sectionId"
-            :field-id="`${sectionId}-${fieldId}`"
-          />
+            :field-id="fieldId"
+            :field="field"
+          >
+            <AnField
+              :field-data="field"
+              :section-id="sectionId"
+              :field-id="`${sectionId}-${fieldId}`"
+            />
+          </AnAccordion>
         </section>
       </template>
     </main>
@@ -25,12 +30,13 @@
 
 <script>
 import form from '@/data/form.json';
+import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnField from '@/components/AnField.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 
 export default {
   name: 'Form',
-  components: { AnField, AnStepper },
+  components: { AnAccordion, AnField, AnStepper },
   created() {
     this.form = form;
 
