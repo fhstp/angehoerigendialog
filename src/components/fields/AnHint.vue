@@ -1,16 +1,14 @@
 <template>
-  <div class="an-heading">
-    <h3>
-      {{ field_label }}
-    </h3>
-  </div>
+  <p class="an-hint" v-html="field_label"></p>
 </template>
 
 <script>
 import field from '@/mixins/field.js';
 
 export default {
-  name: 'AnHeading',
+  name: 'AnHint',
   mixins: [field]
 };
 </script>
+
+<style lang="scss" scoped></style>

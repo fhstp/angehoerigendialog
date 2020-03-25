@@ -12,10 +12,16 @@
 </template>
 
 <script>
-import field from '@/mixins/field';
+import field from '@/mixins/field.js';
 
 export default {
   name: 'AnText',
   mixins: [field]
 };
 </script>
+
+<style lang="scss" scoped>
+textarea {
+  width: 100%;
+}
+</style>
