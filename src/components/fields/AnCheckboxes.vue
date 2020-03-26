@@ -27,6 +27,7 @@
           :field-data="field"
           :section-id="`${field_id}-${optionId}`"
           :field-id="`${field_id}-${optionId}-${fieldId}`"
+          :is-subfield="true"
         />
       </div>
     </div>

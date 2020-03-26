@@ -6,11 +6,21 @@
       class="an-accordion__link"
       >{{ field.label }}</router-link
     >
-    <slot v-if="accordionOpen"></slot>
+    <template v-if="accordionOpen">
+      <input type="text" class="an-accordion__focusnavigation" @focus="prev" />
+      <slot></slot>
+      <input type="text" class="an-accordion__focusnavigation" @focus="next" />
+    </template>
   </div>
 </template>
 
 <script>
+import {
+  hasNoAccordion,
+  prevLocation,
+  nextLocation
+} from '@/helpers/navigation.js';
+
 export default {
   name: 'AnAccordion',
   props: {
@@ -19,11 +29,22 @@ export default {
   },
   computed: {
     accordionOpen() {
-      const alwaysOpen = ['heading', 'hint'].includes(this.field.type);
-      const accordionDisabled = this.field.hideAccordion === true;
+      const noAccordion = hasNoAccordion(this.field);
       const routerFieldMatches = this.$route.query.field === this.fieldId;
 
-      return alwaysOpen || accordionDisabled || routerFieldMatches;
+      return noAccordion || routerFieldMatches;
+    },
+    prevQuery() {
+      const step = this.$route.query.step;
+      const field = this.$route.query.field;
+
+      return prevLocation(step, field);
+    },
+    nextQuery() {
+      const step = this.$route.query.step;
+      const field = this.$route.query.field;
+
+      return nextLocation(step, field);
     }
   },
   watch: {
@@ -37,6 +58,15 @@ export default {
           }
         }
       });
+    }
+  },
+
+  methods: {
+    prev() {
+      this.$router.push({ query: this.prevQuery });
+    },
+    next() {
+      this.$router.push({ query: this.nextQuery });
     }
   }
 };
@@ -52,5 +82,14 @@ export default {
   margin-bottom: $spacer * 2;
   color: black;
   text-decoration: none;
+}
+
+.an-accordion__focusnavigation {
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
 }
 </style>
