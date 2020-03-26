@@ -104,7 +104,8 @@ section > .an-accordion > .an-field {
 .an-field {
   transition: background-color 100ms ease-in-out;
 
-  &:focus-within {
+  &:focus-within,
+  .an-accordion--open & {
     background-color: #eee;
   }
 

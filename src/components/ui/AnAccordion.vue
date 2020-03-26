@@ -1,5 +1,5 @@
 <template>
-  <div class="an-accordion">
+  <div :class="{ 'an-accordion--open': accordionOpen }" class="an-accordion">
     <router-link
       v-if="!accordionOpen"
       :to="{ query: { ...$route.query, field: fieldId } }"
@@ -24,6 +24,19 @@ export default {
       const routerFieldMatches = this.$route.query.field === this.fieldId;
 
       return alwaysOpen || accordionDisabled || routerFieldMatches;
+    }
+  },
+  watch: {
+    accordionOpen(open) {
+      this.$nextTick(function() {
+        if (open === true) {
+          const field = this.$slots.default[0].elm;
+          const firstInput = field.querySelector('input, textarea');
+          if (firstInput) {
+            firstInput.focus();
+          }
+        }
+      });
     }
   }
 };
