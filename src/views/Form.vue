@@ -1,7 +1,7 @@
 <template>
   <div class="an-form">
     <AnStepper :steps="steps" />
-    <main class="an-form__content">
+    <main ref="main" class="an-form__content">
       <template v-for="(section, sectionId) in form">
         <section
           v-if="$route.query.step === sectionId"
@@ -37,6 +37,13 @@ import AnStepper from '@/components/ui/AnStepper.vue';
 export default {
   name: 'Form',
   components: { AnAccordion, AnField, AnStepper },
+  watch: {
+    '$route.query.step'(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.$refs.main.scrollTop = 0;
+      }
+    }
+  },
   created() {
     this.form = form;
 

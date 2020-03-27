@@ -1,6 +1,6 @@
 <template>
   <nav class="an-stepper">
-    <ol class="an-stepper__list">
+    <ol ref="stepsContainer" class="an-stepper__list">
       <li
         v-for="(step, i) in steps"
         :key="step.id"
@@ -36,7 +36,13 @@ export default {
   watch: {
     '$route.query.step'(newValue) {
       const foundItem = this.$refs[`stepperItem-${newValue}`];
-      if (foundItem.length) foundItem[0].scrollIntoView({ behavior: 'smooth' });
+      if (foundItem.length) {
+        this.$refs.stepsContainer.scrollTo({
+          top: foundItem[0].offsetTop,
+          left: foundItem[0].offsetLeft,
+          behavior: 'smooth'
+        });
+      }
     }
   },
   created() {
