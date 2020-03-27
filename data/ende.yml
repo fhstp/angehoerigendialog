@@ -1,0 +1,15 @@
+title: Angaben zu Datum und Uhrzeit
+titleShort: Ende
+fields:
+
+  datum:
+    label: Datum wählen
+    type: date
+
+  uhrzeit:
+    label: Uhrzeit wählen
+    type: time
+
+  auswerten:
+    label: Fragebogen auswerten
+    type: submit

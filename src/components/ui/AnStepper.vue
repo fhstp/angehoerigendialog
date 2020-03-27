@@ -1,7 +1,12 @@
 <template>
   <nav class="an-stepper">
     <ol class="an-stepper__list">
-      <li v-for="(step, i) in steps" :key="i" class="an-stepper__step">
+      <li
+        v-for="(step, i) in steps"
+        :key="step.id"
+        :ref="`stepperItem-${step.id}`"
+        class="an-stepper__step"
+      >
         <router-link :to="{ query: { step: step.id } }">
           <component
             :is="step.icon"
@@ -26,6 +31,12 @@ export default {
     steps: {
       type: Array,
       default: () => []
+    }
+  },
+  watch: {
+    '$route.query.step'(newValue) {
+      const foundItem = this.$refs[`stepperItem-${newValue}`];
+      if (foundItem.length) foundItem[0].scrollIntoView({ behavior: 'smooth' });
     }
   },
   created() {
