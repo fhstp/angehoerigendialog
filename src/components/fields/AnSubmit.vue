@@ -1,7 +1,5 @@
 <template>
-  <button>
-    <router-link to="/auswertung">{{ field_label }} </router-link>
-  </button>
+  <router-link to="/auswertung">{{ field_label }}</router-link>
 </template>
 
 <script>
