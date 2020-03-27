@@ -7,44 +7,42 @@
       >{{ field.label }}</router-link
     >
     <template v-if="accordionOpen">
-      <input type="text" class="an-accordion__focusnavigation" @focus="prev" />
+      <input
+        v-if="navForm_prevLocation && !noAccordion"
+        type="text"
+        class="an-accordion__focusnavigation"
+        @focus="navForm_prev"
+      />
       <slot></slot>
-      <input type="text" class="an-accordion__focusnavigation" @focus="next" />
+      <input
+        v-if="navForm_nextLocation && !noAccordion"
+        type="text"
+        class="an-accordion__focusnavigation"
+        @focus="navForm_next"
+      />
     </template>
   </div>
 </template>
 
 <script>
-import {
-  hasNoAccordion,
-  prevLocation,
-  nextLocation
-} from '@/helpers/navigation.js';
+import { hasNoAccordion } from '@/helpers/navigation.js';
+import navForm from '@/mixins/navForm.js';
 
 export default {
   name: 'AnAccordion',
+  mixins: [navForm],
   props: {
     fieldId: { type: String, required: true },
     field: { type: Object, required: true }
   },
   computed: {
+    noAccordion() {
+      return hasNoAccordion(this.field);
+    },
     accordionOpen() {
-      const noAccordion = hasNoAccordion(this.field);
       const routerFieldMatches = this.$route.query.field === this.fieldId;
 
-      return noAccordion || routerFieldMatches;
-    },
-    prevQuery() {
-      const step = this.$route.query.step;
-      const field = this.$route.query.field;
-
-      return prevLocation(step, field);
-    },
-    nextQuery() {
-      const step = this.$route.query.step;
-      const field = this.$route.query.field;
-
-      return nextLocation(step, field);
+      return this.noAccordion || routerFieldMatches;
     }
   },
   watch: {
@@ -58,15 +56,6 @@ export default {
           }
         }
       });
-    }
-  },
-
-  methods: {
-    prev() {
-      this.$router.push({ query: this.prevQuery });
-    },
-    next() {
-      this.$router.push({ query: this.nextQuery });
     }
   }
 };

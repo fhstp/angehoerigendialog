@@ -1,37 +1,16 @@
 <template>
   <div>
-    <button v-if="prevQuery" @click="prev">Zurück</button>
-    <button @click="next">Weiter</button>
+    <button v-if="navForm_prevLocation" @click="navForm_prev">Zurück</button>
+    <button v-if="navForm_nextLocation" @click="navForm_next">Weiter</button>
   </div>
 </template>
 
 <script>
-import { prevLocation, nextLocation } from '@/helpers/navigation.js';
+import navForm from '@/mixins/navForm.js';
 
 export default {
   name: 'AnPrevNext',
-  computed: {
-    prevQuery() {
-      const step = this.$route.query.step;
-      const field = this.$route.query.field;
-
-      return prevLocation(step, field);
-    },
-    nextQuery() {
-      const step = this.$route.query.step;
-      const field = this.$route.query.field;
-
-      return nextLocation(step, field);
-    }
-  },
-  methods: {
-    prev() {
-      this.$router.push({ query: this.prevQuery });
-    },
-    next() {
-      this.$router.push({ query: this.nextQuery });
-    }
-  }
+  mixins: [navForm]
 };
 </script>
 

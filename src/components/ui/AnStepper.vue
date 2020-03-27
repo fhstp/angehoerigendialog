@@ -36,7 +36,7 @@ export default {
   watch: {
     '$route.query.step'(newValue) {
       const foundItem = this.$refs[`stepperItem-${newValue}`];
-      if (foundItem.length) {
+      if (foundItem?.length) {
         this.$refs.stepsContainer.scrollTo({
           top: foundItem[0].offsetTop,
           left: foundItem[0].offsetLeft,
