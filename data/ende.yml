@@ -5,9 +5,7 @@ fields:
   datum:
     label: Datum wählen
     type: date
-    hideAccordion: true
 
   uhrzeit:
     label: Uhrzeit wählen
     type: time
-    hideAccordion: true
