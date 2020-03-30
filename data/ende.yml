@@ -5,11 +5,9 @@ fields:
   datum:
     label: Datum wählen
     type: date
+    hideAccordion: true
 
   uhrzeit:
     label: Uhrzeit wählen
     type: time
-
-  auswerten:
-    label: Fragebogen auswerten
-    type: submit
+    hideAccordion: true

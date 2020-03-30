@@ -24,12 +24,34 @@ input + label {
   margin-left: $spacer;
 }
 
+input, textarea {
+  font-size: 16px;
+}
+
 .field__question {
   display: block;
   font-size: 1.2rem;
   margin-bottom: $spacer
 }
 
-input, textarea {
-  font-size: 16px;
+.btn {
+  display: inline-block;
+  margin: $spacer 0;
+  padding: $spacer $spacer * 2;
+  border-radius: 3px;
+  color: #000;
+  background-color: #fff;
+  border: 3px solid #000;
+  font-size: 1rem;
+  transition: background-color 200ms ease-in-out;
+  text-decoration: none;
+  outline: none;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  &:focus {
+    background-color: #ccc;
+  }
 }
