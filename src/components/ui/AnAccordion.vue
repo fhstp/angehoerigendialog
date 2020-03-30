@@ -1,29 +1,61 @@
 <template>
-  <div class="an-accordion">
+  <div :class="{ 'an-accordion--open': accordionOpen }" class="an-accordion">
     <router-link
       v-if="!accordionOpen"
       :to="{ query: { ...$route.query, field: fieldId } }"
       class="an-accordion__link"
       >{{ field.label }}</router-link
     >
-    <slot v-if="accordionOpen"></slot>
+    <template v-if="accordionOpen">
+      <input
+        v-if="navForm_prevLocation && !noAccordion"
+        type="text"
+        class="an-accordion__focusnavigation"
+        @focus="navForm_prev"
+      />
+      <slot></slot>
+      <input
+        v-if="navForm_nextLocation && !noAccordion"
+        type="text"
+        class="an-accordion__focusnavigation"
+        @focus="navForm_next"
+      />
+    </template>
   </div>
 </template>
 
 <script>
+import { hasNoAccordion } from '@/helpers/navigation.js';
+import navForm from '@/mixins/navForm.js';
+
 export default {
   name: 'AnAccordion',
+  mixins: [navForm],
   props: {
     fieldId: { type: String, required: true },
     field: { type: Object, required: true }
   },
   computed: {
+    noAccordion() {
+      return hasNoAccordion(this.field);
+    },
     accordionOpen() {
-      const alwaysOpen = ['heading', 'hint'].includes(this.field.type);
-      const accordionDisabled = this.field.hideAccordion === true;
       const routerFieldMatches = this.$route.query.field === this.fieldId;
 
-      return alwaysOpen || accordionDisabled || routerFieldMatches;
+      return this.noAccordion || routerFieldMatches;
+    }
+  },
+  watch: {
+    accordionOpen(open) {
+      this.$nextTick(function() {
+        if (open === true) {
+          const field = this.$slots.default[0].elm;
+          const firstInput = field.querySelector('input, textarea');
+          if (firstInput) {
+            firstInput.focus();
+          }
+        }
+      });
     }
   }
 };
@@ -39,5 +71,14 @@ export default {
   margin-bottom: $spacer * 2;
   color: black;
   text-decoration: none;
+}
+
+.an-accordion__focusnavigation {
+  height: 0px;
+  width: 0px;
+  opacity: 0;
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
 }
 </style>

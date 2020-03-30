@@ -17,8 +17,10 @@
           :field-data="subfield"
           :section-id="sectionId"
           :field-id="`${sectionId}-${subfieldId}`"
+          :is-subfield="true"
         />
       </div>
+      <AnPrevNext v-if="showNavButtons" />
     </template>
     <template v-else>
       Not supported field of type: {{ fieldData.type }}
@@ -27,13 +29,16 @@
 </template>
 
 <script>
+import { hasNoAccordion } from '@/helpers/navigation.js';
 import { string_toTitleCase } from '@/helpers/string.js';
 import * as fieldComponents from '@/components/fields/index.js';
+import AnPrevNext from '@/components/ui/AnPrevNext.vue';
 
 export default {
   name: 'AnField',
   components: {
-    ...fieldComponents
+    ...fieldComponents,
+    AnPrevNext
   },
   props: {
     fieldData: {
@@ -47,6 +52,10 @@ export default {
     sectionId: {
       type: String,
       required: true
+    },
+    isSubfield: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -61,6 +70,10 @@ export default {
         }
       }
       return true;
+    },
+    showNavButtons() {
+      const noButtons = hasNoAccordion(this.fieldData);
+      return !(noButtons || this.isSubfield);
     }
   },
   created() {
@@ -104,7 +117,8 @@ section > .an-accordion > .an-field {
 .an-field {
   transition: background-color 100ms ease-in-out;
 
-  &:focus-within {
+  &:focus-within,
+  .an-accordion--open & {
     background-color: #eee;
   }
 
