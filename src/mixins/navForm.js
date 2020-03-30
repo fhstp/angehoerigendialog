@@ -18,15 +18,12 @@ export default {
       const stepIndex = steps.indexOf(routerStep);
       const fieldIndex = fields.indexOf(this.$route.query.field);
 
-      if (fieldIndex === 0) {
-        if (stepIndex === 0) {
-          // button verstecken
-          return false;
-        }
+      // button verstecken
+      if (fieldIndex === 0 && stepIndex === 0) return false;
 
-        // step zurück
-        return { step: steps[stepIndex - 1] };
-      }
+      // step zurück
+      if (fieldIndex === 0)
+        return { step: steps[stepIndex - 1], field: undefined };
 
       // field zurück
       return { step: routerStep, field: fields[fieldIndex - 1] };
@@ -38,15 +35,13 @@ export default {
       const stepIndex = steps.indexOf(routerStep);
       const fieldIndex = fields.indexOf(this.$route.query.field);
 
-      if (fieldIndex === fields.length - 1) {
-        if (stepIndex === steps.length - 1) {
-          // button verstecken
-          return false;
-        }
+      // button verstecken
+      if (fieldIndex === fields.length - 1 && stepIndex === steps.length - 1)
+        return false;
 
-        // step weiter
-        return { step: steps[stepIndex + 1] };
-      }
+      // step weiter
+      if (fieldIndex === fields.length - 1)
+        return { step: steps[stepIndex + 1], field: undefined };
 
       // field weiter
       return { step: routerStep, field: fields[fieldIndex + 1] };
