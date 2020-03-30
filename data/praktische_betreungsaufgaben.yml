@@ -17,7 +17,6 @@ fields:
   situationseinschaetzung:
     label: Benötigen Sie Ihrer Einschätzung nach bei der Durchführung oder Organisation in folgenden Bereichen Unterstützung?
     type: checkboxes
-    hideAccordion: true
     options:
       mahlzeit: Zubereiten der Mahlzeiten
       nahrungsaufnahme: Nahrungsaufnahme

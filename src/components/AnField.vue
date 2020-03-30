@@ -72,8 +72,8 @@ export default {
       return true;
     },
     showNavButtons() {
-      const noButtons = hasNoAccordion(this.fieldData);
-      return !(noButtons || this.isSubfield);
+      const noAccordion = hasNoAccordion(this.fieldData.type);
+      return !(noAccordion || this.isSubfield);
     }
   },
   created() {

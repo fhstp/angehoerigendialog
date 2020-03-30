@@ -4,13 +4,17 @@ import { hasNoAccordion } from '@/helpers/navigation.js';
 const steps = Object.keys(form);
 const currentStepFields = step => {
   const fields = Object.keys(form[step].fields).filter(
-    fieldId => !hasNoAccordion(form[step].fields[fieldId])
+    fieldId => !hasNoAccordion(form[step].fields[fieldId].type)
   );
   return fields;
 };
 
 export default {
   computed: {
+    navForm_currentStepFirstFieldId() {
+      const stepFields = currentStepFields(this.$route.query.step);
+      return stepFields.length > 0 ? stepFields[0] : false;
+    },
     navForm_prevLocation() {
       const routerStep = this.$route.query.step;
       const fields = currentStepFields(routerStep);
@@ -23,7 +27,10 @@ export default {
 
       // step zurück
       if (fieldIndex === 0)
-        return { step: steps[stepIndex - 1], field: undefined };
+        return {
+          step: steps[stepIndex - 1],
+          field: currentStepFields(steps[stepIndex - 1]).pop()
+        };
 
       // field zurück
       return { step: routerStep, field: fields[fieldIndex - 1] };
@@ -41,7 +48,10 @@ export default {
 
       // step weiter
       if (fieldIndex === fields.length - 1)
-        return { step: steps[stepIndex + 1], field: undefined };
+        return {
+          step: steps[stepIndex + 1],
+          field: currentStepFields(steps[stepIndex + 1])[0]
+        };
 
       // field weiter
       return { step: routerStep, field: fields[fieldIndex + 1] };

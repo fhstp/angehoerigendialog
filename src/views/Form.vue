@@ -10,18 +10,27 @@
         >
           <h2 class="an-form__section-heading">{{ section.title }}</h2>
 
-          <AnAccordion
-            v-for="(field, fieldId) in section.fields"
-            :key="fieldId"
-            :field-id="fieldId"
-            :field="field"
-          >
+          <template v-for="(field, fieldId) in section.fields">
             <AnField
+              v-if="field.type === 'hint' || field.type === 'heading'"
+              :key="fieldId"
               :field-data="field"
               :section-id="sectionId"
               :field-id="`${sectionId}-${fieldId}`"
             />
-          </AnAccordion>
+            <AnAccordion
+              v-else
+              :key="fieldId"
+              :field-id="fieldId"
+              :field="field"
+            >
+              <AnField
+                :field-data="field"
+                :section-id="sectionId"
+                :field-id="`${sectionId}-${fieldId}`"
+              />
+            </AnAccordion>
+          </template>
         </section>
       </template>
     </main>
