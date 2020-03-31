@@ -2,7 +2,7 @@
   <div class="an-form">
     <AnStepper :steps="steps" />
     <main ref="main" class="an-form__content">
-      <template v-for="(section, sectionId) in form">
+      <template v-for="(section, sectionId, index) in form">
         <section
           v-if="$route.query.step === sectionId"
           :key="sectionId"
@@ -22,6 +22,12 @@
               :field-id="`${sectionId}-${fieldId}`"
             />
           </AnAccordion>
+          <router-link
+            v-if="Object.keys(form).length === index + 1"
+            to="auswertung"
+            class="btn"
+            >auswerten</router-link
+          >
         </section>
       </template>
     </main>

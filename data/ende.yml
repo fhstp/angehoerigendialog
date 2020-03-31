@@ -9,7 +9,3 @@ fields:
   uhrzeit:
     label: Uhrzeit wählen
     type: time
-
-  auswerten:
-    label: Fragebogen auswerten
-    type: submit
