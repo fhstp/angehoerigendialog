@@ -9,7 +9,6 @@ import AnText from './AnText.vue';
 import AnToggle from './AnToggle.vue';
 import AnDate from './AnDate.vue';
 import AnTime from './AnTime.vue';
-import AnSubmit from './AnSubmit.vue';
 
 export {
   AnCheckboxes,
@@ -20,7 +19,6 @@ export {
   AnNumber,
   AnRadio,
   AnRange,
-  AnSubmit,
   AnText,
   AnTime,
   AnToggle
