@@ -68,12 +68,14 @@ export default {
   },
   methods: {
     afterAccordionOpens() {
-      const field = this.$slots.default[0].elm;
-      const firstInput = field.querySelector('input, textarea');
-      if (firstInput) {
-        firstInput.focus();
+      const field = this.$slots.default ? this.$slots.default[0].elm : false;
+      if (field) {
+        const firstInput = field.querySelector('input, textarea');
+        if (firstInput) {
+          firstInput.focus();
+        }
+        field.scrollIntoView();
       }
-      field.scrollIntoView();
     }
   }
 };
