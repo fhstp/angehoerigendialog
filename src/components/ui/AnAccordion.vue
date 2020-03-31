@@ -8,14 +8,14 @@
     >
     <template v-if="accordionOpen">
       <input
-        v-if="navForm_prevLocation && !noAccordion"
+        v-if="navForm_prevLocation"
         type="text"
         class="an-accordion__focusnavigation"
         @focus="navForm_prev"
       />
       <slot></slot>
       <input
-        v-if="navForm_nextLocation && !noAccordion"
+        v-if="navForm_nextLocation"
         type="text"
         class="an-accordion__focusnavigation"
         @focus="navForm_next"
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { hasNoAccordion } from '@/helpers/navigation.js';
 import navForm from '@/mixins/navForm.js';
 
 export default {
@@ -36,26 +35,47 @@ export default {
     field: { type: Object, required: true }
   },
   computed: {
-    noAccordion() {
-      return hasNoAccordion(this.field);
-    },
     accordionOpen() {
-      const routerFieldMatches = this.$route.query.field === this.fieldId;
-
-      return this.noAccordion || routerFieldMatches;
+      return this.$route.query.field === this.fieldId;
     }
   },
   watch: {
     accordionOpen(open) {
       this.$nextTick(function() {
         if (open === true) {
-          const field = this.$slots.default[0].elm;
-          const firstInput = field.querySelector('input, textarea');
-          if (firstInput) {
-            firstInput.focus();
-          }
+          this.afterAccordionOpens();
         }
       });
+    }
+  },
+  created() {
+    if (
+      !this.$route.query.field &&
+      this.navForm_currentStepFirstFieldId === this.fieldId
+    ) {
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          field: this.navForm_currentStepFirstFieldId
+        }
+      });
+    }
+  },
+  mounted() {
+    if (this.accordionOpen) {
+      this.afterAccordionOpens();
+    }
+  },
+  methods: {
+    afterAccordionOpens() {
+      const field = this.$slots.default ? this.$slots.default[0].elm : false;
+      if (field) {
+        const firstInput = field.querySelector('input, textarea');
+        if (firstInput) {
+          firstInput.focus();
+        }
+        field.scrollIntoView();
+      }
     }
   }
 };

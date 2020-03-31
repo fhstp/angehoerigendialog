@@ -16,7 +16,6 @@ fields:
           Angehörigen auftreten und wie Sie damit zurechtkommen. Die Skala, auf der Sie das
           einschätzen können, reicht von „sehr gut“ bis „schlecht“. Der/die Angehörige …
     type: checkboxes
-    hideAccordion: true
     options:
       wiederholung: … wiederholt sich oft (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
       sachverhalte: … begreift schwierige Sachverhalte nicht mehr (z. B. kann einer längeren Erklärung nicht folgen)
