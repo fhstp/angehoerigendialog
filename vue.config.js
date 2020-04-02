@@ -5,6 +5,7 @@ module.exports = {
     svgRule.use('vue-svg-loader').loader('vue-svg-loader');
   },
   css: {
+    sourceMap: true,
     loaderOptions: {
       sass: {
         prependData: '@import "@/assets/styles/_variables.scss";'
@@ -13,6 +14,7 @@ module.exports = {
   },
   pwa: {
     workboxOptions: {
+      skipWaiting: true,
       exclude: [/_redirects/]
     }
   }
