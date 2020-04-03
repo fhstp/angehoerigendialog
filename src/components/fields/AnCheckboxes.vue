@@ -17,7 +17,7 @@
       />
       <label :for="`${field_id}-${optionId}`">{{ option }}</label>
       <div
-        v-if="hasActiveFields"
+        v-if="Object.keys(fieldActivefields).length > 0"
         v-show="visibleFields[optionId]"
         class="an-checkboxes_activefields"
       >
@@ -46,9 +46,6 @@ export default {
     fieldActivefields: { type: Object, default: () => ({}) }
   },
   computed: {
-    hasActiveFields() {
-      return Object.keys(this.fieldActivefields).length > 0;
-    },
     visibleFields() {
       const visibleFields = {};
       if (Array.isArray(this.field_data)) {

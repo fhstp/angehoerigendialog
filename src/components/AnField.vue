@@ -82,8 +82,24 @@ export default {
         return this.$store.getters.getFieldCompletion(this.fieldId) ?? false;
       },
       set(value) {
+        const subfieldIds = [];
+        if (this.fieldData.subfields) {
+          for (const key of Object.keys(this.fieldData.subfields)) {
+            subfieldIds.push(`${this.sectionId}-${key}`);
+          }
+        }
+        const activeFieldIds = [];
+        if (this.fieldData.activefields && this.fieldData.options) {
+          for (const activeFieldKey in this.fieldData.activefields) {
+            for (const optionKey of Object.keys(this.fieldData.options)) {
+              activeFieldIds.push(
+                `${this.fieldId}-${optionKey}-${activeFieldKey}`
+              );
+            }
+          }
+        }
         this.$store.commit('updateAnswerCompletion', {
-          fieldId: this.fieldId,
+          fieldIds: [this.fieldId, ...subfieldIds, ...activeFieldIds],
           value
         });
       }
