@@ -6,11 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    answers: {}
+    answers: {},
+    notes: {}
   },
   getters: {
     getField: state => fieldId => {
       return state.answers[fieldId];
+    },
+    getNotes: state => {
+      return state.notes;
     }
   },
   mutations: {
@@ -19,6 +23,9 @@ export default new Vuex.Store({
     },
     updateAnswer(state, { fieldId, value }) {
       Vue.set(state.answers, fieldId, value);
+    },
+    updateNotes(state, newVal) {
+      state.notes = newVal;
     }
   },
   actions: {

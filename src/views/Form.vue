@@ -1,7 +1,9 @@
 <template>
   <div class="an-form">
+    <AnNoteText />
     <AnStepper :steps="steps" />
     <main ref="main" class="an-form__content">
+      <AnNoteButton />
       <template v-for="(section, sectionId, index) in form">
         <section
           v-if="$route.query.step === sectionId"
@@ -47,11 +49,13 @@
 import form from '@/data/form.json';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnField from '@/components/AnField.vue';
+import AnNoteButton from '@/components/ui/AnNoteButton.vue';
+import AnNoteText from '@/components/ui/AnNoteText.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 
 export default {
   name: 'Form',
-  components: { AnAccordion, AnField, AnStepper },
+  components: { AnAccordion, AnField, AnStepper, AnNoteButton, AnNoteText },
   watch: {
     '$route.query.step'(newValue, oldValue) {
       if (newValue !== oldValue) {
