@@ -17,14 +17,10 @@ export default {
       showNotes: this.$store.getters.getNotes
     };
   },
-  watch: {
-    showNotes(newVal) {
-      this.$store.commit('updateNotes', newVal);
-    }
-  },
   methods: {
     openNotes() {
       this.showNotes = !this.showNotes;
+      this.$store.commit('updateNotes', this.showNotes);
     }
   }
 };
@@ -41,6 +37,10 @@ export default {
   }
   &__button--opened::before {
     content: 'X';
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
   }
 }
 </style>
