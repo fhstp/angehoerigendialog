@@ -51,9 +51,11 @@ export default {
     },
     visibleFields() {
       const visibleFields = {};
-      this.field_data.forEach(option => {
-        visibleFields[option] = true;
-      });
+      if (Array.isArray(this.field_data)) {
+        for (const option of this.field_data) {
+          visibleFields[option] = true;
+        }
+      }
       return visibleFields;
     }
   },
