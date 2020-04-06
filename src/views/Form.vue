@@ -18,12 +18,7 @@
                 :section-id="sectionId"
                 :field-id="`${sectionId}-${fieldId}`"
               />
-              <AnAccordionItem
-                v-else
-                :key="fieldId"
-                :field-id="fieldId"
-                :field="field"
-              >
+              <AnAccordionItem v-else :key="fieldId">
                 <template #header>{{ field.label }}</template>
                 <template #content>
                   <AnField

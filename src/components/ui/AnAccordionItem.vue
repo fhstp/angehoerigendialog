@@ -12,10 +12,6 @@
 <script>
 export default {
   name: 'AnAccordionItem',
-  props: {
-    fieldId: { type: String, required: true },
-    field: { type: Object, required: true }
-  },
   data() {
     return {
       /** index of accordion item in accordion */
@@ -27,32 +23,8 @@ export default {
       return this.$parent.internalValue === this.index;
     }
   },
-  watch: {
-    active(open) {
-      this.$nextTick(function() {
-        if (open === true) {
-          this.afterAccordionOpens();
-        }
-      });
-    }
-  },
   mounted() {
-    if (this.active) {
-      this.afterAccordionOpens();
-    }
     this.index = this.$parent.items.indexOf(this);
-  },
-  methods: {
-    afterAccordionOpens() {
-      const field = this.$slots.default && this.$slots.default[0].elm;
-      if (field) {
-        const firstInput = field.querySelector('input, textarea');
-        if (firstInput) {
-          firstInput.focus();
-        }
-        field.scrollIntoView();
-      }
-    }
   }
 };
 </script>
