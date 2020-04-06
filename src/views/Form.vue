@@ -3,14 +3,16 @@
     <AnNoteText />
     <AnStepper :steps="steps" />
     <main ref="main" class="an-form__content">
-      <AnNoteButton />
       <template v-for="(section, sectionId, index) in form">
         <section
           v-if="$route.query.step === sectionId"
           :key="sectionId"
           class="an-form__section container"
         >
-          <h2 class="an-form__section-heading">{{ section.title }}</h2>
+          <div class="an-form__headingwrapper">
+            <h2 class="an-form__section-heading">{{ section.title }}</h2>
+            <AnNoteOpenButton />
+          </div>
 
           <template v-for="(field, fieldId) in section.fields">
             <AnField
@@ -49,13 +51,19 @@
 import form from '@/data/form.json';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnField from '@/components/AnField.vue';
-import AnNoteButton from '@/components/ui/AnNoteButton.vue';
+import AnNoteOpenButton from '@/components/ui/AnNoteOpenButton.vue';
 import AnNoteText from '@/components/ui/AnNoteText.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 
 export default {
   name: 'Form',
-  components: { AnAccordion, AnField, AnStepper, AnNoteButton, AnNoteText },
+  components: {
+    AnAccordion,
+    AnField,
+    AnStepper,
+    AnNoteOpenButton,
+    AnNoteText
+  },
   watch: {
     '$route.query.step'(newValue, oldValue) {
       if (newValue !== oldValue) {
@@ -100,7 +108,18 @@ export default {
   }
 
   &__section-heading {
-    margin-bottom: $spacer;
+    //margin-bottom: $spacer;
+    flex-grow: 1;
+  }
+
+  &__headingwrapper {
+    display: flex;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    align-items: flex-end;
+    padding-bottom: $spacer;
+    box-shadow: 3px 3px 8px #ccc;
   }
 }
 
