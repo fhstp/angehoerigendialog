@@ -3,20 +3,27 @@
     <AnNoteCloseButton />
     <div class="an-note-text__elementwrapper">
       <div class="an-note-text__innerContainer">
-        <textarea ref="ta_alreadythere" @input="updateTextAreaHeight($event)">
-Hallo Text der schon da war</textarea
-        >
-        <!-- oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' -->
-        <div>
-          <span>{{ currentQuestion }}</span>
-          <button @click="addHeading()">Frage als Überschrift einfügen</button>
-        </div>
         <textarea
-          ref="ta_newtext"
-          placeholder="Hier neue Notiz einfügen"
-          rows="1"
-          @input="updateTextAreaHeight($event)"
-        ></textarea>
+          ref="ta_alreadythere"
+          @input="updateTextArea($event.currentTarget)"
+        >
+          Hallo Text der schon da war</textarea
+        >
+        <template v-if="showAddHeading">
+          <div>
+            <span class="an-note-text__currentquestion">
+              > {{ currentQuestion }}</span
+            >
+            <button @click="addHeading()">
+              Frage als Überschrift
+            </button>
+          </div>
+          <textarea
+            ref="ta_newtext"
+            placeholder="Hier neue Notiz einfügen"
+            @input="updateTextArea($event.currentTarget)"
+          ></textarea>
+        </template>
       </div>
     </div>
   </div>
@@ -29,6 +36,12 @@ import AnNoteCloseButton from '@/components/ui/AnNoteCloseButton.vue';
 export default {
   name: 'AnNoteText',
   components: { AnNoteCloseButton },
+  data() {
+    return {
+      showAddHeading: true,
+      currentQuestion_prev: undefined
+    };
+  },
   computed: {
     showNotes() {
       return this.$store.getters.getNotes;
@@ -39,11 +52,19 @@ export default {
       );
     }
   },
+  watch: {
+    showNotes(val) {
+      if (val === true) {
+        this.showAddHeadingFunction();
+      }
+    }
+  },
   methods: {
     addHeading() {
       const textarea_alreadythere = this.$refs.ta_alreadythere;
       const textarea_newtext = this.$refs.ta_newtext;
-      const heading_inserted = `**> ${textarea_alreadythere.textContent}**`;
+      const heading_inserted = `*${this.currentQuestion}*`;
+      this.currentQuestion_prev = this.currentQuestion;
 
       textarea_alreadythere.value =
         textarea_alreadythere.value +
@@ -52,18 +73,20 @@ export default {
         '\n\n' +
         textarea_newtext.value;
 
-      this.updateTextAreaHeight(textarea_alreadythere); // TODO
-
-      this.parentElement.parentElement.removeChild(this.parentElement);
-
-      textarea_newtext.parentElement.removeChild(textarea_newtext);
+      this.updateTextArea(textarea_alreadythere);
+      this.showAddHeading = false;
 
       textarea_alreadythere.focus();
     },
-    updateTextAreaHeight(event) {
-      const textArea = event.currentTarget;
+    updateTextArea(textArea) {
+      textArea.textContent = textArea.value;
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
+    },
+    showAddHeadingFunction() {
+      if (this.currentQuestion !== this.currentQuestion_prev) {
+        this.showAddHeading = true;
+      }
     }
   }
 };
@@ -74,8 +97,8 @@ export default {
   width: 100%;
   height: 100vh;
   position: absolute;
-  background: red;
-  opacity: 0.9;
+  background: white;
+  opacity: 1;
   z-index: 1;
 
   &__elementwrapper {
@@ -87,10 +110,16 @@ export default {
   textarea {
     resize: none;
     width: 100%;
+    border: 0;
+    //outline: none;
   }
 
   &__innerContainer {
     width: 80%;
+  }
+
+  &__currentquestion {
+    opacity: 0.5;
   }
 }
 </style>

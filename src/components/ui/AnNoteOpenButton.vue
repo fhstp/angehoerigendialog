@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     openNotes() {
-      // this.showNotes = true;
       this.$store.commit('updateNotes', true);
     }
   }
