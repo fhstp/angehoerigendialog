@@ -1,6 +1,5 @@
 <template>
   <fieldset class="an-list">
-    <legend class="field__question">{{ field_label }}</legend>
     <button
       v-show="!(fieldMax && listData.length === fieldMax)"
       :disabled="listData.length && !listData[listData.length - 1]"

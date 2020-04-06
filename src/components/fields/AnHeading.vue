@@ -1,9 +1,5 @@
 <template>
-  <div class="an-heading">
-    <h3>
-      {{ field_label }}
-    </h3>
-  </div>
+  <h3 class="an-heading">{{ field_label }}</h3>
 </template>
 
 <script>

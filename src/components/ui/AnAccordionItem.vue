@@ -1,0 +1,78 @@
+<template>
+  <div :class="['an-accordion-item', { 'an-accordion-item--open': active }]">
+    <div class="an-accordion-item__header" @click="$parent.changeActive(index)">
+      <slot name="header" />
+    </div>
+    <div v-if="active" class="an-accordion-item__content">
+      <slot name="content" />
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AnAccordionItem',
+  props: {
+    fieldId: { type: String, required: true },
+    field: { type: Object, required: true }
+  },
+  data() {
+    return {
+      /** index of accordion item in accordion */
+      index: undefined
+    };
+  },
+  computed: {
+    active() {
+      return this.$parent.internalValue === this.index;
+    }
+  },
+  watch: {
+    active(open) {
+      this.$nextTick(function() {
+        if (open === true) {
+          this.afterAccordionOpens();
+        }
+      });
+    }
+  },
+  mounted() {
+    if (this.active) {
+      this.afterAccordionOpens();
+    }
+    this.index = this.$parent.items.indexOf(this);
+  },
+  methods: {
+    afterAccordionOpens() {
+      const field = this.$slots.default && this.$slots.default[0].elm;
+      if (field) {
+        const firstInput = field.querySelector('input, textarea');
+        if (firstInput) {
+          firstInput.focus();
+        }
+        field.scrollIntoView();
+      }
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.an-accordion-item {
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+
+  &__header {
+    display: block;
+    padding: $spacer * 2;
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__content {
+    padding: $spacer * 2;
+  }
+}
+</style>

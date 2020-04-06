@@ -1,8 +1,5 @@
 <template>
   <fieldset class="an-checkboxes">
-    <legend v-if="field_label" class="field__question">
-      {{ field_label }}
-    </legend>
     <div
       v-for="(option, optionId) in fieldOptions"
       :key="optionId"
