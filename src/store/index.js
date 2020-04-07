@@ -7,11 +7,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     answers: {},
-    notes: {}
+    updshowNotes: false,
+    newNotes: '',
+    notes: ''
   },
   getters: {
     getField: state => fieldId => {
       return state.answers[fieldId];
+    },
+    getShowNotes: state => {
+      return state.updshowNotes;
+    },
+    getNewNotes: state => {
+      return state.newNotes;
     },
     getNotes: state => {
       return state.notes;
@@ -24,7 +32,13 @@ export default new Vuex.Store({
     updateAnswer(state, { fieldId, value }) {
       Vue.set(state.answers, fieldId, value);
     },
-    updateNotes(state, newVal) {
+    updateShowNotes(state, newVal) {
+      state.updshowNotes = newVal;
+    },
+    saveNewNotes(state, newVal) {
+      state.newNotes = newVal;
+    },
+    saveNotes(state, newVal) {
       state.notes = newVal;
     }
   },

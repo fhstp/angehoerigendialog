@@ -15,12 +15,12 @@ export default {
   name: 'AnNoteCloseButton',
   data() {
     return {
-      showNotes: this.$store.getters.getNotes
+      showNotes: this.$store.getters.getShowNotes
     };
   },
   methods: {
     closeNotes() {
-      this.$store.commit('updateNotes', false);
+      this.$store.commit('updateShowNotes', false);
     }
   }
 };

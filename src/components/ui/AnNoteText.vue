@@ -5,14 +5,14 @@
       <div class="an-note-text__innerContainer">
         <textarea
           ref="ta_alreadythere"
-          @input="updateTextArea($event.currentTarget)"
+          v-model="noteData"
+          @input="updateTextAreaHeight($event.currentTarget)"
         >
-          Hallo Text der schon da war</textarea
-        >
+        </textarea>
         <template v-if="showAddHeading">
           <div>
             <span class="an-note-text__currentquestion">
-              > {{ currentQuestion }}</span
+              > {{ currentQuestionLabel }}</span
             >
             <button @click="addHeading()">
               Frage als Überschrift
@@ -20,8 +20,9 @@
           </div>
           <textarea
             ref="ta_newtext"
+            v-model="noteNewData"
             placeholder="Hier neue Notiz einfügen"
-            @input="updateTextArea($event.currentTarget)"
+            @input="updateTextAreaHeight($event.currentTarget)"
           ></textarea>
         </template>
       </div>
@@ -39,17 +40,35 @@ export default {
   data() {
     return {
       showAddHeading: true,
-      currentQuestion_prev: undefined
+      currentQuestionLabel_prev: undefined
     };
   },
   computed: {
     showNotes() {
-      return this.$store.getters.getNotes;
+      return this.$store.getters.getShowNotes;
     },
-    currentQuestion() {
-      return Object(
-        formJson[this.$route.query.step].fields[this.$route.query.field].label
-      );
+    currentQuestionLabel() {
+      if (this.$route.query.step && this.$route.query.field !== undefined) {
+        return formJson[this.$route.query.step].fields[this.$route.query.field]
+          .label;
+      }
+      return undefined;
+    },
+    noteData: {
+      get() {
+        return this.$store.getters.getNotes;
+      },
+      set(value) {
+        this.$store.commit('saveNotes', value);
+      }
+    },
+    noteNewData: {
+      get() {
+        return this.$store.getters.getNewNotes;
+      },
+      set(value) {
+        this.$store.commit('saveNewNotes', value);
+      }
     }
   },
   watch: {
@@ -59,12 +78,22 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.$refs.ta_alreadythere.value !== '') {
+      this.updateTextAreaHeight(this.$refs.ta_alreadythere);
+    }
+
+    if (this.$refs.ta_newtext.value !== '') {
+      this.updateTextAreaHeight(this.$refs.ta_newtext);
+    }
+    this.showAddHeadingFunction();
+  },
   methods: {
     addHeading() {
       const textarea_alreadythere = this.$refs.ta_alreadythere;
       const textarea_newtext = this.$refs.ta_newtext;
-      const heading_inserted = `*${this.currentQuestion}*`;
-      this.currentQuestion_prev = this.currentQuestion;
+      const heading_inserted = `*${this.currentQuestionLabel}*`;
+      this.currentQuestionLabel_prev = this.currentQuestionLabel;
 
       textarea_alreadythere.value =
         textarea_alreadythere.value +
@@ -73,18 +102,21 @@ export default {
         '\n\n' +
         textarea_newtext.value;
 
-      this.updateTextArea(textarea_alreadythere);
+      this.updateTextAreaHeight(textarea_alreadythere);
       this.showAddHeading = false;
+
+      this.noteData = textarea_alreadythere.value;
+      this.noteNewData = '';
 
       textarea_alreadythere.focus();
     },
-    updateTextArea(textArea) {
-      textArea.textContent = textArea.value;
+    updateTextAreaHeight(textArea) {
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
     },
     showAddHeadingFunction() {
-      if (this.currentQuestion !== this.currentQuestion_prev) {
+      // TODO: when reloading, currentQuestionLabel_prev is undefined
+      if (this.currentQuestionLabel !== this.currentQuestionLabel_prev) {
         this.showAddHeading = true;
       }
     }

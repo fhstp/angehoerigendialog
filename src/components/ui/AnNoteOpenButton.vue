@@ -15,12 +15,12 @@ export default {
   name: 'AnNoteOpenButton',
   data() {
     return {
-      showNotes: this.$store.getters.getNotes
+      showNotes: this.$store.getters.getShowNotes
     };
   },
   methods: {
     openNotes() {
-      this.$store.commit('updateNotes', true);
+      this.$store.commit('updateShowNotes', true);
     }
   }
 };
