@@ -66,7 +66,7 @@ export default {
   components: { AnAccordion, AnAccordionItem, AnField, AnStepper },
   computed: {
     currentField() {
-      return this.$route.query.field;
+      return Number(this.$route.query.field);
     },
     currentStepIndex() {
       return this.steps?.findIndex(step => step.id === this.$route.query.step);
@@ -93,7 +93,7 @@ export default {
 
     if (!Number.isInteger(Number(this.$route.query.field))) {
       this.$router.replace({
-        query: { ...this.$route.query, field: 0 }
+        query: { ...this.$route.query, step: this.steps[0].id, field: 0 }
       });
     }
   },
