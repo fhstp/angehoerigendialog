@@ -164,13 +164,6 @@ export default {
 
 <style lang="scss" scoped>
 .an-field {
-  transition: background-color 100ms ease-in-out;
-
-  &:focus-within,
-  .an-accordion--open & {
-    background-color: #eee;
-  }
-
   &--not-supported {
     background: darkred;
     color: white;

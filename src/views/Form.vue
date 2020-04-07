@@ -195,4 +195,12 @@ export default {
 .an-hint {
   margin-bottom: $spacer;
 }
+
+.an-accordion-item {
+  transition: background-color 100ms ease-in-out;
+
+  &--open {
+    background-color: #eee;
+  }
+}
 </style>
