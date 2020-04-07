@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { hasNoAccordion } from '@/helpers/navigation.js';
+import { form_isInAccordion } from '@/helpers/form.js';
 import { string_toTitleCase } from '@/helpers/string.js';
 import * as fieldComponents from '@/components/fields/index.js';
 
@@ -143,7 +143,7 @@ export default {
       fieldComponents,
       this.fieldComponentName
     );
-    this.isAccordionItem = !hasNoAccordion(this.fieldData.type);
+    this.isAccordionItem = form_isInAccordion(this.fieldData.type);
   },
   mounted() {
     if (!this.isSubfield && this.$parent.active) {

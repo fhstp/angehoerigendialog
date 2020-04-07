@@ -12,7 +12,7 @@
           <AnAccordion query-param="field">
             <template v-for="(field, fieldId) in section.fields">
               <AnField
-                v-if="['hint', 'heading'].includes(field.type)"
+                v-if="!form_isInAccordion(field.type)"
                 :key="fieldId"
                 :field-data="field"
                 :section-id="sectionId"
@@ -47,6 +47,7 @@
 
 <script>
 import form from '@/data/form.json';
+import { form_isInAccordion } from '@/helpers/form.js';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
 import AnField from '@/components/AnField.vue';
@@ -55,8 +56,7 @@ import AnStepper from '@/components/ui/AnStepper.vue';
 const numberOfAccordionItems = sectionId => {
   let count = 0;
   for (const fieldId in form[sectionId].fields) {
-    if (!['hint', 'heading'].includes(form[sectionId].fields[fieldId].type))
-      count++;
+    if (form_isInAccordion(form[sectionId].fields[fieldId].type)) count++;
   }
   return count;
 };
@@ -98,6 +98,7 @@ export default {
     }
   },
   methods: {
+    form_isInAccordion,
     prevField() {
       const isFirstStep = this.currentStepIndex === 0;
       const isFirstFieldOfStep = this.currentField === 0;
