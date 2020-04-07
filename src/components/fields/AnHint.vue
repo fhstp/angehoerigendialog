@@ -1,5 +1,6 @@
 <template>
-  <p class="an-hint" v-html="field_label"></p>
+  <!-- eslint-disable-next-line vue/no-v-html -->
+  <p class="an-hint" v-html="field_label" />
 </template>
 
 <script>
