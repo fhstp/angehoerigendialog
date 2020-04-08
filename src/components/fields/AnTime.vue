@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <label :for="field_id" class="field__question">{{ field_label }}</label>
-    <input :id="field_id" v-model="field_data" type="time" required />
-  </div>
+  <input
+    :id="field_id"
+    v-model="field_data"
+    type="time"
+    required
+    class="an-time"
+  />
 </template>
 
 <script>

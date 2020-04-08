@@ -7,7 +7,10 @@
         :ref="`stepperItem-${step.id}`"
         class="an-stepper__step"
       >
-        <router-link :to="{ query: { step: step.id } }">
+        <router-link
+          :to="{ query: { ...$route.query, step: step.id } }"
+          @click.native="$emit('input')"
+        >
           <component
             :is="step.icon"
             :class="[
@@ -51,7 +54,9 @@ export default {
       Array.isArray(this.steps) &&
       this.steps.length
     ) {
-      this.$router.replace({ query: { step: this.steps[0].id } });
+      this.$router.replace({
+        query: { ...this.$route.query, step: this.steps[0].id }
+      });
     }
 
     for (const step of this.steps) {

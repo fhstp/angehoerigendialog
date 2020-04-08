@@ -28,12 +28,6 @@ input, textarea {
   font-size: 1rem;
 }
 
-.field__question {
-  display: block;
-  font-size: 1.2rem;
-  margin-bottom: $spacer
-}
-
 .btn {
   display: inline-block;
   margin: $spacer 0;
@@ -54,4 +48,14 @@ input, textarea {
   &:focus {
     background-color: #ccc;
   }
+}
+
+.visually-hidden {
+  display: initial;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }

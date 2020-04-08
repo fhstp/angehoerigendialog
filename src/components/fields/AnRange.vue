@@ -1,6 +1,5 @@
 <template>
   <div class="an-range">
-    <label :for="field_id" class="field__question">{{ field_label }}</label>
     <div class="an-range_wrapper">
       <span class="an-range_min-value">
         {{ minDescription }}

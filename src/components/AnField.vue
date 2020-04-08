@@ -5,6 +5,12 @@
     class="an-field"
   >
     <template v-if="fieldComponentAvailable">
+      <input
+        v-if="isAccordionItem && !isSubfield"
+        type="text"
+        class="an-field__navigation visually-hidden"
+        @focus="$emit('goPrev')"
+      />
       <component
         :is="fieldComponentName"
         v-bind="preparedFieldProps"
@@ -20,11 +26,21 @@
           :is-subfield="true"
         />
       </div>
-      <AnPrev v-if="isAccordionItem && !isSubfield" />
-      <AnComplete
-        v-if="isAccordionItem && !isSubfield"
-        :done.sync="fieldCompletion"
-      />
+      <template v-if="isAccordionItem && !isSubfield">
+        <button @click="$emit('goPrev')">Zurück</button>
+        <button @click="handleCompletion()">
+          {{
+            fieldCompletion
+              ? 'Als unfertig markieren'
+              : 'Als erledigt markieren und weiter'
+          }}
+        </button>
+        <input
+          type="text"
+          class="an-field__navigation visually-hidden"
+          @focus="$emit('goNext')"
+        />
+      </template>
     </template>
     <template v-else>
       Not supported field of type: {{ fieldData.type }}
@@ -33,19 +49,13 @@
 </template>
 
 <script>
-import { hasNoAccordion } from '@/helpers/navigation.js';
+import { form_isInAccordion } from '@/helpers/form.js';
 import { string_toTitleCase } from '@/helpers/string.js';
 import * as fieldComponents from '@/components/fields/index.js';
-import AnComplete from '@/components/ui/AnComplete.vue';
-import AnPrev from '@/components/ui/AnPrev.vue';
 
 export default {
   name: 'AnField',
-  components: {
-    ...fieldComponents,
-    AnComplete,
-    AnPrev
-  },
+  components: { ...fieldComponents },
   props: {
     fieldData: {
       type: Object,
@@ -133,31 +143,33 @@ export default {
       fieldComponents,
       this.fieldComponentName
     );
-    this.isAccordionItem = !hasNoAccordion(this.fieldData.type);
+    this.isAccordionItem = form_isInAccordion(this.fieldData.type);
+  },
+  mounted() {
+    if (!this.isSubfield && this.$parent.active) {
+      const firstInput = this.$el.querySelector(
+        'input:not(.an-field__navigation), textarea:not(.an-field__navigation)'
+      );
+      if (firstInput) firstInput.focus();
+    }
+  },
+  methods: {
+    handleCompletion() {
+      if (!this.fieldCompletion) this.$emit('goNext');
+      this.fieldCompletion = !this.fieldCompletion;
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-section > .an-accordion > .an-field {
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  padding: $spacer * 2;
-}
 .an-field {
-  transition: background-color 100ms ease-in-out;
-
-  &:focus-within,
-  .an-accordion--open & {
-    background-color: #eee;
-  }
-
   &--not-supported {
     background: darkred;
     color: white;
   }
 
-  &__subfields {
+  &__subfields > &:first-child {
     margin-top: $spacer * 4;
   }
 }

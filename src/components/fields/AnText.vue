@@ -1,14 +1,12 @@
 <template>
-  <div class="an-text">
-    <label :for="field_id" class="field__question">{{ field_label }}</label>
-    <textarea
-      :id="field_id"
-      v-model="field_data"
-      :required="field_required"
-      cols="50"
-      rows="3"
-    />
-  </div>
+  <textarea
+    :id="field_id"
+    v-model="field_data"
+    :required="field_required"
+    cols="50"
+    rows="3"
+    class="an-text"
+  />
 </template>
 
 <script>
@@ -21,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-textarea {
+.an-text {
   width: 100%;
 }
 </style>
