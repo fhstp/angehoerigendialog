@@ -35,12 +35,15 @@ export default {
   border-radius: 3px;
 
   &__header {
-    display: block;
     padding: $spacer * 2;
     font-size: 1.2rem;
     color: black;
     text-decoration: none;
     cursor: pointer;
+
+    .an-accordion-item--open & {
+      cursor: auto;
+    }
   }
 
   &__content {
