@@ -9,10 +9,10 @@ export default {
   computed: {
     field_data: {
       get() {
-        return this.$store.getters.getField(this.field_id);
+        return this.$store.getters.getFieldValue(this.field_id);
       },
       set(value) {
-        this.$store.commit('updateAnswer', {
+        this.$store.commit('updateAnswerValue', {
           fieldId: this.field_id,
           value
         });

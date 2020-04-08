@@ -20,7 +20,11 @@
           :is-subfield="true"
         />
       </div>
-      <AnPrevNext v-if="showNavButtons" />
+      <AnPrev v-if="isAccordionItem && !isSubfield" />
+      <AnComplete
+        v-if="isAccordionItem && !isSubfield"
+        :done.sync="fieldCompletion"
+      />
     </template>
     <template v-else>
       Not supported field of type: {{ fieldData.type }}
@@ -32,13 +36,15 @@
 import { hasNoAccordion } from '@/helpers/navigation.js';
 import { string_toTitleCase } from '@/helpers/string.js';
 import * as fieldComponents from '@/components/fields/index.js';
-import AnPrevNext from '@/components/ui/AnPrevNext.vue';
+import AnComplete from '@/components/ui/AnComplete.vue';
+import AnPrev from '@/components/ui/AnPrev.vue';
 
 export default {
   name: 'AnField',
   components: {
     ...fieldComponents,
-    AnPrevNext
+    AnComplete,
+    AnPrev
   },
   props: {
     fieldData: {
@@ -63,7 +69,7 @@ export default {
       if (!this.fieldData.when) return true;
       for (const key in this.fieldData.when) {
         if (
-          this.$store.getters.getField(`${this.sectionId}-${key}`) !==
+          this.$store.getters.getFieldValue(`${this.sectionId}-${key}`) !==
           this.fieldData.when[key]
         ) {
           return false;
@@ -71,9 +77,32 @@ export default {
       }
       return true;
     },
-    showNavButtons() {
-      const noAccordion = hasNoAccordion(this.fieldData.type);
-      return !(noAccordion || this.isSubfield);
+    fieldCompletion: {
+      get() {
+        return this.$store.getters.getFieldCompletion(this.fieldId) ?? false;
+      },
+      set(value) {
+        const subfieldIds = [];
+        if (this.fieldData.subfields) {
+          for (const key of Object.keys(this.fieldData.subfields)) {
+            subfieldIds.push(`${this.sectionId}-${key}`);
+          }
+        }
+        const activeFieldIds = [];
+        if (this.fieldData.activefields && this.fieldData.options) {
+          for (const activeFieldKey in this.fieldData.activefields) {
+            for (const optionKey of Object.keys(this.fieldData.options)) {
+              activeFieldIds.push(
+                `${this.fieldId}-${optionKey}-${activeFieldKey}`
+              );
+            }
+          }
+        }
+        this.$store.commit('updateAnswerCompletion', {
+          fieldIds: [this.fieldId, ...subfieldIds, ...activeFieldIds],
+          value
+        });
+      }
     }
   },
   created() {
@@ -104,6 +133,7 @@ export default {
       fieldComponents,
       this.fieldComponentName
     );
+    this.isAccordionItem = !hasNoAccordion(this.fieldData.type);
   }
 };
 </script>

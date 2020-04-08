@@ -22,17 +22,17 @@ export default {
       const stepIndex = steps.indexOf(routerStep);
       const fieldIndex = fields.indexOf(this.$route.query.field);
 
-      // button verstecken
+      // no prev field or step
       if (fieldIndex === 0 && stepIndex === 0) return false;
 
-      // step zurück
+      // previous step and last field of step
       if (fieldIndex === 0)
         return {
           step: steps[stepIndex - 1],
           field: currentStepFields(steps[stepIndex - 1]).pop()
         };
 
-      // field zurück
+      // previous field
       return { step: routerStep, field: fields[fieldIndex - 1] };
     },
     navForm_nextLocation() {
@@ -42,24 +42,28 @@ export default {
       const stepIndex = steps.indexOf(routerStep);
       const fieldIndex = fields.indexOf(this.$route.query.field);
 
-      // button verstecken
+      // no next field or step
       if (fieldIndex === fields.length - 1 && stepIndex === steps.length - 1)
         return false;
 
-      // step weiter
+      // next step and first field of step
       if (fieldIndex === fields.length - 1)
         return {
           step: steps[stepIndex + 1],
           field: currentStepFields(steps[stepIndex + 1])[0]
         };
 
-      // field weiter
+      // next field
       return { step: routerStep, field: fields[fieldIndex + 1] };
     }
   },
   methods: {
     navForm_next() {
-      this.$router.push({ query: this.navForm_nextLocation });
+      this.$router.push({
+        query: this.navForm_nextLocation
+          ? this.navForm_nextLocation
+          : { ...this.$route.query, field: undefined }
+      });
     },
     navForm_prev() {
       this.$router.push({ query: this.navForm_prevLocation });
