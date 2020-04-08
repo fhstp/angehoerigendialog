@@ -5,7 +5,7 @@
       class="an-note-close__button"
       @click="closeNotes()"
     >
-      X
+      ❌
     </button>
   </div>
 </template>
@@ -21,6 +21,11 @@ export default {
   methods: {
     closeNotes() {
       this.$store.commit('updateShowNotes', false);
+      this.$store.commit(
+        'saveNotes',
+        this.$store.getters.getNotes + '\n\n' + this.$store.getters.getNewNotes
+      );
+      this.$store.commit('saveNewNotes', '');
     }
   }
 };
@@ -30,7 +35,12 @@ export default {
 .an-note-close {
   display: flex;
   justify-content: flex-end;
+
   &__button {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    cursor: pointer;
   }
 }
 </style>

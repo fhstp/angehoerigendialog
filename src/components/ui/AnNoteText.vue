@@ -39,8 +39,8 @@ export default {
   components: { AnNoteCloseButton },
   data() {
     return {
-      showAddHeading: true,
-      currentQuestionLabel_prev: undefined
+      currentQuestionLabel_prev: this.$store.getters.getPrevQuestionLabel,
+      showAddHeading: true
     };
   },
   computed: {
@@ -74,7 +74,10 @@ export default {
   watch: {
     showNotes(val) {
       if (val === true) {
-        this.showAddHeadingFunction();
+        this.showAddHeadingToggle();
+        this.$nextTick(function() {
+          this.updateTextAreaHeight(this.$refs.ta_alreadythere);
+        });
       }
     }
   },
@@ -86,7 +89,8 @@ export default {
     if (this.$refs.ta_newtext.value !== '') {
       this.updateTextAreaHeight(this.$refs.ta_newtext);
     }
-    this.showAddHeadingFunction();
+    this.currentQuestionLabel_prev = this.currentQuestionLabel;
+    this.showAddHeadingToggle();
   },
   methods: {
     addHeading() {
@@ -104,6 +108,10 @@ export default {
 
       this.updateTextAreaHeight(textarea_alreadythere);
       this.showAddHeading = false;
+      this.$store.commit(
+        'savePrevQuestionLabel',
+        this.currentQuestionLabel_prev
+      );
 
       this.noteData = textarea_alreadythere.value;
       this.noteNewData = '';
@@ -114,10 +122,13 @@ export default {
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
     },
-    showAddHeadingFunction() {
-      // TODO: when reloading, currentQuestionLabel_prev is undefined
-      if (this.currentQuestionLabel !== this.currentQuestionLabel_prev) {
+    showAddHeadingToggle() {
+      if (
+        this.currentQuestionLabel !== this.$store.getters.getPrevQuestionLabel
+      ) {
         this.showAddHeading = true;
+      } else {
+        this.showAddHeading = false;
       }
     }
   }
@@ -129,7 +140,7 @@ export default {
   width: 100%;
   height: 100vh;
   position: absolute;
-  background: white;
+  background: red;
   opacity: 1;
   z-index: 1;
 
@@ -144,6 +155,7 @@ export default {
     width: 100%;
     border: 0;
     //outline: none;
+    font-size: 1.45rem;
   }
 
   &__innerContainer {
