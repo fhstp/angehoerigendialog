@@ -19,7 +19,21 @@
                 :field-id="`${sectionId}-${fieldId}`"
               />
               <AnAccordionItem v-else :key="fieldId">
-                <template #header>{{ field.label }}</template>
+                <template #header>
+                  <span class="an-accordion-item__header-text">{{
+                    field.label
+                  }}</span>
+                  <span class="an-accordion-item__header-icon">
+                    <IconCheckmark
+                      v-if="
+                        $store.getters.getFieldCompletion(
+                          `${sectionId}-${fieldId}`
+                        )
+                      "
+                      aria-label="fertig ausgefüllt"
+                    />
+                  </span>
+                </template>
                 <template #content>
                   <AnField
                     :field-data="field"
@@ -52,6 +66,7 @@ import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
 import AnField from '@/components/AnField.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
+import IconCheckmark from '@/assets/icons/checkmark.svg';
 
 const numberOfAccordionItems = sectionId => {
   let count = 0;
@@ -63,7 +78,13 @@ const numberOfAccordionItems = sectionId => {
 
 export default {
   name: 'Form',
-  components: { AnAccordion, AnAccordionItem, AnField, AnStepper },
+  components: {
+    AnAccordion,
+    AnAccordionItem,
+    AnField,
+    AnStepper,
+    IconCheckmark
+  },
   computed: {
     currentField() {
       return Number(this.$route.query.field);
@@ -180,15 +201,6 @@ export default {
     margin-bottom: $spacer * 4;
   }
 }
-
-.an-accordion-item {
-  margin-bottom: $spacer;
-
-  &--open {
-    margin-top: $spacer * 2;
-    margin-bottom: $spacer * 2;
-  }
-}
 </style>
 
 <style lang="scss">
@@ -198,10 +210,27 @@ export default {
 }
 
 .an-accordion-item {
+  margin-bottom: $spacer;
   transition: background-color 100ms ease-in-out;
 
   &--open {
     background-color: #eee;
+    margin-top: $spacer * 2;
+    margin-bottom: $spacer * 2;
+  }
+
+  &__header {
+    display: flex;
+  }
+
+  &__header-text {
+    flex-grow: 1;
+  }
+
+  &__header-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    flex-shrink: 0;
   }
 }
 </style>
