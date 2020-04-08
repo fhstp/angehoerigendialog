@@ -91,6 +91,18 @@ export default {
     },
     currentStepIndex() {
       return this.steps?.findIndex(step => step.id === this.$route.query.step);
+    },
+    steps() {
+      const steps = [];
+      for (const sectionId in form) {
+        steps.push({
+          title: form[sectionId].titleShort ?? form[sectionId].title,
+          icon: form[sectionId].icon ?? sectionId,
+          id: sectionId,
+          done: this.$store.getters.getSectionCompletion(sectionId)
+        });
+      }
+      return steps;
     }
   },
   watch: {
@@ -103,14 +115,7 @@ export default {
   created() {
     this.form = form;
 
-    this.steps = [];
-    for (const sectionId in form) {
-      this.steps.push({
-        title: form[sectionId].titleShort ?? form[sectionId].title,
-        icon: form[sectionId].icon ?? sectionId,
-        id: sectionId
-      });
-    }
+    this.initAnswersStore();
 
     if (!Number.isInteger(Number(this.$route.query.field))) {
       this.$router.replace({
@@ -120,6 +125,21 @@ export default {
   },
   methods: {
     form_isInAccordion,
+    initAnswersStore() {
+      for (const sectionKey in form) {
+        for (const fieldKey in form[sectionKey].fields) {
+          const fieldId = `${sectionKey}-${fieldKey}`;
+          if (
+            form_isInAccordion(form[sectionKey].fields[fieldKey].type) &&
+            !Object.hasOwnProperty.call(this.$store.state.answers, fieldId)
+          )
+            this.$store.commit('updateAnswerCompletion', {
+              fieldIds: [fieldId],
+              value: false
+            });
+        }
+      }
+    },
     prevField() {
       const isFirstStep = this.currentStepIndex === 0;
       const isFirstFieldOfStep = this.currentField === 0;
