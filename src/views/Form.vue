@@ -46,13 +46,14 @@
               </AnAccordionItem>
             </template>
           </AnAccordion>
-          <router-link
+          <button
             v-if="Object.keys(form).length === sectionIndex + 1"
             ref="finish"
-            to="auswertung"
             class="btn"
-            >auswerten</router-link
+            @click="handleFinish()"
           >
+            auswerten
+          </button>
         </section>
       </template>
     </main>
@@ -91,6 +92,18 @@ export default {
     },
     currentStepIndex() {
       return this.steps?.findIndex(step => step.id === this.$route.query.step);
+    },
+    steps() {
+      const steps = [];
+      for (const sectionId in form) {
+        steps.push({
+          title: form[sectionId].titleShort ?? form[sectionId].title,
+          icon: form[sectionId].icon ?? sectionId,
+          id: sectionId,
+          done: this.$store.getters.getSectionCompletion(sectionId)
+        });
+      }
+      return steps;
     }
   },
   watch: {
@@ -103,14 +116,7 @@ export default {
   created() {
     this.form = form;
 
-    this.steps = [];
-    for (const sectionId in form) {
-      this.steps.push({
-        title: form[sectionId].titleShort ?? form[sectionId].title,
-        icon: form[sectionId].icon ?? sectionId,
-        id: sectionId
-      });
-    }
+    this.initAnswersStore();
 
     if (!Number.isInteger(Number(this.$route.query.field))) {
       this.$router.replace({
@@ -120,6 +126,21 @@ export default {
   },
   methods: {
     form_isInAccordion,
+    initAnswersStore() {
+      for (const sectionKey in form) {
+        for (const fieldKey in form[sectionKey].fields) {
+          const fieldId = `${sectionKey}-${fieldKey}`;
+          if (
+            form_isInAccordion(form[sectionKey].fields[fieldKey].type) &&
+            !Object.hasOwnProperty.call(this.$store.state.answers, fieldId)
+          )
+            this.$store.commit('updateAnswerCompletion', {
+              fieldIds: [fieldId],
+              value: false
+            });
+        }
+      }
+    },
     prevField() {
       const isFirstStep = this.currentStepIndex === 0;
       const isFirstFieldOfStep = this.currentField === 0;
@@ -154,7 +175,7 @@ export default {
             field: -1
           }
         });
-        this.$refs.finish[0].$el.focus();
+        this.$refs.finish[0].focus();
       } else if (isLastFieldOfStep) {
         this.$router.push({
           query: {
@@ -175,6 +196,23 @@ export default {
     stepperNavigation() {
       if (Number(this.$route.query.field) !== 0)
         this.$router.replace({ query: { ...this.$route.query, field: 0 } });
+    },
+    handleFinish() {
+      let allSectionsDone = true;
+      for (const step of this.steps) {
+        if (!step.done) {
+          allSectionsDone = false;
+          break;
+        }
+      }
+      if (
+        !allSectionsDone &&
+        !confirm(
+          'Es sind noch nicht alle Fragen als abgeschlossen markiert. Möchten Sie trotzdem zur Auswertung fortfahren?'
+        )
+      )
+        return;
+      this.$router.push({ path: 'auswertung' });
     }
   }
 };
