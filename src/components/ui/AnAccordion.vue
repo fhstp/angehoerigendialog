@@ -1,104 +1,72 @@
 <template>
-  <div :class="{ 'an-accordion--open': accordionOpen }" class="an-accordion">
-    <router-link
-      v-if="!accordionOpen"
-      :to="{ query: { ...$route.query, field: fieldId } }"
-      class="an-accordion__link"
-      >{{ field.label }}</router-link
-    >
-    <template v-if="accordionOpen">
-      <input
-        v-if="navForm_prevLocation"
-        type="text"
-        class="an-accordion__focusnavigation"
-        @focus="navForm_prev"
-      />
-      <slot></slot>
-      <input
-        v-if="navForm_nextLocation"
-        type="text"
-        class="an-accordion__focusnavigation"
-        @focus="navForm_next"
-      />
-    </template>
+  <div class="an-accordion">
+    <slot />
   </div>
 </template>
 
 <script>
-import navForm from '@/mixins/navForm.js';
-
 export default {
   name: 'AnAccordion',
-  mixins: [navForm],
   props: {
-    fieldId: { type: String, required: true },
-    field: { type: Object, required: true }
+    value: {
+      type: Number,
+      default: undefined
+    },
+    /** if set the active item is written to the route using the specified parameter name */
+    queryParam: {
+      type: String,
+      default: undefined
+    }
+  },
+  data() {
+    return {
+      internalValue: this.value
+    };
   },
   computed: {
-    accordionOpen() {
-      return this.$route.query.field === this.fieldId;
+    items() {
+      return this.$children.filter(
+        child => child.$options.name === 'AnAccordionItem'
+      );
+    },
+    currentQuery() {
+      return this.queryParam ? this.$route.query[this.queryParam] : undefined;
     }
   },
   watch: {
-    accordionOpen(open) {
-      this.$nextTick(function() {
-        if (open === true) {
-          this.afterAccordionOpens();
-        }
-      });
+    value(newValue) {
+      this.internalValue = newValue;
     }
   },
   created() {
-    if (
-      !this.$route.query.field &&
-      this.navForm_currentStepFirstFieldId === this.fieldId
-    ) {
-      this.$router.replace({
-        query: {
-          ...this.$route.query,
-          field: this.navForm_currentStepFirstFieldId
-        }
+    if (this.queryParam) {
+      // already in route
+      if (Object.hasOwnProperty.call(this.$route.query, this.queryParam)) {
+        this.changeActiveFromRoute();
+      }
+      // watch for changes in route
+      this.$watch('currentQuery', () => {
+        this.changeActiveFromRoute();
       });
     }
   },
-  mounted() {
-    if (this.accordionOpen) {
-      this.afterAccordionOpens();
-    }
-  },
   methods: {
-    afterAccordionOpens() {
-      const field = this.$slots.default ? this.$slots.default[0].elm : false;
-      if (field) {
-        const firstInput = field.querySelector('input, textarea');
-        if (firstInput) {
-          firstInput.focus();
-        }
-        field.scrollIntoView();
+    changeActive(index) {
+      if (this.internalValue === index) return;
+      this.internalValue = index;
+      this.$emit('input', index);
+      if (this.queryParam) {
+        this.$router.push({
+          query: { ...this.$route.query, [this.queryParam]: index }
+        });
       }
+    },
+    changeActiveFromRoute() {
+      const index = Number(this.$route.query[this.queryParam]);
+      if (!Number.isInteger(index) || this.internalValue === index) return;
+      this.internalValue = index;
+      this.$emit('input', index);
     }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.an-accordion__link {
-  display: block;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  padding: $spacer * 2;
-  font-size: 1.2rem;
-  margin-bottom: $spacer * 2;
-  color: black;
-  text-decoration: none;
-}
-
-.an-accordion__focusnavigation {
-  height: 0px;
-  width: 0px;
-  opacity: 0;
-  position: absolute;
-  top: -1000px;
-  left: -1000px;
-}
-</style>

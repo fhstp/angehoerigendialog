@@ -32,6 +32,7 @@
 
 <script>
 import formJson from '@/data/form.json';
+import { form_filterAccordionItems } from '@/helpers/form.js';
 import AnNoteCloseButton from '@/components/ui/AnNoteCloseButton.vue';
 
 export default {
@@ -49,8 +50,13 @@ export default {
     },
     currentQuestionLabel() {
       if (this.$route.query.step && this.$route.query.field !== undefined) {
-        return formJson[this.$route.query.step].fields[this.$route.query.field]
-          .label;
+        const accordionItems = form_filterAccordionItems(
+          formJson[this.$route.query.step].fields
+        );
+        return (
+          accordionItems.length > this.$route.query.field &&
+          accordionItems[this.$route.query.field].label
+        );
       }
       return undefined;
     },
