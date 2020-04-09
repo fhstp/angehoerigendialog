@@ -13,11 +13,6 @@
 <script>
 export default {
   name: 'AnNoteOpenButton',
-  data() {
-    return {
-      showNotes: this.$store.getters.getShowNotes
-    };
-  },
   methods: {
     openNotes() {
       this.$store.commit('updateShowNotes', true);

@@ -1,65 +1,67 @@
 <template>
   <div class="an-form">
     <AnNoteText />
-    <AnStepper :steps="steps" @input="stepperNavigation()" />
-    <main ref="main" class="an-form__content">
-      <template v-for="(section, sectionId, sectionIndex) in form">
-        <section
-          v-if="$route.query.step === sectionId"
-          :key="sectionId"
-          class="an-form__section container"
-        >
-          <div class="an-form__headingwrapper">
-            <h2 class="an-form__section-heading">{{ section.title }}</h2>
-            <AnNoteOpenButton />
-          </div>
-          <AnAccordion query-param="field">
-            <template v-for="(field, fieldId) in section.fields">
-              <AnField
-                v-if="!form_isInAccordion(field.type)"
-                :key="fieldId"
-                :field-data="field"
-                :section-id="sectionId"
-                :field-id="`${sectionId}-${fieldId}`"
-              />
-              <AnAccordionItem v-else :key="fieldId">
-                <template #header>
-                  <span class="an-accordion-item__header-text">{{
-                    field.label
-                  }}</span>
-                  <span class="an-accordion-item__header-icon">
-                    <IconCheckmark
-                      v-if="
-                        $store.getters.getFieldCompletion(
-                          `${sectionId}-${fieldId}`
-                        )
-                      "
-                      aria-label="fertig ausgefüllt"
-                    />
-                  </span>
-                </template>
-                <template #content>
-                  <AnField
-                    :field-data="field"
-                    :section-id="sectionId"
-                    :field-id="`${sectionId}-${fieldId}`"
-                    @goPrev="prevField()"
-                    @goNext="nextField()"
-                  />
-                </template>
-              </AnAccordionItem>
-            </template>
-          </AnAccordion>
-          <router-link
-            v-if="Object.keys(form).length === sectionIndex + 1"
-            ref="finish"
-            to="auswertung"
-            class="btn"
-            >auswerten</router-link
+    <div class="scrollarea">
+      <AnStepper :steps="steps" @input="stepperNavigation()" />
+      <main ref="main" class="an-form__content">
+        <template v-for="(section, sectionId, sectionIndex) in form">
+          <section
+            v-if="$route.query.step === sectionId"
+            :key="sectionId"
+            class="an-form__section container"
           >
-        </section>
-      </template>
-    </main>
+            <div class="an-form__headingwrapper">
+              <h2 class="an-form__section-heading">{{ section.title }}</h2>
+              <AnNoteOpenButton />
+            </div>
+            <AnAccordion query-param="field">
+              <template v-for="(field, fieldId) in section.fields">
+                <AnField
+                  v-if="!form_isInAccordion(field.type)"
+                  :key="fieldId"
+                  :field-data="field"
+                  :section-id="sectionId"
+                  :field-id="`${sectionId}-${fieldId}`"
+                />
+                <AnAccordionItem v-else :key="fieldId">
+                  <template #header>
+                    <span class="an-accordion-item__header-text">{{
+                      field.label
+                    }}</span>
+                    <span class="an-accordion-item__header-icon">
+                      <IconCheckmark
+                        v-if="
+                          $store.getters.getFieldCompletion(
+                            `${sectionId}-${fieldId}`
+                          )
+                        "
+                        aria-label="fertig ausgefüllt"
+                      />
+                    </span>
+                  </template>
+                  <template #content>
+                    <AnField
+                      :field-data="field"
+                      :section-id="sectionId"
+                      :field-id="`${sectionId}-${fieldId}`"
+                      @goPrev="prevField()"
+                      @goNext="nextField()"
+                    />
+                  </template>
+                </AnAccordionItem>
+              </template>
+            </AnAccordion>
+            <router-link
+              v-if="Object.keys(form).length === sectionIndex + 1"
+              ref="finish"
+              to="auswertung"
+              class="btn"
+              >auswerten</router-link
+            >
+          </section>
+        </template>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -205,10 +207,6 @@ export default {
   }
 
   &__section-heading {
-    margin-bottom: $spacer * 4;
-  }
-
-  &__section-heading {
     flex-grow: 1;
   }
 
@@ -220,6 +218,7 @@ export default {
     align-items: flex-end;
     padding-bottom: $spacer;
     box-shadow: 3px 3px 8px #ccc;
+    margin-bottom: $spacer * 2;
   }
 }
 </style>

@@ -112,6 +112,7 @@ export default {
     > a {
       display: flex;
       flex-direction: column;
+      color: black;
     }
   }
 

@@ -1,5 +1,6 @@
 <template>
   <div class="an-note-close">
+    <div class="an-note-close__focusdiv" @click="focusMethod()"></div>
     <button
       aria-label="Schließen"
       class="an-note-close__button"
@@ -13,10 +14,8 @@
 <script>
 export default {
   name: 'AnNoteCloseButton',
-  data() {
-    return {
-      showNotes: this.$store.getters.getShowNotes
-    };
+  props: {
+    focusMethod: { type: Function, default: undefined }
   },
   methods: {
     closeNotes() {
@@ -41,6 +40,10 @@ export default {
     height: 50px;
     font-size: 25px;
     cursor: pointer;
+  }
+  &__focusdiv {
+    flex-grow: 1;
+    cursor: text;
   }
 }
 </style>

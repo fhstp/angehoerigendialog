@@ -1,6 +1,6 @@
 <template>
   <div v-show="showNotes" class="an-note-text">
-    <AnNoteCloseButton />
+    <AnNoteCloseButton :focus-method="focus_TaAlreadythere" />
     <div class="an-note-text__elementwrapper">
       <div class="an-note-text__innerContainer">
         <textarea
@@ -10,7 +10,10 @@
         >
         </textarea>
         <template v-if="showAddHeading">
-          <div>
+          <div
+            class="an-note-text__currentquestionwrapper"
+            @click="focus_TaNewtextLastLine()"
+          >
             <span class="an-note-text__currentquestion">
               > {{ currentQuestionLabel }}</span
             >
@@ -21,12 +24,15 @@
           <textarea
             ref="ta_newtext"
             v-model="noteNewData"
-            placeholder="Hier neue Notiz einfügen"
             @input="updateTextAreaHeight($event.currentTarget)"
           ></textarea>
         </template>
       </div>
     </div>
+    <div
+      class="an-note-text__focusdiv"
+      @click="focus_TaNewtextLastLine()"
+    ></div>
   </div>
 </template>
 
@@ -136,6 +142,22 @@ export default {
       } else {
         this.showAddHeading = false;
       }
+    },
+    focus_TaAlreadythere() {
+      const ta = this.$refs.ta_alreadythere;
+      ta.focus();
+      ta.setSelectionRange(0, 0, 0);
+    },
+    focus_TaNewtextLastLine() {
+      if (this.showAddHeading) {
+        const ta = this.$refs.ta_newtext;
+        ta.focus();
+        ta.setSelectionRange(ta.value.length, ta.value.length);
+      } else {
+        const ta = this.$refs.ta_alreadythere;
+        ta.focus();
+        ta.setSelectionRange(ta.value.length, ta.value.length);
+      }
     }
   }
 };
@@ -146,9 +168,12 @@ export default {
   width: 100%;
   height: 100vh;
   position: absolute;
-  background: red;
+  background-color: white;
   opacity: 1;
   z-index: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 
   &__elementwrapper {
     display: flex;
@@ -160,16 +185,29 @@ export default {
     resize: none;
     width: 100%;
     border: 0;
-    //outline: none;
+    outline: none;
+    display: block;
     font-size: 1.45rem;
+
+    padding: 0 $spacer * 5 0 $spacer * 5;
   }
 
   &__innerContainer {
-    width: 80%;
+    width: 100%;
   }
 
   &__currentquestion {
     opacity: 0.5;
+  }
+
+  &__focusdiv {
+    flex-grow: 1;
+    cursor: text;
+  }
+
+  &__currentquestionwrapper {
+    padding: 0 $spacer * 5 0 $spacer * 5;
+    cursor: text;
   }
 }
 </style>

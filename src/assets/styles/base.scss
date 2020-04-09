@@ -6,6 +6,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  overflow:hidden;
 }
 
 .container {
@@ -58,4 +59,16 @@ input, textarea {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
+}
+
+.scrollarea{
+  width: 100vw;
+  overflow: auto;
+  height: 100vh;
+}
+
+@media #{map-get($query, 'lg-and-up')} {
+  .scrollarea{
+    display: flex;
+  }
 }
