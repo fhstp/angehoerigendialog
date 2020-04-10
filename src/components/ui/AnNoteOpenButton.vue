@@ -1,13 +1,7 @@
 <template>
-  <div class="an-note-open">
-    <button
-      aria-label="Öffnen"
-      class="an-note-open__button"
-      @click="openNotes()"
-    >
-      ✏️
-    </button>
-  </div>
+  <button aria-label="Öffnen" class="an-note-open" @click="openNotes()">
+    ✏️
+  </button>
 </template>
 
 <script>
@@ -23,9 +17,7 @@ export default {
 
 <style lang="scss" scoped>
 .an-note-open {
-  &__button {
-    width: 50px;
-    height: 50px;
-  }
+  width: 50px;
+  height: 50px;
 }
 </style>

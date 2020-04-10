@@ -1,7 +1,7 @@
 <template>
   <div class="an-form">
     <AnNoteText />
-    <div class="scrollarea">
+    <div class="an-form__scrollarea">
       <AnStepper :steps="steps" @input="stepperNavigation()" />
       <main ref="main" class="an-form__content">
         <template v-for="(section, sectionId, sectionIndex) in form">
@@ -219,6 +219,16 @@ export default {
     padding-bottom: $spacer;
     box-shadow: 3px 3px 8px #ccc;
     margin-bottom: $spacer * 2;
+  }
+
+  &__scrollarea {
+    width: 100vw;
+    overflow: auto;
+    height: 100vh;
+
+    @media #{map-get($query, 'lg-and-up')} {
+      display: flex;
+    }
   }
 }
 </style>

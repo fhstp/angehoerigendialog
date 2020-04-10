@@ -106,7 +106,7 @@ export default {
 
     @media #{map-get($query, 'lg-and-up')} {
       width: 100%;
-      height: 19%;
+      height: 12rem;
     }
 
     > a {

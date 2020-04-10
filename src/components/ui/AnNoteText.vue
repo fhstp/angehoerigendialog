@@ -1,8 +1,17 @@
 <template>
   <div v-show="showNotes" class="an-note-text">
-    <AnNoteCloseButton :focus-method="focus_TaAlreadythere" />
-    <div class="an-note-text__elementwrapper">
-      <div class="an-note-text__innerContainer">
+    <button
+      aria-label="Schließen"
+      class="an-note-text__close"
+      @click="closeNotes()"
+    >
+      ❌
+    </button>
+    <div
+      class="an-note-text__elementwrapper"
+      @click.self="focus_TaAlreadythere()"
+    >
+      <div class="an-note-text__content container">
         <textarea
           ref="ta_alreadythere"
           v-model="noteData"
@@ -29,21 +38,16 @@
         </template>
       </div>
     </div>
-    <div
-      class="an-note-text__focusdiv"
-      @click="focus_TaNewtextLastLine()"
-    ></div>
+    <div class="an-note-text__focusdiv" @click="focus_TaNewtextLastLine()" />
   </div>
 </template>
 
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
-import AnNoteCloseButton from '@/components/ui/AnNoteCloseButton.vue';
 
 export default {
   name: 'AnNoteText',
-  components: { AnNoteCloseButton },
   data() {
     return {
       currentQuestionLabel_prev: this.$store.getters.getPrevQuestionLabel,
@@ -61,6 +65,7 @@ export default {
         );
         return (
           accordionItems.length > this.$route.query.field &&
+          this.$route.query.field >= 0 &&
           accordionItems[this.$route.query.field].label
         );
       }
@@ -135,18 +140,13 @@ export default {
       textArea.style.height = textArea.scrollHeight + 'px';
     },
     showAddHeadingToggle() {
-      if (
-        this.currentQuestionLabel !== this.$store.getters.getPrevQuestionLabel
-      ) {
-        this.showAddHeading = true;
-      } else {
-        this.showAddHeading = false;
-      }
+      this.showAddHeading =
+        this.currentQuestionLabel !== this.$store.getters.getPrevQuestionLabel;
     },
     focus_TaAlreadythere() {
       const ta = this.$refs.ta_alreadythere;
       ta.focus();
-      ta.setSelectionRange(0, 0, 0);
+      ta.setSelectionRange(0, 0);
     },
     focus_TaNewtextLastLine() {
       if (this.showAddHeading) {
@@ -157,6 +157,18 @@ export default {
         const ta = this.$refs.ta_alreadythere;
         ta.focus();
         ta.setSelectionRange(ta.value.length, ta.value.length);
+      }
+    },
+    closeNotes() {
+      this.$store.commit('updateShowNotes', false);
+      if (this.$store.getters.getNewNotes !== '') {
+        this.$store.commit(
+          'saveNotes',
+          this.$store.getters.getNotes +
+            '\n\n' +
+            this.$store.getters.getNewNotes
+        );
+        this.$store.commit('saveNewNotes', '');
       }
     }
   }
@@ -179,6 +191,20 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 50px;
+  }
+
+  &__content {
+    padding-top: $spacer * 2;
+    padding-bottom: $spacer * 2;
+    width: 100%;
+  }
+
+  &__close {
+    position: fixed;
+    right: 0;
+    width: 50px;
+    height: 50px;
   }
 
   textarea {
@@ -188,12 +214,6 @@ export default {
     outline: none;
     display: block;
     font-size: 1.45rem;
-
-    padding: 0 $spacer * 5 0 $spacer * 5;
-  }
-
-  &__innerContainer {
-    width: 100%;
   }
 
   &__currentquestion {
