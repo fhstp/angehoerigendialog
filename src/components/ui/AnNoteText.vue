@@ -128,12 +128,17 @@ export default {
       const heading_inserted = `*${this.currentQuestionLabel}*`;
       this.currentQuestionLabel_prev = this.currentQuestionLabel;
 
-      textarea_alreadythere.value =
-        textarea_alreadythere.value +
-        '\n\n' +
-        heading_inserted +
-        '\n\n' +
-        textarea_newtext.value;
+      if (textarea_alreadythere.value !== '') {
+        textarea_alreadythere.value =
+          textarea_alreadythere.value +
+          '\n\n' +
+          heading_inserted +
+          '\n\n' +
+          textarea_newtext.value;
+      } else {
+        textarea_alreadythere.value =
+          heading_inserted + '\n\n' + textarea_newtext.value;
+      }
 
       this.showAddHeading = false;
       this.$store.commit(
@@ -170,12 +175,16 @@ export default {
     closeNotes() {
       this.$store.commit('updateShowNotes', false);
       if (this.$store.getters.getNewNotes !== '') {
-        this.$store.commit(
-          'saveNotes',
-          this.$store.getters.getNotes +
-            '\n\n' +
-            this.$store.getters.getNewNotes
-        );
+        if (this.$store.getters.getNotes === '') {
+          this.$store.commit('saveNotes', this.$store.getters.getNewNotes);
+        } else {
+          this.$store.commit(
+            'saveNotes',
+            this.$store.getters.getNotes +
+              '\n\n' +
+              this.$store.getters.getNewNotes
+          );
+        }
         this.$store.commit('saveNewNotes', '');
       }
     }
