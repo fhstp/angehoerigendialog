@@ -9,19 +9,19 @@
     </button>
     <div
       class="an-note-text__elementwrapper"
-      @click.self="focus_TaAlreadythere()"
+      @click.self="focusTaAlreadyThere()"
     >
       <div class="an-note-text__content container">
         <textarea
+          v-show="showAlreadyThere"
           ref="ta_alreadythere"
           v-model="noteData"
-          @input="updateTextAreaHeight($event.currentTarget)"
         >
         </textarea>
-        <template v-if="showAddHeading">
+        <template v-if="showAddHeading && currentQuestionLabel">
           <div
             class="an-note-text__currentquestionwrapper"
-            @click="focus_TaNewtextLastLine()"
+            @click="focusTaNewText()"
           >
             <span class="an-note-text__currentquestion">
               > {{ currentQuestionLabel }}</span
@@ -33,15 +33,15 @@
           <textarea
             ref="ta_newtext"
             v-model="noteNewData"
+            placeholder="Hier Notiz einfügen..."
             @input="updateTextAreaHeight($event.currentTarget)"
           ></textarea>
         </template>
       </div>
     </div>
-    <div class="an-note-text__focusdiv" @click="focus_TaNewtextLastLine()" />
+    <div class="an-note-text__focusdiv" @click="focusTaNewText()" />
   </div>
 </template>
-
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
@@ -86,24 +86,36 @@ export default {
       set(value) {
         this.$store.commit('saveNewNotes', value);
       }
+    },
+    showAlreadyThere() {
+      return !(
+        this.noteData === '' &&
+        this.showAddHeading &&
+        this.currentQuestionLabel
+      );
     }
   },
   watch: {
-    showNotes(val) {
-      if (val === true) {
+    showNotes(newValue) {
+      if (newValue === true) {
         this.showAddHeadingToggle();
         this.$nextTick(function() {
           this.updateTextAreaHeight(this.$refs.ta_alreadythere);
         });
       }
+    },
+    noteData(newValue, oldValue) {
+      if (newValue === oldValue) return;
+      this.$nextTick(() => {
+        this.updateTextAreaHeight(this.$refs.ta_alreadythere);
+      });
     }
   },
   mounted() {
-    if (this.$refs.ta_alreadythere.value !== '') {
+    if (this.$refs.ta_alreadythere?.value !== '') {
       this.updateTextAreaHeight(this.$refs.ta_alreadythere);
     }
-
-    if (this.$refs.ta_newtext.value !== '') {
+    if (this.$refs.ta_newtext?.value !== '') {
       this.updateTextAreaHeight(this.$refs.ta_newtext);
     }
     this.currentQuestionLabel_prev = this.currentQuestionLabel;
@@ -123,19 +135,17 @@ export default {
         '\n\n' +
         textarea_newtext.value;
 
-      this.updateTextAreaHeight(textarea_alreadythere);
       this.showAddHeading = false;
       this.$store.commit(
         'savePrevQuestionLabel',
         this.currentQuestionLabel_prev
       );
-
       this.noteData = textarea_alreadythere.value;
       this.noteNewData = '';
-
       textarea_alreadythere.focus();
     },
     updateTextAreaHeight(textArea) {
+      if (!textArea) return;
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
     },
@@ -143,21 +153,19 @@ export default {
       this.showAddHeading =
         this.currentQuestionLabel !== this.$store.getters.getPrevQuestionLabel;
     },
-    focus_TaAlreadythere() {
-      const ta = this.$refs.ta_alreadythere;
+    focusTaAlreadyThere() {
+      const ta = this.showAlreadyThere
+        ? this.$refs.ta_alreadythere
+        : this.$refs.ta_newtext;
       ta.focus();
       ta.setSelectionRange(0, 0);
     },
-    focus_TaNewtextLastLine() {
-      if (this.showAddHeading) {
-        const ta = this.$refs.ta_newtext;
-        ta.focus();
-        ta.setSelectionRange(ta.value.length, ta.value.length);
-      } else {
-        const ta = this.$refs.ta_alreadythere;
-        ta.focus();
-        ta.setSelectionRange(ta.value.length, ta.value.length);
-      }
+    focusTaNewText() {
+      const ta = this.$refs.ta_newtext
+        ? this.$refs.ta_newtext
+        : this.$refs.ta_alreadythere;
+      ta.focus();
+      ta.setSelectionRange(ta.value.length, ta.value.length);
     },
     closeNotes() {
       this.$store.commit('updateShowNotes', false);
@@ -222,12 +230,11 @@ export default {
 
   &__focusdiv {
     flex-grow: 1;
-    cursor: text;
+    //cursor: text;
   }
 
   &__currentquestionwrapper {
-    padding: 0 $spacer * 5 0 $spacer * 5;
-    cursor: text;
+    //cursor: text;
   }
 }
 </style>
