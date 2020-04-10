@@ -19,6 +19,17 @@ export default new Vuex.Store({
     getFieldValue: state => fieldId => {
       return state.answers[fieldId]?.value;
     },
+    getSectionCompletion: state => sectionId => {
+      for (const key in state.answers) {
+        if (
+          key.startsWith(`${sectionId}-`) &&
+          state.answers[key].done !== true
+        ) {
+          return false;
+        }
+      }
+      return true;
+    },
     getShowNotes: state => {
       return state.updshowNotes;
     },
@@ -33,7 +44,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    initAnswers(state) {
+    wipeStore(state) {
       state.answers = {};
     },
     /**

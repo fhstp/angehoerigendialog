@@ -5,7 +5,7 @@
         v-for="(step, i) in steps"
         :key="step.id"
         :ref="`stepperItem-${step.id}`"
-        class="an-stepper__step"
+        :class="['an-stepper__step', { 'an-stepper__step--done': step.done }]"
       >
         <router-link
           :to="{ query: { ...$route.query, step: step.id } }"
@@ -21,6 +21,7 @@
           <p class="an-stepper__text">
             <span aria-hidden="true">{{ i + 1 }}.</span>&nbsp;{{ step.title }}
           </p>
+          <IconCheckmark v-if="step.done" class="an-stepper__status" />
         </router-link>
       </li>
     </ol>
@@ -30,6 +31,7 @@
 <script>
 export default {
   name: 'AnStepper',
+  components: { IconCheckmark: () => import('@/assets/icons/checkmark.svg') },
   props: {
     steps: {
       type: Array,
@@ -70,6 +72,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$icon_width: 50px;
+
 .an-stepper {
   overflow: hidden;
 
@@ -91,13 +95,11 @@ export default {
 
   &__step {
     flex-shrink: 0;
-    padding: $spacer * 4;
     width: 66%;
     list-style: none;
 
     @media #{map-get($query, 'sm-and-up')} {
       width: 29%;
-      padding: $spacer * 2;
     }
 
     @media #{map-get($query, 'md-and-up')} {
@@ -110,9 +112,15 @@ export default {
     }
 
     > a {
+      position: relative;
       display: flex;
       flex-direction: column;
       color: black;
+      padding: $spacer * 4;
+
+      @media #{map-get($query, 'sm-and-up')} {
+        padding: $spacer * 2;
+      }
     }
   }
 
@@ -122,7 +130,7 @@ export default {
     fill: white;
     background-color: black;
     border-radius: 50%;
-    width: 50px;
+    width: $icon_width;
     height: auto;
 
     &--active {
@@ -134,6 +142,13 @@ export default {
   &__text {
     word-break: normal;
     overflow-wrap: anywhere;
+  }
+
+  &__status {
+    position: absolute;
+    width: 1.2rem;
+    left: 50%;
+    margin-left: $icon_width / 2;
   }
 }
 </style>
