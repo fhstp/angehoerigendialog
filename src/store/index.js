@@ -6,7 +6,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    answers: {}
+    answers: {},
+    updshowNotes: false,
+    newNotes: '',
+    notes: '',
+    prevQuestionLabel: ''
   },
   getters: {
     getFieldCompletion: state => fieldId => {
@@ -25,6 +29,18 @@ export default new Vuex.Store({
         }
       }
       return true;
+    },
+    getShowNotes: state => {
+      return state.updshowNotes;
+    },
+    getNewNotes: state => {
+      return state.newNotes;
+    },
+    getNotes: state => {
+      return state.notes;
+    },
+    getPrevQuestionLabel: state => {
+      return state.prevQuestionLabel;
     }
   },
   mutations: {
@@ -51,6 +67,18 @@ export default new Vuex.Store({
         Vue.set(state.answers, fieldId, {});
       }
       Vue.set(state.answers[fieldId], 'value', value);
+    },
+    updateShowNotes(state, newVal) {
+      state.updshowNotes = newVal;
+    },
+    saveNewNotes(state, newVal) {
+      state.newNotes = newVal;
+    },
+    saveNotes(state, newVal) {
+      state.notes = newVal;
+    },
+    savePrevQuestionLabel(state, newVal) {
+      state.prevQuestionLabel = newVal;
     }
   },
   actions: {

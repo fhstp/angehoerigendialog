@@ -108,13 +108,14 @@ $icon_width: 50px;
 
     @media #{map-get($query, 'lg-and-up')} {
       width: 100%;
-      height: 19%;
+      height: 12rem;
     }
 
     > a {
       position: relative;
       display: flex;
       flex-direction: column;
+      color: black;
       padding: $spacer * 4;
 
       @media #{map-get($query, 'sm-and-up')} {

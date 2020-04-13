@@ -1,81 +1,84 @@
 <template>
   <div class="an-form">
-    <AnStepper :steps="steps" @input="stepperNavigation()" />
-    <main ref="main" class="an-form__content">
-      <template v-for="(section, sectionId, sectionIndex) in form">
-        <section
-          v-if="$route.query.step === sectionId"
-          :key="sectionId"
-          class="an-form__section container"
-        >
-          <h2 class="an-form__section-heading">{{ section.title }}</h2>
-          <AnAccordion query-param="field">
-            <template v-for="(field, fieldId) in section.fields">
-              <AnField
-                v-if="!form_isInAccordion(field.type)"
-                :key="fieldId"
-                :field-data="field"
-                :section-id="sectionId"
-                :field-id="`${sectionId}-${fieldId}`"
-              />
-              <AnAccordionItem v-else :key="fieldId">
-                <template #header>
-                  <span class="an-accordion-item__header-text">{{
-                    field.label
-                  }}</span>
-                  <span class="an-accordion-item__header-icon">
-                    <IconCheckmark
-                      v-if="
-                        $store.getters.getFieldCompletion(
-                          `${sectionId}-${fieldId}`
-                        )
-                      "
-                      aria-label="fertig ausgefüllt"
-                    />
-                  </span>
-                </template>
-                <template #content>
-                  <AnField
-                    :field-data="field"
-                    :section-id="sectionId"
-                    :field-id="`${sectionId}-${fieldId}`"
-                    @goPrev="prevField()"
-                    @goNext="nextField()"
-                  />
-                </template>
-              </AnAccordionItem>
-            </template>
-          </AnAccordion>
-          <button
-            v-if="Object.keys(form).length === sectionIndex + 1"
-            ref="finish"
-            class="btn"
-            @click="handleFinish()"
+    <AnNoteText />
+    <div class="an-form__scrollarea">
+      <AnStepper :steps="steps" @input="stepperNavigation()" />
+      <main ref="main" class="an-form__content">
+        <template v-for="(section, sectionId, sectionIndex) in form">
+          <section
+            v-if="$route.query.step === sectionId"
+            :key="sectionId"
+            class="an-form__section container"
           >
-            auswerten
-          </button>
-        </section>
-      </template>
-    </main>
+            <div class="an-form__headingwrapper">
+              <h2 class="an-form__section-heading">{{ section.title }}</h2>
+              <AnNoteOpenButton />
+            </div>
+            <AnAccordion query-param="field">
+              <template v-for="(field, fieldId) in section.fields">
+                <AnField
+                  v-if="!form_isInAccordion(field.type)"
+                  :key="fieldId"
+                  :field-data="field"
+                  :section-id="sectionId"
+                  :field-id="`${sectionId}-${fieldId}`"
+                />
+                <AnAccordionItem v-else :key="fieldId">
+                  <template #header>
+                    <span class="an-accordion-item__header-text">{{
+                      field.label
+                    }}</span>
+                    <span class="an-accordion-item__header-icon">
+                      <IconCheckmark
+                        v-if="
+                          $store.getters.getFieldCompletion(
+                            `${sectionId}-${fieldId}`
+                          )
+                        "
+                        aria-label="fertig ausgefüllt"
+                      />
+                    </span>
+                  </template>
+                  <template #content>
+                    <AnField
+                      :field-data="field"
+                      :section-id="sectionId"
+                      :field-id="`${sectionId}-${fieldId}`"
+                      @goPrev="prevField()"
+                      @goNext="nextField()"
+                    />
+                  </template>
+                </AnAccordionItem>
+              </template>
+            </AnAccordion>
+            <button
+              v-if="Object.keys(form).length === sectionIndex + 1"
+              ref="finish"
+              class="btn"
+              @click="handleFinish()"
+            >
+              auswerten
+            </button>
+          </section>
+        </template>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
 import form from '@/data/form.json';
-import { form_isInAccordion } from '@/helpers/form.js';
+import {
+  form_isInAccordion,
+  form_numberOfAccordionItems
+} from '@/helpers/form.js';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
 import AnField from '@/components/AnField.vue';
+import AnNoteOpenButton from '@/components/ui/AnNoteOpenButton.vue';
+import AnNoteText from '@/components/ui/AnNoteText.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconCheckmark from '@/assets/icons/checkmark.svg';
-
-const numberOfAccordionItems = sectionId => {
-  let count = 0;
-  for (const fieldId in form[sectionId].fields) {
-    if (form_isInAccordion(form[sectionId].fields[fieldId].type)) count++;
-  }
-  return count;
-};
 
 export default {
   name: 'Form',
@@ -83,11 +86,13 @@ export default {
     AnAccordion,
     AnAccordionItem,
     AnField,
+    AnNoteOpenButton,
+    AnNoteText,
     AnStepper,
     IconCheckmark
   },
   computed: {
-    currentField() {
+    currentFieldIndex() {
       return Number(this.$route.query.field);
     },
     currentStepIndex() {
@@ -143,30 +148,34 @@ export default {
     },
     prevField() {
       const isFirstStep = this.currentStepIndex === 0;
-      const isFirstFieldOfStep = this.currentField === 0;
+      const isFirstFieldOfStep = this.currentFieldIndex === 0;
       if (isFirstFieldOfStep && !isFirstStep) {
         this.$router.push({
           query: {
             ...this.$route.query,
             step: this.steps[this.currentStepIndex - 1].id,
             field:
-              numberOfAccordionItems(this.steps[this.currentStepIndex - 1].id) -
-              1
+              form_numberOfAccordionItems(
+                form[this.steps[this.currentStepIndex - 1].id].fields
+              ) - 1
           }
         });
       } else if (!(isFirstStep && isFirstFieldOfStep)) {
         this.$router.push({
           query: {
             ...this.$route.query,
-            field: this.currentField - 1
+            field: this.currentFieldIndex - 1
           }
         });
       }
     },
     nextField() {
       const isLastFieldOfStep =
-        this.currentField ===
-        numberOfAccordionItems(this.steps[this.currentStepIndex].id) - 1;
+        this.currentFieldIndex ===
+        form_numberOfAccordionItems(
+          form[this.steps[this.currentStepIndex].id].fields
+        ) -
+          1;
       const isLastStep = this.currentStepIndex === this.steps.length - 1;
       if (isLastStep && isLastFieldOfStep) {
         this.$router.push({
@@ -188,7 +197,7 @@ export default {
         this.$router.push({
           query: {
             ...this.$route.query,
-            field: this.currentField + 1
+            field: this.currentFieldIndex + 1
           }
         });
       }
@@ -236,7 +245,28 @@ export default {
   }
 
   &__section-heading {
-    margin-bottom: $spacer * 4;
+    flex-grow: 1;
+  }
+
+  &__headingwrapper {
+    display: flex;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    align-items: flex-end;
+    padding-bottom: $spacer;
+    box-shadow: 3px 3px 8px #ccc;
+    margin-bottom: $spacer * 2;
+  }
+
+  &__scrollarea {
+    width: 100vw;
+    overflow: auto;
+    height: 100vh;
+
+    @media #{map-get($query, 'lg-and-up')} {
+      display: flex;
+    }
   }
 }
 </style>
