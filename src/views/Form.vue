@@ -232,6 +232,7 @@ export default {
   @media #{map-get($query, 'lg-and-up')} {
     display: flex;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   &__content {
@@ -263,6 +264,7 @@ export default {
     width: 100vw;
     overflow: auto;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
 
     @media #{map-get($query, 'lg-and-up')} {
       display: flex;
