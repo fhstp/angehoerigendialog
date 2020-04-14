@@ -1,5 +1,5 @@
 <template>
-  <div v-show="showNotes" class="an-note-text">
+  <div v-if="showNotes" class="an-note-text">
     <button
       aria-label="Schließen"
       class="an-note-text__close btn"
@@ -110,6 +110,7 @@ export default {
         this.showAddHeadingToggle();
         this.$nextTick(function() {
           this.updateTextAreaHeight(this.$refs.ta_alreadythere);
+          this.updateTextAreaHeight(this.$refs.ta_newtext);
         });
       }
     },
@@ -245,6 +246,7 @@ export default {
     outline: none;
     display: block;
     font-size: 1.45rem;
+    overflow: hidden;
   }
 
   &__focusdiv {
