@@ -40,17 +40,22 @@
       </div>
     </div>
     <div class="an-note-text__focusdiv" @click="focusTaNewText()" />
+    <div class="an-note-text__savehint">
+      Änderungen werden automatisch gespeichert<IconCheckmark />
+    </div>
   </div>
 </template>
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
 import IconClose from '@/assets/icons/close.svg';
+import IconCheckmark from '@/assets/icons/checkmark.svg';
 
 export default {
   name: 'AnNoteText',
   components: {
-    IconClose
+    IconClose,
+    IconCheckmark
   },
   data() {
     return {
@@ -244,6 +249,23 @@ export default {
 
   &__focusdiv {
     flex-grow: 1;
+  }
+
+  &__savehint {
+    position: absolute;
+    bottom: 0;
+    border: 2px solid black;
+    border-radius: 2px;
+    box-shadow: 3px 3px 8px #ccc;
+    display: flex;
+    align-items: center;
+    padding: $spacer * 0.5;
+    background: white;
+  }
+
+  &__savehint > svg {
+    height: 1.4rem;
+    margin-left: $spacer;
   }
 }
 
