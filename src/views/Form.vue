@@ -8,13 +8,15 @@
           <section
             v-if="$route.query.step === sectionId"
             :key="sectionId"
-            class="an-form__section container"
+            class="an-form__section"
           >
-            <div class="an-form__headingwrapper">
-              <h2 class="an-form__section-heading">{{ section.title }}</h2>
-              <AnNoteOpenButton />
+            <div class="an-form__header-wrapper">
+              <div class="an-form__header container">
+                <h2 class="an-form__section-heading">{{ section.title }}</h2>
+                <AnNoteOpenButton />
+              </div>
             </div>
-            <AnAccordion query-param="field">
+            <AnAccordion class="container" query-param="field">
               <template v-for="(field, fieldId) in section.fields">
                 <AnField
                   v-if="!form_isInAccordion(field.type)"
@@ -236,8 +238,6 @@ export default {
   }
 
   &__content {
-    padding-top: $spacer;
-
     @media #{map-get($query, 'lg-and-up')} {
       flex-grow: 1;
       height: 100%;
@@ -249,15 +249,19 @@ export default {
     flex-grow: 1;
   }
 
-  &__headingwrapper {
-    display: flex;
+  &__header-wrapper {
     position: sticky;
     top: 0;
     background-color: white;
-    align-items: flex-end;
+    padding-top: $spacer;
     padding-bottom: $spacer;
     box-shadow: 3px 3px 8px #ccc;
     margin-bottom: $spacer * 2;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
   }
 
   &__scrollarea {
@@ -271,12 +275,17 @@ export default {
     }
   }
 }
+
+.an-note-open {
+  margin-left: $spacer;
+}
 </style>
 
 <style lang="scss">
 .an-heading,
 .an-hint {
-  margin-bottom: $spacer;
+  margin-top: $spacer * 4;
+  margin-bottom: $spacer * 2;
 }
 
 .an-accordion-item {

@@ -34,9 +34,7 @@
           <button class="btn" @click="$emit('goPrev')">Zurück</button>
           <button class="btn" @click="handleCompletion()">
             {{
-              fieldCompletion
-                ? 'Als unfertig markieren'
-                : 'Als erledigt markieren und weiter'
+              fieldCompletion ? 'Weiter' : 'Als erledigt markieren und weiter'
             }}
           </button>
         </div>
@@ -160,8 +158,8 @@ export default {
   },
   methods: {
     handleCompletion() {
-      if (!this.fieldCompletion) this.$emit('goNext');
-      this.fieldCompletion = !this.fieldCompletion;
+      this.$emit('goNext');
+      if (!this.fieldCompletion) this.fieldCompletion = true;
     }
   }
 };
