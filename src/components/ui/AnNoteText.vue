@@ -252,7 +252,7 @@ export default {
   }
 
   &__savehint {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     border: 2px solid black;
     border-radius: 2px;
