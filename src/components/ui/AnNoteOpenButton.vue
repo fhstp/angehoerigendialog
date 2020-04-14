@@ -24,6 +24,8 @@ export default {
 .an-note-open {
   display: flex;
   font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .icon-edit {
