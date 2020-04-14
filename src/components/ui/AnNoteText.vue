@@ -2,10 +2,10 @@
   <div v-show="showNotes" class="an-note-text">
     <button
       aria-label="Schließen"
-      class="an-note-text__close"
+      class="an-note-text__close btn"
       @click="closeNotes()"
     >
-      ❌
+      <IconClose />
     </button>
     <div
       class="an-note-text__elementwrapper"
@@ -19,15 +19,15 @@
         >
         </textarea>
         <template v-if="showAddHeading && currentQuestionLabel">
-          <div
-            class="an-note-text__currentquestionwrapper"
-            @click="focusTaNewText()"
-          >
-            <span class="an-note-text__currentquestion">
+          <div class="an-note-current" @click="focusTaNewText()">
+            <p class="an-note-current__header">
+              Möchten Sie diese Überschrift zur Notiz einfügen?
+            </p>
+            <span class="an-note-current__question">
               > {{ currentQuestionLabel }}</span
             >
-            <button @click="addHeading()">
-              Frage als Überschrift
+            <button class="an-note-current__action btn" @click="addHeading()">
+              Text hinzufügen
             </button>
           </div>
           <textarea
@@ -45,9 +45,13 @@
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
+import IconClose from '@/assets/icons/close.svg';
 
 export default {
   name: 'AnNoteText',
+  components: {
+    IconClose
+  },
   data() {
     return {
       currentQuestionLabel_prev: this.$store.getters.getPrevQuestionLabel,
@@ -220,8 +224,12 @@ export default {
   &__close {
     position: fixed;
     right: 0;
-    width: 50px;
-    height: 50px;
+    padding: $spacer * 2;
+    line-height: 0;
+
+    > svg {
+      height: 1.2rem;
+    }
   }
 
   textarea {
@@ -233,17 +241,30 @@ export default {
     font-size: 1.45rem;
   }
 
-  &__currentquestion {
+  &__focusdiv {
+    flex-grow: 1;
+  }
+}
+
+.an-note-current {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: $spacer * 2 0;
+  border: 3px dotted lightgrey;
+  padding: $spacer * 2;
+
+  &__header {
+    margin-bottom: $spacer * 2;
+    width: 100%;
+  }
+
+  &__question {
     opacity: 0.5;
   }
 
-  &__focusdiv {
-    flex-grow: 1;
-    //cursor: text;
-  }
-
-  &__currentquestionwrapper {
-    //cursor: text;
+  &__action {
+    margin: 0;
   }
 }
 </style>

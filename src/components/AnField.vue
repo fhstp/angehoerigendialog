@@ -30,14 +30,16 @@
         />
       </div>
       <template v-if="isAccordionItem && !isSubfield">
-        <button @click="$emit('goPrev')">Zurück</button>
-        <button @click="handleCompletion()">
-          {{
-            fieldCompletion
-              ? 'Als unfertig markieren'
-              : 'Als erledigt markieren und weiter'
-          }}
-        </button>
+        <div class="an-field__actions">
+          <button class="btn" @click="$emit('goPrev')">Zurück</button>
+          <button class="btn" @click="handleCompletion()">
+            {{
+              fieldCompletion
+                ? 'Als unfertig markieren'
+                : 'Als erledigt markieren und weiter'
+            }}
+          </button>
+        </div>
         <input
           type="text"
           class="an-field__navigation visually-hidden"
@@ -174,6 +176,12 @@ export default {
 
   &__subfields > &:first-child {
     margin-top: $spacer * 4;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $spacer * 2;
   }
 }
 </style>
