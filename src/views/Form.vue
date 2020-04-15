@@ -53,14 +53,14 @@
                 </AnAccordionItem>
               </template>
             </AnAccordion>
-            <button
+            <div
               v-if="Object.keys(form).length === sectionIndex + 1"
-              ref="finish"
-              class="btn"
-              @click="handleFinish()"
+              class="container"
             >
-              auswerten
-            </button>
+              <button ref="finish" class="btn" @click="handleFinish()">
+                auswerten
+              </button>
+            </div>
           </section>
         </template>
       </main>
