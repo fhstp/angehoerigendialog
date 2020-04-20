@@ -224,6 +224,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 50px;
   }
 
   &__content {
@@ -276,6 +277,7 @@ export default {
   &__close-btn-wrapper {
     position: sticky;
     top: 0;
+    height: 0;
   }
 }
 
