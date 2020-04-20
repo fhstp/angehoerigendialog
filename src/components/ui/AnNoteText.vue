@@ -163,8 +163,11 @@ export default {
     },
     updateTextAreaHeight(textArea) {
       if (!textArea) return;
+      const anNoteEl = document.getElementsByClassName('an-note-text')[0];
+      const currentScrollTop = anNoteEl.scrollTop;
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
+      anNoteEl.scrollTop = currentScrollTop;
     },
     showAddHeadingToggle() {
       this.showAddHeading =
