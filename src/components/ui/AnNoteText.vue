@@ -1,12 +1,14 @@
 <template>
   <div v-if="showNotes" class="an-note-text">
-    <button
-      aria-label="Schließen"
-      class="an-note-text__close btn"
-      @click="closeNotes()"
-    >
-      <IconClose />
-    </button>
+    <div class="an-note-text__close-btn-wrapper">
+      <button
+        aria-label="Schließen"
+        class="an-note-text__close btn"
+        @click="closeNotes()"
+      >
+        <IconClose />
+      </button>
+    </div>
     <div
       class="an-note-text__elementwrapper"
       @click.self="focusTaAlreadyThere()"
@@ -219,7 +221,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
   }
 
   &__content {
@@ -229,8 +230,8 @@ export default {
   }
 
   &__close {
-    position: fixed;
-    right: 0;
+    float: right;
+    margin: $spacer $spacer 0 0;
     padding: $spacer * 2;
     line-height: 0;
 
@@ -269,6 +270,10 @@ export default {
     height: 1.4rem;
     margin-left: $spacer;
   }
+  &__close-btn-wrapper {
+    position: sticky;
+    top: 0;
+  }
 }
 
 .an-note-current {
@@ -285,7 +290,7 @@ export default {
   }
 
   &__question {
-    opacity: 0.5;
+    color: #aaa;
   }
 
   &__action {
