@@ -1,9 +1,9 @@
 <template>
   <div class="an-resources row">
-    <div class="an-resources__icon-wrapper col-md-3">
+    <div class="an-resources__icon-wrapper col-sm-3">
       <IconBeach class="an-resources__icon" />
     </div>
-    <div class="an-resources__list-wrapper col-md-3">
+    <div class="an-resources__list-wrapper col-sm-3">
       <ul class="an-resources__list">
         <li v-for="(resource, i) in resources" :key="i">{{ resource }}</li>
       </ul>
@@ -33,6 +33,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media #{map-get($query, 'sm-and-up')} {
+      justify-content: flex-end;
+    }
   }
 
   &__icon {
@@ -48,7 +52,7 @@ export default {
   &__list {
     max-width: 30ch;
 
-    @media #{map-get($query, 'sm-and-down')} {
+    @media #{map-get($query, 'xs-only')} {
       margin: 0 auto;
     }
   }
