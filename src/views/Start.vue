@@ -1,13 +1,21 @@
 <template>
   <div class="an-start">
     <h1>Angehörigendialog</h1>
-    <router-link to="fragebogen" class="btn">start</router-link>
+    <button class="btn" @click="restartQuestionnaire">start</button>
+    <router-link to="fragebogen" class="btn"
+      >vorherigen Fragebogen laden</router-link
+    >
   </div>
 </template>
 
 <script>
+import { restartQuestionnaire } from '@/helpers/form.js';
+
 export default {
-  name: 'Start'
+  name: 'Start',
+  methods: {
+    restartQuestionnaire
+  }
 };
 </script>
 
