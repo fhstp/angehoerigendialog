@@ -1,10 +1,10 @@
 <template>
   <div class="an-resources row">
-    <div class="an-resources__icon-wrapper col-md-3">
+    <div class="an-resources__icon-wrapper col-sm-3">
       <IconBeach class="an-resources__icon" />
     </div>
-    <div class="col-md-3">
-      <ul>
+    <div class="an-resources__list-wrapper col-sm-3">
+      <ul class="an-resources__list">
         <li v-for="(resource, i) in resources" :key="i">{{ resource }}</li>
       </ul>
     </div>
@@ -19,7 +19,9 @@ export default {
   components: { IconBeach },
   computed: {
     resources() {
-      return [];
+      return this.$store.getters.getFieldValue(
+        'ressourcen_belastungen-kraftausdauer'
+      );
     }
   }
 };
@@ -29,12 +31,30 @@ export default {
 .an-resources {
   &__icon-wrapper {
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: center;
+
+    @media #{map-get($query, 'sm-and-up')} {
+      justify-content: flex-end;
+    }
   }
 
   &__icon {
-    width: 75%;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  &__list-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__list {
+    max-width: 30ch;
+
+    @media #{map-get($query, 'xs-only')} {
+      margin: 0 auto;
+    }
   }
 }
 </style>
