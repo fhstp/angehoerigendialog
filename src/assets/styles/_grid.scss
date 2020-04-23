@@ -11,7 +11,7 @@
   }
 }
 
-[class^='col-'] {
+[class^='col-'], [class*=' col-'] {
   width: 100%;
 }
 
