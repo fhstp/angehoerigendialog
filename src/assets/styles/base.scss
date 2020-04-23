@@ -17,6 +17,10 @@ body {
   padding-right: $spacer;
 }
 
+ul, ol {
+  list-style-position: inside;
+}
+
 fieldset {
   border: 0;
 }
