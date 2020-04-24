@@ -1,28 +1,21 @@
 <template>
   <div class="an-todonotepad row">
-    <div
-      v-for="(notepad, index) in answers"
-      :key="index"
-      class="col-md-2 an-todonotepad__image"
-    >
+    <div v-for="(notepad, index) in answers" :key="index" class="col-md-2">
       <div class="an-todonotepad__heading">
         {{ notepadHeading[index] }}
       </div>
-      <ul>
-        <!--<IconNotepad />-->
-        <!--<template v-if="notepad">-->
-        <li v-for="value in notepad" :key="value">{{ value }}</li>
-        <!--</template>-->
+      <ul :class="getClass(index)" class="an-todonotepad__image">
+        <li v-for="value in notepad" :key="value">
+          {{ value }}
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-// import IconNotepad from '@/assets/icons/notepad.svg';
 export default {
   name: 'AnTodoNotepadVue',
-  // components: { IconNotepad },
   data() {
     return {
       notepadHeading: [
@@ -89,9 +82,16 @@ export default {
             break;
         }
       });
-
-      console.log(resultArray);
       return resultArray;
+    }
+  },
+  methods: {
+    getClass(index) {
+      return {
+        'an-todonotepad__list--check': index === 0,
+        'an-todonotepad__list--wave': index === 1,
+        'an-todonotepad__list--cross': index === 2
+      };
     }
   }
 };
@@ -104,9 +104,22 @@ export default {
   }
 
   &__image {
-    //background-image: url('~@/assets/icons/notepad.svg');
     background-image: url('../../assets/icons/notepad.svg');
-    //background-image: url("paper.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 390px;
+  }
+
+  &__list--check {
+    list-style-image: url('../../assets/icons/check.svg');
+  }
+
+  &__list--wave {
+    list-style-image: url('../../assets/icons/wave.svg');
+  }
+
+  &__list--cross {
+    list-style-image: url('../../assets/icons/cross.svg');
   }
 }
 </style>
