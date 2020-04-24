@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import IconBeach from '@/assets/icons/beach.svg';
+import IconBeach from '@/assets/icons/beach.svg?inline';
 
 export default {
   name: 'AnResources',

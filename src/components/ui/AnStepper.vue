@@ -64,7 +64,7 @@ export default {
     for (const step of this.steps) {
       if (!(step.icon in this.$options.components)) {
         this.$options.components[step.icon] = () =>
-          import(`@/assets/icons/${step.icon}.svg`);
+          import(`@/assets/icons/${step.icon}.svg?inline`);
       }
     }
   }
