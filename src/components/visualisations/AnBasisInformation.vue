@@ -4,12 +4,12 @@
       :class="[
         'col-md-3 btn',
         {
-          'col-md-3 btn--active': btnActive_pflegendePerson
+          'col-md-3 btn--active': btnActive_betreuendePerson
         }
       ]"
-      @click="btnActive_pflegendePerson = !btnActive_pflegendePerson"
+      @click="btnActive_betreuendePerson = !btnActive_betreuendePerson"
     >
-      Pflegende Person
+      Betreuende Person
     </button>
 
     <button
@@ -23,61 +23,79 @@
     </button>
 
     <table
-      v-if="btnActive_pflegendePerson"
-      class="an-basisinformation__table"
-      :class="{
-        'col-md-2': btnActive_pflegendePerson && btnActive_demenzPerson
-      }"
+      v-if="btnActive_betreuendePerson"
+      class="an-basisinformation__table col-md-3"
     >
       <tr>
         <td>Alter</td>
-        <td>Inhalt dynamisch</td>
+        <td colspan="2">{{ getBasisinfo('betreuende_person', 'alter') }}</td>
       </tr>
       <tr>
         <td>Berufstätigkeit</td>
-        <td>Inhalt dynamisch</td>
+        <td>{{ getBasisinfo('betreuende_person', 'beruf') }}</td>
+        <td>{{ getBasisinfo('betreuende_person', 'berufdetail') }} h</td>
       </tr>
       <tr>
         <td>Weitere Betreuungs- oder Sorgepflichten</td>
-        <td>Inhalt dynamisch</td>
+        <td colspan="2">
+          {{ getBasisinfo('betreuende_person', 'sorgepflichten') }}
+        </td>
       </tr>
       <tr>
         <td>Unterstützungsangebote</td>
-        <td>Inhalt dynamisch</td>
+        <td colspan="2">
+          {{ getBasisinfo('betreuende_person', 'unterstuetzungsangebote') }}
+        </td>
       </tr>
     </table>
 
     <table
       v-if="btnActive_demenzPerson"
-      class="an-basisinformation__table "
-      :class="{
-        'col-md-2 !important':
-          btnActive_pflegendePerson && btnActive_demenzPerson
-      }"
+      class="an-basisinformation__table col-md-3 "
     >
       <tr>
-        <td>Verwandtschaftliches Verhätnis</td>
-        <td>Inhalt dynamisch</td>
+        <td>Verwandtschaftliches Verhältnis</td>
+        <td>
+          {{ getBasisinfo('demenzerkrankte_person', 'verhaeltnis') }}
+        </td>
       </tr>
       <tr>
         <td>Alter</td>
-        <td>Inhalt dynamisch</td>
+        <td>
+          {{ getBasisinfo('demenzerkrankte_person', 'alter') }}
+        </td>
       </tr>
+
       <tr>
         <td>Unterstüztungsbedarf seit</td>
-        <td>Inhalt dynamisch</td>
+        <td>{{ getBasisinfo('demenzerkrankte_person', 'pflegebedarf') }}</td>
+      </tr>
+      <tr>
+        <td>Ärztliche Demenzdiagnose</td>
+        <td>{{ getBasisinfo('demenzerkrankte_person', 'diagnose') }}</td>
       </tr>
       <tr>
         <td>Pflegestufe</td>
-        <td>Inhalt dynamisch</td>
+        <td
+          :class="{
+            'an-basisinformation--noscale': !getBasisinfo(
+              'demenzerkrankte_person',
+              'pflegegelddetail'
+            )
+          }"
+        >
+          {{ getBasisinfo('demenzerkrankte_person', 'pflegegelddetail') }}
+        </td>
       </tr>
       <tr>
         <td>Gemeinsamer Haushalt</td>
-        <td>Inhalt dynamisch</td>
+        <td>{{ getBasisinfo('demenzerkrankte_person', 'haushalt') }}</td>
       </tr>
       <tr>
         <td>Unterstützungsangebote</td>
-        <td>Inhalt dynamisch</td>
+        <td>
+          {{ getBasisinfo('demenzerkrankte_person', 'unterstuetzungsangebot') }}
+        </td>
       </tr>
     </table>
   </div>
@@ -88,9 +106,20 @@ export default {
   name: 'AnBasisinformation',
   data() {
     return {
-      btnActive_pflegendePerson: false,
+      btnActive_betreuendePerson: false,
       btnActive_demenzPerson: false
     };
+  },
+  methods: {
+    getBasisinfo(sectionKey, fieldKey) {
+      let fieldValue = this.$store.getters.getFieldValue(
+        sectionKey + '-' + fieldKey
+      );
+      if (fieldValue === undefined) fieldValue = '-';
+      if (fieldValue === false) fieldValue = 'nein';
+      else if (fieldValue === true) fieldValue = 'ja';
+      return fieldValue;
+    }
   }
 };
 </script>
@@ -104,14 +133,16 @@ export default {
     border: 3px solid black;
     border-collapse: collapse;
   }
+
+  &--noscale {
+    background-color: red;
+  }
   tr:nth-child(even) {
     background-color: #eee;
   }
-  td,
-  th {
+  td {
     text-align: left;
     padding: 8px;
-    border-collapse: collapse;
   }
 }
 
