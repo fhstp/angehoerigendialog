@@ -46,6 +46,9 @@ export default new Vuex.Store({
   mutations: {
     wipeStore(state) {
       state.answers = {};
+      state.notes = '';
+      state.updshowNotes = false;
+      state.prevQuestionLabel = '';
     },
     /**
      * Update the completion state of fields
@@ -83,7 +86,7 @@ export default new Vuex.Store({
   },
   actions: {
     resetForm({ commit }) {
-      commit('initAnswers');
+      commit('wipeStore');
     }
   },
   strict: process.env.NODE_ENV !== 'production',
