@@ -3,16 +3,31 @@
     <h1>Auswertung</h1>
     <h2>Meine Ressourcen</h2>
     <AnResources />
+    <button class="an-visualisation__restart btn" @click="restartQuestionnaire">
+      Neuen Fragebogen beginnen
+    </button>
   </div>
 </template>
 
 <script>
 import AnResources from '@/components/visualisations/AnResources.vue';
+import { restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Visualisation',
   components: {
     AnResources
+  },
+  methods: {
+    restartQuestionnaire
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.an-visualisation__restart {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+}
+</style>
