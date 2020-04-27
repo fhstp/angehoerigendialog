@@ -12,16 +12,20 @@
 </template>
 
 <script>
+import visualisation from '@/mixins/visualisation.js';
 import IconBeach from '@/assets/icons/beach.svg?inline';
 
 export default {
   name: 'AnResources',
   components: { IconBeach },
+  mixins: [visualisation],
   computed: {
     resources() {
-      return this.$store.getters.getFieldValue(
+      const resources = this.$store.getters.getFieldValue(
         'ressourcen_belastungen-kraftausdauer'
       );
+      this.$emit('update:available', resources?.length > 0);
+      return resources;
     }
   }
 };
@@ -42,6 +46,12 @@ export default {
   &__icon {
     width: 100%;
     max-width: 200px;
+    padding-bottom: $spacer * 2;
+
+    @media #{map-get($query, 'sm-and-up')} {
+      padding-bottom: 0;
+      padding-right: $spacer * 2;
+    }
   }
 
   &__list-wrapper {
