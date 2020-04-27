@@ -48,8 +48,8 @@
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
-import IconClose from '@/assets/icons/close.svg';
-import IconCheckmark from '@/assets/icons/checkmark.svg';
+import IconClose from '@/assets/icons/close.svg?inline';
+import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 
 export default {
   name: 'AnNoteText',
