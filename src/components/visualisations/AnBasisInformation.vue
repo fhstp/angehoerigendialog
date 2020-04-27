@@ -78,10 +78,8 @@
         <td>Pflegestufe</td>
         <td
           :class="{
-            'an-basisinformation--noscale': !getBasisinfo(
-              'demenzerkrankte_person',
-              'pflegegelddetail'
-            )
+            'an-basisinformation--nocarelevel':
+              getBasisinfo('demenzerkrankte_person', 'pflegegelddetail') === '-'
           }"
         >
           {{ getBasisinfo('demenzerkrankte_person', 'pflegegelddetail') }}
@@ -134,7 +132,7 @@ export default {
     border-collapse: collapse;
   }
 
-  &--noscale {
+  &--nocarelevel {
     background-color: red;
   }
   tr:nth-child(even) {
