@@ -4,9 +4,10 @@
       <div class="an-todonotepad__heading">
         {{ notepadHeading[index] }}
       </div>
-      <ul :class="getClass(index)" class="an-todonotepad__image">
+      <ul class="an-todonotepad__list">
         <li v-for="value in notepad" :key="value">
-          {{ value }}
+          <div :class="getClass(index)" class="an-todonotepad__image"></div>
+          <div class="an-todonotepad__list--text">{{ value }}</div>
         </li>
       </ul>
     </div>
@@ -21,7 +22,7 @@ export default {
       notepadHeading: [
         'Was bereits gut funktioniert',
         'Was teilweise funktioniert',
-        'Worum ich mich noch kümmern sollte'
+        'Was noch nicht funktioniert'
       ]
     };
   },
@@ -101,25 +102,42 @@ export default {
 .an-todonotepad {
   &__heading {
     font-weight: bold;
+    text-align: center;
+    margin: $spacer * 3;
   }
 
-  &__image {
+  &__list {
     background-image: url('../../assets/icons/notepad.svg');
     background-repeat: no-repeat;
-    background-size: cover;
-    height: 390px;
+    height: 316px;
+    margin: 0 $spacer * 2;
+    padding: 53px 32px;
+
+    li {
+      padding: $spacer 0 $spacer 0;
+      list-style: none;
+      display: flex;
+    }
+  }
+  &__list--text {
+    width: 85%;
+    margin-left: 5%;
+  }
+  &__image {
+    width: 10%;
+    background-repeat: no-repeat;
   }
 
   &__list--check {
-    list-style-image: url('../../assets/icons/check.svg');
+    background-image: url('../../assets/icons/check.svg');
   }
 
   &__list--wave {
-    list-style-image: url('../../assets/icons/wave.svg');
+    background-image: url('../../assets/icons/wave.svg');
   }
 
   &__list--cross {
-    list-style-image: url('../../assets/icons/cross.svg');
+    background-image: url('../../assets/icons/cross.svg');
   }
 }
 </style>
