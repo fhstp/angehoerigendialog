@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import IconEdit from '@/assets/icons/edit.svg';
+import IconEdit from '@/assets/icons/edit.svg?inline';
 
 export default {
   name: 'AnNoteOpenButton',
