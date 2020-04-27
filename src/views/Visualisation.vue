@@ -1,12 +1,15 @@
 <template>
   <div class="container">
     <h1>Auswertung</h1>
-    <h2>Meine Ressourcen</h2>
-    <AnResources />
-
+    <h2 v-show="isAvailable.resources">
+      Meine Ressourcen
+    </h2>
+    <AnResources
+      v-show="isAvailable.resources"
+      :available.sync="isAvailable.resources"
+    />
     <h2>Gegenüberstellung</h2>
     <AnTodoNotepad />
-
     <button class="an-visualisation__restart btn" @click="restartQuestionnaire">
       Neuen Fragebogen beginnen
     </button>
@@ -24,6 +27,9 @@ export default {
     AnResources,
     AnTodoNotepad
   },
+  data: () => ({
+    isAvailable: {}
+  }),
   methods: {
     restartQuestionnaire
   }
