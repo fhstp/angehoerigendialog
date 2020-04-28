@@ -26,74 +26,22 @@
       v-if="btnActive_betreuendePerson"
       class="an-basisinformation__table col-md-3"
     >
-      <tr>
-        <td>Alter</td>
-        <td colspan="2">{{ getBasisinfo('betreuende_person', 'alter') }}</td>
-      </tr>
-      <tr>
-        <td>Berufstätigkeit</td>
-        <td>{{ getBasisinfo('betreuende_person', 'beruf') }}</td>
-        <td>{{ getBasisinfo('betreuende_person', 'berufdetail') }} h</td>
-      </tr>
-      <tr>
-        <td>Weitere Betreuungs- oder Sorgepflichten</td>
-        <td colspan="2">
-          {{ getBasisinfo('betreuende_person', 'sorgepflichten') }}
-        </td>
-      </tr>
-      <tr>
-        <td>Unterstützungsangebote</td>
-        <td colspan="2">
-          {{ getBasisinfo('betreuende_person', 'unterstuetzungsangebote') }}
+      <tr v-for="(answer, row) in answerArray_betreuendePerson[0]" :key="row">
+        <td>{{ tdHeading['betreuende_person'][row] }}</td>
+        <td :colspan="row === 1 ? 0 : 2">{{ answer }}</td>
+        <td v-if="answer === 'ja' && row === 1">
+          {{ answerArray_betreuendePerson[1][0] }}
         </td>
       </tr>
     </table>
 
     <table
       v-if="btnActive_demenzPerson"
-      class="an-basisinformation__table col-md-3 "
+      class="an-basisinformation__table col-md-3"
     >
-      <tr>
-        <td>Verwandtschaftliches Verhältnis</td>
-        <td>
-          {{ getBasisinfo('demenzerkrankte_person', 'verhaeltnis') }}
-        </td>
-      </tr>
-      <tr>
-        <td>Alter</td>
-        <td>
-          {{ getBasisinfo('demenzerkrankte_person', 'alter') }}
-        </td>
-      </tr>
-
-      <tr>
-        <td>Unterstüztungsbedarf seit</td>
-        <td>{{ getBasisinfo('demenzerkrankte_person', 'pflegebedarf') }}</td>
-      </tr>
-      <tr>
-        <td>Ärztliche Demenzdiagnose</td>
-        <td>{{ getBasisinfo('demenzerkrankte_person', 'diagnose') }}</td>
-      </tr>
-      <tr>
-        <td>Pflegestufe</td>
-        <td
-          :class="{
-            'an-basisinformation--nocarelevel':
-              getBasisinfo('demenzerkrankte_person', 'pflegegelddetail') === '-'
-          }"
-        >
-          {{ getBasisinfo('demenzerkrankte_person', 'pflegegelddetail') }}
-        </td>
-      </tr>
-      <tr>
-        <td>Gemeinsamer Haushalt</td>
-        <td>{{ getBasisinfo('demenzerkrankte_person', 'haushalt') }}</td>
-      </tr>
-      <tr>
-        <td>Unterstützungsangebote</td>
-        <td>
-          {{ getBasisinfo('demenzerkrankte_person', 'unterstuetzungsangebot') }}
-        </td>
+      <tr v-for="(answer, row) in answerArray_demenzPerson" :key="row">
+        <td>{{ tdHeading['demenzerkrankte_person'][row] }}</td>
+        <td>{{ answer }}</td>
       </tr>
     </table>
   </div>
@@ -105,18 +53,72 @@ export default {
   data() {
     return {
       btnActive_betreuendePerson: false,
-      btnActive_demenzPerson: false
+      btnActive_demenzPerson: false,
+      tdHeading: {
+        betreuende_person: [
+          'Alter',
+          'Berufstätigkeit',
+          'Weitere Betreuungs- oder Sorgepflichten',
+          'Unterstützungsangebote'
+        ],
+        demenzerkrankte_person: [
+          'Verwandtschaftliches Verhältnis',
+          'Alter',
+          'Unterstüztungsbedarf seit',
+          'Ärztliche Demenzdiagnose',
+          'Pflegestufe',
+          'Gemeinsamer Haushalt',
+          'Unterstützungsangebote'
+        ]
+      },
+      fieldKey: {
+        betreuende_person: [
+          'alter',
+          'beruf',
+          'berufdetail',
+          'sorgepflichten',
+          'unterstuetzungsangebote'
+        ],
+        demenzerkrankte_person: [
+          'verhaeltnis',
+          'alter',
+          'pflegebedarf',
+          'diagnose',
+          'pflegegelddetail',
+          'haushalt',
+          'unterstuetzungsangebot'
+        ]
+      }
     };
   },
+  computed: {
+    answerArray_betreuendePerson() {
+      return [[], []];
+    },
+    answerArray_demenzPerson() {
+      return [];
+    }
+  },
+  mounted() {
+    this.getBasisinfo('betreuende_person');
+    this.getBasisinfo('demenzerkrankte_person');
+  },
   methods: {
-    getBasisinfo(sectionKey, fieldKey) {
-      let fieldValue = this.$store.getters.getFieldValue(
-        sectionKey + '-' + fieldKey
-      );
-      if (fieldValue === undefined) fieldValue = '-';
-      if (fieldValue === false) fieldValue = 'nein';
-      else if (fieldValue === true) fieldValue = 'ja';
-      return fieldValue;
+    getBasisinfo(sectionKey) {
+      const component = this;
+      this.fieldKey[sectionKey].forEach(function(key) {
+        let fieldValue = component.$store.getters.getFieldValue(
+          sectionKey + '-' + key
+        );
+        if (fieldValue === undefined) fieldValue = '-';
+        if (fieldValue === false) fieldValue = 'nein';
+        else if (fieldValue === true) fieldValue = 'ja';
+        if (sectionKey === 'betreuende_person') {
+          if (key === 'berufdetail') {
+            component.answerArray_betreuendePerson[1].push(fieldValue);
+          } else component.answerArray_betreuendePerson[0].push(fieldValue);
+        } else component.answerArray_demenzPerson.push(fieldValue);
+      });
     }
   }
 };
