@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import visualisation from '@/mixins/visualisation.js';
 export default {
   name: 'AnTodoNotepadVue',
+  mixins: [visualisation],
   data() {
     return {
       notepadHeading: [
@@ -83,6 +85,11 @@ export default {
             break;
         }
       });
+      const questionsAreAnswered =
+        resultArray[0].length > 0 ||
+        resultArray[1].length > 0 ||
+        resultArray[2].length > 0;
+      this.$emit('update:available', questionsAreAnswered);
       return resultArray;
     }
   },

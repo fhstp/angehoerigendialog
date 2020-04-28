@@ -9,7 +9,10 @@
       :available.sync="isAvailable.resources"
     />
     <h2>Gegenüberstellung</h2>
-    <AnTodoNotepad />
+    <AnTodoNotepad
+      v-show="isAvailable.todoNotepad"
+      :available.sync="isAvailable.todoNotepad"
+    />
     <button class="an-visualisation__restart btn" @click="restartQuestionnaire">
       Neuen Fragebogen beginnen
     </button>
