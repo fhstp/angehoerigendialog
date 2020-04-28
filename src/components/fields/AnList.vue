@@ -78,7 +78,7 @@ export default {
         (!this.fieldMax || this.listData.length < this.fieldMax)
       ) {
         this.listData.push('');
-        this.$nextTick(function() {
+        this.$nextTick(function () {
           this.$refs.listItems[this.$refs.listItems.length - 1].focus();
         });
       }
