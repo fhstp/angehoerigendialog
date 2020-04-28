@@ -3,8 +3,13 @@
     <h1>Auswertung</h1>
     <h2>Überblick</h2>
     <AnBasisInformation />
-    <h2>Meine Ressourcen</h2>
-    <AnResources />
+    <h2 v-show="isAvailable.resources">
+      Meine Ressourcen
+    </h2>
+    <AnResources
+      v-show="isAvailable.resources"
+      :available.sync="isAvailable.resources"
+    />
     <button class="an-visualisation__restart btn" @click="restartQuestionnaire">
       Neuen Fragebogen beginnen
     </button>
@@ -22,6 +27,9 @@ export default {
     AnBasisInformation,
     AnResources
   },
+  data: () => ({
+    isAvailable: {}
+  }),
   methods: {
     restartQuestionnaire
   }

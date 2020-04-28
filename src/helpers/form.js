@@ -26,6 +26,6 @@ export function restartQuestionnaire() {
     )
   )
     return;
+  this.$store.commit('resetState');
   this.$router.push({ path: 'fragebogen' });
-  this.$store.dispatch('resetForm');
 }
