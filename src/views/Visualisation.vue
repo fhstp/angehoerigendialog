@@ -8,8 +8,13 @@
       v-show="isAvailable.resources"
       :available.sync="isAvailable.resources"
     />
-    <h2>Zusammenfassende Einschätzung der gesundheitliche Situation</h2>
-    <AnSituation />
+    <h2 v-show="isAvailable.situation">
+      Zusammenfassende Einschätzung der gesundheitliche Situation
+    </h2>
+    <AnSituation
+      v-show="isAvailable.situation"
+      :available.sync="isAvailable.situation"
+    />
     <button class="an-visualisation__restart btn" @click="restartQuestionnaire">
       Neuen Fragebogen beginnen
     </button>
