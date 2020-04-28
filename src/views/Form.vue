@@ -80,7 +80,7 @@ import AnField from '@/components/AnField.vue';
 import AnNoteOpenButton from '@/components/ui/AnNoteOpenButton.vue';
 import AnNoteText from '@/components/ui/AnNoteText.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
-import IconCheckmark from '@/assets/icons/checkmark.svg';
+import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 
 export default {
   name: 'Form',
