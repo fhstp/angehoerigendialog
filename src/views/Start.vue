@@ -22,8 +22,7 @@ export default {
   name: 'Start',
   computed: {
     existingLocalStorage() {
-      if (localStorage.getItem('vuex') !== null) return true;
-      return false;
+      return localStorage.getItem('vuex');
     }
   },
   methods: {
