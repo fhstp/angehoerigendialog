@@ -3,27 +3,47 @@
     <div
       v-for="(situation, i) in situations"
       :key="i"
-      class="an-situation__category"
+      :class="[
+        'an-situation__category',
+        { 'an-situation__category--danger': situation.value < 4 }
+      ]"
     >
-      <h3 class="an-situation__heading">{{ situation.title }}</h3>
       <IconMoodBad class="an-situation__legend" />
       <div
         class="an-situation__data-area"
-        :style="{ '--value': situation.value / 10 }"
+        :style="{ '--value': situation.value / 9 - 1 / 9 }"
       >
-        <IconWaving class="an-situation__me" />
+        <component
+          :is="situation.value < 4 ? 'IconPersonArmUp' : 'IconPersonStanding'"
+          class="an-situation__me"
+        />
         <div class="an-situation__indicator" />
         <div class="an-situation__progressbar" />
       </div>
       <IconMood class="an-situation__legend" />
+      <h3 class="an-situation__heading">
+        <IconWarning
+          v-if="situation.value < 4"
+          class="icon-warning"
+          aria-hidden="true"
+        />
+        <span>{{ situation.title }}</span>
+        <IconWarning
+          v-if="situation.value < 4"
+          class="icon-warning"
+          aria-hidden="true"
+        />
+      </h3>
     </div>
   </div>
 </template>
 
 <script>
-import IconWaving from '@/assets/icons/waving.svg?inline';
 import IconMood from '@/assets/icons/mood.svg?inline';
 import IconMoodBad from '@/assets/icons/mood_bad.svg?inline';
+import IconPersonArmUp from '@/assets/icons/person-arm-up.svg?inline';
+import IconPersonStanding from '@/assets/icons/person-standing.svg?inline';
+import IconWarning from '@/assets/icons/warning.svg?inline';
 
 const fields = {
   'gesundheit-gesundheitszustand': {
@@ -39,7 +59,13 @@ const fields = {
 
 export default {
   name: 'AnSituation',
-  components: { IconMood, IconMoodBad, IconWaving },
+  components: {
+    IconMood,
+    IconMoodBad,
+    IconPersonArmUp,
+    IconPersonStanding,
+    IconWarning
+  },
   computed: {
     situations() {
       const situations = [];
@@ -59,9 +85,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.an-situation {
-  $me-size: 75px;
+$progressbar-border-width: 0.33rem;
 
+.an-situation {
   &__category {
     display: flex;
     flex-wrap: wrap;
@@ -70,43 +96,73 @@ export default {
   }
 
   &__heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: $progressbar-border-width;
     width: 100%;
+  }
+
+  .icon-warning {
+    height: 1.5em;
+    width: 1.5em;
+    fill: red;
+
+    &:first-child {
+      margin-right: $spacer;
+    }
+
+    &:last-child {
+      margin-left: $spacer;
+    }
   }
 
   &__data-area {
     position: relative;
     flex-grow: 1;
     margin: 0 $spacer * 2;
+    padding-top: $progressbar-border-width;
   }
 
   &__indicator,
   &__me {
     position: relative;
+    top: -$progressbar-border-width;
     left: calc(100% * var(--value));
     transform: translateX(-50%);
   }
 
   &__me {
-    width: $me-size;
+    height: 3rem;
+    padding-top: 0.25rem;
+
+    .an-situation__category--danger & {
+      padding-top: 0;
+      fill: red;
+    }
   }
 
   &__indicator {
-    width: 0;
     border-top: 15px solid #333;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
+    width: 0;
+
+    .an-situation__category--danger & {
+      border-top-color: red;
+    }
   }
 
   &__progressbar {
-    height: 50px;
-    border: 5px solid #333;
-    border-radius: 10px;
-    margin: 0 -5px;
-    background: linear-gradient(to right, red, white 45% 55%, green);
+    height: 1rem;
+    border: $progressbar-border-width solid #333;
+    border-radius: 1000px;
+    margin: 0 -$progressbar-border-width;
   }
 
   &__legend {
-    width: 50px;
+    margin-bottom: -$progressbar-border-width;
+    width: 3rem;
   }
 }
 </style>
