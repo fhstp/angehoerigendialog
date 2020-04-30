@@ -1,11 +1,13 @@
 <template>
   <div class="an-range">
-    <div class="an-range_wrapper">
-      <span class="an-range_min-label">
+    <div class="an-range__wrapper">
+      <span class="an-range__min-label">
         {{ fieldMin.label }}
       </span>
       <div class="an-range__input-area" :style="{ '--value': valueAsPercent }">
-        <div class="an-range__thumb-label">{{ field_data }}</div>
+        <div class="an-range__label-area">
+          <div class="an-range__thumb-label">{{ field_data }}</div>
+        </div>
         <input
           :id="field_id"
           v-model.number="field_data"
@@ -17,7 +19,7 @@
           :step="fieldStep"
         />
       </div>
-      <span class="an-range_max-label">
+      <span class="an-range__max-label">
         {{ fieldMax.label }}
       </span>
     </div>
@@ -32,8 +34,20 @@ export default {
   mixins: [field],
   props: {
     fieldStep: { type: Number, default: 1 },
-    fieldMin: { type: Array, required: true },
-    fieldMax: { type: Array, required: true }
+    fieldMin: {
+      type: Object,
+      default: () => ({
+        label: undefined,
+        value: 0
+      })
+    },
+    fieldMax: {
+      type: Object,
+      default: () => ({
+        label: undefined,
+        value: 1
+      })
+    }
   },
   computed: {
     valueAsPercent() {
@@ -42,21 +56,38 @@ export default {
         (this.fieldMax.value - this.fieldMin.value)
       );
     }
+  },
+  created() {
+    if (!this.field_data) this.field_data = this.fieldMin.value;
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .an-range {
+  &__wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+
   &__input-area {
     display: inline-block;
     position: relative;
     margin: 0 $spacer * 2;
+    flex-grow: 1;
+  }
+
+  &__label-area {
+    position: absolute;
+    top: -5px;
+    left: $range-thumb-size / 2;
+    right: $range-thumb-size / 2;
+    line-height: 0;
   }
 
   &__thumb-label {
     position: absolute;
-    top: -5px;
+    top: 0;
     left: calc(100% * var(--value));
     transform: translate(-50%, -100%);
     border-radius: 3px;
@@ -77,6 +108,10 @@ export default {
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
     }
+  }
+
+  &__slider {
+    width: 100%;
   }
 }
 </style>
