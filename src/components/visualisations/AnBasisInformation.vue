@@ -28,9 +28,9 @@
     >
       <tr v-for="(answer, row) in answerArray_betreuendePerson[0]" :key="row">
         <td>{{ tdHeading['betreuende_person'][row] }}</td>
-        <td :colspan="row === 1 ? 0 : 2">{{ answer }}</td>
+        <td :colspan="answer === 'ja' && row === 1 ? 0 : 2">{{ answer }}</td>
         <td v-if="answer === 'ja' && row === 1">
-          {{ answerArray_betreuendePerson[1][0] }}
+          {{ answerArray_betreuendePerson[1][0] }}h
         </td>
       </tr>
     </table>
@@ -134,9 +134,6 @@ export default {
     border-collapse: collapse;
   }
 
-  &--nocarelevel {
-    background-color: red;
-  }
   tr:nth-child(even) {
     background-color: #eee;
   }
