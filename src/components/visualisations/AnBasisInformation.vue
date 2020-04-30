@@ -2,10 +2,9 @@
   <div class="an-basisinformation col-md-6 row">
     <button
       :class="[
-        'col-md-3 btn',
-        {
-          'col-md-3 btn--active': btnActive_betreuendePerson
-        }
+        'col-md-3',
+        'btn',
+        { 'btn--active': btnActive_betreuendePerson }
       ]"
       @click="btnActive_betreuendePerson = !btnActive_betreuendePerson"
     >
@@ -13,10 +12,7 @@
     </button>
 
     <button
-      :class="[
-        'col-md-3 btn',
-        { 'col-md-3 btn--active': btnActive_demenzPerson }
-      ]"
+      :class="['col-md-3', 'btn', { 'btn--active': btnActive_demenzPerson }]"
       @click="btnActive_demenzPerson = !btnActive_demenzPerson"
     >
       Demenzerkrankte Person
@@ -88,16 +84,10 @@ export default {
           'haushalt',
           'unterstuetzungsangebot'
         ]
-      }
+      },
+      answerArray_betreuendePerson: [[], []],
+      answerArray_demenzPerson: []
     };
-  },
-  computed: {
-    answerArray_betreuendePerson() {
-      return [[], []];
-    },
-    answerArray_demenzPerson() {
-      return [];
-    }
   },
   mounted() {
     this.getBasisinfo('betreuende_person');
