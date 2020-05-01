@@ -11,7 +11,7 @@
         :available.sync="isAvailable.resources"
       />
       <h2>Gegenüberstellung</h2>
-      <AnTodoNotepad
+      <AnFlower
         v-show="isAvailable.todoNotepad"
         :available.sync="isAvailable.todoNotepad"
       />
@@ -27,7 +27,7 @@
 
 <script>
 import AnResources from '@/components/visualisations/AnResources.vue';
-import AnTodoNotepad from '@/components/visualisations/AnTodoNotepad.vue';
+import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
 
@@ -35,7 +35,7 @@ export default {
   name: 'Visualisation',
   components: {
     AnResources,
-    AnTodoNotepad,
+    AnFlower,
     AnSendMail
   },
   data: () => ({
