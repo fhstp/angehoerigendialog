@@ -1,8 +1,15 @@
 <template>
   <div class="an-start">
     <h1>Angehörigendialog</h1>
-    <button class="btn" @click="restartQuestionnaire">start</button>
-    <router-link to="fragebogen" class="btn"
+    <button
+      v-if="existingLocalStorage"
+      class="btn"
+      @click="restartQuestionnaire"
+    >
+      start
+    </button>
+    <router-link v-else to="fragebogen" class="btn" start>start</router-link>
+    <router-link v-if="existingLocalStorage" to="fragebogen" class="btn"
       >vorherigen Fragebogen laden</router-link
     >
   </div>
@@ -13,6 +20,11 @@ import { restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Start',
+  computed: {
+    existingLocalStorage() {
+      return localStorage.getItem('vuex');
+    }
+  },
   methods: {
     restartQuestionnaire
   }
