@@ -1,15 +1,17 @@
 <template>
-  <div class="an-todonotepad row">
-    <div v-for="(notepad, index) in answers" :key="index" class="col-md-2">
+  <div class="an-todonotepad">
+    <div v-for="(notepad, index) in answers" :key="index">
       <div class="an-todonotepad__heading">
         {{ notepadHeading[index] }}
       </div>
-      <ul class="an-todonotepad__list">
-        <li v-for="value in notepad" :key="value">
-          <div :class="getClass(index)" class="an-todonotepad__image"></div>
-          <div class="an-todonotepad__list--text">{{ value }}</div>
-        </li>
-      </ul>
+      <div class="an-todonotepad__list">
+        <ul class="neu">
+          <li v-for="value in notepad" :key="value">
+            <div :class="getClass(index)" class="an-todonotepad__image"></div>
+            <div class="an-todonotepad__list--text">{{ value }}</div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -107,6 +109,24 @@ export default {
 
 <style lang="scss" scoped>
 .an-todonotepad {
+  display: flex;
+  align-items: stretch;
+  @media only screen and (max-width: 850px) {
+    flex-direction: column;
+    width: 42%;
+    margin: 0 auto;
+  }
+
+  > div {
+    flex: 1;
+  }
+
+  .neu {
+    padding: 0 40px;
+    background-image: url('../../assets/icons/ListeMitte.svg');
+    height: 100%;
+  }
+
   &__heading {
     font-weight: bold;
     text-align: center;
@@ -114,17 +134,48 @@ export default {
   }
 
   &__list {
-    background-image: url('../../assets/icons/notepad.svg');
-    background-repeat: no-repeat;
-    height: 316px;
-    margin: 0 $spacer * 2;
-    padding: 53px 32px;
+    height: auto;
+    margin: 0 1rem;
+    height: calc(100% - 65px);
+    position: relative;
+    padding-top: 56px;
+    padding-bottom: 35px;
+
+    @media only screen and (max-width: 850px) {
+      padding-top: 65px;
+      padding-bottom: 56px;
+    }
 
     li {
       padding: $spacer 0 $spacer 0;
       list-style: none;
       display: flex;
     }
+  }
+
+  &__list:before {
+    content: '';
+    background-image: url('../../assets/icons/ListeOben.svg');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__list:after {
+    content: '';
+    background-image: url('../../assets/icons/ListeUnten.svg');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-position: bottom;
   }
   &__list--text {
     width: 85%;
@@ -137,14 +188,17 @@ export default {
 
   &__list--check {
     background-image: url('../../assets/icons/check.svg');
+    background-position-y: 2px;
   }
 
   &__list--wave {
     background-image: url('../../assets/icons/wave.svg');
+    background-position-y: 5px;
   }
 
   &__list--cross {
     background-image: url('../../assets/icons/cross.svg');
+    background-position-y: 1px;
   }
 }
 </style>
