@@ -5,8 +5,13 @@
         {{ fieldMin.label }}
       </span>
       <div class="an-range__input-area" :style="{ '--value': valueAsPercent }">
-        <div class="an-range__label-area">
-          <div class="an-range__thumb-label">{{ field_data }}</div>
+        <div
+          v-if="!Number.isNaN(Number(field_data))"
+          class="an-range__label-area"
+        >
+          <div class="an-range__thumb-label">
+            {{ field_data }}
+          </div>
         </div>
         <input
           :id="field_id"
@@ -56,9 +61,6 @@ export default {
         (this.fieldMax.value - this.fieldMin.value)
       );
     }
-  },
-  created() {
-    if (!this.field_data) this.field_data = this.fieldMin.value;
   }
 };
 </script>
