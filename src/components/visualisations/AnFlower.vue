@@ -90,9 +90,9 @@ export default {
   },
   methods: {
     getClass: type => ({
-      'an-todonotepad__list--bloom': type === 1,
-      'an-todonotepad__list--bloomwithered': type === 2,
-      'an-todonotepad__list--withered': type === 3
+      'an-flower__list--bloom': type === 1,
+      'an-flower__list--bloomwithered': type === 2,
+      'an-flower__list--withered': type === 3
     })
   }
 };
@@ -102,18 +102,18 @@ export default {
 .an-flower {
   &__list {
     list-style-type: none;
-  }
 
-  &--bloom {
-    background-color: yellow;
-  }
+    &--bloom {
+      background-color: yellow;
+    }
 
-  &--bloomwithered {
-    background-color: burlywood;
-  }
+    &--bloomwithered {
+      background-color: burlywood;
+    }
 
-  &--withered {
-    background-color: brown;
+    &--withered {
+      background-color: brown;
+    }
   }
 }
 </style>
