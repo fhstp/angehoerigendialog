@@ -70,10 +70,11 @@ export default {
     situations() {
       const situations = [];
       for (const key in fields) {
-        if (this.$store.getters.getFieldCompletion(key)) {
+        const value = this.$store.getters.getFieldValue(key);
+        if (value) {
           situations.push({
             title: fields[key].title,
-            value: this.$store.getters.getFieldValue(key)
+            value
           });
         }
       }
