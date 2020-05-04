@@ -31,7 +31,9 @@
 <script>
 export default {
   name: 'AnStepper',
-  components: { IconCheckmark: () => import('@/assets/icons/checkmark.svg') },
+  components: {
+    IconCheckmark: () => import('@/assets/icons/checkmark.svg?inline')
+  },
   props: {
     steps: {
       type: Array,
