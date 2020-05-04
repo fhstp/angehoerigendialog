@@ -10,6 +10,13 @@
       v-show="isAvailable.resources"
       :available.sync="isAvailable.resources"
     />
+    <h2 v-show="isAvailable.situation">
+      Zusammenfassende Einschätzung der gesundheitliche Situation
+    </h2>
+    <AnSituation
+      v-show="isAvailable.situation"
+      :available.sync="isAvailable.situation"
+    />
     <button class="an-visualisation__restart btn" @click="restartQuestionnaire">
       Neuen Fragebogen beginnen
     </button>
@@ -19,13 +26,15 @@
 <script>
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
+import AnSituation from '@/components/visualisations/AnSituation.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Visualisation',
   components: {
     AnBasisInformation,
-    AnResources
+    AnResources,
+    AnSituation
   },
   data: () => ({
     isAvailable: {}
