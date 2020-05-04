@@ -47,6 +47,9 @@ export default new Vuex.Store({
   },
   mutations: {
     resetState(state) {
+      for (const key in state.answers) {
+        Vue.delete(state.answers, key);
+      }
       Object.assign(state, { ...initialState });
     },
     /**
