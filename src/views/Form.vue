@@ -280,6 +280,10 @@ export default {
 .an-note-open {
   margin-left: $spacer;
 }
+
+.an-note-text {
+  z-index: 100;
+}
 </style>
 
 <style lang="scss">
