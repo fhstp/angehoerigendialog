@@ -257,6 +257,7 @@ export default {
     padding-bottom: $spacer;
     box-shadow: 3px 3px 8px #ccc;
     margin-bottom: $spacer * 2;
+    z-index: 1;
   }
 
   &__header {
