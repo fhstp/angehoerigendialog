@@ -19,10 +19,10 @@
         v-show="isAvailable.situation"
         :available.sync="isAvailable.situation"
       />
-      <h2>Gegenüberstellung</h2>
+      <h2>Meine Energie-Blume</h2>
       <AnFlower
-        v-show="isAvailable.todoNotepad"
-        :available.sync="isAvailable.todoNotepad"
+        v-show="isAvailable.flower"
+        :available.sync="isAvailable.flower"
       />
       <button
         class="an-visualisation__restart btn"
