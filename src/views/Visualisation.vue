@@ -12,6 +12,13 @@
         v-show="isAvailable.resources"
         :available.sync="isAvailable.resources"
       />
+      <h2 v-show="isAvailable.situation">
+        Zusammenfassende Einschätzung der gesundheitliche Situation
+      </h2>
+      <AnSituation
+        v-show="isAvailable.situation"
+        :available.sync="isAvailable.situation"
+      />
       <h2>Gegenüberstellung</h2>
       <AnFlower
         v-show="isAvailable.todoNotepad"
@@ -32,6 +39,7 @@ import AnBasisInformation from '@/components/visualisations/AnBasisInformation.v
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
+import AnSituation from '@/components/visualisations/AnSituation.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
@@ -40,7 +48,8 @@ export default {
     AnBasisInformation,
     AnFlower,
     AnResources,
-    AnSendMail
+    AnSendMail,
+    AnSituation
   },
   data: () => ({
     isAvailable: {}

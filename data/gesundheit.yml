@@ -19,33 +19,33 @@ fields:
     type: range
     step: 1
     min:
-      - 1
-      - sehr schlecht
+      value: 1
+      label: sehr schlecht
     max:
-      - 10
-      - sehr gesund
+      value: 10
+      label: sehr gesund
 
   nervlichebelastung:
     label: Wie schätzen Sie Ihre nervliche Belastung ein?
     type: range
     step: 1
     min:
-      - 1
-      - nicht belastend
+      value: 1
+      label: sehr stark belastend
     max:
-      - 10
-      - sehr stark belastend
+      value: 10
+      label: nicht belastend
 
   energiereserven:
     label: Wie schätzen Sie Ihre Energiereserven ein?
     type: range
     step: 1
     min:
-      - 1
-      - beinahe vollständig verbraucht
+      value: 1
+      label: beinahe vollständig verbraucht
     max:
-      - 10
-      - sehr gute Energiereserven
+      value: 10
+      label: sehr gute Energiereserven
 
   einschaetzung:
     label: Sorgen Sie Ihrer Einschätzung nach gut dafür, dass es Ihnen selbst gut geht?

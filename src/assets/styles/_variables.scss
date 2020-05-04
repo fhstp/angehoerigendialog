@@ -19,3 +19,7 @@ $query: (
   'lg-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
   'lg-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')})'
 );
+
+$range-thumb-size: 20px;
+$range-thumb-border-size: 2px;
+$range-track-height: 6px

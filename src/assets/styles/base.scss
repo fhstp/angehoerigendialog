@@ -33,6 +33,47 @@ input, textarea {
   font-size: 1rem;
 }
 
+input[type=range] {
+  background-color: transparent;
+  appearance: none;
+
+  @mixin range-thumb {
+    box-sizing: content-box;
+    border: $range-thumb-border-size solid #333;
+    border-radius: 50%;
+    background-color: #fff;
+    width: $range-thumb-size - $range-thumb-border-size * 2;
+    height: $range-thumb-size - $range-thumb-border-size * 2;
+    cursor: grab;
+    appearance: none;
+  }
+  &::-webkit-slider-thumb{
+    @include range-thumb;
+    transform: translateY(-$range-track-height);
+  }
+  &::-moz-range-thumb {
+    @include range-thumb;
+  }
+  &::-ms-thumb {
+    @include range-thumb;
+  }
+
+  @mixin range-track {
+    height: $range-track-height;
+    background-color: #666;
+    border-radius: 3px;
+  }
+  &::-webkit-slider-runnable-track{
+    @include range-track;
+  }
+  &::-moz-range-track {
+    @include range-track;
+  }
+  &::-ms-track {
+    @include range-track;
+  }
+}
+
 .btn {
   display: inline-block;
   margin: $spacer 0;

@@ -257,6 +257,7 @@ export default {
     padding-bottom: $spacer;
     box-shadow: 3px 3px 8px #ccc;
     margin-bottom: $spacer * 2;
+    z-index: 1;
   }
 
   &__header {
@@ -278,6 +279,10 @@ export default {
 
 .an-note-open {
   margin-left: $spacer;
+}
+
+.an-note-text {
+  z-index: 100;
 }
 </style>
 
