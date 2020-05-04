@@ -26,16 +26,16 @@
 </template>
 
 <script>
-import AnResources from '@/components/visualisations/AnResources.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
+import AnResources from '@/components/visualisations/AnResources.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Visualisation',
   components: {
-    AnResources,
     AnFlower,
+    AnResources,
     AnSendMail
   },
   data: () => ({

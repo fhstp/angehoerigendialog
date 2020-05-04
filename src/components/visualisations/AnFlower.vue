@@ -1,6 +1,6 @@
 <template>
-  <div class="an-todonotepad">
-    <ul class="an-todonotepad__list">
+  <div class="an-flower">
+    <ul class="an-flower__list">
       <li v-for="(answer, index) in answers" :key="index">
         <div v-if="answer !== undefined" :class="getClass(answer.type)">
           {{ answer.text }}
@@ -17,7 +17,6 @@ export default {
   mixins: [visualisation],
   computed: {
     answers() {
-      const component = this;
       const data = [
         {
           fieldID: 'ressourcen_belastungen-rueckzugsmoeglichkeit',
@@ -58,8 +57,8 @@ export default {
         }
       ];
 
-      const resultArray = data.map(function(object) {
-        switch (component.$store.getters.getFieldValue(object.fieldID)) {
+      const resultArray = data.map(object => {
+        switch (this.$store.getters.getFieldValue(object.fieldID)) {
           case 'stimmt':
             return {
               text: object.translationPro,
@@ -90,32 +89,30 @@ export default {
     }
   },
   methods: {
-    getClass(type) {
-      return {
-        'an-todonotepad__list--bloom': type === 1,
-        'an-todonotepad__list--bloomwithered': type === 2,
-        'an-todonotepad__list--withered': type === 3
-      };
-    }
+    getClass: type => ({
+      'an-todonotepad__list--bloom': type === 1,
+      'an-todonotepad__list--bloomwithered': type === 2,
+      'an-todonotepad__list--withered': type === 3
+    })
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.an-todonotepad {
+.an-flower {
   &__list {
     list-style-type: none;
   }
 
-  &__list--bloom {
+  &--bloom {
     background-color: yellow;
   }
 
-  &__list--bloomwithered {
+  &--bloomwithered {
     background-color: burlywood;
   }
 
-  &__list--withered {
+  &--withered {
     background-color: brown;
   }
 }
