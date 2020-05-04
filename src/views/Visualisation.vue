@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <h1>Auswertung</h1>
+    <h2>Überblick</h2>
+    <AnBasisInformation />
     <h2 v-show="isAvailable.resources">
       Meine Ressourcen
     </h2>
@@ -15,12 +17,14 @@
 </template>
 
 <script>
+import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Visualisation',
   components: {
+    AnBasisInformation,
     AnResources
   },
   data: () => ({
