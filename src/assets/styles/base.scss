@@ -6,7 +6,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  overflow:hidden;
+  overflow:  hidden;
 }
 
 .container {
@@ -86,6 +86,7 @@ input[type=range] {
   transition: background-color 200ms ease-in-out;
   text-decoration: none;
   outline: none;
+  cursor: pointer;
 
   &:hover {
     background-color: #eee;
