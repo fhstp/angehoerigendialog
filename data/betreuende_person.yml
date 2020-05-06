@@ -72,11 +72,11 @@ fields:
     type: range
     step: 1
     min:
-      - 1
-      - sehr unzufrieden
+      value: 1
+      label: sehr unzufrieden
     max:
-      - 10
-      - sehr zufrieden
+      value: 10
+      label: sehr zufrieden
     subfields:
       zufriedenheitdetail:
         label: Was sind die Gründe Ihrer Einschätzung?

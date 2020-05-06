@@ -4,14 +4,16 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
+const initialState = {
+  answers: {},
+  updshowNotes: false,
+  newNotes: '',
+  notes: '',
+  prevQuestionLabel: ''
+};
+
 export default new Vuex.Store({
-  state: {
-    answers: {},
-    updshowNotes: false,
-    newNotes: '',
-    notes: '',
-    prevQuestionLabel: ''
-  },
+  state: { ...initialState },
   getters: {
     getFieldCompletion: state => fieldId => {
       return state.answers[fieldId]?.done;
@@ -44,8 +46,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    wipeStore(state) {
-      state.answers = {};
+    resetState(state) {
+      for (const key in state.answers) {
+        Vue.delete(state.answers, key);
+      }
+      Object.assign(state, { ...initialState });
     },
     /**
      * Update the completion state of fields
@@ -79,11 +84,6 @@ export default new Vuex.Store({
     },
     savePrevQuestionLabel(state, newVal) {
       state.prevQuestionLabel = newVal;
-    }
-  },
-  actions: {
-    resetForm({ commit }) {
-      commit('initAnswers');
     }
   },
   strict: process.env.NODE_ENV !== 'production',

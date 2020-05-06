@@ -50,8 +50,8 @@
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
-import IconClose from '@/assets/icons/close.svg';
-import IconCheckmark from '@/assets/icons/checkmark.svg';
+import IconClose from '@/assets/icons/close.svg?inline';
+import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 
 export default {
   name: 'AnNoteText',
@@ -110,7 +110,7 @@ export default {
     showNotes(newValue) {
       if (newValue === true) {
         this.showAddHeadingToggle();
-        this.$nextTick(function() {
+        this.$nextTick(function () {
           this.updateTextAreaHeight(this.$refs.ta_alreadythere);
           this.updateTextAreaHeight(this.$refs.ta_newtext);
         });

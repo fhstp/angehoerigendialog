@@ -1,0 +1,24 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin cols($breakpoint) {
+  @for $i from 1 through 6 {
+    .col-#{$breakpoint}#{$i} {
+      width: #{$i / .06}#{'%'};
+    }
+  }
+}
+
+[class^='col-'], [class*=' col-'] {
+  width: 100%;
+}
+
+@include cols('');
+@each $name, $value in $grid-breakpoints {
+  @media (min-width: $value) {
+    @include cols(#{$name}#{'-'});
+  }
+}
+
