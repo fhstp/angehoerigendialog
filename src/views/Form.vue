@@ -53,13 +53,29 @@
                 </AnAccordionItem>
               </template>
             </AnAccordion>
-            <div
-              v-if="Object.keys(form).length === sectionIndex + 1"
-              class="container"
-            >
-              <button ref="finish" class="btn" @click="handleFinish()">
+            <div class="container">
+              <button
+                v-if="Object.keys(form).length === sectionIndex + 1"
+                ref="sectionEndBtn"
+                class="btn"
+                @click="handleFinish()"
+              >
                 auswerten
               </button>
+              <router-link
+                v-else
+                ref="sectionEndBtn"
+                :to="{
+                  query: {
+                    ...$route.query,
+                    step: Object.keys(form)[sectionIndex + 1],
+                    field: 0
+                  }
+                }"
+                class="btn"
+              >
+                zur nächsten Kategorie
+              </router-link>
             </div>
           </section>
         </template>
@@ -178,23 +194,16 @@ export default {
           form[this.steps[this.currentStepIndex].id].fields
         ) -
           1;
-      const isLastStep = this.currentStepIndex === this.steps.length - 1;
-      if (isLastStep && isLastFieldOfStep) {
+      if (isLastFieldOfStep) {
         this.$router.push({
           query: {
             ...this.$route.query,
             field: -1
           }
         });
-        this.$refs.finish[0].focus();
-      } else if (isLastFieldOfStep) {
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            step: this.steps[this.currentStepIndex + 1].id,
-            field: 0
-          }
-        });
+        this.$refs.sectionEndBtn[0].$el
+          ? this.$refs.sectionEndBtn[0].$el.focus()
+          : this.$refs.sectionEndBtn[0].focus();
       } else {
         this.$router.push({
           query: {
