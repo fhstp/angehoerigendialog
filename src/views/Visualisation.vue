@@ -7,7 +7,7 @@
       </div>
       <h1>Auswertung</h1>
       <h2>Überblick</h2>
-      <AnBasisInformation :print-mode="printMode" />
+      <AnBasisInformation />
       <h2 v-show="isAvailable.resources">
         Meine Ressourcen
       </h2>
@@ -40,10 +40,10 @@
 
 <script>
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
+import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
-import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
 
@@ -51,31 +51,17 @@ export default {
   name: 'Visualisation',
   components: {
     AnBasisInformation,
+    AnExportPdf,
     AnFlower,
     AnResources,
     AnSendMail,
-    AnExportPdf,
     AnSituation
   },
   data: () => ({
-    isAvailable: {},
-    printMode: false
+    isAvailable: {}
   }),
-  created() {
-    // eslint-disable-next-line nuxt/no-globals-in-created
-    window.addEventListener('afterprint', this.afterPrint);
-  },
-  beforeDestroy() {
-    window.removeEventListener('afterprint', this.afterPrint);
-  },
   methods: {
-    restartQuestionnaire,
-    beforePrint() {
-      this.printMode = true;
-    },
-    afterPrint() {
-      this.printMode = false;
-    }
+    restartQuestionnaire
   }
 };
 </script>
