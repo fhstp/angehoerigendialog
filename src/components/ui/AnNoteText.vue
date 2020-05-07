@@ -108,7 +108,7 @@ export default {
     showNotes(newValue) {
       if (newValue === true) {
         this.showAddHeadingToggle();
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           this.updateTextAreaHeight(this.$refs.ta_alreadythere);
           this.updateTextAreaHeight(this.$refs.ta_newtext);
         });
