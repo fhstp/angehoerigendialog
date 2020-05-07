@@ -1,14 +1,13 @@
 <template>
   <div v-if="showNotes" class="an-note-text">
     <div class="an-note-text__top-bar container">
-      <router-link
+      <button
         aria-label="Schließen"
         class="an-note-text__close btn"
-        :to="{ query: { ...$route.query } }"
-        replace
+        @click="closeNotes"
       >
         <IconNavigateBefore /> Zum Fragebogen zurückkehren
-      </router-link>
+      </button>
       <div
         :style="{ opacity: isSaveHint ? 1 : 0 }"
         class="an-note-text__save-hint"
@@ -114,14 +113,16 @@ export default {
   },
   watch: {
     showNotes(newValue) {
-      if (newValue === true) {
+      if (newValue) {
         this.showAddHeadingToggle();
         this.$nextTick(function () {
           this.updateTextAreaHeight(this.$refs.ta_alreadythere);
           this.updateTextAreaHeight(this.$refs.ta_newtext);
         });
+        document.addEventListener('keydown', this.closeNotes);
       } else {
-        this.closeNotes();
+        this.afterCloseNotes();
+        document.removeEventListener('keydown', this.closeNotes);
       }
     },
     noteData(newValue, oldValue) {
@@ -140,6 +141,12 @@ export default {
     }
     this.currentQuestionLabel_prev = this.currentQuestionLabel;
     this.showAddHeadingToggle();
+    if (this.showNotes) {
+      document.addEventListener('keydown', this.closeNotes);
+    }
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.closeNotes);
   },
   methods: {
     addHeading() {
@@ -195,7 +202,11 @@ export default {
       ta.focus();
       ta.setSelectionRange(ta.value.length, ta.value.length);
     },
-    closeNotes() {
+    closeNotes(event) {
+      if (event?.type === 'keydown' && event.keyCode !== 27) return;
+      this.$router.replace({ query: { ...this.$route.query } });
+    },
+    afterCloseNotes() {
       if (this.$store.getters.getNewNotes !== '') {
         if (this.$store.getters.getNotes === '') {
           this.$store.commit('saveNotes', this.$store.getters.getNewNotes);

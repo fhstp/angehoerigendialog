@@ -1,8 +1,9 @@
 <template>
   <router-link
-    aria-label="Öffnen"
+    tag="button"
     class="an-note-open btn"
     :to="{ query: { ...$route.query }, hash: 'notiz' }"
+    replace
   >
     <span>Notiz</span><IconEdit class="icon-edit" />
   </router-link>
