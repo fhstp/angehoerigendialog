@@ -1,5 +1,5 @@
 <template>
-  <div class="an-basisinformation col-md-6 row">
+  <div class="an-basisinformation row">
     <button
       :class="[
         'col-md-3',
@@ -131,6 +131,10 @@ export default {
     margin-top: $spacer * 4;
     border: 3px solid black;
     border-collapse: collapse;
+
+    @media print {
+      width: 50%;
+    }
   }
 
   tr:nth-child(even) {
@@ -149,6 +153,10 @@ export default {
   }
   &:focus {
     background-color: white;
+  }
+
+  @media print {
+    width: 50%;
   }
 }
 </style>

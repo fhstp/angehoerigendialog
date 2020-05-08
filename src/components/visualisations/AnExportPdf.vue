@@ -1,5 +1,5 @@
 <template>
-  <button class="btn an-exportpdf" @click="print">
+  <button ref="button" class="btn an-exportpdf" @click="print">
     Handout als PDF speichern
   </button>
 </template>
@@ -9,58 +9,16 @@ export default {
   name: 'AnExportPdf',
   methods: {
     print() {
-      this.$emit('beforePrint');
-      this.$nextTick(function () {
+      this.$store.commit('updatePrintMode', true);
+      this.$refs.button.disabled = true;
+      setTimeout(() => {
         window.print();
-      });
+        this.$refs.button.disabled = false;
+      }, 1);
     }
   }
 };
 </script>
-
-<style lang="scss">
-@media all {
-  .page-break {
-    display: none;
-  }
-}
-
-@media print {
-  @page {
-    size: A4 portrait;
-    margin: 1cm;
-  }
-
-  .page-break {
-    display: block;
-    page-break-before: always;
-  }
-
-  body {
-    overflow: auto;
-  }
-
-  .container {
-    max-width: 100%;
-  }
-
-  .an-visualisation {
-    height: auto !important;
-
-    &__restart,
-    &__actions {
-      display: none;
-    }
-  }
-
-  .an-basisinformation {
-    & .btn,
-    &__table {
-      width: 50%;
-    }
-  }
-}
-</style>
 
 <style lang="scss" scoped>
 .an-exportpdf {

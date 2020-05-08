@@ -2,7 +2,7 @@
   <div class="an-visualisation">
     <div class="container">
       <div class="an-visualisation__actions">
-        <AnExportPdf @beforePrint="beforePrint" />
+        <AnExportPdf />
         <AnSendMail />
       </div>
       <h1>Auswertung</h1>
@@ -15,8 +15,7 @@
         v-show="isAvailable.resources"
         :available.sync="isAvailable.resources"
       />
-      <div class="page-break"></div>
-      <h2 v-show="isAvailable.situation">
+      <h2 v-show="isAvailable.situation" class="page-break-before">
         Zusammenfassende Einschätzung der gesundheitliche Situation
       </h2>
       <AnSituation
@@ -71,6 +70,15 @@ export default {
   overflow: auto;
   height: 100vh;
 
+  @media print {
+    height: auto !important;
+
+    &__restart,
+    &__actions {
+      display: none;
+    }
+  }
+
   &__restart {
     position: fixed;
     bottom: 1.25rem;
@@ -81,6 +89,14 @@ export default {
     position: fixed;
     top: 1.25rem;
     right: 1.25rem;
+  }
+}
+</style>
+
+<style lang="scss">
+body {
+  @media print {
+    overflow: auto;
   }
 }
 </style>
