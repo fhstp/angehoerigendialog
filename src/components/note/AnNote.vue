@@ -1,27 +1,21 @@
 <template>
-  <div v-if="showNotes" class="an-note-text">
-    <div class="an-note-text__top-bar container">
+  <div v-if="showNotes" class="an-note">
+    <div class="an-note__top-bar container">
       <button
         aria-label="Schließen"
-        class="an-note-text__close btn"
+        class="an-note__close btn"
         @click="closeNotes"
       >
         <IconNavigateBefore /> Zum Fragebogen zurückkehren
       </button>
-      <div
-        :style="{ opacity: isSaveHint ? 1 : 0 }"
-        class="an-note-text__save-hint"
-      >
+      <div :style="{ opacity: isSaveHint ? 1 : 0 }" class="an-note__save-hint">
         Notizen werden automatisch gespeichert
       </div>
     </div>
-    <div
-      class="an-note-text__elementwrapper"
-      @click.self="focusTaAlreadyThere()"
-    >
-      <div class="an-note-text__content container">
+    <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere()">
+      <div class="an-note__content container">
         <h2>Meine Notizen</h2>
-        <div class="an-note-text__input-area">
+        <div class="an-note__input-area">
           <textarea
             v-show="showAlreadyThere"
             ref="ta_alreadythere"
@@ -48,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="an-note-text__focusdiv" @click="focusTaNewText()" />
+    <div class="an-note__focusdiv" @click="focusTaNewText()" />
   </div>
 </template>
 <script>
@@ -57,7 +51,7 @@ import { form_filterAccordionItems } from '@/helpers/form.js';
 import IconNavigateBefore from '@/assets/icons/navigate_before.svg?inline';
 
 export default {
-  name: 'AnNoteText',
+  name: 'AnNote',
   components: {
     IconNavigateBefore
   },
@@ -178,7 +172,7 @@ export default {
     },
     updateTextAreaHeight(textArea) {
       if (!textArea) return;
-      const anNoteEl = document.getElementsByClassName('an-note-text')[0];
+      const anNoteEl = document.getElementsByClassName('an-note')[0];
       const currentScrollTop = anNoteEl.scrollTop;
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
@@ -237,7 +231,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.an-note-text {
+.an-note {
   width: 100%;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
