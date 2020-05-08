@@ -25,7 +25,7 @@
         :available.sync="isAvailable.flower"
       />
       <h2>Praktische Betreuungsaufgaben</h2>
-      <AnFigure
+      <AnCareTasks
         v-show="isAvailable.careTasks"
         :available.sync="isAvailable.careTasks"
       />
@@ -41,7 +41,7 @@
 
 <script>
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
-import AnFigure from '@/components/visualisations/AnFigure.vue';
+import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
@@ -52,7 +52,7 @@ export default {
   name: 'Visualisation',
   components: {
     AnBasisInformation,
-    AnFigure,
+    AnCareTasks,
     AnFlower,
     AnResources,
     AnSendMail,

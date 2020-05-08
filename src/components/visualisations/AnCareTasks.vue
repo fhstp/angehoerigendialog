@@ -1,32 +1,30 @@
 <template>
-  <div class="an-figure">
+  <div class="an-care-tasks">
     <div
       v-for="(careTaskCategory, index) in careTasks"
       :key="index"
-      class="an-figure__category"
+      class="an-care-tasks__category"
     >
       <ul>
         <li
           v-for="(careTask, i) in careTaskCategory"
           :key="i"
-          class="an-figure__list"
+          class="an-care-tasks__list"
         >
           {{ careTask.text }}
         </li>
       </ul>
-      <div class="an-figure__figure">MÄNNCHEN</div>
+      <div class="an-care-tasks__figure">MÄNNCHEN</div>
     </div>
   </div>
 </template>
 
 <script>
-import formJson from '@/data/form.json';
-import { form_filterAccordionItems } from '@/helpers/form.js';
-
+import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
 
 export default {
-  name: 'AnFigure',
+  name: 'AnCareTasks',
   mixins: [visualisation],
   computed: {
     careTasks() {
@@ -36,10 +34,7 @@ export default {
       );
       this.$emit('update:available', careTasks?.length > 0);
 
-      const accordionItems = form_filterAccordionItems(
-        formJson.praktische_betreungsaufgaben.fields
-      );
-      const careTasksLabel = accordionItems['0'].options;
+      const careTasksLabel = visJson.visualisation.caretasks;
 
       careTasks.forEach(item => {
         const careTaskObject = {
@@ -72,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.an-figure {
+.an-care-tasks {
   display: flex;
   width: 100%;
 
