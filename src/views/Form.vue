@@ -55,7 +55,7 @@
             </AnAccordion>
             <div class="container">
               <button
-                v-if="Object.keys(form).length === sectionIndex + 1"
+                v-if="steps.length === sectionIndex + 1"
                 ref="sectionEndBtn"
                 class="btn"
                 @click="handleFinish()"
@@ -74,7 +74,8 @@
                 }"
                 class="btn"
               >
-                zur nächsten Kategorie
+                Zur Kategorie
+                {{ steps[sectionIndex + 1].title }}
               </router-link>
             </div>
           </section>
