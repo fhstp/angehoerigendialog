@@ -50,9 +50,6 @@
 <script>
 export default {
   name: 'AnBasisinformation',
-  props: {
-    printMode: { type: Boolean, default: false }
-  },
   data() {
     return {
       btnActive_betreuendePerson: false,
@@ -95,6 +92,11 @@ export default {
       answerArray_betreuendePerson: [[], []],
       answerArray_demenzPerson: []
     };
+  },
+  computed: {
+    printMode() {
+      return this.$store.state.printMode;
+    }
   },
   mounted() {
     this.getBasisinfo('betreuende_person');
