@@ -16,7 +16,10 @@
           </div>
         </li>
       </ul>
-      <div class="an-care-tasks__figure">
+      <div
+        class="an-care-tasks__figure"
+        :class="{ 'an-care-tasks__figure--self': index === 0 }"
+      >
         <component
           :is="f.type"
           v-for="(f, fi) in careSvg[index]"
@@ -117,25 +120,6 @@ export default {
     @media (max-width: 800px) {
       width: 50%;
     }
-
-    &:first-child > .an-care-tasks__figure {
-      &::before {
-        content: 'Das bin ich';
-        height: 30px;
-        width: 100px;
-        position: absolute;
-        left: 50%;
-        top: 10px;
-        transform: translateX(-110px);
-        border-radius: 15px;
-        border-bottom-right-radius: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ddd;
-        border: 2px solid #ccc;
-      }
-    }
   }
 
   &__figure {
@@ -159,6 +143,23 @@ export default {
       left: -25px;
       bottom: -5px;
       z-index: -1;
+    }
+
+    &--self::before {
+      content: 'Das bin ich';
+      height: 30px;
+      width: 100px;
+      position: absolute;
+      left: 50%;
+      top: 10px;
+      transform: translateX(-110px);
+      border-radius: 15px;
+      border-bottom-right-radius: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ddd;
+      border: 2px solid #ccc;
     }
   }
 
