@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+@page {
+  size: A4 portrait;
+  margin: 1cm;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   overflow:  hidden;
@@ -15,6 +20,10 @@ body {
   margin-right: auto;
   padding-left: $spacer;
   padding-right: $spacer;
+
+  @media print {
+    max-width: 100%;
+  }
 }
 
 ul, ol {
@@ -105,6 +114,12 @@ input[type=range] {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
+}
+
+.page-break-before {
+  @media print {
+    page-break-before: always;
+  }
 }
 
 @import '_grid.scss';

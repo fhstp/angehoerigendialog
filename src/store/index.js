@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 const initialState = {
   answers: {},
+  printMode: false,
   updshowNotes: false,
   newNotes: '',
   notes: '',
@@ -73,6 +74,9 @@ export default new Vuex.Store({
       }
       Vue.set(state.answers[fieldId], 'value', value);
     },
+    updatePrintMode(state, newVal) {
+      state.printMode = newVal;
+    },
     updateShowNotes(state, newVal) {
       state.updshowNotes = newVal;
     },
@@ -87,5 +91,9 @@ export default new Vuex.Store({
     }
   },
   strict: process.env.NODE_ENV !== 'production',
-  plugins: [createPersistedState()]
+  plugins: [
+    createPersistedState({
+      filter: mutation => mutation.type !== 'updatePrintMode'
+    })
+  ]
 });

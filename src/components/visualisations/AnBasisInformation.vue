@@ -1,10 +1,10 @@
 <template>
-  <div class="an-basisinformation col-md-6 row">
+  <div class="an-basisinformation row">
     <button
       :class="[
         'col-md-3',
         'btn',
-        { 'btn--active': btnActive_betreuendePerson }
+        { 'btn--active': btnActive_betreuendePerson || printMode }
       ]"
       @click="btnActive_betreuendePerson = !btnActive_betreuendePerson"
     >
@@ -12,14 +12,18 @@
     </button>
 
     <button
-      :class="['col-md-3', 'btn', { 'btn--active': btnActive_demenzPerson }]"
+      :class="[
+        'col-md-3',
+        'btn',
+        { 'btn--active': btnActive_demenzPerson || printMode }
+      ]"
       @click="btnActive_demenzPerson = !btnActive_demenzPerson"
     >
       Demenzerkrankte Person
     </button>
 
     <table
-      v-if="btnActive_betreuendePerson"
+      v-if="btnActive_betreuendePerson || printMode"
       class="an-basisinformation__table col-md-3"
     >
       <tr v-for="(answer, row) in answerArray_betreuendePerson[0]" :key="row">
@@ -32,7 +36,7 @@
     </table>
 
     <table
-      v-if="btnActive_demenzPerson"
+      v-if="btnActive_demenzPerson || printMode"
       class="an-basisinformation__table col-md-3"
     >
       <tr v-for="(answer, row) in answerArray_demenzPerson" :key="row">
@@ -89,6 +93,11 @@ export default {
       answerArray_demenzPerson: []
     };
   },
+  computed: {
+    printMode() {
+      return this.$store.state.printMode;
+    }
+  },
   mounted() {
     this.getBasisinfo('betreuende_person');
     this.getBasisinfo('demenzerkrankte_person');
@@ -122,6 +131,10 @@ export default {
     margin-top: $spacer * 4;
     border: 3px solid black;
     border-collapse: collapse;
+
+    @media print {
+      width: 50%;
+    }
   }
 
   tr:nth-child(even) {
@@ -140,6 +153,10 @@ export default {
   }
   &:focus {
     background-color: white;
+  }
+
+  @media print {
+    width: 50%;
   }
 }
 </style>
