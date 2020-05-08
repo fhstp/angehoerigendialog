@@ -1,7 +1,12 @@
 <template>
-  <button aria-label="Öffnen" class="an-note-open btn" @click="openNotes()">
+  <router-link
+    tag="button"
+    class="an-note-open btn"
+    :to="{ query: { ...$route.query }, hash: 'notiz' }"
+    replace
+  >
     <span>Notiz</span><IconEdit class="icon-edit" />
-  </button>
+  </router-link>
 </template>
 
 <script>
@@ -11,11 +16,6 @@ export default {
   name: 'AnNoteOpenButton',
   components: {
     IconEdit
-  },
-  methods: {
-    openNotes() {
-      this.$store.commit('updateShowNotes', true);
-    }
   }
 };
 </script>
