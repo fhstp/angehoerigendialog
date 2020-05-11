@@ -6,7 +6,15 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    window.addEventListener('beforeprint', () => {
+      this.$store.commit('updatePrintMode', true);
+    });
+    window.addEventListener('afterprint', () => {
+      this.$store.commit('updatePrintMode', false);
+    });
+  }
 };
 </script>
 

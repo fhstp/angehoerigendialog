@@ -1,6 +1,6 @@
 <template>
   <div class="an-form">
-    <AnNoteText />
+    <AnNote />
     <div class="an-form__scrollarea">
       <AnStepper :steps="steps" @input="stepperNavigation()" />
       <main ref="main" class="an-form__content">
@@ -13,7 +13,7 @@
             <div class="an-form__header-wrapper">
               <div class="an-form__header container">
                 <h2 class="an-form__section-heading">{{ section.title }}</h2>
-                <AnNoteOpenButton />
+                <AnNoteOpen />
               </div>
             </div>
             <AnAccordion class="container" query-param="field">
@@ -77,8 +77,8 @@ import {
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
 import AnField from '@/components/AnField.vue';
-import AnNoteOpenButton from '@/components/ui/AnNoteOpenButton.vue';
-import AnNoteText from '@/components/ui/AnNoteText.vue';
+import AnNote from '@/components/note/AnNote.vue';
+import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 
@@ -88,8 +88,8 @@ export default {
     AnAccordion,
     AnAccordionItem,
     AnField,
-    AnNoteOpenButton,
-    AnNoteText,
+    AnNote,
+    AnNoteOpen,
     AnStepper,
     IconCheckmark
   },
@@ -281,7 +281,7 @@ export default {
   margin-left: $spacer;
 }
 
-.an-note-text {
+.an-note {
   z-index: 100;
 }
 </style>
