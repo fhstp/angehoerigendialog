@@ -13,7 +13,7 @@
 import IconEdit from '@/assets/icons/edit.svg?inline';
 
 export default {
-  name: 'AnNoteOpenButton',
+  name: 'AnNoteOpen',
   components: {
     IconEdit
   }
