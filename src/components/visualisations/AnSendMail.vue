@@ -19,11 +19,3 @@ export default {
   })
 };
 </script>
-
-<style lang="scss" scoped>
-.an-sendmail {
-  position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
-}
-</style>

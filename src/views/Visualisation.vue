@@ -1,7 +1,10 @@
 <template>
   <div class="an-visualisation">
     <div class="container">
-      <AnSendMail />
+      <div class="an-visualisation__actions">
+        <AnExportPdf />
+        <AnSendMail />
+      </div>
       <h1>Auswertung</h1>
       <h2>Überblick</h2>
       <AnBasisInformation />
@@ -12,7 +15,7 @@
         v-show="isAvailable.resources"
         :available.sync="isAvailable.resources"
       />
-      <h2 v-show="isAvailable.situation">
+      <h2 v-show="isAvailable.situation" class="page-break-before">
         Zusammenfassende Einschätzung der gesundheitliche Situation
       </h2>
       <AnSituation
@@ -46,6 +49,7 @@
 
 <script>
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
+import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnPressure from '@/components/visualisations/AnPressure.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
@@ -58,6 +62,7 @@ export default {
   name: 'Visualisation',
   components: {
     AnBasisInformation,
+    AnExportPdf,
     AnFlower,
     AnPressure,
     AnResources,
@@ -79,10 +84,33 @@ export default {
   overflow: auto;
   height: 100vh;
 
+  @media print {
+    height: auto !important;
+
+    &__restart,
+    &__actions {
+      display: none;
+    }
+  }
+
   &__restart {
     position: fixed;
     bottom: 1.25rem;
     right: 1.25rem;
+  }
+
+  &__actions {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+}
+</style>
+
+<style lang="scss">
+body {
+  @media print {
+    overflow: auto;
   }
 }
 </style>

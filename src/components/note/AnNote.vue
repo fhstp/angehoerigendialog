@@ -1,71 +1,70 @@
 <template>
-  <div v-if="showNotes" class="an-note-text">
-    <button
-      aria-label="Schließen"
-      class="an-note-text__close btn"
-      @click="closeNotes()"
-    >
-      <IconClose />
-    </button>
-    <div
-      class="an-note-text__elementwrapper"
-      @click.self="focusTaAlreadyThere()"
-    >
-      <div class="an-note-text__content container">
-        <textarea
-          v-show="showAlreadyThere"
-          ref="ta_alreadythere"
-          v-model="noteData"
-        >
-        </textarea>
-        <template v-if="showAddHeading && currentQuestionLabel">
-          <div class="an-note-current" @click="focusTaNewText()">
-            <p class="an-note-current__header">
-              Möchten Sie diese Überschrift zur Notiz einfügen?
-            </p>
-            <span class="an-note-current__question">
-              > {{ currentQuestionLabel }}</span
-            >
-            <button class="an-note-current__action btn" @click="addHeading()">
-              Text hinzufügen
-            </button>
-          </div>
-          <textarea
-            ref="ta_newtext"
-            v-model="noteNewData"
-            placeholder="Hier Notiz einfügen..."
-            @input="updateTextAreaHeight($event.currentTarget)"
-          ></textarea>
-        </template>
+  <div v-if="showNotes" class="an-note">
+    <div class="an-note__top-bar container">
+      <button
+        aria-label="Schließen"
+        class="an-note__close btn"
+        @click="closeNotes"
+      >
+        <IconNavigateBefore /> Zum Fragebogen zurückkehren
+      </button>
+      <div :style="{ opacity: isSaveHint ? 1 : 0 }" class="an-note__save-hint">
+        Notizen werden automatisch gespeichert
       </div>
     </div>
-    <div class="an-note-text__focusdiv" @click="focusTaNewText()" />
-    <div class="an-note-text__savehint">
-      Änderungen werden automatisch gespeichert<IconCheckmark />
+    <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere()">
+      <div class="an-note__content container">
+        <h2>Meine Notizen</h2>
+        <div class="an-note__input-area">
+          <textarea
+            v-show="showAlreadyThere"
+            ref="ta_alreadythere"
+            v-model="noteData"
+          >
+          </textarea>
+          <template v-if="showAddHeading && currentQuestionLabel">
+            <div class="an-note-current" @click="focusTaNewText()">
+              <button class="an-note-current__action btn" @click="addHeading()">
+                Aktuell offene Frage als Überschrift zu meinen Notizen
+                hinzufügen
+              </button>
+              <span class="an-note-current__question">
+                > {{ currentQuestionLabel }}</span
+              >
+            </div>
+            <textarea
+              ref="ta_newtext"
+              v-model="noteNewData"
+              placeholder="Notiz einfügen …"
+              @input="updateTextAreaHeight($event.currentTarget)"
+            ></textarea>
+          </template>
+        </div>
+      </div>
     </div>
+    <div class="an-note__focusdiv" @click="focusTaNewText()" />
   </div>
 </template>
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
-import IconClose from '@/assets/icons/close.svg?inline';
-import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
+import IconNavigateBefore from '@/assets/icons/navigate_before.svg?inline';
 
 export default {
-  name: 'AnNoteText',
+  name: 'AnNote',
   components: {
-    IconClose,
-    IconCheckmark
+    IconNavigateBefore
   },
   data() {
     return {
       currentQuestionLabel_prev: this.$store.getters.getPrevQuestionLabel,
-      showAddHeading: true
+      showAddHeading: true,
+      isSaveHint: false
     };
   },
   computed: {
     showNotes() {
-      return this.$store.getters.getShowNotes;
+      return this.$route.hash === '#notiz';
     },
     currentQuestionLabel() {
       if (this.$route.query.step && this.$route.query.field !== undefined) {
@@ -85,6 +84,7 @@ export default {
         return this.$store.getters.getNotes;
       },
       set(value) {
+        this.showSaveHint();
         this.$store.commit('saveNotes', value);
       }
     },
@@ -93,6 +93,7 @@ export default {
         return this.$store.getters.getNewNotes;
       },
       set(value) {
+        this.showSaveHint();
         this.$store.commit('saveNewNotes', value);
       }
     },
@@ -106,12 +107,16 @@ export default {
   },
   watch: {
     showNotes(newValue) {
-      if (newValue === true) {
+      if (newValue) {
         this.showAddHeadingToggle();
         this.$nextTick(function() {
           this.updateTextAreaHeight(this.$refs.ta_alreadythere);
           this.updateTextAreaHeight(this.$refs.ta_newtext);
         });
+        document.addEventListener('keydown', this.closeNotes);
+      } else {
+        this.afterCloseNotes();
+        document.removeEventListener('keydown', this.closeNotes);
       }
     },
     noteData(newValue, oldValue) {
@@ -130,6 +135,12 @@ export default {
     }
     this.currentQuestionLabel_prev = this.currentQuestionLabel;
     this.showAddHeadingToggle();
+    if (this.showNotes) {
+      document.addEventListener('keydown', this.closeNotes);
+    }
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.closeNotes);
   },
   methods: {
     addHeading() {
@@ -161,8 +172,11 @@ export default {
     },
     updateTextAreaHeight(textArea) {
       if (!textArea) return;
+      const anNoteEl = document.getElementsByClassName('an-note')[0];
+      const currentScrollTop = anNoteEl.scrollTop;
       textArea.style.height = 'auto';
       textArea.style.height = textArea.scrollHeight + 'px';
+      anNoteEl.scrollTop = currentScrollTop;
     },
     showAddHeadingToggle() {
       this.showAddHeading =
@@ -182,8 +196,11 @@ export default {
       ta.focus();
       ta.setSelectionRange(ta.value.length, ta.value.length);
     },
-    closeNotes() {
-      this.$store.commit('updateShowNotes', false);
+    closeNotes(event) {
+      if (event?.type === 'keydown' && event.keyCode !== 27) return;
+      this.$router.replace({ query: { ...this.$route.query } });
+    },
+    afterCloseNotes() {
       if (this.$store.getters.getNewNotes !== '') {
         if (this.$store.getters.getNotes === '') {
           this.$store.commit('saveNotes', this.$store.getters.getNewNotes);
@@ -197,13 +214,24 @@ export default {
         }
         this.$store.commit('saveNewNotes', '');
       }
+    },
+    showSaveHint() {
+      clearTimeout(this.showSaveHintTimeout);
+      clearTimeout(this.removeSaveHintTimeout);
+      this.isSaveHint = false;
+      this.showSaveHintTimeout = setTimeout(() => {
+        this.isSaveHint = true;
+      }, 700);
+      this.removeSaveHintTimeout = setTimeout(() => {
+        this.isSaveHint = false;
+      }, 3000);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.an-note-text {
+.an-note {
   width: 100%;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
@@ -219,7 +247,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
   }
 
   &__content {
@@ -228,15 +255,25 @@ export default {
     width: 100%;
   }
 
+  &__input-area {
+    border: 2px solid darkgray;
+    border-radius: 3px;
+    padding: $spacer;
+  }
+
   &__close {
-    position: fixed;
-    right: 0;
-    padding: $spacer * 2;
-    line-height: 0;
+    margin-right: $spacer;
+    padding-left: $spacer;
+    display: inline-flex;
 
     > svg {
       height: 1.2rem;
     }
+  }
+
+  &__save-hint {
+    color: #aaa;
+    transition: opacity 150ms ease-in-out;
   }
 
   textarea {
@@ -253,21 +290,37 @@ export default {
     flex-grow: 1;
   }
 
-  &__savehint {
-    position: fixed;
-    bottom: 0;
-    border: 2px solid black;
-    border-radius: 2px;
-    box-shadow: 3px 3px 8px #ccc;
-    display: flex;
-    align-items: center;
-    padding: $spacer * 0.5;
-    background: white;
-  }
-
   &__savehint > svg {
     height: 1.4rem;
     margin-left: $spacer;
+  }
+
+  &__top-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: white;
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+    width: 100%;
+
+    &::after {
+      display: block;
+      content: '';
+      left: 0;
+      height: 12px;
+      background: linear-gradient(
+        rgba(204, 204, 204, 1),
+        rgba(204, 204, 204, 0)
+      );
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 100%;
+    }
   }
 }
 
@@ -275,21 +328,26 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: $spacer * 2 0;
-  border: 3px dotted lightgrey;
+  background-color: #eee;
+  border-radius: 3px;
   padding: $spacer * 2;
 
-  &__header {
-    margin-bottom: $spacer * 2;
-    width: 100%;
-  }
-
   &__question {
-    opacity: 0.5;
+    color: #aaa;
   }
 
   &__action {
     margin: 0;
+  }
+}
+
+textarea {
+  &:not(:first-child) {
+    margin-top: $spacer * 2;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: $spacer * 2;
   }
 }
 </style>
