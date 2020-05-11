@@ -105,7 +105,7 @@ export default {
   methods: {
     getBasisinfo(sectionKey) {
       const component = this;
-      this.fieldKey[sectionKey].forEach(function(key) {
+      this.fieldKey[sectionKey].forEach(function (key) {
         let fieldValue = component.$store.getters.getFieldValue(
           sectionKey + '-' + key
         );
