@@ -11,9 +11,7 @@
           :key="i"
           class="an-care-tasks__list"
         >
-          <div>
-            {{ careTask.text }}
-          </div>
+          {{ careTask.text }}
         </li>
       </ul>
       <div
@@ -21,10 +19,10 @@
         :class="{ 'an-care-tasks__figure--self': index === 0 }"
       >
         <component
-          :is="f.type"
-          v-for="(f, fi) in careSvg[index]"
-          :key="f.type + fi"
-          :style="{ fill: f.fill }"
+          :is="figure.type"
+          v-for="(figure, figureIndex) in careSvg[index]"
+          :key="figure.type + figureIndex"
+          :style="{ fill: figure.fill }"
         />
       </div>
       <div class="an-care-tasks__label">{{ careLabels[index] }}</div>
@@ -42,63 +40,73 @@ export default {
   name: 'AnCareTasks',
   components: { IconPersonArmsUp, IconPersonArmUp },
   mixins: [visualisation],
+  data() {
+    return {
+      careLabels: Array,
+      careSvg: Array
+    };
+  },
   computed: {
     careTasks() {
       const careTasksValues = [[], [], [], []];
       const careTasks = this.$store.getters.getFieldValue(
         'praktische_betreungsaufgaben-situationseinschaetzung'
       );
-      this.$emit('update:available', careTasks?.length > 0);
 
       const careTasksLabel = visJson.visualisation.caretasks;
 
-      careTasks.forEach(item => {
-        const careTaskObject = {
-          type: this.$store.getters.getFieldValue(
-            `praktische_betreungsaufgaben-situationseinschaetzung-${item}-details`
-          ),
-          text: careTasksLabel[item]
-        };
+      if (careTasks?.length > 0) {
+        careTasks.forEach(item => {
+          const careTaskObject = {
+            type: this.$store.getters.getFieldValue(
+              `praktische_betreungsaufgaben-situationseinschaetzung-${item}-details`
+            ),
+            text: careTasksLabel[item]
+          };
 
-        switch (careTaskObject.type) {
-          case 'ich':
-            careTasksValues[0].push(careTaskObject);
-            break;
-          case 'teilen':
-            careTasksValues[1].push(careTaskObject);
-            break;
-          case 'ichmeist':
-            careTasksValues[2].push(careTaskObject);
-            break;
-          case 'anderer':
-            careTasksValues[3].push(careTaskObject);
-            break;
-        }
-      });
-      return careTasksValues;
-    },
-    careSvg() {
-      return [
-        [{ type: 'IconPersonArmsUp', fill: '#374355' }],
-        [
-          { type: 'IconPersonArmsUp', fill: '#374355' },
-          { type: 'IconPersonArmsUp', fill: '#ADB9C9' }
-        ],
-        [
-          { type: 'IconPersonArmsUp', fill: '#374355' },
-          { type: 'IconPersonArmUp', fill: '#ADB9C9' }
-        ],
-        [{ type: 'IconPersonArmsUp', fill: '#ADB9C9' }]
-      ];
-    },
-    careLabels() {
-      return [
-        'Ich leiste die gesamte Unterstützung',
-        'Ich teile mir die Unterstützungen mit jemandem zu in etwa gleichen Teilen',
-        'Ich leiste den größten Teil der Untertützung, jemand anderes unterstützt mich fallweise',
-        'Jemand anderes leistet die Unterstützung'
-      ];
+          const categoryMap = {
+            ich: 0,
+            teilen: 1,
+            ichmeist: 2,
+            anderer: 3
+          };
+          if (Object.hasOwnProperty.call(categoryMap, careTaskObject.type)) {
+            careTasksValues[categoryMap[careTaskObject.type]].push(
+              careTaskObject
+            );
+          }
+        });
+        this.$emit(
+          'update:available',
+          careTasksValues[0]?.length > 0 ||
+            careTasksValues[1]?.length > 0 ||
+            careTasksValues[2]?.length > 0 ||
+            careTasksValues[3]?.length > 0
+        );
+        return careTasksValues;
+      }
+      return '';
     }
+  },
+  created() {
+    this.careSvg = [
+      [{ type: 'IconPersonArmsUp', fill: '#374355' }],
+      [
+        { type: 'IconPersonArmsUp', fill: '#374355' },
+        { type: 'IconPersonArmsUp', fill: '#ADB9C9' }
+      ],
+      [
+        { type: 'IconPersonArmsUp', fill: '#374355' },
+        { type: 'IconPersonArmUp', fill: '#ADB9C9' }
+      ],
+      [{ type: 'IconPersonArmsUp', fill: '#ADB9C9' }]
+    ];
+    this.careLabels = [
+      'Ich leiste die gesamte Unterstützung',
+      'Ich teile mir die Unterstützungen mit jemandem zu in etwa gleichen Teilen',
+      'Ich leiste den größten Teil der Untertützung, jemand anderes unterstützt mich fallweise',
+      'Jemand anderes leistet die Unterstützung'
+    ];
   }
 };
 </script>

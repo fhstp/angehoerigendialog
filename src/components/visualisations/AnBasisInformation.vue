@@ -95,19 +95,18 @@ export default {
   },
   methods: {
     getBasisinfo(sectionKey) {
-      const component = this;
-      this.fieldKey[sectionKey].forEach(function(key) {
-        let fieldValue = component.$store.getters.getFieldValue(
-          sectionKey + '-' + key
+      this.fieldKey[sectionKey].forEach(key => {
+        let fieldValue = this.$store.getters.getFieldValue(
+          `${sectionKey}-${key}`
         );
         if (fieldValue === undefined) fieldValue = '-';
         if (fieldValue === false) fieldValue = 'nein';
         else if (fieldValue === true) fieldValue = 'ja';
         if (sectionKey === 'betreuende_person') {
           if (key === 'berufdetail') {
-            component.answerArray_betreuendePerson[1].push(fieldValue);
-          } else component.answerArray_betreuendePerson[0].push(fieldValue);
-        } else component.answerArray_demenzPerson.push(fieldValue);
+            this.answerArray_betreuendePerson[1].push(fieldValue);
+          } else this.answerArray_betreuendePerson[0].push(fieldValue);
+        } else this.answerArray_demenzPerson.push(fieldValue);
       });
     }
   }
