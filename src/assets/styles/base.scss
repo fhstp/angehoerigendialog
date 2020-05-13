@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +12,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   overflow:  hidden;
 }
 
@@ -96,6 +98,7 @@ input[type=range] {
   text-decoration: none;
   outline: none;
   cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
 
   &:hover {
     background-color: #eee;

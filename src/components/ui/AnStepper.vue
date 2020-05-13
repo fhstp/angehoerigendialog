@@ -88,6 +88,7 @@ $icon_width: 50px;
     width: 100%;
     overflow: auto;
     scrollbar-width: thin;
+    background-color: #f2f5f9;
 
     @media #{map-get($query, 'lg-and-up')} {
       flex-direction: column;
@@ -129,15 +130,12 @@ $icon_width: 50px;
   &__icon {
     display: block;
     align-self: center;
-    fill: white;
-    background-color: black;
     border-radius: 50%;
     width: $icon_width;
     height: auto;
 
-    &--active {
-      fill: black;
-      background-color: white;
+    &--active > circle:first-child {
+      fill: #3566aa;
     }
   }
 
