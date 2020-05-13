@@ -1,24 +1,25 @@
 <template>
   <div class="an-resources-pressure">
     <div class="an-resources-pressure__icon-wrapper">
-      <Balloon class="an-resources-pressure__icon">
-        <foreignObject
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          required-extensions="http://www.w3.org/2000/svg"
-          class="an-resources-pressure__innercircle-wrapper"
-        >
-          <div
-            v-for="(resource, i) in resources"
-            :key="i"
-            class="an-resources-pressure__inncercircle"
-          >
-            {{ resource }}
-          </div>
-        </foreignObject>
-      </Balloon>
+      <AnBalloon class="an-resources-pressure__icon">
+        <g class="an-resources-pressure__air">
+          <g v-for="(resource, i) in resources" :key="i" class="ball">
+            <foreignObject
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              required-extensions="http://www.w3.org/2000/svg"
+              class="an-resources-pressure__innercircle-wrapper"
+            >
+              <AnBalloonKugel
+                class="an-resources-pressure__inncercircle"
+                :text="resource"
+              />
+            </foreignObject>
+          </g>
+        </g>
+      </AnBalloon>
     </div>
     <div class="an-resources-pressure__weight-wrapper">
       <div
@@ -33,12 +34,15 @@
 </template>
 
 <script>
+import { hierarchy, pack } from 'd3-hierarchy';
+import { select } from 'd3-selection';
+import AnBalloon from './AnBalloon';
+import AnBalloonKugel from './AnBalloonKugel';
 import visualisation from '@/mixins/visualisation.js';
-import Balloon from '@/assets/icons/balloon.svg?inline';
 
 export default {
   name: 'AnResourcesPressure',
-  components: { Balloon },
+  components: { AnBalloon, AnBalloonKugel },
   mixins: [visualisation],
   computed: {
     resources() {
@@ -55,6 +59,30 @@ export default {
       this.$emit('update:available', pressure?.length > 0);
       return pressure;
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      const packData = data =>
+        pack().size([251, 251]).padding(10)(
+          hierarchy({ children: data }).sum(d => 1 + Math.random() * 0.2)
+        );
+
+      const root = packData(this.resources);
+
+      const group = select('.an-resources-pressure__air');
+
+      const leaf = group
+        .selectAll('g')
+        .data(root.leaves())
+        .attr('transform', d => `translate(${d.x + 1},${d.y + 1})`);
+
+      leaf
+        .select('foreignObject')
+        .attr('height', d => d.r * 2)
+        .attr('width', d => d.r * 2)
+        .attr('x', d => -d.r)
+        .attr('y', d => -d.r);
+    });
   }
 };
 </script>
@@ -71,19 +99,6 @@ export default {
     width: 100%;
     max-width: 400px;
     padding-bottom: $spacer * 2;
-  }
-
-  &__inncercircle {
-    border: 2px solid #8bafb1;
-    border-radius: 80%;
-    text-align: center;
-    height: 50px;
-    width: 50px;
-    font-size: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: -5px;
   }
 
   &__weight-wrapper {
