@@ -89,10 +89,11 @@ input[type=range] {
   display: inline-block;
   margin: $spacer 0;
   padding: $spacer $spacer * 2;
-  border-radius: 3px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
   color: #000;
   background-color: #fff;
-  border: 3px solid #000;
+  border: 2px solid #000;
   font-size: 1rem;
   transition: background-color 200ms ease-in-out;
   text-decoration: none;
@@ -106,6 +107,11 @@ input[type=range] {
 
   &:focus {
     background-color: #ccc;
+  }
+
+  &:active{
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
   }
 }
 

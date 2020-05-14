@@ -45,12 +45,14 @@ export default {
     .an-accordion-item--open & {
       cursor: auto;
       background-color: $color-accordionitem-active;
+      color: white;
     }
   }
 
   &__content {
     padding: $spacer * 2;
     background-color: $color-accordionitem-active;
+    color: white;
   }
 }
 </style>
