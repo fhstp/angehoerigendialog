@@ -74,8 +74,7 @@
                 }"
                 class="btn"
               >
-                Zur Kategorie
-                {{ steps[sectionIndex + 1].title }}
+                Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
             </div>
           </section>
