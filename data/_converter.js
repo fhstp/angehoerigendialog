@@ -12,6 +12,11 @@ for (const section of content) {
   form[section] = YAML.parse(sectionYaml);
 }
 
+const contentVis = fs.readFileSync('./data/visualisation.yml', 'utf8');
+const vis = YAML.parse(contentVis);
+
 const jsonFileSanitized = sanitizeHtml(JSON.stringify(form));
+const jsonFileVisSanitized = sanitizeHtml(JSON.stringify(vis));
 
 fs.writeFileSync('./src/data/form.json', jsonFileSanitized, 'utf8');
+fs.writeFileSync('./src/data/visualisation.json', jsonFileVisSanitized, 'utf8');
