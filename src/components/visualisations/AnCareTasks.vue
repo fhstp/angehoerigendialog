@@ -125,7 +125,7 @@ export default {
     padding-bottom: 0;
     width: 25%;
 
-    @media (max-width: 800px) {
+    @media screen and (max-width: 800px) {
       width: 50%;
     }
   }
@@ -146,11 +146,31 @@ export default {
       position: absolute;
       height: 10px;
       background: #437bb9;
-      border-radius: 5px;
-      width: calc(100% + 50px);
-      left: -25px;
+      width: calc(100% + 20px);
+      left: -10px;
       bottom: -5px;
       z-index: -1;
+    }
+
+    .an-care-tasks__category:first-child &::after {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .an-care-tasks__category:last-child &::after {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    @media screen and (max-width: 800px) {
+      .an-care-tasks__category:nth-child(2) &::after {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+      .an-care-tasks__category:nth-child(3) &::after {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
     }
 
     &--self::before {
@@ -194,7 +214,7 @@ export default {
   }
 
   &__label {
-    min-height: 100px;
+    min-height: 120px;
     text-align: center;
     display: flex;
     justify-content: center;

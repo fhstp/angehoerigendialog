@@ -27,7 +27,9 @@
         v-show="isAvailable.flower"
         :available.sync="isAvailable.flower"
       />
-      <h2 v-show="isAvailable.careTasks">Praktische Betreuungsaufgaben</h2>
+      <h2 v-show="isAvailable.careTasks" class="page-break-before">
+        Praktische Betreuungsaufgaben
+      </h2>
       <AnCareTasks
         v-show="isAvailable.careTasks"
         :available.sync="isAvailable.careTasks"
