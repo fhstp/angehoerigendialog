@@ -33,6 +33,7 @@ export default {
 .an-accordion-item {
   border: 1px solid lightgrey;
   border-radius: 3px;
+  background-color: $color-accordionitem-inactive;
 
   &__header {
     padding: $spacer * 2;
@@ -43,11 +44,13 @@ export default {
 
     .an-accordion-item--open & {
       cursor: auto;
+      background-color: $color-accordionitem-active;
     }
   }
 
   &__content {
     padding: $spacer * 2;
+    background-color: $color-accordionitem-active;
   }
 }
 </style>

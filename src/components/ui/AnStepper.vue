@@ -134,8 +134,12 @@ $icon_width: 50px;
     width: $icon_width;
     height: auto;
 
+    > circle:first-child {
+      fill: $color-steppericon-inactive;
+    }
+
     &--active > circle:first-child {
-      fill: #3566aa;
+      fill: $color-steppericon-active;
     }
   }
 
