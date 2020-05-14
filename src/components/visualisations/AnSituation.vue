@@ -17,7 +17,6 @@
           :is="situation.value < 4 ? 'IconPersonArmUp' : 'IconPersonStanding'"
           class="an-situation__me"
         />
-        <div class="an-situation__indicator" />
         <div class="an-situation__progressbar" />
       </div>
       <IconMood class="an-situation__legend" />
@@ -86,7 +85,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$progressbar-border-width: 0.33rem;
+$progressbar-border-width: 0.2rem;
 
 .an-situation {
   &__category {
@@ -125,17 +124,13 @@ $progressbar-border-width: 0.33rem;
     padding-top: $progressbar-border-width;
   }
 
-  &__indicator,
   &__me {
     position: relative;
     top: -$progressbar-border-width;
     left: calc(100% * var(--value));
-    transform: translateX(-50%);
-  }
-
-  &__me {
-    height: 3rem;
     padding-top: 0.25rem;
+    height: 4rem;
+    transform: translateX(-50%);
 
     .an-situation__category--danger & {
       padding-top: 0;
@@ -143,19 +138,8 @@ $progressbar-border-width: 0.33rem;
     }
   }
 
-  &__indicator {
-    border-top: 15px solid #333;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    width: 0;
-
-    .an-situation__category--danger & {
-      border-top-color: red;
-    }
-  }
-
   &__progressbar {
-    height: 1rem;
+    height: 2rem;
     border: $progressbar-border-width solid #333;
     border-radius: 1000px;
     margin: 0 -$progressbar-border-width;
@@ -163,7 +147,7 @@ $progressbar-border-width: 0.33rem;
 
   &__legend {
     margin-bottom: -$progressbar-border-width;
-    width: 3rem;
+    width: 2rem;
   }
 }
 </style>
