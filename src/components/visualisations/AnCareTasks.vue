@@ -1,32 +1,32 @@
 <template>
   <div class="an-care-tasks">
-    <div
-      v-for="(careTaskCategory, index) in careTasks"
-      :key="index"
-      class="an-care-tasks__category"
-    >
-      <ul>
-        <li
-          v-for="(careTask, i) in careTaskCategory"
-          :key="i"
-          class="an-care-tasks__list"
+    <template v-for="(careTaskCategory, index) in careTasks">
+      <div :key="index" class="an-care-tasks__category">
+        <ul>
+          <li
+            v-for="(careTask, i) in careTaskCategory"
+            :key="i"
+            class="an-care-tasks__list"
+          >
+            {{ careTask.text }}
+          </li>
+        </ul>
+        <div
+          class="an-care-tasks__figure"
+          :class="{ 'an-care-tasks__figure--self': index === 0 }"
         >
-          {{ careTask.text }}
-        </li>
-      </ul>
-      <div
-        class="an-care-tasks__figure"
-        :class="{ 'an-care-tasks__figure--self': index === 0 }"
-      >
-        <component
-          :is="figure.type"
-          v-for="(figure, figureIndex) in careSvg[index]"
-          :key="figure.type + figureIndex"
-          :style="{ fill: figure.fill }"
-        />
+          <component
+            :is="figure.type"
+            v-for="(figure, figureIndex) in careSvg[index]"
+            :key="figure.type + figureIndex"
+            :style="{ fill: figure.fill }"
+          />
+        </div>
       </div>
-      <div class="an-care-tasks__label">{{ careLabels[index] }}</div>
-    </div>
+      <div :key="`${index}-label`" class="an-care-tasks__label">
+        {{ careLabels[index] }}
+      </div>
+    </template>
   </div>
 </template>
 
@@ -113,9 +113,15 @@ export default {
 
 <style lang="scss" scoped>
 .an-care-tasks {
-  display: flex;
-  word-break: break-word;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto auto;
+  }
 
   &__category {
     display: flex;
@@ -123,11 +129,6 @@ export default {
     justify-content: flex-end;
     padding: 10px;
     padding-bottom: 0;
-    width: 25%;
-
-    @media screen and (max-width: 800px) {
-      width: 50%;
-    }
   }
 
   &__figure {
@@ -152,24 +153,30 @@ export default {
       z-index: -1;
     }
 
-    .an-care-tasks__category:first-child &::after {
+    @mixin first-of-line() {
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
     }
 
-    .an-care-tasks__category:last-child &::after {
+    @mixin last-of-line() {
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
     }
 
+    .an-care-tasks__category:nth-child(1) &::after {
+      @include first-of-line();
+    }
+
+    .an-care-tasks__category:nth-child(7) &::after {
+      @include last-of-line();
+    }
+
     @media screen and (max-width: 800px) {
-      .an-care-tasks__category:nth-child(2) &::after {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
       .an-care-tasks__category:nth-child(3) &::after {
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        @include first-of-line();
+      }
+      .an-care-tasks__category:nth-child(5) &::after {
+        @include last-of-line();
       }
     }
 
@@ -180,7 +187,7 @@ export default {
       position: absolute;
       left: 50%;
       top: 10px;
-      transform: translateX(-110px);
+      transform: translate(-110px, 0);
       border-radius: 15px;
       border-bottom-right-radius: 0;
       display: flex;
@@ -188,6 +195,11 @@ export default {
       align-items: center;
       background: #ddd;
       border: 2px solid #ccc;
+
+      @media print {
+        transform: translate(-50px, 95px);
+        border-bottom-right-radius: 15px;
+      }
     }
   }
 
@@ -203,22 +215,25 @@ export default {
     border-radius: 3px;
     margin-bottom: -5px;
 
+    @media print {
+      font-size: 0.9rem;
+    }
+
     &:nth-child(2n) {
       margin-left: -6px;
-      margin-right: +6px;
+      margin-right: 6px;
     }
     &:nth-child(2n - 1) {
-      margin-left: +8px;
+      margin-left: 8px;
       margin-right: -8px;
     }
   }
 
   &__label {
-    min-height: 120px;
+    padding-top: $spacer;
+    padding-right: $spacer;
+    padding-left: $spacer;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 </style>
