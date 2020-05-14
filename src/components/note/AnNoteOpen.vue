@@ -29,7 +29,6 @@ export default {
 }
 
 .icon-edit {
-  margin-left: $spacer / 2;
-  height: 1.2rem;
+  margin-left: $spacer;
 }
 </style>
