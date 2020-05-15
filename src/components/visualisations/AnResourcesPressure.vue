@@ -101,14 +101,58 @@ export default {
     padding-bottom: $spacer * 2;
   }
 
-  &__weight-wrapper {
-    background-color: #bd753a;
-    padding: 10px;
-    text-align: center;
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -20px;
+  &__weight {
+    $bgcolor: #975824;
+    $fgcolor: #bd753a;
+
+    $ringsize: 60px;
+    $bordersize: 4px;
+
+    &-wrapper {
+      background-color: $bgcolor;
+      padding: $bordersize;
+      text-align: center;
+      width: max-content;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+
+      &::before {
+        content: '';
+        width: $ringsize;
+        height: $ringsize;
+        border: $bordersize * 4 solid $bgcolor;
+        border-radius: 50%;
+        background-color: transparent;
+        position: absolute;
+        top: -($ringsize - $bordersize * 3);
+        z-index: -2;
+        margin-left: -($ringsize / 2);
+      }
+
+      &::after {
+        content: '';
+        width: $ringsize - $bordersize * 2;
+        height: $ringsize - $bordersize * 2;
+        border: $bordersize * 2 solid $fgcolor;
+        border-radius: 50%;
+        background-color: transparent;
+        position: absolute;
+        top: -($ringsize - $bordersize * 4);
+        margin-left: -($ringsize / 2 - $bordersize);
+        z-index: 0;
+      }
+    }
+    &-list {
+      background: $fgcolor;
+      margin-bottom: $bordersize;
+      padding: $bordersize;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
   }
 }
 </style>
