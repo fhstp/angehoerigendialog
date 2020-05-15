@@ -31,9 +31,8 @@ export default {
 
 <style lang="scss" scoped>
 .an-accordion-item {
-  border: 1px solid lightgrey;
   border-radius: 3px;
-  background-color: $color-accordionitem-inactive;
+  background-color: $color-theme-lightred;
 
   &__header {
     padding: $spacer * 2;
@@ -44,14 +43,14 @@ export default {
 
     .an-accordion-item--open & {
       cursor: auto;
-      background-color: $color-accordionitem-active;
+      background-color: $color-theme-darkred;
       color: white;
     }
   }
 
   &__content {
     padding: $spacer * 2;
-    background-color: $color-accordionitem-active;
+    background-color: $color-theme-darkred;
     color: white;
   }
 }

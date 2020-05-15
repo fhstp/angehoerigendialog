@@ -24,7 +24,7 @@ $range-thumb-size: 20px;
 $range-thumb-border-size: 2px;
 $range-track-height: 6px;
 
-$color-steppericon-active: #344358;
-$color-steppericon-inactive: #CAD3E0;
-$color-accordionitem-inactive: #DAE4EF;
-$color-accordionitem-active: #344358;
+$color-theme-darkred: #7A0E0E;
+$color-theme-lightred: lighten($color-theme-darkred, 66%);
+$color-theme-lightgrey: lighten(desaturate($color-theme-darkred, 100%), 60%);
+$color-theme-darkgrey: desaturate($color-theme-darkred, 100%);

@@ -97,6 +97,7 @@ $icon_width: 50px;
   }
 
   &__step {
+    background-color: $color-theme-lightgrey;
     flex-shrink: 0;
     width: 66%;
     list-style: none;
@@ -135,11 +136,11 @@ $icon_width: 50px;
     height: auto;
 
     > circle:first-child {
-      fill: $color-steppericon-inactive;
+      fill: $color-theme-darkgrey;
     }
 
     &--active > circle:first-child {
-      fill: $color-steppericon-active;
+      fill: $color-theme-darkred;
     }
   }
 
