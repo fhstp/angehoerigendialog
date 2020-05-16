@@ -14,7 +14,12 @@ import field from '@/mixins/field.js';
 
 export default {
   name: 'AnText',
-  mixins: [field]
+  mixins: [field],
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', value?.replace(/^\s+/, '').length > 0);
+    }
+  }
 };
 </script>
 
