@@ -21,6 +21,11 @@ export default {
       const minute = String(currentTime.getMinutes()).padStart(2, '0');
       this.field_data = `${hour}:${minute}`;
     }
+  },
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', !!value);
+    }
   }
 };
 </script>

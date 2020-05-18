@@ -55,6 +55,11 @@ export default {
   },
   created() {
     if (!this.field_data) this.field_data = [];
+  },
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', true);
+    }
   }
 };
 </script>

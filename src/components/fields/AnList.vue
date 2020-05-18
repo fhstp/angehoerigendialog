@@ -85,6 +85,15 @@ export default {
     },
     addHandler() {
       this.enterHandler(this.listData.length - 1);
+    },
+    validate(value) {
+      let valid = true;
+      if (
+        (this.fieldMax !== undefined && value?.length >= this.fieldMax) ||
+        (this.fieldMin !== undefined && value?.length <= this.fieldMin)
+      )
+        valid = false;
+      this.$emit('update:field_valid', valid);
     }
   }
 };
