@@ -11,52 +11,14 @@
 </template>
 
 <script>
+import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
 export default {
   name: 'AnFlower',
   mixins: [visualisation],
   computed: {
     answers() {
-      const data = [
-        {
-          fieldID: 'ressourcen_belastungen-rueckzugsmoeglichkeit',
-          translationPro: 'Rückzugsorte',
-          translationMiddle: 'Rückzugsmöglichkeiten',
-          translationCon: 'Rückzugsmöglichkeiten schaffen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-hobbysinteressen',
-          translationPro: 'Zeit für meine Interessen',
-          translationMiddle: 'Zeit für meine Interessen finden',
-          translationCon: 'Zeit für meine Interessen schaffen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-freizeitaktivitaeten',
-          translationPro: 'Freunde treffen',
-          translationMiddle: 'Freunde zu treffen',
-          translationCon: 'Regelmäßig mit anderen Menschen treffen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-zeitfuermichselbst',
-          translationPro: 'Erholungszeit für mich',
-          translationMiddle: 'Erholungszeit einplanen',
-          translationCon: 'Erholungszeit für mich einplanen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-beziehungen',
-          translationPro: 'Zeit für Familie, Freunde & Verwandte',
-          translationMiddle: 'Zeit für Familie, Freunde und Verwandte haben',
-          translationCon: 'Zeit für Familie, Freunde und Verwandte einplanen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-anforderungen',
-          translationPro: 'Pflege und andere Aktivitäten vereinbaren',
-          translationMiddle: 'Pflege mit Aktivitäten vereinbaren',
-          translationCon:
-            'Die Pflege und andere Aktivitäten miteinander vereinbaren'
-        }
-      ];
-
+      const data = visJson.visualisation.flower;
       const resultArray = data.map(object => {
         switch (this.$store.getters.getFieldValue(object.fieldID)) {
           case 'stimmt':

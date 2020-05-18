@@ -22,7 +22,7 @@
         v-show="isAvailable.situation"
         :available.sync="isAvailable.situation"
       />
-      <h2>Meine Energie-Blume</h2>
+      <h2 v-show="isAvailable.flower">Meine Energie-Blume</h2>
       <AnFlower
         v-show="isAvailable.flower"
         :available.sync="isAvailable.flower"
