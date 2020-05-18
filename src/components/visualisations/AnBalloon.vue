@@ -6,7 +6,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0px"
     y="0px"
-    viewBox="0 0 251 504.6"
+    :viewBox="`0 0 251 ${showRopes ? 504.6 : 421.2}`"
     preserveAspectRatio="xMinYMin"
   >
     <path
@@ -29,20 +29,19 @@
       />
       <circle id="Kopf" class="st1" cx="125.2" cy="338.7" r="7.5" />
     </g>
-    <g id="Seile">
+    <template v-if="showRopes">
       <path
-        id="Seil_Links"
         class="st2"
         d="M110,504.6c-0.5,0-1-0.3-1-0.6L96.4,403.7c0-0.4,0.4-0.7,0.9-0.7s1,0.2,1.1,0.6L111,503.9
 		C111.1,504.3,110.7,504.6,110,504.6C110.1,504.6,110.1,504.6,110,504.6z"
       />
       <path
-        id="Seil_Rechts"
+        v-if="showRopes"
         class="st2"
         d="M141.7,504.6c0.5,0,1-0.3,1-0.6l12.6-100.3c0-0.4-0.4-0.7-0.9-0.7s-1,0.2-1.1,0.6
 		l-12.6,100.3C140.7,504.3,141.1,504.6,141.7,504.6L141.7,504.6z"
       />
-    </g>
+    </template>
     <g id="Ballon_1_">
       <path
         class="st3"
@@ -73,7 +72,13 @@
 
 <script>
 export default {
-  name: 'AnBalloon'
+  name: 'AnBalloon',
+  props: {
+    showRopes: {
+      type: Boolean,
+      default: false
+    }
+  }
 };
 </script>
 

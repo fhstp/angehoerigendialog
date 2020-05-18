@@ -1,27 +1,30 @@
 <template>
   <div class="an-resources-pressure">
     <div class="an-resources-pressure__icon-wrapper">
-      <AnBalloon class="an-resources-pressure__icon">
+      <AnBalloon
+        :show-ropes="pressure && pressure.length > 0"
+        class="an-resources-pressure__icon"
+      >
         <g class="an-resources-pressure__air">
-          <g v-for="(resource, i) in resources" :key="i" class="ball">
-            <foreignObject
-              x="0"
-              y="0"
-              width="100%"
-              height="100%"
-              required-extensions="http://www.w3.org/2000/svg"
-              class="an-resources-pressure__innercircle-wrapper"
-            >
-              <AnBalloonKugel
-                class="an-resources-pressure__inncercircle"
-                :text="resource"
-              />
-            </foreignObject>
-          </g>
+          <foreignObject
+            v-for="(resource, i) in resources"
+            :key="i"
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            required-extensions="http://www.w3.org/2000/svg"
+            class="an-resources-pressure__innercircle-wrapper"
+          >
+            <AnBalloonCircle
+              class="an-resources-pressure__inncercircle"
+              :text="resource"
+            />
+          </foreignObject>
         </g>
       </AnBalloon>
     </div>
-    <div class="an-resources-pressure__weight-wrapper">
+    <div v-if="pressure" class="an-resources-pressure__weight-wrapper">
       <div
         v-for="(pressureItem, i) in pressure"
         :key="i"
@@ -37,12 +40,12 @@
 import { hierarchy, pack } from 'd3-hierarchy';
 import { select } from 'd3-selection';
 import AnBalloon from './AnBalloon';
-import AnBalloonKugel from './AnBalloonKugel';
+import AnBalloonCircle from './AnBalloonCircle';
 import visualisation from '@/mixins/visualisation.js';
 
 export default {
   name: 'AnResourcesPressure',
-  components: { AnBalloon, AnBalloonKugel },
+  components: { AnBalloon, AnBalloonCircle },
   mixins: [visualisation],
   computed: {
     resources() {
@@ -71,13 +74,10 @@ export default {
 
       const group = select('.an-resources-pressure__air');
 
-      const leaf = group
-        .selectAll('g')
+      group
+        .selectAll('foreignObject')
         .data(root.leaves())
-        .attr('transform', d => `translate(${d.x + 1},${d.y + 1})`);
-
-      leaf
-        .select('foreignObject')
+        .attr('transform', d => `translate(${d.x + 1},${d.y + 1})`)
         .attr('height', d => d.r * 2)
         .attr('width', d => d.r * 2)
         .attr('x', d => -d.r)
@@ -86,6 +86,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .an-resources-pressure {
   margin-bottom: 20px;
@@ -104,7 +105,6 @@ export default {
   &__weight {
     $bgcolor: #975824;
     $fgcolor: #bd753a;
-
     $ringsize: 60px;
     $bordersize: 4px;
 
@@ -114,6 +114,7 @@ export default {
       text-align: center;
       width: max-content;
       max-width: 100%;
+      min-width: 150px;
       margin-left: auto;
       margin-right: auto;
       position: relative;
