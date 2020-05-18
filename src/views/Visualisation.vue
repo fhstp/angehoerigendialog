@@ -34,6 +34,14 @@
         v-show="isAvailable.careTasks"
         :available.sync="isAvailable.careTasks"
       />
+      <h2 v-show="isAvailable.behaviourChanges" class="page-break-before">
+        Umgang mit Verhaltensveränderungen
+      </h2>
+      <AnBehaviour
+        v-show="isAvailable.behaviourChanges"
+        :available.sync="isAvailable.behaviourChanges"
+      />
+
       <button
         class="an-visualisation__restart btn"
         @click="restartQuestionnaire"
@@ -46,6 +54,7 @@
 
 <script>
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
+import AnBehaviour from '@/components/visualisations/AnBehaviour.vue';
 import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
@@ -58,6 +67,7 @@ export default {
   name: 'Visualisation',
   components: {
     AnBasisInformation,
+    AnBehaviour,
     AnCareTasks,
     AnExportPdf,
     AnFlower,
