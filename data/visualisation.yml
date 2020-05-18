@@ -13,26 +13,20 @@ visualisation:
     behoerdenwege: Behördenwege / Unterstützungleistung organisieren
   flower:
     - fieldID: ressourcen_belastungen-rueckzugsmoeglichkeit
-      translationPro: Rückzugsorte
-      translationMiddle: Rückzugsmöglichkeiten
-      translationCon: Rückzugsmöglichkeiten schaffen
+      text: Rückzugsmöglichkeiten
+      ewer: Rückzugsmöglichkeiten schaffen
     - fieldID: ressourcen_belastungen-hobbysinteressen
-      translationPro: Zeit für meine Interessen
-      translationMiddle: Zeit für meine Interessen finden
-      translationCon: Zeit für meine Interessen schaffen
+      text: Hobbys und Interessen
+      ewer: Zeit für meine Hobbys/Interessen schaffen
     - fieldID: ressourcen_belastungen-freizeitaktivitaeten
-      translationPro: Freunde treffen
-      translationMiddle: Freunde zu treffen
-      translationCon: Regelmäßig mit anderen Menschen treffen
+      text: Menschen treffen
+      ewer: Mehr Menschen treffen
     - fieldID: ressourcen_belastungen-zeitfuermichselbst
-      translationPro: Erholungszeit für mich
-      translationMiddle: Erholungszeit einplanen
-      translationCon: Erholungszeit für mich einplanen
+      text: Erholungszeit
+      ewer: Erholungszeit einplanen
     - fieldID: ressourcen_belastungen-beziehungen
-      translationPro: Zeit für Familie, Freunde & Verwandte
-      translationMiddle: Zeit für Familie, Freunde und Verwandte haben
-      translationCon: Zeit für Familie, Freunde und Verwandte einplanen
+      text: Familie und Freunde
+      ewer: Zeit für Familie und Freunde einplanen
     - fieldID: ressourcen_belastungen-anforderungen
-      translationPro: Pflege und andere Aktivitäten vereinbaren
-      translationMiddle: Pflege mit Aktivitäten vereinbaren
-      translationCon: Die Pflege und andere Aktivitäten miteinander vereinbaren
+      text: Ausgleich Pflege und Freizeit
+      ewer: Pflege mit Freizeitaktivitäten vereinbaren
