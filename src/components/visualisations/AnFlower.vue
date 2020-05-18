@@ -11,6 +11,15 @@
         <div class="text">{{ answer.text }}</div>
       </div>
     </div>
+    <div class="ewer">
+      <div class="ewer__innerbox">
+        <ul class="ewer__list">
+          <li v-for="(ewerItem, index) in ewerItems" :key="index">
+            <div>{{ ewerItem.ewer }}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -24,39 +33,28 @@ export default {
     answers() {
       const data = visJson.visualisation.flower;
 
+      let questionsAreAnswered = false;
       data.forEach(object => {
-        switch (this.$store.getters.getFieldValue(object.fieldID)) {
-          case 'stimmt':
-            object.type = 3;
-            break;
-          case 'stimmt_teilweise':
-            object.type = 2;
-            break;
-          case 'stimmt_nicht':
-            object.type = 1;
-            break;
-          default:
-            object.type = 0;
-            break;
+        object.type = this.$store.getters.getFieldValue(object.fieldID);
+        if (object.type !== undefined) {
+          questionsAreAnswered = true;
         }
       });
-
-      let questionsAreAnswered = false;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].type !== 0) {
-          questionsAreAnswered = true;
-          break;
-        }
-      }
+      console.log(data);
       this.$emit('update:available', questionsAreAnswered);
       return data;
+    },
+    ewerItems() {
+      return this.answers.filter(object => {
+        return object.type === 'stimmt_nicht';
+      });
     }
   },
   methods: {
     getClass: (type, index) => ({
-      one: type === 1,
-      two: type === 2,
-      three: type === 3,
+      one: type === 'stimmt_nicht',
+      two: type === 'stimmt_teilweise',
+      three: type === 'stimmt',
       reverse: index > 2
     })
   }
@@ -69,9 +67,12 @@ $background: #fff;
 $pill: #e6e6e6;
 $red: #dd848d;
 $blue: #a3cfdf;
-$size: 425px;
-
+$size: 290px;
+//425px
 .an-flower {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   .flower {
     height: calc(#{$size} * 2);
     width: calc(#{$size} * 2);
@@ -80,8 +81,8 @@ $size: 425px;
 
   .flower::after {
     content: '';
-    height: 120px;
-    width: 120px;
+    height: 80px;
+    width: 80px;
     background: white;
     border-radius: 50%;
     position: absolute;
@@ -92,7 +93,7 @@ $size: 425px;
 
   .pillwrapper {
     width: $size;
-    height: 100px;
+    height: 80px;
     position: absolute;
     background: $pill;
     border-radius: 50px;
@@ -124,7 +125,7 @@ $size: 425px;
   }
 
   .pill {
-    border: 7px solid $background;
+    border: 6px solid $background;
     height: 100%;
     border-radius: 50px;
     position: absolute;
@@ -148,15 +149,14 @@ $size: 425px;
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-left: 100px;
+    padding-left: 80px;
     align-items: center;
-    font-size: 1.4rem;
-    font-family: sans-serif;
+    font-size: 1rem;
   }
 
   .pillwrapper.reverse .text {
     padding-left: 0;
-    padding-right: 100px;
+    padding-right: 80px;
   }
 
   .pillwrapper.one .pill:nth-child(3) {
@@ -169,6 +169,46 @@ $size: 425px;
 
   .pillwrapper.three .pill:nth-child(1) {
     background: $blue;
+  }
+
+  .ewer {
+    width: 150px;
+    color: white;
+    font-size: 0.9rem;
+    background-color: black;
+    border-radius: 5px;
+    padding: 5px;
+    &__innerbox {
+      background-color: white;
+      border-radius: 5px;
+    }
+    &__list {
+      list-style-type: none;
+      border-radius: 5px;
+      background-color: #0972db;
+
+      li {
+        background-color: #0972db;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 7px;
+        border-bottom: 4px solid black;
+      }
+
+      li:last-child {
+        border-bottom: 0;
+        border-radius: 5px;
+      }
+      &::before {
+        content: '';
+        display: flex;
+        background-color: white;
+        height: 50px;
+        border-radius: 5px 5px 0% 0%;
+      }
+    }
   }
 }
 </style>
