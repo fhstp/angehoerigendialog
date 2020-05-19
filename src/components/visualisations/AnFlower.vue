@@ -68,21 +68,24 @@ $pill: #e6e6e6;
 $red: #dd848d;
 $blue: #a3cfdf;
 $size: 290px;
+$centerSize: 80px;
+$centerSizeHalf: $centerSize / 2;
 //425px
 .an-flower {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .flower {
-    height: calc(#{$size} * 2);
-    width: calc(#{$size} * 2);
+    height: ($size * 2) - $centerSize;
+    width: ($size * 2) - $centerSize;
     position: relative;
   }
 
   .flower::after {
     content: '';
-    height: 80px;
-    width: 80px;
+    height: $centerSize;
+    width: $centerSize;
     background: white;
     border-radius: 50%;
     position: absolute;
@@ -93,18 +96,18 @@ $size: 290px;
 
   .pillwrapper {
     width: $size;
-    height: 80px;
+    height: $centerSize;
     position: absolute;
     background: $pill;
-    border-radius: 50px;
-    top: calc(#{$size} - 50px);
-    left: calc(#{$size} - 50px);
-    transform-origin: 50px 50px;
+    border-radius: $centerSizeHalf;
+    top: $size - $centerSize;
+    left: $size - $centerSize;
+    transform-origin: $centerSizeHalf $centerSizeHalf;
   }
 
   .pillwrapper.reverse {
-    transform-origin: calc(100% - 50px) 50px;
-    left: 50px;
+    transform-origin: calc(100% - #{$centerSizeHalf}) $centerSizeHalf;
+    left: 0;
   }
 
   .pillwrapper:nth-child(1) {
@@ -127,7 +130,7 @@ $size: 290px;
   .pill {
     border: 6px solid $background;
     height: 100%;
-    border-radius: 50px;
+    border-radius: $centerSizeHalf;
     position: absolute;
   }
 
@@ -149,14 +152,14 @@ $size: 290px;
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-left: 80px;
+    padding-left: $centerSize;
     align-items: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .pillwrapper.reverse .text {
     padding-left: 0;
-    padding-right: 80px;
+    padding-right: $centerSize;
   }
 
   .pillwrapper.one .pill:nth-child(3) {
@@ -207,6 +210,9 @@ $size: 290px;
         background-color: white;
         height: 50px;
         border-radius: 5px 5px 0% 0%;
+        background-image: url('~@/assets/icons/welle.svg');
+        background-position: bottom;
+        background-repeat: repeat-x;
       }
     }
   }
