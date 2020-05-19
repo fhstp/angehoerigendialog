@@ -11,13 +11,17 @@
         <div class="text" v-html="answer.text"></div>
       </div>
     </div>
-    <div class="ewer">
-      <div class="ewer__innerbox">
-        <ul class="ewer__list">
-          <li v-for="(ewerItem, index) in ewerItems" :key="index">
-            <div>{{ ewerItem.ewer }}</div>
-          </li>
-        </ul>
+    <div v-if="ewerItems.length" class="ewer">
+      <div class="ewer__circle"></div>
+      <IconEwer class="ewer__trunk" />
+      <div class="ewer__wrapper">
+        <div class="ewer__innerbox">
+          <ul class="ewer__list">
+            <li v-for="(ewerItem, index) in ewerItems" :key="index">
+              <div v-html="ewerItem.ewer"></div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -26,8 +30,10 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
+import IconEwer from '@/assets/icons/ewer.svg?inline';
 export default {
   name: 'AnFlower',
+  components: { IconEwer },
   mixins: [visualisation],
   computed: {
     answers() {
@@ -40,7 +46,6 @@ export default {
           questionsAreAnswered = true;
         }
       });
-      console.log(data);
       this.$emit('update:available', questionsAreAnswered);
       return data;
     },
@@ -175,12 +180,7 @@ $centerSizeHalf: $centerSize / 2;
   }
 
   .ewer {
-    width: 150px;
-    color: white;
-    font-size: 0.9rem;
-    background-color: black;
-    border-radius: 5px;
-    padding: 5px;
+    position: relative;
     &__innerbox {
       background-color: white;
       border-radius: 5px;
@@ -188,16 +188,16 @@ $centerSizeHalf: $centerSize / 2;
     &__list {
       list-style-type: none;
       border-radius: 5px;
-      background-color: #0972db;
+      background-color: #4aa1c0;
 
       li {
-        background-color: #0972db;
+        background-color: #4aa1c0;
         height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 7px;
-        border-bottom: 4px solid black;
+        border-bottom: 4px solid #636261;
       }
 
       li:last-child {
@@ -211,9 +211,37 @@ $centerSizeHalf: $centerSize / 2;
         height: 50px;
         border-radius: 5px 5px 0% 0%;
         background-image: url('~@/assets/icons/welle.svg');
-        background-position: bottom;
+        background-position-y: 43px;
         background-repeat: repeat-x;
       }
+    }
+
+    &__circle {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background: transparent;
+      right: -50px;
+      top: -50px;
+      border-radius: 50px;
+      border: 5px solid #636261;
+      z-index: -1;
+    }
+
+    &__trunk {
+      position: absolute;
+      left: -132px;
+      width: 80%;
+      z-index: -1;
+      top: 0;
+    }
+    &__wrapper {
+      width: 178px;
+      color: white;
+      font-size: 0.9rem;
+      background-color: #636261;
+      border-radius: 5px;
+      padding: 5px;
     }
   }
 }
