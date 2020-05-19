@@ -8,7 +8,7 @@
         :class="getClass(answer.type, index)"
       >
         <div v-for="pillIndex in 3" :key="pillIndex" class="pill"></div>
-        <div class="text">{{ answer.text }}</div>
+        <div class="text" v-html="answer.text"></div>
       </div>
     </div>
     <div class="ewer">

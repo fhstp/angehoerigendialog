@@ -16,7 +16,7 @@ visualisation:
       text: Rückzugsmöglichkeiten
       ewer: Rückzugsmöglichkeiten schaffen
     - fieldID: ressourcen_belastungen-hobbysinteressen
-      text: Hobbys und Interessen
+      text: Hobbys & Interessen
       ewer: Zeit für meine Hobbys/Interessen schaffen
     - fieldID: ressourcen_belastungen-freizeitaktivitaeten
       text: Menschen treffen
@@ -25,8 +25,8 @@ visualisation:
       text: Erholungszeit
       ewer: Erholungszeit einplanen
     - fieldID: ressourcen_belastungen-beziehungen
-      text: Familie und Freunde
-      ewer: Zeit für Familie und Freunde einplanen
+      text: Familie & Freunde
+      ewer: Zeit für Familie & Freunde einplanen
     - fieldID: ressourcen_belastungen-anforderungen
-      text: Ausgleich Pflege und Freizeit
+      text: Ausgleich Pflege & Freizeit
       ewer: Pflege mit Freizeitaktivitäten vereinbaren
