@@ -1,27 +1,52 @@
 <template>
   <div class="an-behaviour">
-    <div>
-      <ul>
-        <li
-          v-for="(behaviour, i) in behaviourChanges"
-          :key="i"
-          class="an-behaviour__list"
-        >
-          <div class="an-behaviour__text">
-            <IconWarning
-              v-if="behaviour.value === 3"
-              class="icon-warning"
-              aria-hidden="true"
-            />
-            <span>{{ behaviour.text }}</span>
-          </div>
-          <div class="an-behaviour__lollipop">
-            <div class="an-behaviour__progressbar"></div>
-            <div class="an-behaviour__progressicon">{{ behaviour.icon }}</div>
-          </div>
-        </li>
-      </ul>
+    <div
+      class="an-behaviour__label"
+      :style="{ '--labelwidth': 100 / labels.length + '%' }"
+    >
+      <div
+        v-for="(label, i) in labels"
+        :key="i"
+        class="an-behaviour__label-element"
+        :style="{
+          '--value': -100 + (100 / maxValue) * i + '%'
+        }"
+      >
+        <span>{{ label }}</span>
+      </div>
     </div>
+    <ul class="an-behaviour__list">
+      <li
+        v-for="(behaviour, i) in behaviourChanges"
+        :key="i"
+        class="an-behaviour__list-element"
+      >
+        <div class="an-behaviour__text">
+          <IconWarning
+            v-if="behaviour.value === maxValue"
+            class="icon-warning"
+            aria-hidden="true"
+          />
+          <span>{{ behaviour.text }}</span>
+        </div>
+        <div class="an-behaviour__lollipop">
+          <div
+            class="an-behaviour__progressbar-wrapper"
+            :style="{
+              '--value': (100 / maxValue) * behaviour.value + '%',
+              '--width': (100 * maxValue) / (maxValue + 1) + '%'
+            }"
+          >
+            <div
+              class="an-behaviour__progressbar"
+              :class="{
+                'an-behaviour__progressbar--max': behaviour.value === maxValue
+              }"
+            ></div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -49,13 +74,6 @@ export default {
         schlecht: 3
       };
 
-      const typeIcon = {
-        sehr_gut: '😄',
-        gut: '🙂',
-        mittelmäßig: '😐',
-        schlecht: '😫'
-      };
-
       if (behaviour?.length > 0) {
         behaviour.forEach(item => {
           const type = this.$store.getters.getFieldValue(
@@ -63,7 +81,6 @@ export default {
           );
           behaviourValues.push({
             value: typeValue[type],
-            icon: typeIcon[type],
             text: behaviourLabel[item]
           });
         });
@@ -73,42 +90,127 @@ export default {
       console.log(behaviourValues);
 
       return behaviourValues;
+    },
+    maxValue() {
+      return this.labels.length - 1;
+    },
+    labels() {
+      return ['sehr gut', 'gut', 'mittelmäßig', 'schlecht'];
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$lightgrey: #cccccc;
+$darkgrey: #666666;
+$red: #660000;
+$lollipopPercentage: 60%;
+
 .an-behaviour {
-  li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  &__list {
+    width: 100%;
+  }
+
+  &__list-element {
     display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
   }
 
   &__text {
-    width: 50%;
+    width: 100% - $lollipopPercentage;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 2rem;
+    text-align: right;
   }
 
   .icon-warning {
-    height: 1.5em;
-    width: 1.5em;
-    fill: red;
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: $red;
+    margin-right: 1rem;
+    flex-shrink: 0;
   }
 
   &__lollipop {
-    width: 50%;
+    width: $lollipopPercentage;
     position: relative;
+    padding-right: 1rem;
+  }
+
+  &__progressbar-wrapper {
+    height: 1rem;
+    background: $lightgrey;
+    border-radius: 0.3rem / 50%;
+    padding: 0 0.2rem;
+    padding-top: 0.3rem;
+    position: relative;
+    width: 100%;
   }
 
   &__progressbar {
-    height: 2rem;
-    border: 0.2rem solid #3566aa;
+    height: 0.4rem;
+    color: $darkgrey;
+    background: currentColor;
+    width: var(--value);
+
+    &--max {
+      color: $red;
+    }
+
+    &::after {
+      content: '';
+      border: 0.5rem solid currentColor;
+      border-radius: 50%;
+      height: 1.8rem;
+      width: 1.8rem;
+      background: $lightgrey;
+      display: block;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: var(--value);
+      top: 50%;
+    }
   }
 
-  &__progressicon {
-    position: absolute;
+  &__label {
+    width: $lollipopPercentage;
+    height: 5rem;
+    display: flex;
+    padding-right: 1rem;
+
+    &-element {
+      position: relative;
+      width: var(--labelwidth);
+      transform: translateX(var(--value));
+
+      &::after {
+        content: '';
+        height: 1rem;
+        width: 0.15rem;
+        background: $lightgrey;
+        display: block;
+        position: absolute;
+        bottom: 0.6rem;
+        right: 0;
+        transform: translateX(50%);
+      }
+
+      span {
+        bottom: 1.9rem;
+        transform-origin: bottom right;
+        transform: rotate(20deg);
+        position: absolute;
+        right: 0;
+      }
+    }
   }
 }
 </style>
