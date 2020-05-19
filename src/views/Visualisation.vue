@@ -41,6 +41,13 @@
         v-show="isAvailable.behaviourChanges"
         :available.sync="isAvailable.behaviourChanges"
       />
+      <h2 v-show="isAvailable.healthChanges" class="page-break-before">
+        Gesundheit
+      </h2>
+      <AnHealth
+        v-show="isAvailable.healthChanges"
+        :available.sync="isAvailable.healthChanges"
+      />
 
       <button
         class="an-visualisation__restart btn"
@@ -58,6 +65,7 @@ import AnBehaviour from '@/components/visualisations/AnBehaviour.vue';
 import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
+import AnHealth from '@/components/visualisations/AnHealth.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
@@ -71,6 +79,7 @@ export default {
     AnCareTasks,
     AnExportPdf,
     AnFlower,
+    AnHealth,
     AnResources,
     AnSendMail,
     AnSituation
