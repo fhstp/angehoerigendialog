@@ -10,11 +10,10 @@ export default {
   computed: {
     field_data: {
       get() {
-        const value = this.$store.getters.getFieldValue(this.field_id);
-        this.validate(value);
-        return value;
+        return this.$store.getters.getFieldValue(this.field_id);
       },
       set(value) {
+        this.validate(value);
         this.$store.commit('updateAnswerValue', {
           fieldId: this.field_id,
           value

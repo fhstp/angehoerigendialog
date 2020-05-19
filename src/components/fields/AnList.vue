@@ -1,13 +1,5 @@
 <template>
   <fieldset class="an-list">
-    <button
-      v-show="!(fieldMax && listData.length === fieldMax)"
-      :disabled="listData.length && !listData[listData.length - 1]"
-      class="an-list__add"
-      @click="addHandler"
-    >
-      {{ fieldActiontext }}
-    </button>
     <ol v-if="listData.length">
       <li v-for="i in listData.length" :key="i">
         <input
@@ -15,6 +7,7 @@
           v-model="listData[i - 1]"
           type="text"
           @keydown.enter="enterHandler(i - 1)"
+          @input="inputHandler($event, i - 1)"
         />
       </li>
     </ol>
@@ -28,42 +21,38 @@ export default {
   name: 'AnList',
   mixins: [field],
   props: {
-    fieldActiontext: { type: String, default: 'Eintrag hinzufügen' },
     fieldMin: { type: Number, default: undefined },
     fieldMax: { type: Number, default: undefined }
   },
-  data() {
-    return {
-      listData: Array(this.fieldMin ?? 1).fill('')
-    };
-  },
+  data: () => ({
+    listData: ['']
+  }),
   watch: {
     listData(newList) {
-      // remove empty list items at the end
+      // add next empty entry
+      if (
+        newList.length > 0 &&
+        newList[newList.length - 1].length !== 0 &&
+        (!this.fieldMax || newList.length < this.fieldMax)
+      ) {
+        newList.push('');
+      }
+      // remove empty entries at the end
       if (
         newList.length > 1 &&
         newList[newList.length - 1].length === 0 &&
-        newList[newList.length - 2].length === 0 &&
-        (!this.fieldMin || newList.length > this.fieldMin)
+        newList[newList.length - 2].length === 0
       ) {
-        this.listData.splice(newList.length - 1, 1);
+        newList.splice(newList.length - 1, 1);
       }
-
       this.field_data =
-        newList[newList.length - 1] === ''
+        newList[newList.length - 1].length === 0
           ? newList.slice(0, -1)
           : [...newList];
     }
   },
   created() {
-    if (this.field_data?.length) {
-      this.listData = [...this.field_data];
-      if (this.fieldMin && this.fieldMin > this.field_data.length) {
-        this.listData.push(
-          Array(this.fieldMin - this.field_data.length).fill('')
-        );
-      }
-    }
+    if (this.field_data?.length) this.listData = [...this.field_data];
   },
   methods: {
     enterHandler(index) {
@@ -83,14 +72,21 @@ export default {
         });
       }
     },
-    addHandler() {
-      this.enterHandler(this.listData.length - 1);
+    inputHandler(event, index) {
+      if (this.listData[index].match(/^\s+/)) {
+        this.listData[index] = this.listData[index].replace(/^\s/, '');
+        this.$nextTick(() => {
+          event.target.setSelectionRange(0, 0); // prevent that cursor jumps to the end
+        });
+      }
     },
     validate(value) {
       let valid = true;
       if (
-        (this.fieldMax !== undefined && value?.length >= this.fieldMax) ||
-        (this.fieldMin !== undefined && value?.length <= this.fieldMin)
+        value === undefined ||
+        value.length === 0 ||
+        (this.fieldMax !== undefined && value?.length > this.fieldMax) ||
+        (this.fieldMin !== undefined && value?.length < this.fieldMin)
       )
         valid = false;
       this.$emit('update:field_valid', valid);
