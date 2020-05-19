@@ -34,6 +34,9 @@ export default {
   border-radius: 3px;
   background-color: $color-theme-lightred;
 
+  &--open {
+    background-color: $color-theme-darkred;
+  }
   &__header {
     padding: $spacer * 2;
     font-size: 1.2rem;
@@ -43,14 +46,12 @@ export default {
 
     .an-accordion-item--open & {
       cursor: auto;
-      background-color: $color-theme-darkred;
       color: white;
     }
   }
 
   &__content {
     padding: $spacer * 2;
-    background-color: $color-theme-darkred;
     color: white;
   }
 }

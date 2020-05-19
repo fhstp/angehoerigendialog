@@ -76,6 +76,21 @@ export default {
 <style lang="scss" scoped>
 $icon_width: 50px;
 
+.router-link-exact-active {
+  background-color: white;
+  box-shadow: 0 0 20px 0 #555555;
+  border: none !important;
+  & p {
+    color: $color-theme-darkred;
+    font-weight: bold;
+  }
+}
+
+.router-link-active {
+  height: 100%;
+  border-bottom: 1px solid $color-theme-darkgrey;
+}
+
 .an-stepper {
   overflow: hidden;
 
@@ -89,6 +104,15 @@ $icon_width: 50px;
     overflow: auto;
     scrollbar-width: thin;
     background-color: #f2f5f9;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
+
+    a {
+      text-decoration: none;
+    }
 
     @media #{map-get($query, 'lg-and-up')} {
       flex-direction: column;

@@ -243,6 +243,7 @@ export default {
       height: 100%;
       overflow: auto;
     }
+    box-shadow: 0 0 20px 0 #555555;
   }
 
   &__section-heading {
@@ -250,14 +251,13 @@ export default {
   }
 
   &__header-wrapper {
-    position: sticky;
     top: 0;
     background-color: white;
     padding-top: $spacer;
     padding-bottom: $spacer;
-    box-shadow: 3px 3px 8px #ccc;
     margin-bottom: $spacer * 2;
     z-index: 1;
+    color: $color-theme-darkred;
   }
 
   &__header {
