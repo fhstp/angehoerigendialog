@@ -27,12 +27,19 @@
         v-show="isAvailable.flower"
         :available.sync="isAvailable.flower"
       />
+
       <h2 v-show="isAvailable.careTasks" class="page-break-before">
         Praktische Betreuungsaufgaben
       </h2>
       <AnCareTasks
         v-show="isAvailable.careTasks"
         :available.sync="isAvailable.careTasks"
+      />
+
+      <h2>Ressourcen und Belastungen</h2>
+      <AnResourcesPressure
+        v-show="isAvailable.resources"
+        :available.sync="isAvailable.resources"
       />
       <button
         class="an-visualisation__restart btn"
@@ -50,6 +57,7 @@ import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
+import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
@@ -62,6 +70,7 @@ export default {
     AnExportPdf,
     AnFlower,
     AnResources,
+    AnResourcesPressure,
     AnSendMail,
     AnSituation
   },
