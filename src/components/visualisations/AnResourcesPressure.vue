@@ -24,7 +24,10 @@
         </g>
       </AnBalloon>
     </div>
-    <div v-if="pressure" class="an-resources-pressure__weight-wrapper">
+    <div
+      v-if="pressure && pressure.length > 0"
+      class="an-resources-pressure__weight-wrapper"
+    >
       <div
         v-for="(pressureItem, i) in pressure"
         :key="i"
