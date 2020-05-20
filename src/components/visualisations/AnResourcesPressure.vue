@@ -24,7 +24,10 @@
         </g>
       </AnBalloon>
     </div>
-    <div v-if="pressure" class="an-resources-pressure__weight-wrapper">
+    <div
+      v-if="pressure && pressure.length > 0"
+      class="an-resources-pressure__weight-wrapper"
+    >
       <div
         v-for="(pressureItem, i) in pressure"
         :key="i"
@@ -52,18 +55,21 @@ export default {
       const resources = this.$store.getters.getFieldValue(
         'ressourcen_belastungen-kraftausdauer'
       );
-      this.$emit('update:available', resources?.length > 0);
       return resources;
     },
     pressure() {
       const pressure = this.$store.getters.getFieldValue(
         'ressourcen_belastungen-belastend'
       );
-      this.$emit('update:available', pressure?.length > 0);
       return pressure;
     }
   },
   mounted() {
+    this.$emit(
+      'update:available',
+      this.resources?.length > 0 || this.pressure?.length > 0
+    );
+
     this.$nextTick(() => {
       const packData = data =>
         pack().size([251, 251]).padding(10)(
