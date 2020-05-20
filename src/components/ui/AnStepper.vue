@@ -5,22 +5,30 @@
         v-for="(step, i) in steps"
         :key="step.id"
         :ref="`stepperItem-${step.id}`"
-        :class="['an-stepper__step', { 'an-stepper__step--done': step.done }]"
+        :class="[
+          'an-stepper__step',
+          {
+            'an-stepper__step--done': step.done,
+            'an-stepper__step--active': $route.query.step === step.id
+          }
+        ]"
       >
         <router-link
           :to="{ query: { ...$route.query, step: step.id } }"
           @click.native="$emit('input')"
         >
-          <component
-            :is="step.icon"
-            :class="[
-              'an-stepper__icon',
-              { 'an-stepper__icon--active': $route.query.step === step.id }
-            ]"
-          />
-          <p class="an-stepper__text">
-            <span aria-hidden="true">{{ i + 1 }}.</span>&nbsp;{{ step.title }}
-          </p>
+          <div class="an-stepper__svgwrapper">
+            <component
+              :is="step.icon"
+              :class="[
+                'an-stepper__icon',
+                { 'an-stepper__icon--active': $route.query.step === step.id }
+              ]"
+            />
+            <p class="an-stepper__text">
+              <span aria-hidden="true">{{ i + 1 }}.</span>&nbsp;{{ step.title }}
+            </p>
+          </div>
           <IconCheckmark v-if="step.done" class="an-stepper__status" />
         </router-link>
       </li>
@@ -88,7 +96,7 @@ $icon_width: 50px;
 
 .router-link-active {
   height: 100%;
-  border-bottom: 1px solid $color-theme-darkgrey;
+  border-top: 1px solid $color-theme-darkgrey;
 }
 
 .an-stepper {
@@ -98,12 +106,18 @@ $icon_width: 50px;
     height: 100%;
   }
 
+  &__svgwrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   &__list {
     display: flex;
     width: 100%;
     overflow: auto;
     scrollbar-width: thin;
-    background-color: #f2f5f9;
+    background-color: white;
     overflow: -moz-scrollbars-none;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -119,6 +133,10 @@ $icon_width: 50px;
       flex-direction: column;
       height: 100%;
     }
+  }
+
+  &__step--active + &__step > a {
+    border: none;
   }
 
   &__step {
@@ -146,6 +164,7 @@ $icon_width: 50px;
       flex-direction: column;
       color: black;
       padding: $spacer * 4;
+      justify-content: center;
 
       @media #{map-get($query, 'sm-and-up')} {
         padding: $spacer * 2;
@@ -172,6 +191,7 @@ $icon_width: 50px;
   &__text {
     word-break: normal;
     overflow-wrap: anywhere;
+    text-align: center;
   }
 
   &__status {

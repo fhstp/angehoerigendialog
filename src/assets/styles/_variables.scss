@@ -25,6 +25,6 @@ $range-thumb-border-size: 2px;
 $range-track-height: 6px;
 
 $color-theme-darkred: #7A0E0E;
-$color-theme-lightred: lighten($color-theme-darkred, 66%);
+$color-theme-lightred: lighten(desaturate($color-theme-darkred, 50%), 60%);
 $color-theme-lightgrey: lighten(desaturate($color-theme-darkred, 100%), 60%);
-$color-theme-darkgrey: desaturate($color-theme-darkred, 100%);
+$color-theme-darkgrey: lighten(desaturate($color-theme-darkred, 100%), 10%);

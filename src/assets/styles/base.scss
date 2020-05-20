@@ -102,7 +102,7 @@ input[type=range] {
   font-family: 'Open Sans', sans-serif;
 
   &:hover {
-    background-color: #eee;
+    background-color: $color-theme-lightgrey;
   }
 
   &:focus {
