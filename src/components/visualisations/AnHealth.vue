@@ -22,9 +22,9 @@ export default {
       const healthValues = [];
 
       const typeValue = {
-        stimmt: 0,
+        stimmt: 2,
         stimmt_teilweise: 1,
-        stimmt_nicht: 2
+        stimmt_nicht: 0
       };
 
       Object.keys(healthLabel).forEach(item => {

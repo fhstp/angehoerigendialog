@@ -3,6 +3,7 @@
     <div
       class="an-lollipop__label"
       :style="{ '--labelwidth': 100 / labels.length + '%' }"
+      aria-hidden="true"
     >
       <div
         v-for="(label, i) in labels"
@@ -29,7 +30,12 @@
           />
           <span>{{ item.text }}</span>
         </div>
-        <div class="an-lollipop__lollipop">
+        <div
+          class="an-lollipop__lollipop"
+          :aria-label="
+            labels.length > item.value ? labels[item.value] : undefined
+          "
+        >
           <div
             class="an-lollipop__progressbar-wrapper"
             :style="{
