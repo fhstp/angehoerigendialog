@@ -105,6 +105,7 @@ $icon_width: 50px;
     scrollbar-width: thin;
     background-color: #f2f5f9;
     overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
       width: 0 !important;
