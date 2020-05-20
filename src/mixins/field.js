@@ -20,5 +20,8 @@ export default {
         });
       }
     }
+  },
+  created() {
+    if (this.validate) this.validate(this.field_data);
   }
 };
