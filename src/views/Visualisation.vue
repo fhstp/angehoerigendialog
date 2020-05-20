@@ -36,10 +36,12 @@
         :available.sync="isAvailable.careTasks"
       />
 
-      <h2>Ressourcen und Belastungen</h2>
+      <h2 v-show="isAvailable.resourcespressure">
+        Ressourcen und Belastungen
+      </h2>
       <AnResourcesPressure
-        v-show="isAvailable.resources"
-        :available.sync="isAvailable.resources"
+        v-show="isAvailable.resourcespressure"
+        :available.sync="isAvailable.resourcespressure"
       />
       <button
         class="an-visualisation__restart btn"
