@@ -11,3 +11,26 @@ visualisation:
     verletzungen: Stürze / Verletzungen vermeiden
     anwesend: Persönlich verfügbar / anwesend sein
     behoerdenwege: Behördenwege / Unterstützungleistung organisieren
+
+  behaviour:
+    wiederholung: Wiederholt sich oft
+    sachverhalte: Begreift schwierige Sachverhalte nicht mehr
+    erzaehltes: Vergisst Erzähltes schnell
+    merkwuerdigedinge: Tut Dinge, die mir merkwürdig oder unlogisch erscheinen
+    unruhig: Ist unruhig
+    aggresiv: Wird verbal aggresiv
+    handgfreilich: Wird handgreiflich
+    wahnhafteideen: Sieht/hört Dinge, die nicht da sind
+    schwankendeverfassung: Schwankende Verfassung
+    verhaltenweise: Gefährdet sich selbst
+
+  health:
+    erschoepfung: Ich fühle mich oft körperlich erschöpft.
+    pflegegesundheit: Durch die Pflege wird meine Gesundheit angegriffen.
+    eigenekraft: Die Pflege kostet viel von meiner eigenen Kraft.
+    eigenegesundheit: Ich kann mich zu wenig um meine eigene Gesundheit kümmern.
+    schlafstoerung: Ich leide unter Schlafstörungen.
+    eindruck: Habe den Eindruck alles alleine schaffen zu müssen.
+    zuviel: Es fällt mir schwer zuzugeben, dass es mir manchmal zuviel wird.
+    hemmungen: Habe Hemmungen um Hilfe zu bitten.
+    betreuungsaufgaben: Es fällt mir schwer Betreuungsaufgaben abzugeben.
