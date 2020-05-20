@@ -11,6 +11,11 @@ export default {
   name: 'AnBehaviour',
   components: { AnLollipop },
   mixins: [visualisation],
+  data() {
+    return {
+      labels: Array
+    };
+  },
   computed: {
     behaviourChanges() {
       const behaviour = this.$store.getters.getFieldValue(
@@ -42,10 +47,10 @@ export default {
 
       this.$emit('update:available', behaviourValues?.length > 0);
       return behaviourValues;
-    },
-    labels() {
-      return ['sehr gut', 'gut', 'mittelmäßig', 'schlecht'];
     }
+  },
+  created() {
+    this.labels = ['sehr gut', 'gut', 'mittelmäßig', 'schlecht'];
   }
 };
 </script>

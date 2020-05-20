@@ -11,6 +11,11 @@ export default {
   name: 'AnHealth',
   components: { AnLollipop },
   mixins: [visualisation],
+  data() {
+    return {
+      labels: Array
+    };
+  },
   computed: {
     healthChanges() {
       const healthLabel = visJson.visualisation.health;
@@ -34,10 +39,10 @@ export default {
 
       this.$emit('update:available', healthValues?.length > 0);
       return healthValues;
-    },
-    labels() {
-      return ['stimmt', 'stimmt teilweise', 'stimmt nicht'];
     }
+  },
+  created() {
+    this.labels = ['stimmt nicht', 'stimmt teilweise', 'stimmt'];
   }
 };
 </script>
