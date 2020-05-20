@@ -13,7 +13,7 @@ visualisation:
     behoerdenwege: Behördenwege / Unterstützungleistung organisieren
   flower:
     - fieldID: ressourcen_belastungen-rueckzugsmoeglichkeit
-      text: Rückzugsmöglichkeiten
+      text: Rückzugs- möglichkeiten
       ewer: Rückzugsmöglichkeiten schaffen
     - fieldID: ressourcen_belastungen-hobbysinteressen
       text: Hobbys & Interessen

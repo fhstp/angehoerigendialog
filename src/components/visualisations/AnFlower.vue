@@ -159,7 +159,8 @@ $centerSizeHalf: $centerSize / 2;
     justify-content: center;
     padding-left: $centerSize;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 19px;
+    text-align: center;
   }
 
   .pillwrapper.reverse .text {
@@ -181,6 +182,7 @@ $centerSizeHalf: $centerSize / 2;
 
   .ewer {
     position: relative;
+    font-size: 17px;
     &__innerbox {
       background-color: white;
       border-radius: 5px;
@@ -238,7 +240,6 @@ $centerSizeHalf: $centerSize / 2;
     &__wrapper {
       width: 178px;
       color: white;
-      font-size: 0.9rem;
       background-color: #636261;
       border-radius: 5px;
       padding: 5px;
