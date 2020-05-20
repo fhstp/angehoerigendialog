@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "d3-hierarchy": "^1.1.9",
+    "d3-selection": "^1.4.1",
     "register-service-worker": "^1.7.1",
     "sanitize-html": "^1.23.0",
     "vh-check": "^2.0.5",
