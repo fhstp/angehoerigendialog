@@ -94,11 +94,19 @@ export default {
   watch: {
     noneSelected(newValue) {
       this.validate(this.field_data);
+      if (newValue) {
+        this.field_data_cache = [...this.field_data];
+        this.field_data = [];
+      } else {
+        this.field_data = [...this.field_data_cache];
+        this.field_data_cache = [];
+      }
     },
     validActiveFields: 'validate'
   },
   created() {
     if (!this.field_data) this.field_data = [];
+    this.field_data_cache = [];
   },
   methods: {
     validate(value) {
