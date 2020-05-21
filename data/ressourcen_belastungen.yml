@@ -9,7 +9,8 @@ fields:
   belastend:
     label: Welche drei Aspekte sind Ihrer Einschätzung nach besonders belastend für Sie?
     type: list
-    actiontext: Aspekt hinzufügen
+    min: 3
+    max: 3
 
   einschraenkungenhinweis:
     label: Andere pflegende Angehörige von demenzerkrankten Menschen berichten

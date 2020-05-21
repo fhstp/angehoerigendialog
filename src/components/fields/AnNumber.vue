@@ -13,6 +13,14 @@ import field from '@/mixins/field.js';
 
 export default {
   name: 'AnNumber',
-  mixins: [field]
+  mixins: [field],
+  methods: {
+    validate(value) {
+      this.$emit(
+        'update:field_valid',
+        value !== '' && !Number.isNaN(Number(value))
+      );
+    }
+  }
 };
 </script>

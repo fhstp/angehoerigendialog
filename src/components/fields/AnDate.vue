@@ -17,6 +17,11 @@ export default {
   created() {
     if (!this.field_data)
       this.field_data = new Date().toISOString().slice(0, 10);
+  },
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', !!value);
+    }
   }
 };
 </script>

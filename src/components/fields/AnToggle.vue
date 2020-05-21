@@ -31,6 +31,11 @@ export default {
       type: Array,
       default: () => ['Nein', 'Ja']
     }
+  },
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', value !== undefined);
+    }
   }
 };
 </script>
