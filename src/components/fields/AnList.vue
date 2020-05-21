@@ -87,8 +87,9 @@ export default {
         value.length === 0 ||
         (this.fieldMax !== undefined && value?.length > this.fieldMax) ||
         (this.fieldMin !== undefined && value?.length < this.fieldMin)
-      )
+      ) {
         valid = false;
+      }
       this.$emit('update:field_valid', valid);
     }
   }

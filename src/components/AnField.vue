@@ -179,7 +179,7 @@ export default {
         }
       }
       this.$store.commit('updateAnswerCompletion', {
-        fieldIds: [this.fieldId],
+        fieldIds: [this.fieldId, ...subfieldIds, ...activeFieldIds],
         value: isValid
       });
     }
