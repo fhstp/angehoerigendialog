@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148.3 180.1">
-  <path fill="none" stroke="#646363" stroke-width="7.51" stroke-miterlimit="10" d="M145.8 106.7L74.2 44.2 48.3 68.8l96.3 108.9"/>
-  <path fill="none" stroke="#646363" stroke-width="7.51" stroke-miterlimit="10" d="M75.3 44.3L53.4 6 6.7 50.3l42.6 18.6z"/>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  preserveAspectRatio="none"
+  width="100"
+  height="100"
+>
+  <path d="M16.63,1,99,70.46V97.59L2.41,1H16.63M17,0H0L100,100V70L17,0Z" />
 </svg>

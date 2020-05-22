@@ -13,7 +13,24 @@
     </div>
     <div v-if="ewerItems.length" class="ewer">
       <div class="ewer__circle"></div>
-      <IconEwer class="ewer__trunk" />
+      <!-- TODO: include via component, doesn't work because viewBox gets lost -->
+      <!-- <IconEwer
+        class="ewer__trunk"
+        :style="{ '--stroke': -0.4 * ewerItems.length + 3.4 + 'px' }"
+      /> -->
+      <svg
+        class="ewer__trunk"
+        :style="{ '--stroke': -0.4 * ewerItems.length + 3.4 + 'px' }"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        width="100"
+        height="100"
+      >
+        <path
+          d="M16.63,1,99,70.46V97.59L2.41,1H16.63M17,0H0L100,100V70L17,0Z"
+        />
+      </svg>
       <div class="ewer__wrapper">
         <div class="ewer__innerbox">
           <ul class="ewer__list">
@@ -30,10 +47,10 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
-import IconEwer from '@/assets/icons/ewer.svg?inline';
+// import IconEwer from '@/assets/icons/ewer.svg?inline';
 export default {
   name: 'AnFlower',
-  components: { IconEwer },
+  // components: { IconEwer },
   mixins: [visualisation],
   computed: {
     answers() {
@@ -77,6 +94,7 @@ $centerSize: 80px;
 $centerSizeHalf: $centerSize / 2;
 //425px
 .an-flower {
+  -webkit-print-color-adjust: exact;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,8 +112,8 @@ $centerSizeHalf: $centerSize / 2;
     background: white;
     border-radius: 50%;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: $size - $centerSizeHalf;
+    left: $size - $centerSizeHalf;
     transform: translate(-50%, -50%);
   }
 
@@ -183,6 +201,12 @@ $centerSizeHalf: $centerSize / 2;
   .ewer {
     position: relative;
     font-size: 17px;
+    margin-right: 50px;
+
+    @media (max-width: 800px) {
+      margin-top: $size + $centerSize;
+    }
+
     &__innerbox {
       background-color: white;
       border-radius: 5px;
@@ -232,16 +256,19 @@ $centerSizeHalf: $centerSize / 2;
 
     &__trunk {
       position: absolute;
-      left: -132px;
-      width: 80%;
       z-index: -1;
       top: 0;
+      right: calc(100% - var(--stroke) - 10px);
+      stroke-width: var(--stroke);
+      stroke: #636261;
+      height: 100%;
+      width: 100px;
     }
     &__wrapper {
       width: 178px;
       color: white;
       background-color: #636261;
-      border-radius: 5px;
+      border-radius: 10px;
       padding: 5px;
     }
   }
