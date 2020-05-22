@@ -130,6 +130,8 @@ export default {
       this.fieldComponentName
     );
     this.isAccordionItem = form_isInAccordion(this.fieldData.type);
+
+    if (!this.isVisible) this.computeCompletion();
   },
   mounted() {
     if (!this.isSubfield && this.$parent.active) {
