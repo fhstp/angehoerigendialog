@@ -117,7 +117,6 @@ $icon_width: 50px;
     width: 100%;
     overflow: auto;
     scrollbar-width: thin;
-    background-color: white;
     overflow: -moz-scrollbars-none;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -165,7 +164,7 @@ $icon_width: 50px;
       color: black;
       padding: $spacer * 4;
       justify-content: center;
-
+      z-index: 2;
       @media #{map-get($query, 'sm-and-up')} {
         padding: $spacer * 2;
       }

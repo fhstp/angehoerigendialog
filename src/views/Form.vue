@@ -244,6 +244,7 @@ export default {
       overflow: auto;
     }
     box-shadow: 0 0 20px 0 #555555;
+    z-index: 1;
   }
 
   &__section-heading {
