@@ -36,6 +36,7 @@
               ref="ta_newtext"
               v-model="noteNewData"
               placeholder="Notiz einfügen …"
+              class="an-note-current__textarea"
               @input="updateTextAreaHeight($event.currentTarget)"
             ></textarea>
           </template>
@@ -266,6 +267,9 @@ export default {
     border-radius: 3px;
     padding: $spacer;
     background-color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   &__close {
@@ -321,9 +325,9 @@ export default {
 .an-note-current {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   border-radius: 3px;
   padding: $spacer * 2;
+  align-items: flex-start;
 
   &__question {
     color: #aaa;
@@ -331,6 +335,14 @@ export default {
 
   &__action {
     margin: 0;
+
+    width: 40%;
+    flex-shrink: 0;
+    margin-right: 17px;
+  }
+
+  &__textarea {
+    flex-grow: 1;
   }
 }
 
