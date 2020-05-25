@@ -46,6 +46,8 @@
                       :field-data="field"
                       :section-id="sectionId"
                       :field-id="`${sectionId}-${fieldId}`"
+                      :has-prev="hasPrevField(fieldId)"
+                      :has-next="hasNextField(fieldId)"
                       @goPrev="prevField()"
                       @goNext="nextField()"
                     />
@@ -88,7 +90,8 @@
 import form from '@/data/form.json';
 import {
   form_isInAccordion,
-  form_numberOfAccordionItems
+  form_numberOfAccordionItems,
+  form_filterAccordionItems
 } from '@/helpers/form.js';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
@@ -164,21 +167,29 @@ export default {
         }
       }
     },
+    hasPrevField(fieldId) {
+      const currentStepFields = form_filterAccordionItems(
+        form[this.steps[this.currentStepIndex].id].fields
+      );
+      const fieldIndex = currentStepFields.findIndex(
+        field => field.fieldKey === fieldId
+      );
+
+      return fieldIndex !== 0;
+    },
+    hasNextField(fieldId) {
+      const currentStepFields = form_filterAccordionItems(
+        form[this.steps[this.currentStepIndex].id].fields
+      );
+      const fieldIndex = currentStepFields.findIndex(
+        field => field.fieldKey === fieldId
+      );
+
+      return fieldIndex !== currentStepFields.length - 1;
+    },
     prevField() {
-      const isFirstStep = this.currentStepIndex === 0;
       const isFirstFieldOfStep = this.currentFieldIndex === 0;
-      if (isFirstFieldOfStep && !isFirstStep) {
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            step: this.steps[this.currentStepIndex - 1].id,
-            field:
-              form_numberOfAccordionItems(
-                form[this.steps[this.currentStepIndex - 1].id].fields
-              ) - 1
-          }
-        });
-      } else if (!(isFirstStep && isFirstFieldOfStep)) {
+      if (!isFirstFieldOfStep) {
         this.$router.push({
           query: {
             ...this.$route.query,
@@ -194,17 +205,7 @@ export default {
           form[this.steps[this.currentStepIndex].id].fields
         ) -
           1;
-      if (isLastFieldOfStep) {
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            field: -1
-          }
-        });
-        this.$refs.sectionEndBtn[0].$el
-          ? this.$refs.sectionEndBtn[0].$el.focus()
-          : this.$refs.sectionEndBtn[0].focus();
-      } else {
+      if (!isLastFieldOfStep) {
         this.$router.push({
           query: {
             ...this.$route.query,
