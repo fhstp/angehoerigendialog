@@ -57,10 +57,10 @@
               <button
                 v-if="steps.length === sectionIndex + 1"
                 ref="sectionEndBtn"
-                class="btn"
+                class="an-form__done btn"
                 @click="handleFinish()"
               >
-                auswerten
+                Auswerten
               </button>
               <router-link
                 v-else
@@ -248,11 +248,11 @@ export default {
 
   &__content {
     flex-grow: 1;
-    box-shadow: 0 0 20px 0 #555555;
+    box-shadow: 0 0 20px 0 $color-theme-shadow;
     z-index: 1;
     @media #{map-get($query, 'lg-and-up')} {
       height: 100%;
-      overflow: auto;
+      overflow-y: scroll;
     }
   }
 
@@ -279,13 +279,21 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    overflow: auto;
+    overflow-y: scroll;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
 
     @media #{map-get($query, 'lg-and-up')} {
       flex-direction: row;
+      overflow: hidden;
     }
+  }
+
+  &__done {
+    display: block;
+    margin-top: $spacer * 10;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 

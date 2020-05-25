@@ -264,7 +264,7 @@ export default {
 
   &__input-area {
     border: 2px solid $color-theme-darkgrey;
-    border-radius: 3px;
+    border-radius: $border-radius;
     padding: $spacer;
     background-color: white;
     min-height: 100vh;
@@ -325,7 +325,7 @@ export default {
 .an-note-current {
   display: flex;
   justify-content: space-between;
-  border-radius: 3px;
+  border-radius: $border-radius;
   padding: $spacer * 2;
   align-items: flex-start;
 

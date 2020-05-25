@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .an-accordion-item {
-  border-radius: 3px;
+  border-radius: $border-radius;
   background-color: $color-theme-lightred;
 
   &--open {

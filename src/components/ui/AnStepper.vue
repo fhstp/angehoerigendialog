@@ -17,7 +17,7 @@
           :to="{ query: { ...$route.query, step: step.id } }"
           @click.native="$emit('input')"
         >
-          <div class="an-stepper__svgwrapper">
+          <div class="an-stepper__icon-wrapper">
             <component
               :is="step.icon"
               :class="[
@@ -25,12 +25,12 @@
                 { 'an-stepper__icon--active': $route.query.step === step.id }
               ]"
             />
-            <p class="an-stepper__text">
-              <span aria-hidden="true">{{ i + 1 }}.</span>
-              &nbsp;{{ step.title }}
-            </p>
+            <IconCheckmark v-if="step.done" class="an-stepper__status" />
           </div>
-          <IconCheckmark v-if="step.done" class="an-stepper__status" />
+          <p class="an-stepper__text">
+            <span aria-hidden="true">{{ i + 1 }}.</span>
+            &nbsp;{{ step.title }}
+          </p>
         </router-link>
       </li>
     </ol>
@@ -95,11 +95,9 @@ $icon_width: 50px;
 
 .router-link-exact-active {
   background-color: white;
-  box-shadow: 0 0 20px 0 #555555;
-  border: none !important;
+  box-shadow: 0 0 20px 0 $color-theme-shadow;
   & p {
     color: $color-theme-darkred;
-    font-weight: bold;
   }
 }
 
@@ -112,12 +110,6 @@ $icon_width: 50px;
 
   @media #{map-get($query, 'lg-and-up')} {
     height: 100%;
-  }
-
-  &__svgwrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   &__list {
@@ -152,7 +144,7 @@ $icon_width: 50px;
     &:not(:first-child):not(&--active) {
       border-left: 1px solid $color-theme-darkgrey;
 
-      @media #{map-get($query, 'md-and-up')} {
+      @media #{map-get($query, 'lg-and-up')} {
         border-top: 1px solid $color-theme-darkgrey;
       }
     }
@@ -176,10 +168,13 @@ $icon_width: 50px;
       flex-direction: column;
       color: black;
       padding: $spacer * 4;
-      justify-content: center;
+      justify-content: flex-start;
       z-index: 2;
       @media #{map-get($query, 'sm-and-up')} {
         padding: $spacer * 2;
+      }
+      @media #{map-get($query, 'lg-and-up')} {
+        justify-content: center;
       }
     }
   }
@@ -188,9 +183,16 @@ $icon_width: 50px;
     border: none !important;
   }
 
+  &__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: $icon_width + 15px;
+  }
+
   &__icon {
     display: block;
-    align-self: center;
     border-radius: 50%;
     width: $icon_width;
     height: auto;
@@ -208,15 +210,10 @@ $icon_width: 50px;
     }
   }
 
-  &__text {
-    word-break: normal;
-    overflow-wrap: anywhere;
-    text-align: center;
-  }
-
   &__status {
     position: absolute;
     left: 50%;
+    bottom: 0;
     margin-left: $icon_width / 2;
     width: 1.2rem;
 
@@ -224,6 +221,12 @@ $icon_width: 50px;
       margin-left: ($icon_width + 15px) / 2;
       width: 1.3rem;
     }
+  }
+
+  &__text {
+    word-break: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
   }
 }
 </style>

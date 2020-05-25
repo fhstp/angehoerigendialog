@@ -50,9 +50,9 @@ input[type=range] {
 
   @mixin range-thumb {
     box-sizing: content-box;
-    border: $range-thumb-border-size solid #333;
+    border: $range-thumb-border-size solid $color-theme-darkgrey;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: white;
     width: $range-thumb-size - $range-thumb-border-size * 2;
     height: $range-thumb-size - $range-thumb-border-size * 2;
     cursor: grab;
@@ -71,8 +71,8 @@ input[type=range] {
 
   @mixin range-track {
     height: $range-track-height;
-    background-color: #666;
-    border-radius: 3px;
+    background-color: white;
+    border-radius: $border-radius;
   }
   &::-webkit-slider-runnable-track{
     @include range-track;
@@ -112,6 +112,10 @@ input[type=range] {
   &:active{
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
     transform: translateY(2px);
+  }
+
+  &--block {
+    width: 100%;
   }
 }
 
