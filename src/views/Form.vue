@@ -76,6 +76,28 @@
               >
                 Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
+              <div
+                v-if="steps.length === sectionIndex + 1"
+                class="an-form__openquestion-wrapper"
+              >
+                <h3>Noch offene Fragen:</h3>
+
+                <router-link
+                  v-for="(openQuestion, i) in openQuestions"
+                  :key="i"
+                  :to="{
+                    query: {
+                      ...$route.query,
+                      step: openQuestion.sectionId,
+                      field: openQuestion.fieldKey
+                    }
+                  }"
+                >
+                  <div class="an-form__openquestion-element">
+                    {{ openQuestions[i].label }}
+                  </div>
+                </router-link>
+              </div>
             </div>
           </section>
         </template>
@@ -88,7 +110,8 @@
 import form from '@/data/form.json';
 import {
   form_isInAccordion,
-  form_numberOfAccordionItems
+  form_numberOfAccordionItems,
+  form_filterAccordionItems
 } from '@/helpers/form.js';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
@@ -127,6 +150,32 @@ export default {
         });
       }
       return steps;
+    },
+    openQuestions() {
+      const openQuestions = [];
+
+      for (const sectionId in form) {
+        const accordionItems = form_filterAccordionItems(
+          form[sectionId].fields
+        );
+
+        accordionItems.forEach((key, index) => {
+          const fieldKey = accordionItems[index].fieldKey;
+
+          const done = this.$store.getters.getFieldCompletion(
+            `${sectionId}-${fieldKey}`
+          );
+
+          if (!done && done !== undefined) {
+            openQuestions.push({
+              sectionId,
+              fieldKey: index,
+              label: accordionItems[index].label
+            });
+          }
+        });
+      }
+      return openQuestions;
     }
   },
   watch: {
@@ -282,6 +331,21 @@ export default {
 
     @media #{map-get($query, 'lg-and-up')} {
       display: flex;
+    }
+  }
+  &__openquestion {
+    &-wrapper {
+      border: 1px solid lightgrey;
+      border-radius: 3px;
+      background-color: #eee;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+    &-element {
+      border: 1px solid black;
+      padding: 1rem;
+      margin-top: 1rem;
     }
   }
 }

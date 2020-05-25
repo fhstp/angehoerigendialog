@@ -14,7 +14,7 @@ export const form_filterAccordionItems = fields => {
   const filtered = [];
   for (const fieldKey in fields) {
     if (form_isInAccordion(fields[fieldKey].type))
-      filtered.push(fields[fieldKey]);
+      filtered.push({ ...fields[fieldKey], fieldKey });
   }
   return filtered;
 };
