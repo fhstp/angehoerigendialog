@@ -1,25 +1,29 @@
 <template>
   <div class="an-flower">
-    <div class="flower">
+    <div class="an-flower__flower">
       <div
         v-for="(answer, index) in answers"
         :key="index"
-        class="pillwrapper"
+        class="an-flower__pillwrapper"
         :class="getClass(answer.type, index)"
       >
-        <div v-for="pillIndex in 3" :key="pillIndex" class="pill"></div>
-        <div class="text" v-html="answer.text"></div>
+        <div
+          v-for="pillIndex in 3"
+          :key="pillIndex"
+          class="an-flower__pill"
+        ></div>
+        <div class="an-flower__text" v-html="answer.text"></div>
       </div>
     </div>
-    <div v-if="wateringcanItems.length" class="wateringcan">
-      <div class="wateringcan__circle"></div>
+    <div v-if="wateringcanItems.length" class="an-flower__wateringcan">
+      <div class="an-flower__wateringcan__circle"></div>
       <!-- TODO: include via component, doesn't work because viewBox gets lost -->
       <!-- <Iconwateringcan
         class="wateringcan__trunk"
         :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
       /> -->
       <svg
-        class="wateringcan__trunk"
+        class="an-flower__wateringcan__trunk"
         :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
@@ -31,9 +35,9 @@
           d="M16.63,1,99,70.46V97.59L2.41,1H16.63M17,0H0L100,100V70L17,0Z"
         />
       </svg>
-      <div class="wateringcan__wrapper">
-        <div class="wateringcan__innerbox">
-          <ul class="wateringcan__list">
+      <div class="an-flower__wateringcan__wrapper">
+        <div class="an-flower__wateringcan__innerbox">
+          <ul class="an-flower__wateringcan__list">
             <li
               v-for="(wateringcanItem, index) in wateringcanItems"
               :key="index"
@@ -95,20 +99,20 @@ $blue: #a3cfdf;
 $size: 290px;
 $centerSize: 80px;
 $centerSizeHalf: $centerSize / 2;
-//425px
+
 .an-flower {
   -webkit-print-color-adjust: exact;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  .flower {
+  &__flower {
     height: ($size * 2) - $centerSize;
     width: ($size * 2) - $centerSize;
     position: relative;
   }
 
-  .flower::after {
+  &__flower::after {
     content: '';
     height: $centerSize;
     width: $centerSize;
@@ -120,7 +124,7 @@ $centerSizeHalf: $centerSize / 2;
     transform: translate(-50%, -50%);
   }
 
-  .pillwrapper {
+  &__pillwrapper {
     width: $size;
     height: $centerSize;
     position: absolute;
@@ -131,48 +135,48 @@ $centerSizeHalf: $centerSize / 2;
     transform-origin: $centerSizeHalf $centerSizeHalf;
   }
 
-  .pillwrapper.reverse {
+  &__pillwrapper.reverse {
     transform-origin: calc(100% - #{$centerSizeHalf}) $centerSizeHalf;
     left: 0;
   }
 
-  .pillwrapper:nth-child(1) {
+  &__pillwrapper:nth-child(1) {
     transform: rotate(-60deg);
   }
-  .pillwrapper:nth-child(3) {
+  &__pillwrapper:nth-child(3) {
     transform: rotate(60deg);
   }
-  .pillwrapper:nth-child(4) {
+  &__pillwrapper:nth-child(4) {
     transform: rotate(-60deg);
   }
-  .pillwrapper:nth-child(6) {
+  &__pillwrapper:nth-child(6) {
     transform: rotate(60deg);
   }
 
-  .pillwrapper.reverse .pill {
+  &__pillwrapper.reverse &__pill {
     right: 0;
   }
 
-  .pill {
+  &__pill {
     border: 6px solid $background;
     height: 100%;
     border-radius: $centerSizeHalf;
     position: absolute;
   }
 
-  .pill:nth-child(1) {
+  &__pill:nth-child(1) {
     width: 100%;
   }
 
-  .pill:nth-child(2) {
+  &__pill:nth-child(2) {
     width: 75%;
   }
 
-  .pill:nth-child(3) {
+  &__pill:nth-child(3) {
     width: 50%;
   }
 
-  .text {
+  &__text {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -184,24 +188,24 @@ $centerSizeHalf: $centerSize / 2;
     text-align: center;
   }
 
-  .pillwrapper.reverse .text {
+  &__pillwrapper.reverse &__text {
     padding-left: 0;
     padding-right: $centerSize;
   }
 
-  .pillwrapper.one .pill:nth-child(3) {
+  &__pillwrapper.one &__pill:nth-child(3) {
     background: $red;
   }
 
-  .pillwrapper.two .pill:nth-child(2) {
+  &__pillwrapper.two &__pill:nth-child(2) {
     background: $blue;
   }
 
-  .pillwrapper.three .pill:nth-child(1) {
+  &__pillwrapper.three &__pill:nth-child(1) {
     background: $blue;
   }
 
-  .wateringcan {
+  &__wateringcan {
     position: relative;
     font-size: 17px;
     margin-right: 50px;
