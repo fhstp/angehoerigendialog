@@ -11,16 +11,16 @@
         <div class="text" v-html="answer.text"></div>
       </div>
     </div>
-    <div v-if="ewerItems.length" class="ewer">
-      <div class="ewer__circle"></div>
+    <div v-if="wateringcanItems.length" class="wateringcan">
+      <div class="wateringcan__circle"></div>
       <!-- TODO: include via component, doesn't work because viewBox gets lost -->
-      <!-- <IconEwer
-        class="ewer__trunk"
-        :style="{ '--stroke': -0.4 * ewerItems.length + 3.4 + 'px' }"
+      <!-- <Iconwateringcan
+        class="wateringcan__trunk"
+        :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
       /> -->
       <svg
-        class="ewer__trunk"
-        :style="{ '--stroke': -0.4 * ewerItems.length + 3.4 + 'px' }"
+        class="wateringcan__trunk"
+        :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
@@ -31,11 +31,14 @@
           d="M16.63,1,99,70.46V97.59L2.41,1H16.63M17,0H0L100,100V70L17,0Z"
         />
       </svg>
-      <div class="ewer__wrapper">
-        <div class="ewer__innerbox">
-          <ul class="ewer__list">
-            <li v-for="(ewerItem, index) in ewerItems" :key="index">
-              <div v-html="ewerItem.ewer"></div>
+      <div class="wateringcan__wrapper">
+        <div class="wateringcan__innerbox">
+          <ul class="wateringcan__list">
+            <li
+              v-for="(wateringcanItem, index) in wateringcanItems"
+              :key="index"
+            >
+              <div v-html="wateringcanItem.solution"></div>
             </li>
           </ul>
         </div>
@@ -47,10 +50,10 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
-// import IconEwer from '@/assets/icons/ewer.svg?inline';
+// import Iconwateringcan from '@/assets/icons/wateringcan.svg?inline';
 export default {
   name: 'AnFlower',
-  // components: { IconEwer },
+  // components: { Iconwateringcan },
   mixins: [visualisation],
   computed: {
     answers() {
@@ -66,7 +69,7 @@ export default {
       this.$emit('update:available', questionsAreAnswered);
       return data;
     },
-    ewerItems() {
+    wateringcanItems() {
       return this.answers.filter(object => {
         return object.type === 'stimmt_nicht';
       });
@@ -198,7 +201,7 @@ $centerSizeHalf: $centerSize / 2;
     background: $blue;
   }
 
-  .ewer {
+  .wateringcan {
     position: relative;
     font-size: 17px;
     margin-right: 50px;
