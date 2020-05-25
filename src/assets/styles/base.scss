@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +12,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   overflow:  hidden;
 }
 
@@ -48,9 +50,9 @@ input[type=range] {
 
   @mixin range-thumb {
     box-sizing: content-box;
-    border: $range-thumb-border-size solid #333;
+    border: $range-thumb-border-size solid $color-theme-darkgrey;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: white;
     width: $range-thumb-size - $range-thumb-border-size * 2;
     height: $range-thumb-size - $range-thumb-border-size * 2;
     cursor: grab;
@@ -69,8 +71,8 @@ input[type=range] {
 
   @mixin range-track {
     height: $range-track-height;
-    background-color: #666;
-    border-radius: 3px;
+    background-color: white;
+    border-radius: $border-radius;
   }
   &::-webkit-slider-runnable-track{
     @include range-track;
@@ -87,22 +89,33 @@ input[type=range] {
   display: inline-block;
   margin: $spacer 0;
   padding: $spacer $spacer * 2;
-  border-radius: 3px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
   color: #000;
   background-color: #fff;
-  border: 3px solid #000;
+  border: 2px solid #000;
   font-size: 1rem;
   transition: background-color 200ms ease-in-out;
   text-decoration: none;
   outline: none;
   cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
 
   &:hover {
-    background-color: #eee;
+    background-color: $color-theme-lightgrey;
   }
 
   &:focus {
     background-color: #ccc;
+  }
+
+  &:active{
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+  }
+
+  &--block {
+    width: 100%;
   }
 }
 

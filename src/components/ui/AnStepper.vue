@@ -5,23 +5,32 @@
         v-for="(step, i) in steps"
         :key="step.id"
         :ref="`stepperItem-${step.id}`"
-        :class="['an-stepper__step', { 'an-stepper__step--done': step.done }]"
+        :class="[
+          'an-stepper__step',
+          {
+            'an-stepper__step--done': step.done,
+            'an-stepper__step--active': $route.query.step === step.id
+          }
+        ]"
       >
         <router-link
           :to="{ query: { ...$route.query, step: step.id } }"
           @click.native="$emit('input')"
         >
-          <component
-            :is="step.icon"
-            :class="[
-              'an-stepper__icon',
-              { 'an-stepper__icon--active': $route.query.step === step.id }
-            ]"
-          />
+          <div class="an-stepper__icon-wrapper">
+            <component
+              :is="step.icon"
+              :class="[
+                'an-stepper__icon',
+                { 'an-stepper__icon--active': $route.query.step === step.id }
+              ]"
+            />
+            <IconCheckmark v-if="step.done" class="an-stepper__status" />
+          </div>
           <p class="an-stepper__text">
-            <span aria-hidden="true">{{ i + 1 }}.</span>&nbsp;{{ step.title }}
+            <span aria-hidden="true">{{ i + 1 }}.</span>
+            &nbsp;{{ step.title }}
           </p>
-          <IconCheckmark v-if="step.done" class="an-stepper__status" />
         </router-link>
       </li>
     </ol>
@@ -84,6 +93,18 @@ export default {
 <style lang="scss" scoped>
 $icon_width: 50px;
 
+.router-link-exact-active {
+  background-color: white;
+  box-shadow: 0 0 20px 0 $color-theme-shadow;
+  & p {
+    color: $color-theme-darkred;
+  }
+}
+
+.router-link-active {
+  height: 100%;
+}
+
 .an-stepper {
   overflow: hidden;
 
@@ -96,6 +117,17 @@ $icon_width: 50px;
     width: 100%;
     overflow: auto;
     scrollbar-width: thin;
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0 !important;
+      display: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
 
     @media #{map-get($query, 'lg-and-up')} {
       flex-direction: column;
@@ -104,9 +136,18 @@ $icon_width: 50px;
   }
 
   &__step {
+    background-color: $color-theme-lightgrey;
     flex-shrink: 0;
     width: 66%;
     list-style: none;
+
+    &:not(:first-child):not(&--active) {
+      border-left: 1px solid $color-theme-darkgrey;
+
+      @media #{map-get($query, 'lg-and-up')} {
+        border-top: 1px solid $color-theme-darkgrey;
+      }
+    }
 
     @media #{map-get($query, 'sm-and-up')} {
       width: 29%;
@@ -127,38 +168,65 @@ $icon_width: 50px;
       flex-direction: column;
       color: black;
       padding: $spacer * 4;
-
+      justify-content: flex-start;
+      z-index: 2;
       @media #{map-get($query, 'sm-and-up')} {
         padding: $spacer * 2;
+      }
+      @media #{map-get($query, 'lg-and-up')} {
+        justify-content: center;
       }
     }
   }
 
+  &__step--active + &__step {
+    border: none !important;
+  }
+
+  &__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: $icon_width + 15px;
+  }
+
   &__icon {
     display: block;
-    align-self: center;
-    fill: white;
-    background-color: black;
     border-radius: 50%;
     width: $icon_width;
     height: auto;
 
+    > circle:first-child {
+      fill: $color-theme-darkgrey;
+    }
+
     &--active {
-      fill: black;
-      background-color: white;
+      width: $icon_width + 15px;
+
+      & > circle:first-child {
+        fill: $color-theme-darkred;
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-left: $icon_width / 2;
+    width: 1.2rem;
+
+    .an-stepper__step--active & {
+      margin-left: ($icon_width + 15px) / 2;
+      width: 1.3rem;
     }
   }
 
   &__text {
     word-break: normal;
     overflow-wrap: anywhere;
-  }
-
-  &__status {
-    position: absolute;
-    width: 1.2rem;
-    left: 50%;
-    margin-left: $icon_width / 2;
+    text-align: center;
   }
 }
 </style>
