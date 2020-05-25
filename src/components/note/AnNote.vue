@@ -283,7 +283,7 @@ export default {
   }
 
   &__save-hint {
-    color: #aaa;
+    color: $color-theme-darkgrey;
     transition: opacity 150ms ease-in-out;
   }
 

@@ -26,7 +26,8 @@
               ]"
             />
             <p class="an-stepper__text">
-              <span aria-hidden="true">{{ i + 1 }}.</span>&nbsp;{{ step.title }}
+              <span aria-hidden="true">{{ i + 1 }}.</span>
+              &nbsp;{{ step.title }}
             </p>
           </div>
           <IconCheckmark v-if="step.done" class="an-stepper__status" />
@@ -96,7 +97,6 @@ $icon_width: 50px;
 
 .router-link-active {
   height: 100%;
-  border-top: 1px solid $color-theme-darkgrey;
 }
 
 .an-stepper {
@@ -122,6 +122,7 @@ $icon_width: 50px;
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
       width: 0 !important;
+      display: none;
     }
 
     a {
@@ -134,15 +135,19 @@ $icon_width: 50px;
     }
   }
 
-  &__step--active + &__step > a {
-    border: none;
-  }
-
   &__step {
     background-color: $color-theme-lightgrey;
     flex-shrink: 0;
     width: 66%;
     list-style: none;
+
+    &:not(:first-child):not(&--active) {
+      border-left: 1px solid $color-theme-darkgrey;
+
+      @media #{map-get($query, 'md-and-up')} {
+        border-top: 1px solid $color-theme-darkgrey;
+      }
+    }
 
     @media #{map-get($query, 'sm-and-up')} {
       width: 29%;
@@ -171,6 +176,10 @@ $icon_width: 50px;
     }
   }
 
+  &__step--active + &__step {
+    border: none !important;
+  }
+
   &__icon {
     display: block;
     align-self: center;
@@ -182,8 +191,12 @@ $icon_width: 50px;
       fill: $color-theme-darkgrey;
     }
 
-    &--active > circle:first-child {
-      fill: $color-theme-darkred;
+    &--active {
+      width: $icon_width + 15px;
+
+      & > circle:first-child {
+        fill: $color-theme-darkred;
+      }
     }
   }
 
@@ -195,9 +208,14 @@ $icon_width: 50px;
 
   &__status {
     position: absolute;
-    width: 1.2rem;
     left: 50%;
     margin-left: $icon_width / 2;
+    width: 1.2rem;
+
+    .an-stepper__step--active & {
+      margin-left: ($icon_width + 15px) / 2;
+      width: 1.3rem;
+    }
   }
 }
 </style>

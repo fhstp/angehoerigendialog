@@ -238,13 +238,13 @@ export default {
   }
 
   &__content {
+    flex-grow: 1;
+    box-shadow: 0 0 20px 0 #555555;
+    z-index: 1;
     @media #{map-get($query, 'lg-and-up')} {
-      flex-grow: 1;
       height: 100%;
       overflow: auto;
     }
-    box-shadow: 0 0 20px 0 #555555;
-    z-index: 1;
   }
 
   &__section-heading {
@@ -267,15 +267,21 @@ export default {
   }
 
   &__scrollarea {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     overflow: auto;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
 
     @media #{map-get($query, 'lg-and-up')} {
-      display: flex;
+      flex-direction: row;
     }
   }
+}
+
+.an-stepper {
+  flex-shrink: 0;
 }
 
 .an-note-open {
