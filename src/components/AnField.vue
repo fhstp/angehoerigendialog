@@ -18,36 +18,29 @@
         :is="fieldComponentName"
         v-bind="preparedFieldProps"
         :field_id="fieldId"
+        :field_valid.sync="validSelf"
       />
       <div v-if="fieldData.subfields" class="an-field__subfields">
         <AnField
-          v-for="(subfield, subfieldId) in fieldData.subfields"
+          v-for="(subfield, subfieldId, subfieldIndex) in fieldData.subfields"
           :key="subfieldId"
           :field-data="subfield"
           :section-id="sectionId"
           :field-id="`${sectionId}-${subfieldId}`"
           :is-subfield="true"
+          :valid.sync="validChildren[subfieldIndex]"
         />
       </div>
-      <template v-if="isAccordionItem && !isSubfield">
-        <div class="an-field__actions">
-          <button class="btn" @click="$emit('goPrev')">Zurück</button>
-          <button class="btn" @click="handleCompletion()">
-            {{
-              fieldCompletion ? 'Weiter' : 'Als erledigt markieren und weiter'
-            }}
-          </button>
-        </div>
-        <input
-          type="text"
-          class="an-field__navigation visually-hidden"
-          @focus="$emit('goNext')"
-        />
-      </template>
+      <input
+        v-if="isAccordionItem && !isSubfield"
+        type="text"
+        class="an-field__navigation visually-hidden"
+        @focus="$emit('goNext')"
+      />
     </template>
-    <template v-else>
-      Not supported field of type: {{ fieldData.type }}
-    </template>
+    <template v-else
+      >Not supported field of type: {{ fieldData.type }}</template
+    >
   </div>
 </template>
 
@@ -75,7 +68,19 @@ export default {
     isSubfield: {
       type: Boolean,
       default: false
+    },
+    valid: {
+      type: Boolean,
+      default: false
     }
+  },
+  data() {
+    return {
+      validSelf: false,
+      validChildren: this.fieldData.subfields
+        ? Array(Object.keys(this.fieldData.subfields).length).fill(false)
+        : undefined
+    };
   },
   computed: {
     isVisible() {
@@ -89,34 +94,12 @@ export default {
         }
       }
       return true;
-    },
-    fieldCompletion: {
-      get() {
-        return this.$store.getters.getFieldCompletion(this.fieldId) ?? false;
-      },
-      set(value) {
-        const subfieldIds = [];
-        if (this.fieldData.subfields) {
-          for (const key of Object.keys(this.fieldData.subfields)) {
-            subfieldIds.push(`${this.sectionId}-${key}`);
-          }
-        }
-        const activeFieldIds = [];
-        if (this.fieldData.activefields && this.fieldData.options) {
-          for (const activeFieldKey in this.fieldData.activefields) {
-            for (const optionKey of Object.keys(this.fieldData.options)) {
-              activeFieldIds.push(
-                `${this.fieldId}-${optionKey}-${activeFieldKey}`
-              );
-            }
-          }
-        }
-        this.$store.commit('updateAnswerCompletion', {
-          fieldIds: [this.fieldId, ...subfieldIds, ...activeFieldIds],
-          value
-        });
-      }
     }
+  },
+  watch: {
+    isVisible: 'computeCompletion',
+    validSelf: 'computeCompletion',
+    validChildren: 'computeCompletion'
   },
   created() {
     const newFieldData = {};
@@ -147,6 +130,8 @@ export default {
       this.fieldComponentName
     );
     this.isAccordionItem = form_isInAccordion(this.fieldData.type);
+
+    if (!this.isVisible) this.computeCompletion();
   },
   mounted() {
     if (!this.isSubfield && this.$parent.active) {
@@ -157,9 +142,48 @@ export default {
     }
   },
   methods: {
-    handleCompletion() {
-      this.$emit('goNext');
-      if (!this.fieldCompletion) this.fieldCompletion = true;
+    computeCompletion() {
+      let isValid = true;
+      if (this.isVisible) {
+        if (!this.validSelf) {
+          isValid = false;
+        } else if (this.validChildren) {
+          for (const validChild of this.validChildren) {
+            if (!validChild) {
+              isValid = false;
+            }
+          }
+        }
+      }
+
+      if (this.isSubfield) {
+        this.$emit('update:valid', isValid);
+        return;
+      }
+
+      if (this.$store.getters.getFieldCompletion(this.fieldId) === isValid)
+        return;
+
+      const subfieldIds = [];
+      if (this.fieldData.subfields) {
+        for (const key of Object.keys(this.fieldData.subfields)) {
+          subfieldIds.push(`${this.sectionId}-${key}`);
+        }
+      }
+      const activeFieldIds = [];
+      if (this.fieldData.activefields && this.fieldData.options) {
+        for (const activeFieldKey in this.fieldData.activefields) {
+          for (const optionKey of Object.keys(this.fieldData.options)) {
+            activeFieldIds.push(
+              `${this.fieldId}-${optionKey}-${activeFieldKey}`
+            );
+          }
+        }
+      }
+      this.$store.commit('updateAnswerCompletion', {
+        fieldIds: [this.fieldId, ...subfieldIds, ...activeFieldIds],
+        value: isValid
+      });
     }
   }
 };
@@ -174,12 +198,6 @@ export default {
 
   &__subfields > &:first-child {
     margin-top: $spacer * 4;
-  }
-
-  &__actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: $spacer * 2;
   }
 }
 </style>

@@ -27,6 +27,35 @@
         v-show="isAvailable.flower"
         :available.sync="isAvailable.flower"
       />
+
+      <h2 v-show="isAvailable.careTasks" class="page-break-before">
+        Praktische Betreuungsaufgaben
+      </h2>
+      <AnCareTasks
+        v-show="isAvailable.careTasks"
+        :available.sync="isAvailable.careTasks"
+      />
+      <h2 v-show="isAvailable.behaviourChanges" class="page-break-before">
+        Umgang mit Verhaltensveränderungen
+      </h2>
+      <AnBehaviour
+        v-show="isAvailable.behaviourChanges"
+        :available.sync="isAvailable.behaviourChanges"
+      />
+      <h2 v-show="isAvailable.healthChanges" class="page-break-before">
+        Gesundheit
+      </h2>
+      <AnHealth
+        v-show="isAvailable.healthChanges"
+        :available.sync="isAvailable.healthChanges"
+      />
+      <h2 v-show="isAvailable.resourcespressure">
+        Ressourcen und Belastungen
+      </h2>
+      <AnResourcesPressure
+        v-show="isAvailable.resourcespressure"
+        :available.sync="isAvailable.resourcespressure"
+      />
       <button
         class="an-visualisation__restart btn"
         @click="restartQuestionnaire"
@@ -39,9 +68,13 @@
 
 <script>
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
+import AnBehaviour from '@/components/visualisations/AnBehaviour.vue';
+import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
+import AnHealth from '@/components/visualisations/AnHealth.vue';
 import AnResources from '@/components/visualisations/AnResources.vue';
+import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
 import { restartQuestionnaire } from '@/helpers/form.js';
@@ -50,9 +83,13 @@ export default {
   name: 'Visualisation',
   components: {
     AnBasisInformation,
+    AnBehaviour,
+    AnCareTasks,
     AnExportPdf,
     AnFlower,
+    AnHealth,
     AnResources,
+    AnResourcesPressure,
     AnSendMail,
     AnSituation
   },

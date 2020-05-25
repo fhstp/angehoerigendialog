@@ -25,6 +25,11 @@ export default {
   mixins: [field],
   props: {
     fieldOptions: { type: Object, default: undefined }
+  },
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', value !== undefined);
+    }
   }
 };
 </script>

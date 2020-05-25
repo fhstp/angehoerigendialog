@@ -61,6 +61,11 @@ export default {
         (this.fieldMax.value - this.fieldMin.value)
       );
     }
+  },
+  methods: {
+    validate(value) {
+      this.$emit('update:field_valid', !Number.isNaN(Number(value)));
+    }
   }
 };
 </script>

@@ -51,14 +51,7 @@ export default {
   },
   watch: {
     '$route.query.step'(newValue) {
-      const foundItem = this.$refs[`stepperItem-${newValue}`];
-      if (foundItem?.length) {
-        this.$refs.stepsContainer.scrollTo({
-          top: foundItem[0].offsetTop,
-          left: foundItem[0].offsetLeft,
-          behavior: 'smooth'
-        });
-      }
+      this.scrollToStep(newValue, 'smooth');
     }
   },
   created() {
@@ -76,6 +69,21 @@ export default {
       if (!(step.icon in this.$options.components)) {
         this.$options.components[step.icon] = () =>
           import(`@/assets/icons/${step.icon}.svg?inline`);
+      }
+    }
+  },
+  mounted() {
+    this.scrollToStep(this.$route.query.step, 'auto');
+  },
+  methods: {
+    scrollToStep(step, behavior) {
+      const foundItem = this.$refs[`stepperItem-${step}`];
+      if (foundItem?.length) {
+        this.$refs.stepsContainer.scrollTo({
+          top: foundItem[0].offsetTop,
+          left: foundItem[0].offsetLeft,
+          behavior
+        });
       }
     }
   }
