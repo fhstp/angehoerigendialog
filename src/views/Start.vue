@@ -19,17 +19,17 @@
       <div class="an-start__inputbackground">
         <div class="an-start__inputwrapper">
           <label for="partner-name">GesprächspartnerIn</label>
-          <input id="partner-name" type="text" required />
+          <input id="partner-name" type="text" />
         </div>
 
         <div class="an-start__inputwrapper">
           <label for="socialworker-name">Durchgeführt von</label>
-          <input id="socialworker-name" type="text" required />
+          <input id="socialworker-name" type="text" />
         </div>
 
         <div class="an-start__inputwrapper">
           <label for="date">Datum</label>
-          <input id="date" type="date" required />
+          <input id="date" type="date" />
         </div>
       </div>
       <div>
