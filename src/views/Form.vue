@@ -52,6 +52,39 @@
                   </template>
                 </AnAccordionItem>
               </template>
+              <div
+                v-if="steps.length === sectionIndex + 1"
+                class="an-form__openquestions"
+              >
+                <div
+                  v-for="(step, stepIndex) in steps"
+                  :key="stepIndex"
+                  class="an-form__openquestions-wrapper"
+                >
+                  <div
+                    v-if="openQuestions[stepIndex].length > 0"
+                    class="an-form__openquestions-section-text"
+                  >
+                    {{ stepIndex + 1 + '.' }}
+                    {{ step.title }}
+                  </div>
+                  <router-link
+                    v-for="(openQuestion, i) in openQuestions[stepIndex]"
+                    :key="i"
+                    :to="{
+                      query: {
+                        ...$route.query,
+                        step: openQuestion.sectionId,
+                        field: openQuestion.fieldKey
+                      }
+                    }"
+                  >
+                    <div class="an-form__openquestions-item">
+                      {{ openQuestion.label }}
+                    </div>
+                  </router-link>
+                </div>
+              </div>
             </AnAccordion>
             <div class="container">
               <button
@@ -76,28 +109,6 @@
               >
                 Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
-              <div
-                v-if="steps.length === sectionIndex + 1"
-                class="an-form__openquestion-wrapper"
-              >
-                <h3>Noch offene Fragen:</h3>
-
-                <router-link
-                  v-for="(openQuestion, i) in openQuestions"
-                  :key="i"
-                  :to="{
-                    query: {
-                      ...$route.query,
-                      step: openQuestion.sectionId,
-                      field: openQuestion.fieldKey
-                    }
-                  }"
-                >
-                  <div class="an-form__openquestion-element">
-                    {{ openQuestions[i].label }}
-                  </div>
-                </router-link>
-              </div>
             </div>
           </section>
         </template>
@@ -152,7 +163,8 @@ export default {
       return steps;
     },
     openQuestions() {
-      const openQuestions = [];
+      const openQuestions = [[], [], [], [], [], [], [], [], [], []];
+      let i = 0;
 
       for (const sectionId in form) {
         const accordionItems = form_filterAccordionItems(
@@ -167,13 +179,14 @@ export default {
           );
 
           if (!done && done !== undefined) {
-            openQuestions.push({
+            openQuestions[i].push({
               sectionId,
               fieldKey: index,
               label: accordionItems[index].label
             });
           }
         });
+        i++;
       }
       return openQuestions;
     }
@@ -337,27 +350,37 @@ export default {
       overflow: hidden;
     }
   }
-  &__openquestion {
-    &-wrapper {
-      border: 1px solid lightgrey;
-      border-radius: 3px;
-      background-color: #eee;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      padding: 1rem;
-    }
-    &-element {
-      border: 1px solid black;
-      padding: 1rem;
-      margin-top: 1rem;
-    }
-  }
 
   &__done {
     display: block;
     margin-top: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  &__openquestions {
+    background-color: $color-theme-darkred;
+    margin-top: $spacer * 2;
+    margin-bottom: $spacer * 2;
+    padding: 1rem;
+    border-radius: 3px;
+
+    &-item {
+      margin-bottom: $spacer * 2;
+      padding: $spacer;
+      border-radius: 3px;
+      background-color: white;
+      color: black;
+    }
+
+    &-section-text {
+      margin-bottom: $spacer * 2;
+      font-size: 1.2rem;
+      color: white;
+    }
+  }
+  .router-link-active {
+    text-decoration: none;
   }
 }
 

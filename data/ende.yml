@@ -9,3 +9,7 @@ fields:
   uhrzeit:
     label: Uhrzeit wählen
     type: time
+
+  offenefragen:
+    label: Offene Fragen
+    type: heading
