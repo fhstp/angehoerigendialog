@@ -6,7 +6,7 @@
   >
     <template v-if="fieldComponentAvailable">
       <input
-        v-if="isAccordionItem && !isSubfield"
+        v-if="isAccordionItem && !isSubfield && hasPrev"
         type="text"
         class="an-field__navigation visually-hidden"
         @focus="$emit('goPrev')"
@@ -32,7 +32,7 @@
         />
       </div>
       <input
-        v-if="isAccordionItem && !isSubfield"
+        v-if="isAccordionItem && !isSubfield && hasNext"
         type="text"
         class="an-field__navigation visually-hidden"
         @focus="$emit('goNext')"
@@ -72,6 +72,14 @@ export default {
     valid: {
       type: Boolean,
       default: false
+    },
+    hasNext: {
+      type: Boolean,
+      default: true
+    },
+    hasPrev: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
