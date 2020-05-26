@@ -33,6 +33,9 @@
         :aria-label="`${situation.value} von 10`"
       >
         <div class="an-situation__progressbar" />
+        <div class="an-situation__battery-sections row flex-no-wrap">
+          <div v-for="section in 10" :key="section" class="col-6" />
+        </div>
       </div>
     </div>
   </div>
@@ -72,8 +75,10 @@ export default {
 
 <style lang="scss" scoped>
 $battery-border-width: 2px;
+$battery-border-radius: 0.5rem;
 $battery-height: 1.5rem;
 $pin-width: 10px;
+$pin-height: 60%;
 
 .an-situation {
   @media print, #{map-get($query, 'md-and-up')} {
@@ -109,20 +114,19 @@ $pin-width: 10px;
   &__battery {
     position: relative;
     border: $battery-border-width solid #333;
-    border-radius: 1000px;
+    border-radius: $battery-border-radius;
     width: calc(100% - #{$pin-width});
 
     &::after {
       content: '';
       position: absolute;
-      top: 20%;
+      top: (100% - $pin-height) / 2;
       left: 100%;
       border: $battery-border-width solid #333;
       border-left: none;
       border-radius: 0 $border-radius $border-radius 0;
-      margin-left: -1px;
-      width: $pin-width + 1;
-      height: 60%;
+      width: $pin-width;
+      height: $pin-height;
     }
   }
 
@@ -130,7 +134,7 @@ $pin-width: 10px;
     position: relative;
     height: 2rem;
     border: $battery-border-width solid white;
-    border-radius: 1000px;
+    border-radius: $battery-border-radius;
     overflow: hidden;
 
     &::after {
@@ -143,11 +147,33 @@ $pin-width: 10px;
       width: 100%;
       height: 100%;
       transform: translateX(var(--value));
-      transition: transform 400ms ease-in-out,
+      transition: transform 400ms ease-out,
         background-color 400ms ease-in-out 200ms;
 
       .an-situation__category--danger & {
         background-color: $color-theme-darkred;
+      }
+    }
+  }
+
+  &__battery-sections {
+    flex-wrap: nowrap;
+    position: absolute;
+    top: 0;
+    border: 2px solid transparent;
+    height: 100%;
+    width: 100%;
+
+    & > div {
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
+
+      &:not(:first-child) {
+        border-left-color: white;
+      }
+
+      &:not(:last-child) {
+        border-right-color: white;
       }
     }
   }
