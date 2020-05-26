@@ -58,7 +58,6 @@
             <div class="container">
               <button
                 v-if="steps.length === sectionIndex + 1"
-                ref="sectionEndBtn"
                 class="an-form__done btn"
                 @click="handleFinish()"
               >
@@ -66,7 +65,6 @@
               </button>
               <router-link
                 v-else
-                ref="sectionEndBtn"
                 :to="{
                   query: {
                     ...$route.query,
@@ -172,7 +170,7 @@ export default {
         form[this.steps[this.currentStepIndex].id].fields
       );
       const fieldIndex = currentStepFields.findIndex(
-        field => field.fieldKey === fieldId
+        field => field.fieldId === fieldId
       );
 
       return fieldIndex !== 0;
@@ -182,7 +180,7 @@ export default {
         form[this.steps[this.currentStepIndex].id].fields
       );
       const fieldIndex = currentStepFields.findIndex(
-        field => field.fieldKey === fieldId
+        field => field.fieldId === fieldId
       );
 
       return fieldIndex !== currentStepFields.length - 1;
