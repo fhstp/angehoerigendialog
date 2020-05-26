@@ -80,6 +80,8 @@ export default {
     left: 0;
     width: 100vw;
     z-index: 0;
+    height: 100vh;
+    object-fit: cover;
   }
 
   &__iconv {
