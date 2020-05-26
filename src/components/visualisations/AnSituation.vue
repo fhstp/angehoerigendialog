@@ -9,7 +9,9 @@
           'an-situation__category--danger':
             ($store.state.printMode || visualisation_gotVisible) &&
             situation.value < 4
-        }
+        },
+        'col-6',
+        'col-md-2'
       ]"
     >
       <h3 class="an-situation__heading">
@@ -75,19 +77,21 @@ $pin-width: 10px;
 
 .an-situation {
   @media print, #{map-get($query, 'md-and-up')} {
+    display: flex;
     align-items: flex-end;
     margin-left: -$spacer;
     margin-right: -$spacer;
   }
 
   &__category {
+    &:not(:first-child) {
+      @media #{map-get($query, 'sm-and-down')} {
+        margin-top: $spacer * 2;
+      }
+    }
     @media print, #{map-get($query, 'md-and-up')} {
       padding-left: $spacer;
       padding-right: $spacer;
-      width: 33.33333%;
-    }
-    &:not(:first-child) {
-      margin-top: $spacer * 4;
     }
   }
 
