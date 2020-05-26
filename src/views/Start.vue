@@ -16,32 +16,38 @@
 
     <IconV class="an-start__iconv" />
     <div class="an-start__content">
-      <div class="an-start__inputwrapper">
-        <label for="partner-name">GesprächspartnerIn</label>
-        <input id="partner-name" type="text" required />
-      </div>
+      <div class="an-start__inputbackground">
+        <div class="an-start__inputwrapper">
+          <label for="partner-name">GesprächspartnerIn</label>
+          <input id="partner-name" type="text" required />
+        </div>
 
-      <div class="an-start__inputwrapper">
-        <label for="socialworker-name">Durchgeführt von</label>
-        <input id="socialworker-name" type="text" required />
-      </div>
+        <div class="an-start__inputwrapper">
+          <label for="socialworker-name">Durchgeführt von</label>
+          <input id="socialworker-name" type="text" required />
+        </div>
 
-      <div class="an-start__inputwrapper">
-        <label for="date">Datum</label> <input id="date" type="date" required />
+        <div class="an-start__inputwrapper">
+          <label for="date">Datum</label>
+          <input id="date" type="date" required />
+        </div>
       </div>
       <div>
         <button
           v-if="existingLocalStorage"
-          class="btn"
+          class="btn an-start__startbutton"
           @click="restartQuestionnaire"
         >
-          start
+          Start
         </button>
         <router-link v-else to="fragebogen" class="btn" start
           >start</router-link
         >
-        <router-link v-if="existingLocalStorage" to="fragebogen" class="btn"
-          >vorherigen Fragebogen laden</router-link
+        <router-link
+          v-if="existingLocalStorage"
+          to="fragebogen"
+          class="btn an-start__previousbutton"
+          >Vorherigen Fragebogen laden</router-link
         >
       </div>
     </div>
@@ -91,8 +97,11 @@ export default {
     z-index: 1;
     position: absolute;
     top: 0;
-    right: 0;
+    right: auto;
     height: 100vh;
+    @media #{map-get($query, 'md-and-up')} {
+      right: -35px;
+    }
   }
 
   &__logo {
@@ -120,10 +129,28 @@ export default {
   &__content {
     position: absolute;
     bottom: 10vw;
-    left: 10vw;
+    left: auto;
     z-index: 3;
     display: flex;
     flex-direction: column;
+    @media #{map-get($query, 'md-and-up')} {
+      left: 10vw;
+    }
+  }
+
+  &__startbutton {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  &__previousbutton {
+  }
+
+  &__inputbackground {
+    padding: $spacer * 3;
+    border-radius: $border-radius;
+    border: 1.5px solid $color-theme-lightgrey;
+    background-color: white;
   }
 
   &__inputwrapper {
@@ -131,16 +158,23 @@ export default {
     flex-direction: column;
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 12px;
+    margin-bottom: $spacer * 2;
 
     input {
+      transition: box-shadow 150ms linear;
       height: 40px;
       border-radius: $border-radius;
       border: 1.5px solid $color-theme-lightgrey;
+      outline: none;
+      padding: 3px 7px;
+      &:focus {
+        box-shadow: 0 0 3px 2px $color-theme-lightred;
+      }
     }
 
     label {
       font-size: 1.5rem;
+      margin-bottom: $spacer;
     }
   }
 }
