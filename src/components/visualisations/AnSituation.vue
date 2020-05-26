@@ -1,25 +1,19 @@
 <template>
-  <div class="an-situation">
+  <div class="an-situation row">
     <div
       v-for="(situation, i) in situations"
       :key="i"
       :class="[
         'an-situation__category',
-        { 'an-situation__category--danger': situation.value < 4 }
+        {
+          'an-situation__category--danger':
+            ($store.state.printMode || visualisation_gotVisible) &&
+            situation.value < 4
+        },
+        'col-6',
+        'col-md-2'
       ]"
     >
-      <IconMoodBad class="an-situation__legend" />
-      <div
-        class="an-situation__data-area"
-        :style="{ '--value': situation.value / 9 - 1 / 9 }"
-      >
-        <component
-          :is="situation.value < 4 ? 'IconPersonArmUp' : 'IconPersonStanding'"
-          class="an-situation__me"
-        />
-        <div class="an-situation__progressbar" />
-      </div>
-      <IconMood class="an-situation__legend" />
       <h3 class="an-situation__heading">
         <IconWarning
           v-if="situation.value < 4"
@@ -27,44 +21,36 @@
           aria-hidden="true"
         />
         <span>{{ situation.title }}</span>
-        <IconWarning
-          v-if="situation.value < 4"
-          class="icon-warning"
-          aria-hidden="true"
-        />
       </h3>
+      <div
+        class="an-situation__battery"
+        :style="{
+          '--value':
+            $store.state.printMode || visualisation_gotVisible
+              ? `-${situation.value * -10 + 100}%`
+              : '0%'
+        }"
+        :aria-label="`${situation.value} von 10`"
+      >
+        <div class="an-situation__progressbar" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import IconMood from '@/assets/icons/mood.svg?inline';
-import IconMoodBad from '@/assets/icons/mood_bad.svg?inline';
-import IconPersonArmUp from '@/assets/icons/person-arm-up.svg?inline';
-import IconPersonStanding from '@/assets/icons/person-standing.svg?inline';
 import IconWarning from '@/assets/icons/warning.svg?inline';
+import visualisationMixin from '@/mixins/visualisation.js';
+import visualisationData from '@/data/visualisation.json';
 
-const fields = {
-  'gesundheit-gesundheitszustand': {
-    title: 'Gesundheitszustand'
-  },
-  'gesundheit-nervlichebelastung': {
-    title: 'nervliche Belastung'
-  },
-  'gesundheit-energiereserven': {
-    title: 'Energiereserven'
-  }
-};
+const fields = visualisationData.visualisation.situation;
 
 export default {
   name: 'AnSituation',
   components: {
-    IconMood,
-    IconMoodBad,
-    IconPersonArmUp,
-    IconPersonStanding,
     IconWarning
   },
+  mixins: [visualisationMixin],
   computed: {
     situations() {
       const situations = [];
@@ -72,7 +58,7 @@ export default {
         const value = this.$store.getters.getFieldValue(key);
         if (value) {
           situations.push({
-            title: fields[key].title,
+            title: fields[key],
             value
           });
         }
@@ -85,69 +71,85 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$progressbar-border-width: 0.2rem;
+$battery-border-width: 2px;
+$battery-height: 1.5rem;
+$pin-width: 10px;
 
 .an-situation {
-  &__category {
+  @media print, #{map-get($query, 'md-and-up')} {
     display: flex;
-    flex-wrap: wrap;
     align-items: flex-end;
-    margin-top: $spacer * 10;
+    margin-left: -$spacer;
+    margin-right: -$spacer;
+  }
+
+  &__category {
+    &:not(:first-child) {
+      @media #{map-get($query, 'sm-and-down')} {
+        margin-top: $spacer * 2;
+      }
+    }
+    @media print, #{map-get($query, 'md-and-up')} {
+      padding-left: $spacer;
+      padding-right: $spacer;
+    }
   }
 
   &__heading {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: $progressbar-border-width;
-    width: 100%;
   }
 
   .icon-warning {
     height: 1.5em;
     width: 1.5em;
-    fill: red;
-
-    &:first-child {
-      margin-right: $spacer;
-    }
-
-    &:last-child {
-      margin-left: $spacer;
-    }
+    fill: $color-theme-darkred;
   }
 
-  &__data-area {
+  &__battery {
     position: relative;
-    flex-grow: 1;
-    margin: 0 $spacer * 2;
-    padding-top: $progressbar-border-width;
-  }
+    border: $battery-border-width solid #333;
+    border-radius: 1000px;
+    width: calc(100% - #{$pin-width});
 
-  &__me {
-    position: relative;
-    top: -$progressbar-border-width;
-    left: calc(100% * var(--value));
-    padding-top: 0.25rem;
-    height: 4rem;
-    transform: translateX(-50%);
-
-    .an-situation__category--danger & {
-      padding-top: 0;
-      fill: red;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 100%;
+      border: $battery-border-width solid #333;
+      border-left: none;
+      border-radius: 0 $border-radius $border-radius 0;
+      margin-left: -1px;
+      width: $pin-width + 1;
+      height: 60%;
     }
   }
 
   &__progressbar {
+    position: relative;
     height: 2rem;
-    border: $progressbar-border-width solid #333;
+    border: $battery-border-width solid white;
     border-radius: 1000px;
-    margin: 0 -$progressbar-border-width;
-  }
+    overflow: hidden;
 
-  &__legend {
-    margin-bottom: -$progressbar-border-width;
-    width: 2rem;
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: $color-theme-darkgrey;
+      color-adjust: exact;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateX(var(--value));
+      transition: transform 400ms ease-in-out,
+        background-color 400ms ease-in-out 200ms;
+
+      .an-situation__category--danger & {
+        background-color: $color-theme-darkred;
+      }
+    }
   }
 }
 </style>

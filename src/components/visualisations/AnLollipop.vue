@@ -81,7 +81,7 @@ $red: #660000;
 $lollipopPercentage: 60%;
 
 .an-lollipop {
-  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
