@@ -5,14 +5,17 @@
       alt="Hände einer alten Person"
       class="an-start__backgroundimage"
     />
-    <img
-      src="@/assets/images/logo.png"
-      alt="Volkshilfe"
-      class="an-start__logo"
-    />
+    <div class="an-start__logowrapper">
+      <img
+        src="@/assets/images/logo.png"
+        alt="Volkshilfe"
+        class="an-start__logo"
+      />
+      <h1 class="an-start__heading">Angehörigendialog</h1>
+    </div>
+
     <IconV class="an-start__iconv" />
     <div class="an-start__content">
-      <h1>Angehörigendialog</h1>
       <div class="an-start__inputwrapper">
         <label for="partner-name">GesprächspartnerIn</label>
         <input id="partner-name" type="text" required />
@@ -93,11 +96,25 @@ export default {
   }
 
   &__logo {
+    width: 220px;
+    margin-bottom: 12px;
+  }
+
+  &__logowrapper {
     z-index: 2;
     position: absolute;
     right: 5vw;
     top: 5vw;
-    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__heading {
+    color: white;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    font-weight: normal;
   }
 
   &__content {
@@ -114,6 +131,17 @@ export default {
     flex-direction: column;
     font-size: 1.2rem;
     font-weight: bold;
+    margin-bottom: 12px;
+
+    input {
+      height: 40px;
+      border-radius: $border-radius;
+      border: 1.5px solid $color-theme-lightgrey;
+    }
+
+    label {
+      font-size: 1.5rem;
+    }
   }
 }
 </style>
