@@ -212,7 +212,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
+    border-radius: $border-radius;
     margin-bottom: -5px;
 
     @media print {

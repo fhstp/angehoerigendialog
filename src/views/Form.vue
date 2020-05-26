@@ -57,10 +57,10 @@
               <button
                 v-if="steps.length === sectionIndex + 1"
                 ref="sectionEndBtn"
-                class="btn"
+                class="an-form__done btn"
                 @click="handleFinish()"
               >
-                auswerten
+                Auswerten
               </button>
               <router-link
                 v-else
@@ -296,10 +296,12 @@ export default {
   }
 
   &__content {
+    flex-grow: 1;
+    box-shadow: 0 0 20px 0 $color-theme-shadow;
+    z-index: 1;
     @media #{map-get($query, 'lg-and-up')} {
-      flex-grow: 1;
       height: 100%;
-      overflow: auto;
+      overflow-y: scroll;
     }
   }
 
@@ -308,14 +310,13 @@ export default {
   }
 
   &__header-wrapper {
-    position: sticky;
     top: 0;
     background-color: white;
     padding-top: $spacer;
     padding-bottom: $spacer;
-    box-shadow: 3px 3px 8px #ccc;
     margin-bottom: $spacer * 2;
     z-index: 1;
+    color: $color-theme-darkred;
   }
 
   &__header {
@@ -324,13 +325,16 @@ export default {
   }
 
   &__scrollarea {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
-    overflow: auto;
+    overflow-y: scroll;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
 
     @media #{map-get($query, 'lg-and-up')} {
-      display: flex;
+      flex-direction: row;
+      overflow: hidden;
     }
   }
   &__openquestion {
@@ -348,6 +352,17 @@ export default {
       margin-top: 1rem;
     }
   }
+
+  &__done {
+    display: block;
+    margin-top: $spacer * 10;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.an-stepper {
+  flex-shrink: 0;
 }
 
 .an-note-open {

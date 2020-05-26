@@ -97,7 +97,7 @@ export default {
     top: 0;
     left: calc(100% * var(--value));
     transform: translate(-50%, -100%);
-    border-radius: 3px;
+    border-radius: $border-radius;
     background-color: #333;
     color: white;
     padding: $spacer / 2;

@@ -14,7 +14,7 @@
     </div>
     <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere()">
       <div class="an-note__content container">
-        <h2>Meine Notizen</h2>
+        <h2 class="an-note__heading">Meine Notizen</h2>
         <div class="an-note__input-area">
           <textarea
             v-show="showAlreadyThere"
@@ -25,7 +25,7 @@
           <template v-if="showAddHeading && currentQuestionLabel">
             <div class="an-note-current" @click="focusTaNewText()">
               <button class="an-note-current__action btn" @click="addHeading()">
-                Aktuell offene Frage als Überschrift zu meinen Notizen
+                Aktuell offene Frage als Überschrift<br />zu meinen Notizen
                 hinzufügen
               </button>
               <span class="an-note-current__question">
@@ -36,6 +36,7 @@
               ref="ta_newtext"
               v-model="noteNewData"
               placeholder="Notiz einfügen …"
+              class="an-note-current__textarea"
               @input="updateTextAreaHeight($event.currentTarget)"
             ></textarea>
           </template>
@@ -242,11 +243,17 @@ export default {
   overflow: auto;
   display: flex;
   flex-direction: column;
+  background-color: $color-theme-lightgrey;
+
+  &__heading {
+    color: $color-theme-darkred;
+  }
 
   &__elementwrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: $color-theme-lightgrey;
   }
 
   &__content {
@@ -256,9 +263,13 @@ export default {
   }
 
   &__input-area {
-    border: 2px solid darkgray;
-    border-radius: 3px;
+    border: 2px solid $color-theme-darkgrey;
+    border-radius: $border-radius;
     padding: $spacer;
+    background-color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   &__close {
@@ -272,7 +283,7 @@ export default {
   }
 
   &__save-hint {
-    color: #aaa;
+    color: $color-theme-darkgrey;
     transition: opacity 150ms ease-in-out;
   }
 
@@ -288,6 +299,7 @@ export default {
 
   &__focusdiv {
     flex-grow: 1;
+    background-color: $color-theme-lightgrey;
   }
 
   &__savehint > svg {
@@ -306,31 +318,16 @@ export default {
     padding-top: $spacer;
     padding-bottom: $spacer;
     width: 100%;
-
-    &::after {
-      display: block;
-      content: '';
-      left: 0;
-      height: 12px;
-      background: linear-gradient(
-        rgba(204, 204, 204, 1),
-        rgba(204, 204, 204, 0)
-      );
-      position: absolute;
-      bottom: -12px;
-      left: 0;
-      width: 100%;
-    }
+    background-color: $color-theme-lightgrey;
   }
 }
 
 .an-note-current {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  background-color: #eee;
-  border-radius: 3px;
+  border-radius: $border-radius;
   padding: $spacer * 2;
+  align-items: flex-start;
 
   &__question {
     color: #aaa;
@@ -338,6 +335,14 @@ export default {
 
   &__action {
     margin: 0;
+
+    width: 40%;
+    flex-shrink: 0;
+    margin-right: 17px;
+  }
+
+  &__textarea {
+    flex-grow: 1;
   }
 }
 

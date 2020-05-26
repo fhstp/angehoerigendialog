@@ -2,7 +2,7 @@
   <fieldset class="an-checkboxes">
     <div class="an-checkboxes__option">
       <input :id="`${field_id}-none`" v-model="noneSelected" type="checkbox" />
-      <label :for="`${field_id}-none`">keines dieser Optionen</label>
+      <label :for="`${field_id}-none`">keine dieser Optionen</label>
     </div>
     <div
       v-for="(option, optionId, optionIndex) in fieldOptions"
@@ -122,12 +122,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.an-checkboxes__option {
-  padding-top: $spacer;
-  padding-bottom: $spacer;
+.an-checkboxes {
+  border-radius: $border-radius;
+  margin: -0.5rem;
+  padding: 0.5rem;
+  background-color: white;
+  color: black;
 
-  &:first-child {
-    border-bottom: 1px solid black;
+  &__option {
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+
+    &:first-child {
+      border-bottom: 1px solid black;
+    }
   }
 }
 
