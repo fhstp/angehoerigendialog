@@ -60,7 +60,7 @@
                 class="an-form__done btn"
                 @click="handleFinish()"
               >
-                Auswerten
+                {{ buttonText }}
               </button>
               <router-link
                 v-else
@@ -84,30 +84,34 @@
               "
               class="an-form__openquestions"
             >
-              <div class="an-form__openquestions-heading-wrapper">
+              <div
+                v-if="openQuestions.length > 0"
+                class="an-form__openquestions-heading-wrapper"
+              >
                 <IconWarning class="an-form__openquestions-icon-warning" />
                 <h3 class="an-form__openquestions-heading">Offene Fragen</h3>
               </div>
-              <div v-for="(step, stepIndex) in steps" :key="stepIndex">
-                <div
-                  v-if="openQuestions[stepIndex].length > 0"
-                  class="an-form__openquestions-heading-section"
-                >
-                  {{ `Kategorie "${step.title}"` }}
+
+              <div
+                v-for="(openQuestion, questionIndex) in openQuestions"
+                :key="questionIndex"
+              >
+                <div class="an-form__openquestions-heading-section">
+                  {{ `Kategorie "${openQuestion[0].sectionTitle}"` }}
                 </div>
                 <router-link
-                  v-for="(openQuestion, i) in openQuestions[stepIndex]"
+                  v-for="(question, i) in openQuestion"
                   :key="i"
                   :to="{
                     query: {
                       ...$route.query,
-                      step: openQuestion.sectionId,
-                      field: openQuestion.fieldKey
+                      step: question.sectionId,
+                      field: question.fieldKey
                     }
                   }"
                 >
                   <div class="an-form__openquestions-item">
-                    {{ openQuestion.label }}
+                    {{ question.label }}
                   </div>
                 </router-link>
               </div>
@@ -149,7 +153,7 @@ export default {
   },
   data() {
     return {
-      showOpenQuestions: Boolean
+      showOpenQuestions: false
     };
   },
   computed: {
@@ -190,6 +194,7 @@ export default {
           if (!done && done !== undefined) {
             openQuestions[i].push({
               sectionId,
+              sectionTitle: form[sectionId].titleShort ?? form[sectionId].title,
               fieldKey: index,
               label: accordionItems[index].label
             });
@@ -197,13 +202,22 @@ export default {
         });
         i++;
       }
-      return openQuestions;
+
+      return openQuestions.filter(list => list.length);
+    },
+    buttonText() {
+      return !this.showOpenQuestions ? 'Auswerten' : 'Trotzdem auswerten';
     }
   },
   watch: {
     '$route.query.step'(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.$refs.main.scrollTop = 0;
+      }
+    },
+    openQuestions(newValue) {
+      if (newValue.length === 0) {
+        this.showOpenQuestions = false;
       }
     }
   },
@@ -289,21 +303,12 @@ export default {
         this.$router.replace({ query: { ...this.$route.query, field: 0 } });
     },
     handleFinish() {
-      let allSectionsDone = true;
-      for (const step of this.steps) {
-        if (!step.done) {
-          allSectionsDone = false;
+      if (!this.showOpenQuestions) {
+        if (this.openQuestions.length > 0) {
           this.showOpenQuestions = true;
-          break;
+          return;
         }
       }
-      if (
-        !allSectionsDone &&
-        !confirm(
-          'Es sind noch nicht alle Fragen als abgeschlossen markiert. Möchten Sie trotzdem zur Auswertung fortfahren?'
-        )
-      )
-        return;
       this.$router.push({ path: 'auswertung' });
     }
   }
