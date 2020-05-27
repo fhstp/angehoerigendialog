@@ -76,44 +76,44 @@
               >
                 Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
-            </div>
-
-            <div
-              v-if="
-                steps.length === sectionIndex + 1 && showOpenQuestions == true
-              "
-              class="an-form__openquestions"
-            >
-              <div
-                v-if="openQuestions.length > 0"
-                class="an-form__openquestions-heading-wrapper"
-              >
-                <IconWarning class="an-form__openquestions-icon-warning" />
-                <h3 class="an-form__openquestions-heading">Offene Fragen</h3>
-              </div>
 
               <div
-                v-for="(openQuestion, questionIndex) in openQuestions"
-                :key="questionIndex"
+                v-if="
+                  steps.length === sectionIndex + 1 && showOpenQuestions == true
+                "
+                class="an-form__openquestions"
               >
-                <div class="an-form__openquestions-heading-section">
-                  {{ `Kategorie "${openQuestion[0].sectionTitle}"` }}
-                </div>
-                <router-link
-                  v-for="(question, i) in openQuestion"
-                  :key="i"
-                  :to="{
-                    query: {
-                      ...$route.query,
-                      step: question.sectionId,
-                      field: question.fieldKey
-                    }
-                  }"
+                <div
+                  v-if="openQuestions.length > 0"
+                  class="an-form__openquestions-heading-wrapper"
                 >
-                  <div class="an-form__openquestions-item">
-                    {{ question.label }}
+                  <IconWarning class="an-form__openquestions-icon-warning" />
+                  <h3 class="an-form__openquestions-heading">Offene Fragen</h3>
+                </div>
+
+                <div
+                  v-for="(openQuestion, questionIndex) in openQuestions"
+                  :key="questionIndex"
+                >
+                  <div class="an-form__openquestions-heading-section">
+                    {{ `Kategorie "${openQuestion[0].sectionTitle}"` }}
                   </div>
-                </router-link>
+                  <router-link
+                    v-for="(question, i) in openQuestion"
+                    :key="i"
+                    :to="{
+                      query: {
+                        ...$route.query,
+                        step: question.sectionId,
+                        field: question.fieldKey
+                      }
+                    }"
+                  >
+                    <div class="an-form__openquestions-item">
+                      {{ question.label }}
+                    </div>
+                  </router-link>
+                </div>
               </div>
             </div>
           </section>
@@ -376,7 +376,6 @@ export default {
   &__openquestions {
     margin-top: $spacer * 2;
     margin-bottom: $spacer * 2;
-    padding: 1rem;
     border-radius: 3px;
     font-size: 1.2rem;
 
