@@ -14,6 +14,17 @@ export default {
     window.addEventListener('afterprint', () => {
       this.$store.commit('updatePrintMode', false);
     });
+    // detect Ctrl+p
+    window.addEventListener('keydown', event => {
+      if (
+        event.ctrlKey &&
+        !event.altKey &&
+        !event.metaKey &&
+        event.keyCode === 80
+      ) {
+        this.$store.commit('updatePrintMode', true);
+      }
+    });
   }
 };
 </script>
