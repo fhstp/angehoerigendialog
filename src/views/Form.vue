@@ -52,39 +52,6 @@
                   </template>
                 </AnAccordionItem>
               </template>
-              <div
-                v-if="steps.length === sectionIndex + 1"
-                class="an-form__openquestions"
-              >
-                <div
-                  v-for="(step, stepIndex) in steps"
-                  :key="stepIndex"
-                  class="an-form__openquestions-wrapper"
-                >
-                  <div
-                    v-if="openQuestions[stepIndex].length > 0"
-                    class="an-form__openquestions-section-text"
-                  >
-                    {{ stepIndex + 1 + '.' }}
-                    {{ step.title }}
-                  </div>
-                  <router-link
-                    v-for="(openQuestion, i) in openQuestions[stepIndex]"
-                    :key="i"
-                    :to="{
-                      query: {
-                        ...$route.query,
-                        step: openQuestion.sectionId,
-                        field: openQuestion.fieldKey
-                      }
-                    }"
-                  >
-                    <div class="an-form__openquestions-item">
-                      {{ openQuestion.label }}
-                    </div>
-                  </router-link>
-                </div>
-              </div>
             </AnAccordion>
             <div class="container">
               <button
@@ -110,6 +77,41 @@
                 Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
             </div>
+
+            <div
+              v-if="
+                steps.length === sectionIndex + 1 && showOpenQuestions == true
+              "
+              class="an-form__openquestions"
+            >
+              <div class="an-form__openquestions-heading-wrapper">
+                <IconWarning class="an-form__openquestions-icon-warning" />
+                <h3 class="an-form__openquestions-heading">Offene Fragen</h3>
+              </div>
+              <div v-for="(step, stepIndex) in steps" :key="stepIndex">
+                <div
+                  v-if="openQuestions[stepIndex].length > 0"
+                  class="an-form__openquestions-heading-section"
+                >
+                  {{ `Kategorie "${step.title}"` }}
+                </div>
+                <router-link
+                  v-for="(openQuestion, i) in openQuestions[stepIndex]"
+                  :key="i"
+                  :to="{
+                    query: {
+                      ...$route.query,
+                      step: openQuestion.sectionId,
+                      field: openQuestion.fieldKey
+                    }
+                  }"
+                >
+                  <div class="an-form__openquestions-item">
+                    {{ openQuestion.label }}
+                  </div>
+                </router-link>
+              </div>
+            </div>
           </section>
         </template>
       </main>
@@ -131,6 +133,7 @@ import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
+import IconWarning from '@/assets/icons/warning.svg?inline';
 
 export default {
   name: 'Form',
@@ -141,7 +144,13 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark
+    IconCheckmark,
+    IconWarning
+  },
+  data() {
+    return {
+      showOpenQuestions: Boolean
+    };
   },
   computed: {
     currentFieldIndex() {
@@ -172,7 +181,7 @@ export default {
         );
 
         accordionItems.forEach((key, index) => {
-          const fieldKey = accordionItems[index].fieldKey;
+          const fieldKey = accordionItems[index].fieldId;
 
           const done = this.$store.getters.getFieldCompletion(
             `${sectionId}-${fieldKey}`
@@ -284,6 +293,7 @@ export default {
       for (const step of this.steps) {
         if (!step.done) {
           allSectionsDone = false;
+          this.showOpenQuestions = true;
           break;
         }
       }
@@ -359,24 +369,35 @@ export default {
   }
 
   &__openquestions {
-    background-color: $color-theme-darkred;
     margin-top: $spacer * 2;
     margin-bottom: $spacer * 2;
     padding: 1rem;
     border-radius: 3px;
+    font-size: 1.2rem;
 
     &-item {
       margin-bottom: $spacer * 2;
-      padding: $spacer;
+      margin-top: $spacer * 2;
+      padding: $spacer * 2;
       border-radius: 3px;
-      background-color: white;
+      background-color: $color-theme-lightred;
       color: black;
     }
 
-    &-section-text {
+    &-heading-wrapper {
+      display: flex;
+      align-items: flex-end;
       margin-bottom: $spacer * 2;
-      font-size: 1.2rem;
-      color: white;
+    }
+
+    &-heading {
+      color: $color-theme-darkred;
+    }
+
+    &-icon-warning {
+      width: 35px;
+      margin-right: 0.5rem;
+      fill: $color-theme-darkred;
     }
   }
   .router-link-active {
