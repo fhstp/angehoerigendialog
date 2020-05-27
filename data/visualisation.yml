@@ -1,4 +1,20 @@
 visualisation:
+
+  basisinfo:
+    demenzperson:
+      diagnose: ärztliche Demenzdiagnose
+      pflegegeld: aktuelle Pfelgestufe
+      pflegebedarf: Unterstüzungsbedarf
+
+    betreuendeperson:
+      sorgepflichten: weitere Betreuungspflicthen
+      beruf: Berufstätigkeit
+
+    allgemein:
+      verhaeltnis: Verwandschaftliches Verhältnis
+      haushalt: gemeinsamer Haushalt
+      unterstuetzungsangebot: Unterstützungsangebote
+
   caretasks:
     mahlzeit: Mahlzeiten zubereiten
     nahrungsaufnahme: Nahrungsaufnahme unterstützen

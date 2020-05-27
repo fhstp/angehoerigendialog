@@ -22,7 +22,7 @@ fields:
     subfields:
       sorgepflichtendetail:
         label: Welche Betreuungs- oder Sorgepflichten haben Sie?
-        type: text
+        type: list
         when:
           sorgepflichten: true
 
@@ -32,7 +32,7 @@ fields:
     subfields:
       unterstuetzungsangebotedetails:
         label: Welche Unterstützungsangebote nehmen Sie in Anspruch (etwa Angehörigenstammtisch, Gespräche mit professionellen HelferInnen)
-        type: text
+        type: list
         when:
           unterstuetzungsangebote: true
 
