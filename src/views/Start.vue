@@ -18,18 +18,27 @@
     <div class="an-start__content">
       <div class="an-start__inputbackground">
         <div class="an-start__inputwrapper">
-          <label for="partner-name">GesprächspartnerIn</label>
-          <input id="partner-name" type="text" />
+          <label for="caregiver-name">GesprächspartnerIn</label>
+          <input
+            id="caregiver-name"
+            v-model="caregivername"
+            type="text"
+            autofocus
+          />
         </div>
 
         <div class="an-start__inputwrapper">
           <label for="socialworker-name">Durchgeführt von</label>
-          <input id="socialworker-name" type="text" />
+          <input
+            id="socialworker-name"
+            v-model="socialworkername"
+            type="text"
+          />
         </div>
 
         <div class="an-start__inputwrapper">
           <label for="date">Datum</label>
-          <input id="date" type="date" />
+          <input id="date" v-model="date" type="date" />
         </div>
       </div>
       <div>
@@ -65,10 +74,46 @@ export default {
   computed: {
     existingLocalStorage() {
       return localStorage.getItem('vuex');
+    },
+    date: {
+      get() {
+        return this.getFromStore('startseite-datum');
+      },
+      set(value) {
+        this.pushToStore(value, 'startseite-datum');
+      }
+    },
+    caregivername: {
+      get() {
+        return this.getFromStore('startseite-angehoerigenname');
+      },
+      set(value) {
+        this.pushToStore(value, 'startseite-angehoerigenname');
+      }
+    },
+    socialworkername: {
+      get() {
+        return this.getFromStore('startseite-sozialarbeitername');
+      },
+      set(value) {
+        this.pushToStore(value, 'startseite-sozialarbeitername');
+      }
     }
   },
+  created() {
+    this.date = new Date().toISOString().slice(0, 10);
+  },
   methods: {
-    restartQuestionnaire
+    restartQuestionnaire,
+    pushToStore(value, field_id) {
+      this.$store.commit('updateAnswerValue', {
+        fieldId: field_id,
+        value
+      });
+    },
+    getFromStore(field_id) {
+      return this.$store.getters.getFieldValue(field_id);
+    }
   }
 };
 </script>
