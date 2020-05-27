@@ -61,7 +61,7 @@
                 class="an-form__done btn"
                 @click="handleFinish()"
               >
-                Auswerten
+                {{ buttonText }}
               </button>
               <router-link
                 v-else
@@ -76,6 +76,45 @@
               >
                 Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
+
+              <div
+                v-if="
+                  steps.length === sectionIndex + 1 && showOpenQuestions == true
+                "
+                class="an-form__openquestions"
+              >
+                <div
+                  v-if="openQuestions.length > 0"
+                  class="an-form__openquestions-heading-wrapper"
+                >
+                  <IconWarning class="an-form__openquestions-icon-warning" />
+                  <h3 class="an-form__openquestions-heading">Offene Fragen</h3>
+                </div>
+
+                <div
+                  v-for="(openQuestion, questionIndex) in openQuestions"
+                  :key="questionIndex"
+                >
+                  <div class="an-form__openquestions-heading-section">
+                    {{ `Kategorie "${openQuestion[0].sectionTitle}"` }}
+                  </div>
+                  <router-link
+                    v-for="(question, i) in openQuestion"
+                    :key="i"
+                    :to="{
+                      query: {
+                        ...$route.query,
+                        step: question.sectionId,
+                        field: question.fieldKey
+                      }
+                    }"
+                  >
+                    <div class="an-form__openquestions-item">
+                      {{ question.label }}
+                    </div>
+                  </router-link>
+                </div>
+              </div>
             </div>
           </section>
         </template>
@@ -98,6 +137,7 @@ import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
+import IconWarning from '@/assets/icons/warning.svg?inline';
 
 export default {
   name: 'Form',
@@ -108,7 +148,13 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark
+    IconCheckmark,
+    IconWarning
+  },
+  data() {
+    return {
+      showOpenQuestions: false
+    };
   },
   computed: {
     currentFieldIndex() {
@@ -128,12 +174,50 @@ export default {
         });
       }
       return steps;
+    },
+    openQuestions() {
+      const openQuestions = [[], [], [], [], [], [], [], [], [], []];
+      let i = 0;
+
+      for (const sectionId in form) {
+        const accordionItems = form_filterAccordionItems(
+          form[sectionId].fields
+        );
+
+        accordionItems.forEach((key, index) => {
+          const fieldKey = accordionItems[index].fieldId;
+
+          const done = this.$store.getters.getFieldCompletion(
+            `${sectionId}-${fieldKey}`
+          );
+
+          if (!done && done !== undefined) {
+            openQuestions[i].push({
+              sectionId,
+              sectionTitle: form[sectionId].titleShort ?? form[sectionId].title,
+              fieldKey: index,
+              label: accordionItems[index].label
+            });
+          }
+        });
+        i++;
+      }
+
+      return openQuestions.filter(list => list.length);
+    },
+    buttonText() {
+      return !this.showOpenQuestions ? 'Auswerten' : 'Trotzdem auswerten';
     }
   },
   watch: {
     '$route.query.step'(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.$refs.main.scrollTop = 0;
+      }
+    },
+    openQuestions(newValue) {
+      if (newValue.length === 0) {
+        this.showOpenQuestions = false;
       }
     }
   },
@@ -217,20 +301,12 @@ export default {
         this.$router.replace({ query: { ...this.$route.query, field: 0 } });
     },
     handleFinish() {
-      let allSectionsDone = true;
-      for (const step of this.steps) {
-        if (!step.done) {
-          allSectionsDone = false;
-          break;
+      if (!this.showOpenQuestions) {
+        if (this.openQuestions.length > 0) {
+          this.showOpenQuestions = true;
+          return;
         }
       }
-      if (
-        !allSectionsDone &&
-        !confirm(
-          'Es sind noch nicht alle Fragen als abgeschlossen markiert. Möchten Sie trotzdem zur Auswertung fortfahren?'
-        )
-      )
-        return;
       this.$router.push({ path: 'auswertung' });
     }
   }
@@ -293,6 +369,41 @@ export default {
     margin-top: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  &__openquestions {
+    margin-top: $spacer * 2;
+    margin-bottom: $spacer * 2;
+    border-radius: 3px;
+    font-size: 1.2rem;
+
+    &-item {
+      margin-bottom: $spacer * 2;
+      margin-top: $spacer * 2;
+      padding: $spacer * 2;
+      border-radius: 3px;
+      background-color: $color-theme-lightred;
+      color: black;
+    }
+
+    &-heading-wrapper {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: $spacer * 2;
+    }
+
+    &-heading {
+      color: $color-theme-darkred;
+    }
+
+    &-icon-warning {
+      width: 35px;
+      margin-right: 0.5rem;
+      fill: $color-theme-darkred;
+    }
+  }
+  .router-link-active {
+    text-decoration: none;
   }
 }
 
