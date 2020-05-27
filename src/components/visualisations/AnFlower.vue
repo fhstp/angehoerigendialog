@@ -1,118 +1,324 @@
 <template>
   <div class="an-flower">
-    <ul class="an-flower__list">
-      <li v-for="(answer, index) in answers" :key="index">
-        <div v-if="answer !== undefined" :class="getClass(answer.type)">
-          {{ answer.text }}
+    <div class="an-flower__flower">
+      <div
+        v-for="(answer, index) in answers"
+        :key="index"
+        class="an-flower__pillwrapper"
+        :class="getClass(answer.type, index)"
+      >
+        <div
+          v-for="pillIndex in 3"
+          :key="pillIndex"
+          class="an-flower__pill"
+        ></div>
+        <div class="an-flower__text" v-html="answer.text"></div>
+      </div>
+      <div
+        class="an-flower__overlay"
+        :class="getClass(answers[0].type, 0)"
+      ></div>
+      <div
+        class="an-flower__overlay_line"
+        :class="getClass(answers[1].type, 0)"
+      ></div>
+    </div>
+    <div v-if="wateringcanItems.length" class="an-flower__wateringcan">
+      <div class="an-flower__wateringcan__circle"></div>
+      <IconWateringcan
+        class="an-flower__wateringcan__trunk"
+        :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
+      />
+      <div class="an-flower__wateringcan__wrapper">
+        <div class="an-flower__wateringcan__innerbox">
+          <ul class="an-flower__wateringcan__list">
+            <li
+              v-for="(wateringcanItem, index) in wateringcanItems"
+              :key="index"
+            >
+              <div v-html="wateringcanItem.solution"></div>
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
+import IconWateringcan from '@/assets/icons/wateringcan.svg?inline';
 export default {
   name: 'AnFlower',
+  components: { IconWateringcan },
   mixins: [visualisation],
   computed: {
     answers() {
-      const data = [
-        {
-          fieldID: 'ressourcen_belastungen-rueckzugsmoeglichkeit',
-          translationPro: 'Rückzugsorte',
-          translationMiddle: 'Rückzugsmöglichkeiten',
-          translationCon: 'Rückzugsmöglichkeiten schaffen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-hobbysinteressen',
-          translationPro: 'Zeit für meine Interessen',
-          translationMiddle: 'Zeit für meine Interessen finden',
-          translationCon: 'Zeit für meine Interessen schaffen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-freizeitaktivitaeten',
-          translationPro: 'Freunde treffen',
-          translationMiddle: 'Freunde zu treffen',
-          translationCon: 'Regelmäßig mit anderen Menschen treffen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-zeitfuermichselbst',
-          translationPro: 'Erholungszeit für mich',
-          translationMiddle: 'Erholungszeit einplanen',
-          translationCon: 'Erholungszeit für mich einplanen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-beziehungen',
-          translationPro: 'Zeit für Familie, Freunde & Verwandte',
-          translationMiddle: 'Zeit für Familie, Freunde und Verwandte haben',
-          translationCon: 'Zeit für Familie, Freunde und Verwandte einplanen'
-        },
-        {
-          fieldID: 'ressourcen_belastungen-anforderungen',
-          translationPro: 'Pflege und andere Aktivitäten vereinbaren',
-          translationMiddle: 'Pflege mit Aktivitäten vereinbaren',
-          translationCon:
-            'Die Pflege und andere Aktivitäten miteinander vereinbaren'
-        }
-      ];
-
-      const resultArray = data.map(object => {
-        switch (this.$store.getters.getFieldValue(object.fieldID)) {
-          case 'stimmt':
-            return {
-              text: object.translationPro,
-              type: 1
-            };
-          case 'stimmt_teilweise':
-            return {
-              text: object.translationMiddle,
-              type: 2
-            };
-          case 'stimmt_nicht':
-            return {
-              text: object.translationCon,
-              type: 3
-            };
-        }
-      });
+      const data = visJson.visualisation.flower;
 
       let questionsAreAnswered = false;
-      for (let i = 0; i < resultArray.length; i++) {
-        if (resultArray[i] !== undefined) {
+      data.forEach(object => {
+        object.type = this.$store.getters.getFieldValue(object.fieldID);
+        if (object.type !== undefined) {
           questionsAreAnswered = true;
-          break;
         }
-      }
+      });
       this.$emit('update:available', questionsAreAnswered);
-      return resultArray;
+      return data;
+    },
+    wateringcanItems() {
+      return this.answers.filter(object => {
+        return object.type === 'stimmt_nicht';
+      });
     }
   },
   methods: {
-    getClass: type => ({
-      'an-flower__list--bloom': type === 1,
-      'an-flower__list--bloomwithered': type === 2,
-      'an-flower__list--withered': type === 3
+    getClass: (type, index) => ({
+      one: type === 'stimmt_nicht',
+      two: type === 'stimmt_teilweise',
+      three: type === 'stimmt',
+      reverse: index > 2
     })
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$grey: #b7bdc4;
+$background: #fff;
+$pill: #e6e6e6;
+$red: #dd848d;
+$blue: #a3cfdf;
+$size: 290px;
+$centerSize: 80px;
+$centerSizeHalf: $centerSize / 2;
+
 .an-flower {
-  &__list {
-    list-style-type: none;
+  color-adjust: exact;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    &--bloom {
-      background-color: yellow;
+  &__flower {
+    height: ($size * 2) - $centerSize;
+    width: ($size * 2) - $centerSize;
+    position: relative;
+  }
+
+  &__flower::after {
+    content: '';
+    height: $centerSize;
+    width: $centerSize;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: $size - $centerSizeHalf;
+    left: $size - $centerSizeHalf;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  &__overlay {
+    content: '';
+    height: $centerSize / 4 * 3;
+    width: $centerSize / 8 * 7;
+    position: absolute;
+
+    &.one {
+      background-color: $red;
     }
 
-    &--bloomwithered {
-      background-color: burlywood;
+    &.two,
+    &.three {
+      background-color: $blue;
     }
 
-    &--withered {
-      background-color: brown;
+    z-index: 1;
+    top: $size - $centerSize;
+    left: $size - $centerSize;
+    transform-origin: $centerSizeHalf $centerSizeHalf;
+    transform: rotate(-60deg) translateX($centerSizeHalf);
+    border-top: 6px solid;
+    border-color: $background;
+  }
+
+  &__overlay_line {
+    height: $centerSize / 4;
+    position: absolute;
+    width: $centerSize / 8 * 5;
+    border-top: 6px solid;
+    border-color: $background;
+
+    &.one {
+      background-color: $red;
+    }
+
+    &.two,
+    &.three {
+      background-color: $blue;
+    }
+
+    transform-origin: $centerSizeHalf $centerSizeHalf;
+    transform: translateX($centerSizeHalf);
+    z-index: 2;
+    top: $size - $centerSize;
+    left: $size - $centerSize;
+  }
+
+  &__pillwrapper {
+    width: $size;
+    height: $centerSize;
+    position: absolute;
+    background: $pill;
+    border-radius: $centerSizeHalf;
+    top: $size - $centerSize;
+    left: $size - $centerSize;
+    transform-origin: $centerSizeHalf $centerSizeHalf;
+  }
+
+  &__pillwrapper.reverse {
+    transform-origin: calc(100% - #{$centerSizeHalf}) $centerSizeHalf;
+    left: 0;
+  }
+
+  &__pillwrapper:nth-child(1) {
+    transform: rotate(-60deg);
+  }
+  &__pillwrapper:nth-child(3) {
+    transform: rotate(60deg);
+  }
+  &__pillwrapper:nth-child(4) {
+    transform: rotate(-60deg);
+  }
+  &__pillwrapper:nth-child(6) {
+    transform: rotate(60deg);
+  }
+
+  &__pillwrapper.reverse &__pill {
+    right: 0;
+  }
+
+  &__pill {
+    border: 6px solid $background;
+    height: 100%;
+    border-radius: $centerSizeHalf;
+    position: absolute;
+  }
+
+  &__pill:nth-child(1) {
+    width: 100%;
+  }
+
+  &__pill:nth-child(2) {
+    width: 75%;
+  }
+
+  &__pill:nth-child(3) {
+    width: 50%;
+  }
+
+  &__text {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-left: $centerSize;
+    align-items: center;
+    font-size: 19px;
+    text-align: center;
+  }
+
+  &__pillwrapper.reverse &__text {
+    padding-left: 0;
+    padding-right: $centerSize;
+  }
+
+  &__pillwrapper.one &__pill:nth-child(3) {
+    background: $red;
+  }
+
+  &__pillwrapper.two &__pill:nth-child(2) {
+    background: $blue;
+  }
+
+  &__pillwrapper.three &__pill:nth-child(1) {
+    background: $blue;
+  }
+
+  &__wateringcan {
+    position: relative;
+    font-size: 17px;
+    margin-right: 50px;
+
+    @media (max-width: 800px) {
+      margin-top: $size + $centerSize;
+    }
+
+    &__innerbox {
+      background-color: white;
+      border-radius: 5px;
+    }
+    &__list {
+      list-style-type: none;
+      border-radius: 5px;
+      background-color: #4aa1c0;
+
+      li {
+        background-color: #4aa1c0;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 7px;
+        border-bottom: 4px solid #636261;
+      }
+
+      li:last-child {
+        border-bottom: 0;
+        border-radius: 5px;
+      }
+      &::before {
+        content: '';
+        display: flex;
+        background-color: white;
+        height: 50px;
+        border-radius: 5px 5px 0% 0%;
+        background-image: url('~@/assets/icons/welle.svg');
+        background-position-y: 43px;
+        background-repeat: repeat-x;
+      }
+    }
+
+    &__circle {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background: transparent;
+      right: -50px;
+      top: -50px;
+      border-radius: 50px;
+      border: 5px solid #636261;
+      z-index: -1;
+    }
+
+    &__trunk {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: calc(100% - var(--stroke) - 10px);
+      stroke-width: var(--stroke);
+      stroke: #636261;
+      height: 100%;
+      width: 100px;
+    }
+    &__wrapper {
+      width: 178px;
+      color: white;
+      background-color: #636261;
+      border-radius: 10px;
+      padding: 5px;
     }
   }
 }
