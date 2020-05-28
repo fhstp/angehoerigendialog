@@ -122,7 +122,7 @@ export default {
       width: $bordersize;
       background: $color-theme-darkred;
       position: absolute;
-      bottom: 30px;
+      bottom: $ringsize / 2;
       left: 50%;
       margin-left: $bordersize / -2;
       z-index: -1;
