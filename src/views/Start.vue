@@ -68,6 +68,18 @@
 import { restartQuestionnaire } from '@/helpers/form.js';
 import IconTextLogo from '@/assets/icons/text-logo.svg?inline';
 
+const fieldGenerator = field_id => ({
+  get() {
+    return this.$store.getters.getFieldValue(field_id);
+  },
+  set(value) {
+    this.$store.commit('updateAnswerValue', {
+      fieldId: field_id,
+      value
+    });
+  }
+});
+
 export default {
   name: 'Start',
   components: {
@@ -78,45 +90,15 @@ export default {
     existingLocalStorage() {
       return localStorage.getItem('vuex');
     },
-    date: {
-      get() {
-        return this.getFromStore('startseite-datum');
-      },
-      set(value) {
-        this.pushToStore(value, 'startseite-datum');
-      }
-    },
-    caregivername: {
-      get() {
-        return this.getFromStore('startseite-angehoerigenname');
-      },
-      set(value) {
-        this.pushToStore(value, 'startseite-angehoerigenname');
-      }
-    },
-    socialworkername: {
-      get() {
-        return this.getFromStore('startseite-sozialarbeitername');
-      },
-      set(value) {
-        this.pushToStore(value, 'startseite-sozialarbeitername');
-      }
-    }
+    date: fieldGenerator('startseite-datum'),
+    caregivername: fieldGenerator('startseite-angehoerigenname'),
+    socialworkername: fieldGenerator('startseite-sozialarbeitername')
   },
   created() {
     this.date = new Date().toISOString().slice(0, 10);
   },
   methods: {
-    restartQuestionnaire,
-    pushToStore(value, field_id) {
-      this.$store.commit('updateAnswerValue', {
-        fieldId: field_id,
-        value
-      });
-    },
-    getFromStore(field_id) {
-      return this.$store.getters.getFieldValue(field_id);
-    }
+    restartQuestionnaire
   }
 };
 </script>
