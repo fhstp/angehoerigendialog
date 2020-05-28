@@ -146,7 +146,7 @@ export default {
       content: '';
       position: absolute;
       height: 10px;
-      background: #437bb9;
+      background: $color-theme-darkgrey;
       width: calc(100% + 20px);
       left: -10px;
       bottom: -5px;
@@ -205,7 +205,7 @@ export default {
 
   &__list {
     list-style: none;
-    border: 5px solid #8bafb1;
+    border: 5px solid $color-theme-blue;
     padding: 10px;
     text-align: center;
     height: 90px;

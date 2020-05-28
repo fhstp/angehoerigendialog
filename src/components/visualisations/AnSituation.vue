@@ -140,7 +140,7 @@ $pin-height: 60%;
     &::after {
       content: '';
       position: absolute;
-      background-color: $color-theme-darkblue;
+      background-color: $color-theme-blue;
       color-adjust: exact;
       top: 0;
       left: 0;

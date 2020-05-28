@@ -85,11 +85,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$grey: #b7bdc4;
 $background: #fff;
-$pill: #e6e6e6;
-$red: #dd848d;
-$blue: #a3cfdf;
+$pill: $color-theme-lightgrey;
+$red: $color-theme-red;
+$blue: $color-theme-lightblue;
 $size: 290px;
 $centerSize: 80px;
 $centerSizeHalf: $centerSize / 2;
@@ -263,10 +262,10 @@ $centerSizeHalf: $centerSize / 2;
     &__list {
       list-style-type: none;
       border-radius: 5px;
-      background-color: #4aa1c0;
+      background-color: $color-theme-lightblue;
 
       li {
-        background-color: #4aa1c0;
+        background-color: $color-theme-lightblue;
         height: 60px;
         display: flex;
         justify-content: center;
@@ -283,7 +282,7 @@ $centerSizeHalf: $centerSize / 2;
         content: '';
         display: flex;
         background-color: white;
-        height: 50px;
+        height: 52px;
         border-radius: 5px 5px 0% 0%;
         background-image: url('~@/assets/icons/welle.svg');
         background-position-y: 43px;
@@ -315,7 +314,6 @@ $centerSizeHalf: $centerSize / 2;
     }
     &__wrapper {
       width: 178px;
-      color: white;
       background-color: #636261;
       border-radius: 10px;
       padding: 5px;
