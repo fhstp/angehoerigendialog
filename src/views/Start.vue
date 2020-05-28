@@ -1,20 +1,27 @@
 <template>
   <div class="an-start">
-    <img
-      src="@/assets/images/background_startscreen.jpg"
-      alt="Hände einer alten Person"
-      class="an-start__backgroundimage"
-    />
+    <div class="an-start__background">
+      <picture>
+        <source srcset="@/assets/images/background_startscreen.webp" />
+        <img
+          src="@/assets/images/background_startscreen.jpg"
+          alt="Hände einer alten Person"
+          class="an-start__backgroundimage"
+        />
+      </picture>
+      <IconV class="an-start__iconv" />
+    </div>
     <div class="an-start__logowrapper">
       <img
         src="@/assets/images/logo.png"
         alt="Volkshilfe"
         class="an-start__logo"
       />
-      <h1 class="an-start__heading">Angehörigendialog</h1>
+      <h1 class="an-start__heading">
+        <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
+      </h1>
     </div>
 
-    <IconV class="an-start__iconv" />
     <div class="an-start__content">
       <div class="an-start__inputbackground">
         <div class="an-start__inputwrapper">
@@ -65,11 +72,13 @@
 
 <script>
 import { restartQuestionnaire } from '@/helpers/form.js';
+import IconTextLogo from '@/assets/icons/text-logo.svg?inline';
 
 export default {
   name: 'Start',
   components: {
-    IconV: () => import('@/assets/icons/v.svg?inline')
+    IconV: () => import('@/assets/icons/v.svg?inline'),
+    IconTextLogo
   },
   computed: {
     existingLocalStorage() {
@@ -119,6 +128,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.icon-text-logo {
+  fill: white;
+  max-height: 2rem;
+  width: 100%; // Chrome won't show otherwise
+}
+
 .an-start {
   display: flex;
   flex-direction: column;
@@ -128,28 +143,35 @@ export default {
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
 
-  &__backgroundimage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 0;
+  &__background {
     height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: fixed;
+  }
+
+  &__backgroundimage {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    background-color: $color-theme-darkgrey;
   }
 
   &__iconv {
     z-index: 1;
     position: absolute;
     top: 0;
-    right: auto;
-    height: 100vh;
-    @media #{map-get($query, 'md-and-up')} {
+    right: 50%;
+    height: 100%;
+    transform: translateX(50%);
+    @media #{map-get($query, 'lg-and-up')} {
       right: -35px;
+      transform: translateX(0);
     }
   }
 
   &__logo {
+    max-width: 100%;
     width: 220px;
     margin-bottom: 12px;
   }
