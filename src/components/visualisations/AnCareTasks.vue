@@ -19,7 +19,6 @@
             :is="figure.type"
             v-for="(figure, figureIndex) in careSvg[index]"
             :key="figure.type + figureIndex"
-            :style="{ fill: figure.fill }"
           />
         </div>
       </div>
@@ -33,12 +32,13 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
-import IconPersonArmsUp from '@/assets/icons/person-arms-up.svg?inline';
+import IconPersonArmsUpWhite from '@/assets/icons/person-arms-up-white.svg?inline';
+import IconPersonArmsUpGrey from '@/assets/icons/person-arms-up-grey.svg?inline';
 import IconPersonArmUp from '@/assets/icons/person-arm-up.svg?inline';
 
 export default {
   name: 'AnCareTasks',
-  components: { IconPersonArmsUp, IconPersonArmUp },
+  components: { IconPersonArmsUpWhite, IconPersonArmsUpGrey, IconPersonArmUp },
   mixins: [visualisation],
   data() {
     return {
@@ -90,17 +90,10 @@ export default {
   },
   created() {
     this.careSvg = [
-      [{ type: 'IconPersonArmsUp', fill: '#616160' }],
-      [
-        { type: 'IconPersonArmsUp', fill: '#616160' },
-        { type: 'IconPersonArmUp', fill: 'none' }
-      ],
-      [
-        { type: 'IconPersonArmsUp', fill: '#616160' },
-        { type: 'IconPersonArmsUp', fill: 'none' }
-      ],
-
-      [{ type: 'IconPersonArmsUp', fill: 'none' }]
+      [{ type: 'IconPersonArmsUpGrey' }],
+      [{ type: 'IconPersonArmsUpGrey' }, { type: 'IconPersonArmUp' }],
+      [{ type: 'IconPersonArmsUpGrey' }, { type: 'IconPersonArmsUpWhite' }],
+      [{ type: 'IconPersonArmsUpWhite' }]
     ];
     this.careLabels = [
       'Ich leiste die gesamte Unterstützung',
