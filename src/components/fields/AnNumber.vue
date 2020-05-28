@@ -1,13 +1,13 @@
 <template>
   <div class="an-number">
-    <button class="an-number__button--minus" @click="field_data--"></button>
+    <button class="an-number__button--minus" @click="calc(false)"></button>
     <input
       :id="field_id"
       v-model.number="field_data"
       type="number"
       :required="field_required"
     />
-    <button class="an-number__button--plus" @click="field_data++"></button>
+    <button class="an-number__button--plus" @click="calc(true)"></button>
   </div>
 </template>
 
@@ -23,6 +23,20 @@ export default {
         'update:field_valid',
         value !== '' && !Number.isNaN(Number(value))
       );
+    },
+    calc(operator) {
+      if (this.field_data !== undefined && this.field_data > 0) {
+        if (operator) {
+          this.field_data++;
+        } else {
+          this.field_data--;
+          if (this.field_data === 0) {
+            this.field_data = 1;
+          }
+        }
+      } else {
+        this.field_data = 1;
+      }
     }
   }
 };
