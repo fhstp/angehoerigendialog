@@ -1,20 +1,24 @@
 <template>
-  <div class="an-basisinformation row">
-    <div class="col-md-2">
-      <h3>Betreuende Person</h3>
-      <div v-for="(info, i) in infoBetreuendePerson" :key="i">
-        {{ info.label }}
-        {{ info.text }}
-        {{ info.value }}
+  <div class="an-basisinformation">
+    <div class="an-basisinformation__header-wrapper">
+      <div class="an-basisinformation__header-items">
+        {{ infoGeneral[0].value[0] }} Jahre Betreuende Person Demenzerkrankte
+        Person {{ infoGeneral[0].value[1] }} Jahre
+      </div>
+      <div class="an-basisinformation__header-overallifno">
+        <p>
+          {{ `${infoGeneral[1].label}: ${infoGeneral[1].value}` }}
+        </p>
+        <p v-if="infoGeneral[2].value">
+          {{ `${infoGeneral[2].label}` }}
+        </p>
       </div>
     </div>
-    <div class="col-md-2">
-      <h3>Demenzerkrankte Person</h3>
-      <div v-for="(info, i) in infoDemenzPerson" :key="i">
-        {{ info.label }}
-        {{ info.text }}
-        {{ info.value }}
-      </div>
+
+    <div v-for="(info, index) in infoPerson" :key="index">
+      {{ info.label }}
+      {{ info.text }}
+      {{ info.value }}
     </div>
   </div>
 </template>
@@ -25,45 +29,54 @@ import visJson from '@/data/visualisation.json';
 export default {
   name: 'AnBasisinformation',
   computed: {
-    infoBetreuendePerson() {
-      const basisinfoLabel = visJson.visualisation.basisinfo.betreuendeperson;
+    infoPerson() {
+      const basisinfoLabels = [
+        {
+          labels: visJson.visualisation.basisinfo.betreuendeperson,
+          id: 'betreuende_person'
+        },
+        {
+          labels: visJson.visualisation.basisinfo.demenzperson,
+          id: 'demenzerkrankte_person'
+        }
+      ];
+
       const basisInfoValues = [];
 
-      Object.keys(basisinfoLabel).forEach(item => {
-        const value = this.$store.getters.getFieldValue(
-          `betreuende_person-${item}`
-        );
-
-        if (value) {
+      basisinfoLabels.forEach(obj => {
+        Object.keys(obj.labels).forEach(fieldId => {
+          const value = this.$store.getters.getFieldValue(
+            `${obj.id}-${fieldId}`
+          );
           basisInfoValues.push({
-            label: basisinfoLabel[item],
-            text: 'Ja',
+            label: obj.labels[fieldId],
+            text: value === true ? 'Ja' : value,
             value: this.$store.getters.getFieldValue(
-              `betreuende_person-${item}detail`
+              `${obj.id}-${fieldId}detail`
             )
           });
-        }
+        });
       });
       return basisInfoValues;
     },
-    infoDemenzPerson() {
-      const basisinfoLabel = visJson.visualisation.basisinfo.demenzperson;
+    infoGeneral() {
+      const basisinfoLabel = visJson.visualisation.basisinfo.allgemein;
       const basisInfoValues = [];
 
       Object.keys(basisinfoLabel).forEach(item => {
         const value = this.$store.getters.getFieldValue(
           `demenzerkrankte_person-${item}`
         );
-
-        if (value) {
-          basisInfoValues.push({
-            label: basisinfoLabel[item],
-            text: 'Ja',
-            value: this.$store.getters.getFieldValue(
-              `demenzerkrankte_person-${item}detail`
-            )
-          });
-        }
+        basisInfoValues.push({
+          label: basisinfoLabel[item],
+          value:
+            item === 'alter'
+              ? [
+                  value,
+                  this.$store.getters.getFieldValue(`betreuende_person-${item}`)
+                ]
+              : value
+        });
       });
       return basisInfoValues;
     }
@@ -73,38 +86,9 @@ export default {
 
 <style lang="scss" scoped>
 .an-basisinformation {
-  justify-content: space-around;
-
-  &__table {
-    margin-top: $spacer * 4;
-    border: 3px solid black;
-    border-collapse: collapse;
-
-    @media print {
-      width: 50%;
-    }
-  }
-
-  tr:nth-child(even) {
-    background-color: #eee;
-  }
-  td {
-    text-align: left;
-    padding: 8px;
-  }
-}
-
-.btn {
-  &--active {
-    background-color: lightblue !important;
-    box-shadow: 3px 3px 8px #ccc;
-  }
-  &:focus {
-    background-color: white;
-  }
-
-  @media print {
-    width: 50%;
+  justify-content: center;
+  &__header-wrapper {
+    background-color: $color-theme-lightgrey;
   }
 }
 </style>

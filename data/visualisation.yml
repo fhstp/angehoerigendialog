@@ -5,17 +5,19 @@ visualisation:
       diagnose: ärztliche Demenzdiagnose
       pflegegeld: aktuelle Pfelgestufe
       pflegebedarf: Unterstüzungsbedarf
+      unterstuetzungsangebot: Unterstützungsangebote
 
     betreuendeperson:
       sorgepflichten: weitere Betreuungspflicthen
       beruf: Berufstätigkeit
-
-    allgemein:
-      verhaeltnis: Verwandschaftliches Verhältnis
-      haushalt: gemeinsamer Haushalt
       unterstuetzungsangebot: Unterstützungsangebote
 
-  caretasks:
+    allgemein:
+      alter: Alter
+      verhaeltnis: Verwandschaftliches Verhältnis
+      haushalt: gemeinsamer Haushalt
+
+    caretasks:
     mahlzeit: Mahlzeiten zubereiten
     nahrungsaufnahme: Nahrungsaufnahme unterstützen
     badenwaschenduschen: Baden, Waschen, Duschen

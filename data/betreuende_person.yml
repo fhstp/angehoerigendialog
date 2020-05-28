@@ -26,15 +26,15 @@ fields:
         when:
           sorgepflichten: true
 
-  unterstuetzungsangebote:
+  unterstuetzungsangebot:
     label: Nehmen Sie derzeit Unterstützungsangebote für pflegende Angehörige in Anspruch?
     type: toggle
     subfields:
-      unterstuetzungsangebotedetails:
+      unterstuetzungsangebotdetail:
         label: Welche Unterstützungsangebote nehmen Sie in Anspruch (etwa Angehörigenstammtisch, Gespräche mit professionellen HelferInnen)
         type: list
         when:
-          unterstuetzungsangebote: true
+          unterstuetzungsangebot: true
 
   demenz:
     label: Haben Sie bereits Vorwissen über die Erkrankung Demenz und ihren Verlauf?
