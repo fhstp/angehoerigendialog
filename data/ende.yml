@@ -1,11 +1,11 @@
-title: Angaben zu Datum und Uhrzeit
+title: Angaben zum Zweitgespräch
 titleShort: Ende
 fields:
 
   datum:
-    label: Datum wählen
+    label: Datum für Zweitgespräch wählen
     type: date
 
   uhrzeit:
-    label: Uhrzeit wählen
+    label: Uhrzeit für Zweitgespräch wählen
     type: time

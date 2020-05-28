@@ -17,8 +17,7 @@
 
 @include cols('');
 @each $name, $value in $grid-breakpoints {
-  @media (min-width: $value) {
+  @media print, (min-width: $value) {
     @include cols(#{$name}#{'-'});
   }
 }
-

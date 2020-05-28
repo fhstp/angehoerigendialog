@@ -60,6 +60,6 @@ fields:
     subfields:
       unterstuetzungsangebotdetail:
         label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
-        type: text
+        type: list
         when:
           unterstuetzungsangebot: true
