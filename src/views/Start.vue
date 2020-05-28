@@ -42,22 +42,24 @@
           </div>
         </div>
         <div>
-          <button
-            v-if="existingLocalStorage"
-            class="btn an-start__startbutton"
-            @click="restartQuestionnaire"
-          >
-            Start
-          </button>
-          <router-link v-else to="fragebogen" class="btn" start
-            >start</router-link
-          >
           <router-link
-            v-if="existingLocalStorage"
+            v-if="!existingQuestionnaire"
             to="fragebogen"
-            class="btn an-start__previousbutton"
-            >Vorherigen Fragebogen laden</router-link
+            class="btn an-start__startbutton"
+            start
+            >Start</router-link
           >
+          <template v-else>
+            <button
+              class="btn an-start__startbutton"
+              @click="restartQuestionnaire"
+            >
+              Start
+            </button>
+            <router-link to="fragebogen" class="btn an-start__previousbutton"
+              >Vorherigen Fragebogen laden</router-link
+            >
+          </template>
         </div>
       </div>
     </div>
@@ -87,14 +89,13 @@ export default {
     IconTextLogo
   },
   computed: {
-    existingLocalStorage() {
-      return localStorage.getItem('vuex');
-    },
     date: fieldGenerator('startseite-datum'),
     caregivername: fieldGenerator('startseite-angehoerigenname'),
     socialworkername: fieldGenerator('startseite-sozialarbeitername')
   },
   created() {
+    this.existingQuestionnaire = localStorage.getItem('vuex')?.length > 0;
+
     this.date = new Date().toISOString().slice(0, 10);
   },
   methods: {
