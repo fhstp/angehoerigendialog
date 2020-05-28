@@ -24,18 +24,18 @@
         </g>
       </AnBalloon>
     </div>
-    <div
-      v-if="pressure && pressure.length > 0"
-      class="an-resources-pressure__weight-wrapper"
-    >
-      <div
-        v-for="(pressureItem, i) in pressure"
-        :key="i"
-        class="an-resources-pressure__weight-list"
-      >
-        {{ pressureItem }}
+    <template v-if="pressure && pressure.length > 0">
+      <div class="an-resources-pressure__ropes"></div>
+      <div class="an-resources-pressure__weight-wrapper">
+        <div
+          v-for="(pressureItem, i) in pressure"
+          :key="i"
+          class="an-resources-pressure__weight-list"
+        >
+          {{ pressureItem }}
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -72,7 +72,7 @@ export default {
 
     this.$nextTick(() => {
       const packData = data =>
-        pack().size([251, 251]).padding(10)(
+        pack().size([153.8, 153.8]).padding(10)(
           hierarchy({ children: data }).sum(d => 1 + Math.random() * 0.2)
         );
 
@@ -105,17 +105,41 @@ export default {
   &__icon {
     width: 100%;
     max-width: 400px;
-    padding-bottom: $spacer * 2;
+  }
+
+  $ringsize: 60px;
+  $bordersize: 4px;
+
+  &__ropes {
+    margin: 0 auto;
+    height: 80px;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      height: 100%;
+      width: $bordersize;
+      background: $color-theme-darkred;
+      position: absolute;
+      bottom: $ringsize / 2;
+      left: 50%;
+      margin-left: $bordersize / -2;
+      z-index: -1;
+      transform-origin: bottom center;
+    }
+
+    &::before {
+      transform: translateX(-10px) rotate(-10deg);
+    }
+    &::after {
+      transform: translateX(10px) rotate(10deg);
+    }
   }
 
   &__weight {
-    $bgcolor: #975824;
-    $fgcolor: #bd753a;
-    $ringsize: 60px;
-    $bordersize: 4px;
-
     &-wrapper {
-      background-color: $bgcolor;
+      background-color: $color-theme-darkred;
       padding: $bordersize;
       text-align: center;
       width: max-content;
@@ -129,7 +153,7 @@ export default {
         content: '';
         width: $ringsize;
         height: $ringsize;
-        border: $bordersize * 4 solid $bgcolor;
+        border: $bordersize * 4 solid $color-theme-darkred;
         border-radius: 50%;
         background-color: transparent;
         position: absolute;
@@ -142,7 +166,7 @@ export default {
         content: '';
         width: $ringsize - $bordersize * 2;
         height: $ringsize - $bordersize * 2;
-        border: $bordersize * 2 solid $fgcolor;
+        border: $bordersize * 2 solid $color-theme-red;
         border-radius: 50%;
         background-color: transparent;
         position: absolute;
@@ -152,7 +176,7 @@ export default {
       }
     }
     &-list {
-      background: $fgcolor;
+      background: $color-theme-red;
       margin-bottom: $bordersize;
       padding: $bordersize;
 
