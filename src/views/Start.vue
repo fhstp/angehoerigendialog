@@ -11,60 +11,54 @@
       </picture>
       <IconV class="an-start__iconv" />
     </div>
-    <div class="an-start__logowrapper">
-      <img
-        src="@/assets/images/logo.png"
-        alt="Volkshilfe"
-        class="an-start__logo"
-      />
-      <h1 class="an-start__heading">
-        <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
-      </h1>
-    </div>
 
     <div class="an-start__content">
-      <div class="an-start__inputbackground">
-        <div class="an-start__inputwrapper">
-          <label for="caregiver-name">GesprächspartnerIn</label>
-          <input
-            id="caregiver-name"
-            v-model="caregivername"
-            type="text"
-            autofocus
-          />
-        </div>
-
-        <div class="an-start__inputwrapper">
-          <label for="socialworker-name">Durchgeführt von</label>
-          <input
-            id="socialworker-name"
-            v-model="socialworkername"
-            type="text"
-          />
-        </div>
-
-        <div class="an-start__inputwrapper">
-          <label for="date">Datum</label>
-          <input id="date" v-model="date" type="date" />
-        </div>
+      <div class="an-start__header">
+        <img
+          src="@/assets/images/logo.png"
+          alt="Volkshilfe"
+          class="an-start__vh-logo"
+        />
+        <h1 class="an-start__an-logo">
+          <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
+        </h1>
       </div>
-      <div>
-        <button
-          v-if="existingLocalStorage"
-          class="btn an-start__startbutton"
-          @click="restartQuestionnaire"
-        >
-          Start
-        </button>
-        <router-link v-else to="fragebogen" class="btn" start
-          >start</router-link
-        >
-        <router-link
-          v-if="existingLocalStorage"
-          to="fragebogen"
-          class="btn an-start__previousbutton"
-          >Vorherigen Fragebogen laden</router-link
-        >
+
+      <div class="an-start__form">
+        <div class="an-start__inputbackground">
+          <div class="an-start__inputwrapper">
+            <label for="caregiver-name">GesprächspartnerIn</label>
+            <input id="caregiver-name" v-model="caregivername" autofocus />
+          </div>
+
+          <div class="an-start__inputwrapper">
+            <label for="socialworker-name">Durchgeführt von</label>
+            <input id="socialworker-name" v-model="socialworkername" />
+          </div>
+
+          <div class="an-start__inputwrapper">
+            <label for="date">Datum</label>
+            <input id="date" v-model="date" type="date" />
+          </div>
+        </div>
+        <div>
+          <button
+            v-if="existingLocalStorage"
+            class="btn an-start__startbutton"
+            @click="restartQuestionnaire"
+          >
+            Start
+          </button>
+          <router-link v-else to="fragebogen" class="btn" start
+            >start</router-link
+          >
+          <router-link
+            v-if="existingLocalStorage"
+            to="fragebogen"
+            class="btn an-start__previousbutton"
+            >Vorherigen Fragebogen laden</router-link
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -135,19 +129,58 @@ export default {
 }
 
 .an-start {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 5vh 5vw;
   height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  &__header {
+    display: flex;
+    margin-bottom: $spacer * 4;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: flex-end;
+    flex-grow: 1;
+  }
+
+  &__vh-logo {
+    max-width: 100%;
+    width: 220px;
+    margin-bottom: $spacer * 2;
+  }
+
+  &__an-logo {
+    color: white;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+  }
+
+  &__startbutton {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 
   &__background {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    position: fixed;
+    z-index: -1;
   }
 
   &__backgroundimage {
@@ -158,7 +191,6 @@ export default {
   }
 
   &__iconv {
-    z-index: 1;
     position: absolute;
     top: 0;
     right: 50%;
@@ -168,49 +200,6 @@ export default {
       right: -35px;
       transform: translateX(0);
     }
-  }
-
-  &__logo {
-    max-width: 100%;
-    width: 220px;
-    margin-bottom: 12px;
-  }
-
-  &__logowrapper {
-    z-index: 2;
-    position: absolute;
-    right: 5vw;
-    top: 5vw;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  &__heading {
-    color: white;
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    font-weight: normal;
-  }
-
-  &__content {
-    position: absolute;
-    bottom: 10vw;
-    left: auto;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    @media #{map-get($query, 'md-and-up')} {
-      left: 10vw;
-    }
-  }
-
-  &__startbutton {
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  &__previousbutton {
   }
 
   &__inputbackground {
