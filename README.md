@@ -1,24 +1,30 @@
+{::options parse_block_html="true" /}
+
 # Angehörigendialog
 
-## Project setup
-```
-npm install
-```
+## Project structure
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### data
+markup for the questionnaire and the visualisations
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### public
+static files
 
-### Lints and fixes files
-```
-npm run lint
-```
+### src
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- `assets`
+- `components`
+  <details>
+    <summary markdown="span">Vue components which are used by the app</summary>
+    - `fields`: Components which represent a field type which is defined in [data](#data)
+    - `note`
+    - `ui`: UI elements
+    - `visualisations`: Components of the visualisations
+    - `AnField.vue`: Wrapper component for the `fields`-components
+  </details>
+- `data`
+- `helpers`
+- `mixins`
+- `router`
+- `store`
+- `views`
