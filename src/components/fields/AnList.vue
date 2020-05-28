@@ -102,6 +102,10 @@ export default {
   font-size: 1.1rem;
 }
 
+li {
+  margin-bottom: 1rem;
+}
+
 ol {
   list-style-position: inside;
 }

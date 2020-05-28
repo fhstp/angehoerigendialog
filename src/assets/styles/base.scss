@@ -39,6 +39,11 @@ fieldset {
 input + label {
   margin-left: $spacer;
 }
+.an-field__subfields{
+  input, textarea {
+    border: 2px solid $color-theme-lightgrey;
+  }
+}
 
 input, textarea {
   font-size: 1rem;
@@ -112,7 +117,7 @@ input, textarea {
     background-color:white;
     display: inline-block;
 
-    .an-checkboxes__option &{
+    .an-checkboxes__option &, .an-field__subfields &{
       background-color: var(--bgcolor);
     }
 
@@ -123,6 +128,13 @@ input, textarea {
   &:not(:checked){
     --opacity: 0;
   }
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
   }
 }
 
