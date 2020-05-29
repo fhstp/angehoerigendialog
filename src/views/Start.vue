@@ -116,7 +116,7 @@ export default {
 
 .an-start {
   padding: 5vh 5vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow-y: auto;
   overflow-x: hidden;
 
