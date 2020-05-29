@@ -2,7 +2,10 @@
   <div class="an-start">
     <div class="an-start__background">
       <picture>
-        <source srcset="@/assets/images/background_startscreen.webp" />
+        <source
+          srcset="@/assets/images/background_startscreen.webp"
+          type="image/webp"
+        />
         <img
           src="@/assets/images/background_startscreen.jpg"
           alt="Hände einer alten Person"
