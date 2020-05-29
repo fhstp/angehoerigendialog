@@ -6,8 +6,10 @@
         <AnSendMail />
       </div>
       <h1>Auswertung</h1>
+
       <h2>Überblick</h2>
       <AnBasisInformation />
+
       <h2 v-show="isAvailable.resources">
         Meine Ressourcen
       </h2>

@@ -8,16 +8,15 @@ visualisation:
       unterstuetzungsangebot: Unterstützungsangebote
 
     betreuendeperson:
-      sorgepflichten: weitere Betreuungspflicthen
+      sorgepflichten: weitere Betreuungspflichten
       beruf: Berufstätigkeit
       unterstuetzungsangebot: Unterstützungsangebote
 
     allgemein:
-      alter: Alter
       verhaeltnis: Verwandschaftliches Verhältnis
       haushalt: gemeinsamer Haushalt
 
-    caretasks:
+  caretasks:
     mahlzeit: Mahlzeiten zubereiten
     nahrungsaufnahme: Nahrungsaufnahme unterstützen
     badenwaschenduschen: Baden, Waschen, Duschen
