@@ -34,3 +34,28 @@ visualisation:
     zuviel: Es fällt mir schwer zuzugeben, dass es mir manchmal zuviel wird.
     hemmungen: Habe Hemmungen um Hilfe zu bitten.
     betreuungsaufgaben: Es fällt mir schwer Betreuungsaufgaben abzugeben.
+
+  situation:
+    gesundheit-gesundheitszustand: Gesundheitszustand
+    gesundheit-nervlichebelastung: Mentaler Zustand
+    gesundheit-energiereserven: Energiereserven
+
+  flower:
+    - fieldID: ressourcen_belastungen-rueckzugsmoeglichkeit
+      text: Rückzugs- möglichkeiten
+      solution: Rückzugsmöglich-keiten schaffen
+    - fieldID: ressourcen_belastungen-hobbysinteressen
+      text: Hobbys & Interessen
+      solution: Zeit für meine Hobbys schaffen
+    - fieldID: ressourcen_belastungen-freizeitaktivitaeten
+      text: Menschen treffen
+      solution: Mehr Menschen treffen
+    - fieldID: ressourcen_belastungen-zeitfuermichselbst
+      text: Erholungszeit
+      solution: Erholungszeit einplanen
+    - fieldID: ressourcen_belastungen-beziehungen
+      text: Familie & Freunde
+      solution: Zeit für Familie & Freunde einplanen
+    - fieldID: ressourcen_belastungen-anforderungen
+      text: Ausgleich Pflege & Freizeit
+      solution: Pflege mit Freizeit vereinbaren

@@ -19,7 +19,8 @@
             :is="figure.type"
             v-for="(figure, figureIndex) in careSvg[index]"
             :key="figure.type + figureIndex"
-            :style="{ fill: figure.fill }"
+            class="an-care-tasks__svg"
+            :class="`an-care-tasks__svg--${figure.class}`"
           />
         </div>
       </div>
@@ -66,8 +67,8 @@ export default {
 
           const categoryMap = {
             ich: 0,
-            teilen: 1,
-            ichmeist: 2,
+            ichmeist: 1,
+            teilen: 2,
             anderer: 3
           };
           if (Object.hasOwnProperty.call(categoryMap, careTaskObject.type)) {
@@ -90,21 +91,21 @@ export default {
   },
   created() {
     this.careSvg = [
-      [{ type: 'IconPersonArmsUp', fill: '#374355' }],
+      [{ type: 'IconPersonArmsUp', class: 'filled' }],
       [
-        { type: 'IconPersonArmsUp', fill: '#374355' },
-        { type: 'IconPersonArmsUp', fill: '#ADB9C9' }
+        { type: 'IconPersonArmsUp', class: 'filled' },
+        { type: 'IconPersonArmUp', class: 'empty' }
       ],
       [
-        { type: 'IconPersonArmsUp', fill: '#374355' },
-        { type: 'IconPersonArmUp', fill: '#ADB9C9' }
+        { type: 'IconPersonArmsUp', class: 'filled' },
+        { type: 'IconPersonArmsUp', class: 'empty' }
       ],
-      [{ type: 'IconPersonArmsUp', fill: '#ADB9C9' }]
+      [{ type: 'IconPersonArmsUp', class: 'empty' }]
     ];
     this.careLabels = [
       'Ich leiste die gesamte Unterstützung',
-      'Ich teile mir die Unterstützungen mit jemandem zu in etwa gleichen Teilen',
-      'Ich leiste den größten Teil der Untertützung, jemand anderes unterstützt mich fallweise',
+      'Jemand anderes unterstützt mich fallweise',
+      'Ich teile mir die Unterstützung mit jemand anderem',
       'Jemand anderes leistet die Unterstützung'
     ];
   }
@@ -138,15 +139,11 @@ export default {
     position: relative;
     margin-bottom: 5px;
 
-    svg {
-      width: 40%;
-    }
-
     &::after {
       content: '';
       position: absolute;
-      height: 10px;
-      background: #437bb9;
+      height: 5px;
+      background: $color-theme-darkgrey;
       width: calc(100% + 20px);
       left: -10px;
       bottom: -5px;
@@ -179,33 +176,25 @@ export default {
         @include last-of-line();
       }
     }
+  }
 
-    &--self::before {
-      content: 'Das bin ich';
-      height: 30px;
-      width: 100px;
-      position: absolute;
-      left: 50%;
-      top: 10px;
-      transform: translate(-110px, 0);
-      border-radius: 15px;
-      border-bottom-right-radius: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #ddd;
-      border: 2px solid #ccc;
+  &__svg {
+    width: 40%;
 
-      @media print {
-        transform: translate(-50px, 95px);
-        border-bottom-right-radius: 15px;
-      }
+    &--filled {
+      fill: $color-theme-darkgrey;
+      stroke: $color-theme-darkgrey;
+    }
+
+    &--empty {
+      fill: white;
+      stroke: $color-theme-darkgrey;
     }
   }
 
   &__list {
     list-style: none;
-    border: 5px solid #8bafb1;
+    border: 5px solid $color-theme-blue;
     padding: 10px;
     text-align: center;
     height: 90px;

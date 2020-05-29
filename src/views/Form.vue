@@ -46,6 +46,8 @@
                       :field-data="field"
                       :section-id="sectionId"
                       :field-id="`${sectionId}-${fieldId}`"
+                      :has-prev="hasPrevField(fieldId)"
+                      :has-next="hasNextField(fieldId)"
                       @goPrev="prevField()"
                       @goNext="nextField()"
                     />
@@ -56,15 +58,13 @@
             <div class="container">
               <button
                 v-if="steps.length === sectionIndex + 1"
-                ref="sectionEndBtn"
                 class="an-form__done btn"
                 @click="handleFinish()"
               >
-                Auswerten
+                {{ buttonText }}
               </button>
               <router-link
                 v-else
-                ref="sectionEndBtn"
                 :to="{
                   query: {
                     ...$route.query,
@@ -76,6 +76,45 @@
               >
                 Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
               </router-link>
+
+              <div
+                v-if="
+                  steps.length === sectionIndex + 1 && showOpenQuestions == true
+                "
+                class="an-form__openquestions"
+              >
+                <div
+                  v-if="openQuestions.length > 0"
+                  class="an-form__openquestions-heading-wrapper"
+                >
+                  <IconWarning class="an-form__openquestions-icon-warning" />
+                  <h3 class="an-form__openquestions-heading">Offene Fragen</h3>
+                </div>
+
+                <div
+                  v-for="(openQuestion, questionIndex) in openQuestions"
+                  :key="questionIndex"
+                >
+                  <div class="an-form__openquestions-heading-section">
+                    {{ `Kategorie "${openQuestion[0].sectionTitle}"` }}
+                  </div>
+                  <router-link
+                    v-for="(question, i) in openQuestion"
+                    :key="i"
+                    :to="{
+                      query: {
+                        ...$route.query,
+                        step: question.sectionId,
+                        field: question.fieldKey
+                      }
+                    }"
+                  >
+                    <div class="an-form__openquestions-item">
+                      {{ question.label }}
+                    </div>
+                  </router-link>
+                </div>
+              </div>
             </div>
           </section>
         </template>
@@ -88,7 +127,8 @@
 import form from '@/data/form.json';
 import {
   form_isInAccordion,
-  form_numberOfAccordionItems
+  form_numberOfAccordionItems,
+  form_filterAccordionItems
 } from '@/helpers/form.js';
 import AnAccordion from '@/components/ui/AnAccordion.vue';
 import AnAccordionItem from '@/components/ui/AnAccordionItem.vue';
@@ -97,6 +137,7 @@ import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
+import IconWarning from '@/assets/icons/warning.svg?inline';
 
 export default {
   name: 'Form',
@@ -107,7 +148,13 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark
+    IconCheckmark,
+    IconWarning
+  },
+  data() {
+    return {
+      showOpenQuestions: false
+    };
   },
   computed: {
     currentFieldIndex() {
@@ -127,12 +174,50 @@ export default {
         });
       }
       return steps;
+    },
+    openQuestions() {
+      const openQuestions = [[], [], [], [], [], [], [], [], [], []];
+      let i = 0;
+
+      for (const sectionId in form) {
+        const accordionItems = form_filterAccordionItems(
+          form[sectionId].fields
+        );
+
+        accordionItems.forEach((key, index) => {
+          const fieldKey = accordionItems[index].fieldId;
+
+          const done = this.$store.getters.getFieldCompletion(
+            `${sectionId}-${fieldKey}`
+          );
+
+          if (!done && done !== undefined) {
+            openQuestions[i].push({
+              sectionId,
+              sectionTitle: form[sectionId].titleShort ?? form[sectionId].title,
+              fieldKey: index,
+              label: accordionItems[index].label
+            });
+          }
+        });
+        i++;
+      }
+
+      return openQuestions.filter(list => list.length);
+    },
+    buttonText() {
+      return !this.showOpenQuestions ? 'Auswerten' : 'Trotzdem auswerten';
     }
   },
   watch: {
     '$route.query.step'(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.$refs.main.scrollTop = 0;
+      }
+    },
+    openQuestions(newValue) {
+      if (newValue.length === 0) {
+        this.showOpenQuestions = false;
       }
     }
   },
@@ -164,21 +249,29 @@ export default {
         }
       }
     },
+    hasPrevField(fieldId) {
+      const currentStepFields = form_filterAccordionItems(
+        form[this.steps[this.currentStepIndex].id].fields
+      );
+      const fieldIndex = currentStepFields.findIndex(
+        field => field.fieldId === fieldId
+      );
+
+      return fieldIndex !== 0;
+    },
+    hasNextField(fieldId) {
+      const currentStepFields = form_filterAccordionItems(
+        form[this.steps[this.currentStepIndex].id].fields
+      );
+      const fieldIndex = currentStepFields.findIndex(
+        field => field.fieldId === fieldId
+      );
+
+      return fieldIndex !== currentStepFields.length - 1;
+    },
     prevField() {
-      const isFirstStep = this.currentStepIndex === 0;
       const isFirstFieldOfStep = this.currentFieldIndex === 0;
-      if (isFirstFieldOfStep && !isFirstStep) {
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            step: this.steps[this.currentStepIndex - 1].id,
-            field:
-              form_numberOfAccordionItems(
-                form[this.steps[this.currentStepIndex - 1].id].fields
-              ) - 1
-          }
-        });
-      } else if (!(isFirstStep && isFirstFieldOfStep)) {
+      if (!isFirstFieldOfStep) {
         this.$router.push({
           query: {
             ...this.$route.query,
@@ -194,17 +287,7 @@ export default {
           form[this.steps[this.currentStepIndex].id].fields
         ) -
           1;
-      if (isLastFieldOfStep) {
-        this.$router.push({
-          query: {
-            ...this.$route.query,
-            field: -1
-          }
-        });
-        this.$refs.sectionEndBtn[0].$el
-          ? this.$refs.sectionEndBtn[0].$el.focus()
-          : this.$refs.sectionEndBtn[0].focus();
-      } else {
+      if (!isLastFieldOfStep) {
         this.$router.push({
           query: {
             ...this.$route.query,
@@ -218,20 +301,12 @@ export default {
         this.$router.replace({ query: { ...this.$route.query, field: 0 } });
     },
     handleFinish() {
-      let allSectionsDone = true;
-      for (const step of this.steps) {
-        if (!step.done) {
-          allSectionsDone = false;
-          break;
+      if (!this.showOpenQuestions) {
+        if (this.openQuestions.length > 0) {
+          this.showOpenQuestions = true;
+          return;
         }
       }
-      if (
-        !allSectionsDone &&
-        !confirm(
-          'Es sind noch nicht alle Fragen als abgeschlossen markiert. Möchten Sie trotzdem zur Auswertung fortfahren?'
-        )
-      )
-        return;
       this.$router.push({ path: 'auswertung' });
     }
   }
@@ -294,6 +369,41 @@ export default {
     margin-top: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  &__openquestions {
+    margin-top: $spacer * 2;
+    margin-bottom: $spacer * 2;
+    border-radius: 3px;
+    font-size: 1.2rem;
+
+    &-item {
+      margin-bottom: $spacer * 2;
+      margin-top: $spacer * 2;
+      padding: $spacer * 2;
+      border-radius: 3px;
+      background-color: $color-theme-lightred;
+      color: black;
+    }
+
+    &-heading-wrapper {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: $spacer * 2;
+    }
+
+    &-heading {
+      color: $color-theme-darkred;
+    }
+
+    &-icon-warning {
+      width: 35px;
+      margin-right: 0.5rem;
+      fill: $color-theme-darkred;
+    }
+  }
+  .router-link-active {
+    text-decoration: none;
   }
 }
 
