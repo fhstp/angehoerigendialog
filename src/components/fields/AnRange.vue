@@ -90,13 +90,25 @@ export default {
     left: $range-thumb-size / 2;
     right: $range-thumb-size / 2;
     line-height: 0;
+    &::before {
+      content: '';
+      width: calc(var(--value) * 100% + #{$range-thumb-size / 2});
+      height: $range-track-height;
+      display: block;
+      position: absolute;
+      background: $color-theme-darkgrey;
+      top: $range-track-height/2 + 0.5;
+      left: -8px;
+      border-radius: $border-radius + 5px;
+      border: 3px solid white;
+    }
   }
 
   &__thumb-label {
     position: absolute;
     top: 0;
     left: calc(100% * var(--value));
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, #{-$range-thumb-size});
     border-radius: $border-radius;
     background-color: #333;
     color: white;
