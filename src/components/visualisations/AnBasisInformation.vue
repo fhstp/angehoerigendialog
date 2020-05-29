@@ -1,40 +1,44 @@
 <template>
   <div class="an-basisinformation">
     <div class="an-basisinformation__header-wrapper">
-      <div style="display: flex; justify-content: space-between;">
-        <span>
-          Betreuende Person
+      <div class="an-basisinformation__header-headings">
+        <div>
+          <span class="label">
+            Betreuende Person
+          </span>
 
           <template v-if="infoGeneral.values.alterBetreuend"
             >{{ infoGeneral.values.alterBetreuend }} Jahre
           </template>
-        </span>
+        </div>
         <IconHands class="icon-hands" />
 
-        <span>
-          Demenzerkrankte Person
+        <div>
+          <span class="label">
+            Demenzerkrankte Person
+          </span>
           <template v-if="infoGeneral.values.alterErkrankt">
             {{ infoGeneral.values.alterErkrankt }} Jahre</template
           >
-        </span>
+        </div>
       </div>
 
       <div class="an-basisinformation__header-overallinfo">
-        <span v-if="infoGeneral.values.verhaeltnis">
+        <div v-if="infoGeneral.values.verhaeltnis">
           {{
             `${infoGeneral.labels.verhaeltnis}: ${infoGeneral.values.verhaeltnis}`
           }}
-        </span>
-        <span v-if="infoGeneral.values.haushalt">
+        </div>
+        <div v-if="infoGeneral.values.haushalt">
           {{ infoGeneral.labels.haushalt }}
-        </span>
+        </div>
       </div>
     </div>
 
     <!-- Betreuende Person Beginn -->
 
     <div class="an-basisinformation__info-wrapper">
-      <div class="an-basisinformation__info-betreuend col-md-3">
+      <div class="an-basisinformation__info-betreuend">
         <div
           class="an-basisinformation__info-items an-basisinformation__info-sorgepflichten"
         >
@@ -54,7 +58,7 @@
               </ul>
             </template>
             <template v-else>
-              KEINE
+              keine
             </template>
           </div>
         </div>
@@ -66,7 +70,7 @@
             <div class="label">
               {{ infoBetreuend.beruf.label }}
             </div>
-            <div v-if="infoBetreuend.beruf.value" class="value">
+            <div v-if="infoBetreuend.beruf.value" class="value warning">
               <IconWarning
                 v-if="infoBetreuend.beruf.value > 40"
                 class="icon-warning"
@@ -113,7 +117,7 @@
                 {{ value }}
               </li>
             </ul>
-            <div v-else>
+            <div v-else class="warning">
               <IconWarning class="icon-warning" aria-hidden="true" />
               <span class="text-warning">KEINE</span>
             </div>
@@ -134,10 +138,10 @@
             <template v-if="infoErkrankt.diagnose.value">
               {{ infoErkrankt.diagnose.value }}
             </template>
-            <template v-else>
+            <div v-else class="warning">
               <IconWarning class="icon-warning" aria-hidden="true" />
               <span class="text-warning">KEINE</span>
-            </template>
+            </div>
           </div>
         </div>
 
@@ -149,7 +153,9 @@
           </div>
           <div class="value">
             <template v-if="infoErkrankt.pflegegeld.value">
-              {{ pflegegeldLabels[infoErkrankt.pflegegeld.value] }}
+              <span
+                v-html="pflegegeldLabels[infoErkrankt.pflegegeld.value]"
+              ></span>
               <div class="lollipop-field">
                 <div
                   v-for="i in 7"
@@ -164,10 +170,10 @@
                 </div>
               </div>
             </template>
-            <template v-else>
+            <div v-else class="warning">
               <IconWarning class="icon-warning" aria-hidden="true" />
               <span class="text-warning">KEINE</span>
-            </template>
+            </div>
           </div>
         </div>
 
@@ -202,7 +208,7 @@
                 {{ value }}
               </li>
             </ul>
-            <div v-else>
+            <div v-else class="warning">
               <IconWarning class="icon-warning" aria-hidden="true" />
               <span class="text-warning">KEINE</span>
             </div>
@@ -260,9 +266,9 @@ export default {
       2: 'mind. 95h/Monat',
       3: 'mind. 120h/Monat',
       4: 'mind. 160h/Monat',
-      5: 'mind. 180h/Monat\n+ wenn Bewegungsunfähigkeit gegeben',
-      6: 'mind. 180h/Monat\n+ wenn Bewegungsunfähigkeit gegeben',
-      7: 'mind. 180h/Monat\n+ wenn Bewegungsunfähigkeit gegeben'
+      5: 'mind. 180h/Monat<br/>+ wenn Bewegungsunfähigkeit gegeben',
+      6: 'mind. 180h/Monat<br/>+ wenn Bewegungsunfähigkeit gegeben',
+      7: 'mind. 180h/Monat<br/>+ wenn Bewegungsunfähigkeit gegeben'
     };
   },
   methods: {
@@ -293,16 +299,42 @@ export default {
 
 <style lang="scss" scoped>
 .an-basisinformation {
-  &__header-wrapper {
-    background-color: $color-theme-lightgrey;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .label {
+    font-size: 18px;
+    font-weight: bold;
   }
-  &__header-overallinfo {
-    border-top: 2px solid $color-theme-darkgrey;
-    width: 100%;
+
+  &__header {
+    margin-bottom: 0.5rem;
+
+    &-headings {
+      display: flex;
+      align-items: flex-end;
+
+      .label {
+        margin-right: 0.5rem;
+      }
+
+      & > div {
+        flex: 1;
+      }
+
+      .icon-hands {
+        margin: 0 2rem -1rem;
+      }
+    }
+    &-overallinfo {
+      border-top: 2px solid $color-theme-darkgrey;
+      background-color: $color-theme-lightgrey;
+      width: 100%;
+      z-index: 1;
+      position: relative;
+      text-align: center;
+    }
+  }
+
+  .warning {
+    display: flex;
   }
 
   .icon-warning {
@@ -324,9 +356,17 @@ export default {
   }
 
   &__info {
+    &-items {
+      margin-bottom: 0.5rem;
+    }
+
     &-wrapper {
       display: flex;
       justify-content: space-between;
+
+      & > div {
+        width: calc(50% - 32px - 2rem);
+      }
     }
 
     &-beruf {
@@ -340,6 +380,8 @@ export default {
         width: $width;
         display: flex;
         flex-wrap: wrap;
+        margin-top: 0.3rem;
+        margin-left: 1rem;
 
         .dot {
           box-sizing: border-box;
@@ -420,6 +462,7 @@ export default {
         align-items: center;
         justify-content: flex-end;
         margin-right: $margin;
+        margin-top: 0.5rem;
 
         &::after {
           content: '';
