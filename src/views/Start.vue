@@ -159,6 +159,10 @@ export default {
     font-weight: bold;
   }
 
+  &__previousbutton {
+    margin-left: $spacer * 2;
+  }
+
   &__background {
     position: fixed;
     top: 0;
