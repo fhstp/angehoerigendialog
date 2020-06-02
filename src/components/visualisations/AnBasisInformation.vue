@@ -1,29 +1,21 @@
 <template>
   <div class="an-basisinformation">
-    <div class="an-basisinformation__header-wrapper">
-      <div class="an-basisinformation__header-headings">
-        <div class="betreuend">
-          <span class="label">
-            Betreuende Person
-          </span>
-
-          <template v-if="infoGeneral.values.alterBetreuend"
-            >{{ infoGeneral.values.alterBetreuend }} Jahre
-          </template>
-        </div>
-        <IconHands class="icon-hands" />
-
-        <div class="erkrankt">
-          <span class="label">
-            Demenzerkrankte Person
-          </span>
-          <template v-if="infoGeneral.values.alterErkrankt">
-            {{ infoGeneral.values.alterErkrankt }} Jahre</template
-          >
-        </div>
+    <div class="an-basisinformation__header">
+      <div class="an-basisinformation__header-betreuend">
+        <strong>Betreuende Person</strong>
+        <template v-if="infoGeneral.values.alterBetreuend"
+          >{{ infoGeneral.values.alterBetreuend }} Jahre
+        </template>
+      </div>
+      <IconHands class="icon-hands" />
+      <div class="an-basisinformation__header-erkrankt">
+        <strong>Demenzerkrankte Person</strong>
+        <template v-if="infoGeneral.values.alterErkrankt">
+          {{ infoGeneral.values.alterErkrankt }} Jahre</template
+        >
       </div>
 
-      <div class="an-basisinformation__header-overallinfo">
+      <div class="an-basisinformation__header-commoninfo">
         <div v-if="infoGeneral.values.verhaeltnis">
           {{
             `${infoGeneral.labels.verhaeltnis}: ${infoGeneral.values.verhaeltnis}`
@@ -37,56 +29,57 @@
 
     <!-- Betreuende Person Beginn -->
 
-    <div class="an-basisinformation__info-wrapper">
-      <div class="an-basisinformation__info-betreuend">
+    <div class="row">
+      <div class="col-3">
         <div
-          class="an-basisinformation__info-items an-basisinformation__info-sorgepflichten"
+          v-if="infoBetreuend.sorgepflichten"
+          class="an-basisinformation-item an-basisinformation-item--sorgepflichten"
         >
-          <div class="label">
+          <div class="an-basisinformation-item__title">
             {{ infoBetreuend.sorgepflichten.label }}
           </div>
-          <div class="value">
-            <template v-if="Array.isArray(infoBetreuend.sorgepflichten.value)">
-              <IconWarning class="icon-warning" aria-hidden="true" />
-              <ul>
-                <li
-                  v-for="(value, i) in infoBetreuend.sorgepflichten.value"
-                  :key="i"
-                >
-                  {{ value }}
-                </li>
-              </ul>
-            </template>
-            <template v-else>
-              keine
-            </template>
-          </div>
+          <template v-if="Array.isArray(infoBetreuend.sorgepflichten.value)">
+            <IconWarning class="icon-warning" aria-hidden="true" />
+            <ul class="row">
+              <li
+                v-for="(value, i) in infoBetreuend.sorgepflichten.value"
+                :key="i"
+                class="col-3"
+              >
+                {{ value }}
+              </li>
+            </ul>
+          </template>
+          <template v-else>
+            keine
+          </template>
         </div>
 
-        <div
-          class="an-basisinformation__info-items an-basisinformation__info-beruf"
-        >
-          <div class="text">
-            <div class="label">
+        <div v-if="infoBetreuend.beruf" class="an-basisinformation-item row">
+          <div>
+            <div class="an-basisinformation-item__title">
               {{ infoBetreuend.beruf.label }}
             </div>
-            <div v-if="infoBetreuend.beruf.value" class="value warning">
+            <div v-if="infoBetreuend.beruf.value" class="d-flex">
               <IconWarning
                 v-if="infoBetreuend.beruf.value > 40"
                 class="icon-warning"
                 aria-hidden="true"
               />
-              <span :class="{ 'text-warning': infoBetreuend.beruf.value > 40 }">
+              <component
+                :is="infoBetreuend.beruf.value > 40 ? 'strong' : 'span'"
+                :class="{ darkred: infoBetreuend.beruf.value > 40 }"
+              >
                 {{ infoBetreuend.beruf.value }}h/Woche
-              </span>
+              </component>
             </div>
-            <div v-else>KEINE</div>
+            <template v-else>keine</template>
           </div>
-          <div v-if="infoBetreuend.beruf.value" class="dots">
+          <div v-if="infoBetreuend.beruf.value" class="an-dots">
             <span
               v-for="i in Math.ceil(infoBetreuend.beruf.value)"
               :key="i"
-              class="dot"
+              class="an-dots__dot"
               :style="{
                 '--percentage':
                   i === Math.ceil(infoBetreuend.beruf.value)
@@ -96,94 +89,89 @@
                       '%'
                     : false
               }"
-            ></span>
+            />
           </div>
         </div>
 
         <div
-          class="an-basisinformation__info-items an-basisinformation__info-unterstuetzungsangebot"
+          v-if="infoBetreuend.unterstuetzungsangebot"
+          class="an-basisinformation-item an-basisinformation-item--unterstuetzungsangebot"
         >
-          <div class="label">
+          <div class="an-basisinformation-item__title">
             {{ infoBetreuend.unterstuetzungsangebot.label }}
           </div>
-          <div class="value">
-            <ul
-              v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)"
+          <ul
+            v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)"
+            class="row"
+          >
+            <li
+              v-for="(value, i) in infoBetreuend.unterstuetzungsangebot.value"
+              :key="i"
+              class="col-3"
             >
-              <li
-                v-for="(value, i) in infoBetreuend.unterstuetzungsangebot.value"
-                :key="i"
-              >
-                {{ value }}
-              </li>
-            </ul>
-            <div v-else class="warning">
-              <IconWarning class="icon-warning" aria-hidden="true" />
-              <span class="text-warning">KEINE</span>
-            </div>
+              {{ value }}
+            </li>
+          </ul>
+          <div v-else class="d-flex">
+            <IconWarning class="icon-warning" aria-hidden="true" />
+            <strong class="darkred">KEINE</strong>
           </div>
         </div>
       </div>
 
       <!-- Demenz Person Beginn -->
 
-      <div class="an-basisinformation__info-demenz">
-        <div
-          class="an-basisinformation__info-items an-basisinformation__info-diagnose"
-        >
-          <div class="label">
+      <div class="col-3">
+        <div v-if="infoErkrankt.diagnose" class="an-basisinformation-item">
+          <div class="an-basisinformation-item__title">
             {{ infoErkrankt.diagnose.label }}
           </div>
-          <div class="value">
+          <div>
             <template v-if="infoErkrankt.diagnose.value">
               {{ infoErkrankt.diagnose.value }}
             </template>
-            <div v-else class="warning">
+            <div v-else class="d-flex">
               <IconWarning class="icon-warning" aria-hidden="true" />
-              <span class="text-warning">KEINE</span>
+              <strong class="darkred">KEINE</strong>
             </div>
           </div>
         </div>
 
-        <div
-          class="an-basisinformation__info-items an-basisinformation__info-pflegegeld"
-        >
-          <div class="label">
+        <div v-if="infoErkrankt.pflegegeld" class="an-basisinformation-item">
+          <div class="an-basisinformation-item__title">
             {{ infoErkrankt.pflegegeld.label }}
           </div>
-          <div class="value">
+          <div>
             <template v-if="infoErkrankt.pflegegeld.value">
               <span
                 v-html="pflegegeldLabels[infoErkrankt.pflegegeld.value]"
               ></span>
-              <div class="lollipop-field">
+              <div class="an-mini-lollipop">
                 <div
                   v-for="i in 7"
                   :key="i"
-                  class="lollipop"
+                  class="an-mini-lollipop__item"
                   :class="{
-                    'lollipop-active':
+                    'an-mini-lollipop__item--active':
                       i === Number(infoErkrankt.pflegegeld.value)
                   }"
                 >
-                  <div class="lollipop-bubble">{{ i }}</div>
+                  <div class="an-mini-lollipop__bubble">{{ i }}</div>
                 </div>
               </div>
             </template>
-            <div v-else class="warning">
+            <div v-else class="d-flex">
               <IconWarning class="icon-warning" aria-hidden="true" />
-              <span class="text-warning">KEINE</span>
+              <strong class="darkred">KEINE</strong>
             </div>
           </div>
         </div>
 
-        <div
-          class="an-basisinformation__info-items an-basisinformation__info-pflegebedarf"
-        >
-          <div class="label">
+        <div v-if="infoErkrankt.pflegebedarf" class="an-basisinformation-item">
+          <div class="an-basisinformation-item__title">
             {{ infoErkrankt.pflegebedarf.label }}
           </div>
-          <div class="value">
+          <div>
             <template v-if="infoErkrankt.pflegebedarf.value">
               {{ infoErkrankt.pflegebedarf.value }}
             </template>
@@ -194,24 +182,27 @@
         </div>
 
         <div
-          class="an-basisinformation__info-items an-basisinformation__info-unterstuetzungsangebot"
+          v-if="infoErkrankt.unterstuetzungsangebot"
+          class="an-basisinformation-item an-basisinformation-item--unterstuetzungsangebot"
         >
-          <div class="label">
+          <div class="an-basisinformation-item__title">
             {{ infoErkrankt.unterstuetzungsangebot.label }}
           </div>
-          <div class="value">
-            <ul v-if="Array.isArray(infoErkrankt.unterstuetzungsangebot.value)">
-              <li
-                v-for="(value, i) in infoErkrankt.unterstuetzungsangebot.value"
-                :key="i"
-              >
-                {{ value }}
-              </li>
-            </ul>
-            <div v-else class="warning">
-              <IconWarning class="icon-warning" aria-hidden="true" />
-              <span class="text-warning">KEINE</span>
-            </div>
+          <ul
+            v-if="Array.isArray(infoErkrankt.unterstuetzungsangebot.value)"
+            class="row"
+          >
+            <li
+              v-for="(value, i) in infoErkrankt.unterstuetzungsangebot.value"
+              :key="i"
+              class="col-3"
+            >
+              {{ value }}
+            </li>
+          </ul>
+          <div v-else class="d-flex">
+            <IconWarning class="icon-warning" aria-hidden="true" />
+            <strong class="darkred">KEINE</strong>
           </div>
         </div>
       </div>
@@ -301,51 +292,40 @@ $leftwidth: 40%;
 $centerwidth: 10%;
 $rightwidth: 50%;
 
+.icon-hands {
+  margin-bottom: -1rem;
+  width: $centerwidth;
+  height: 4rem;
+}
+
 .an-basisinformation {
   color-adjust: exact;
 
-  .label {
-    font-size: 18px;
-    font-weight: bold;
-  }
-
   &__header {
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
 
-    &-headings {
-      display: flex;
-      align-items: flex-end;
-
-      .label {
-        margin-right: 0.5rem;
-      }
-
-      .betreuend {
-        width: $leftwidth;
-      }
-
-      .icon-hands {
-        margin-bottom: -1rem;
-        width: $centerwidth;
-        height: 4rem;
-      }
-
-      .erkrankt {
-        width: $rightwidth;
-      }
+    strong {
+      font-size: 18px;
+      margin-right: $spacer;
     }
-    &-overallinfo {
+
+    &-betreuend {
+      width: $leftwidth;
+    }
+
+    &-erkrankt {
+      width: $rightwidth;
+    }
+
+    &-commoninfo {
       border-top: 2px solid $color-theme-darkgrey;
       background-color: $color-theme-lightgrey;
       width: 100%;
-      z-index: 1;
-      position: relative;
       text-align: center;
     }
-  }
-
-  .warning {
-    display: flex;
   }
 
   .icon-warning {
@@ -355,156 +335,132 @@ $rightwidth: 50%;
     margin-right: 1rem;
     flex-shrink: 0;
   }
+}
 
-  .text-warning {
-    color: $color-theme-darkred;
-    font-weight: bold;
+.an-basisinformation-item {
+  margin-bottom: $spacer;
+
+  &--unterstuetzungsangebot,
+  &--sorgepflichten {
+    overflow-wrap: break-word;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li::before {
+      content: '+';
+    }
   }
 
-  &__info {
-    &-items {
-      margin-bottom: 0.5rem;
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+}
+
+.an-dots {
+  $width: 100px;
+  $margin: 3px;
+  $dot: ($width / 5) - $margin * 4 / 5;
+
+  width: $width;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+
+  &__dot {
+    box-sizing: border-box;
+    width: $dot;
+    height: $dot;
+    background: $color-theme-lightgrey;
+    border: $color-theme-darkgrey solid $dot / 6;
+    border-radius: 50%;
+    margin-bottom: $margin;
+    margin-right: $margin;
+
+    &:nth-child(5n) {
+      margin-right: 0;
     }
 
-    &-wrapper {
+    &:last-child {
+      clip-path: polygon(
+        0 0,
+        var(--percentage) 0,
+        var(--percentage) 100%,
+        0 100%
+      );
+    }
+  }
+}
+
+.an-mini-lollipop {
+  $baseheight: 4px;
+  $stickwidth: 2px;
+  $margin: 4px;
+  $stickamount: 7;
+  $bubblewidth: 24px;
+  display: flex;
+  position: relative;
+
+  &::after {
+    content: '';
+    height: $stickwidth;
+    width: ($bubblewidth + $margin) * ($stickamount - 1) + $stickwidth;
+    position: absolute;
+    left: $bubblewidth / 2 - $stickwidth / 2;
+    bottom: 0;
+    background: $color-theme-darkgrey;
+  }
+
+  &__item {
+    width: $bubblewidth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: $margin;
+    margin-top: $spacer;
+
+    @for $i from 1 through $stickamount {
+      &:nth-child(#{$i}) {
+        --position: #{$baseheight * $i + $baseheight + 10};
+      }
+    }
+
+    &::after {
+      content: '';
+      width: $stickwidth;
+      height: var(--position);
+      background-color: $color-theme-darkgrey;
+    }
+
+    .an-mini-lollipop__bubble {
+      height: $bubblewidth;
+      width: $bubblewidth;
+      border: $color-theme-darkgrey $stickwidth solid;
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: -10px;
+      background-color: white;
+      z-index: 1;
     }
 
-    &-betreuend,
-    &-demenz {
-      width: 50%;
-    }
-
-    &-beruf {
-      display: flex;
-
-      .dots {
-        $width: 100px;
-        $margin: 3px;
-        $dot: ($width / 5) - $margin * 4 / 5;
-
-        width: $width;
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 0.3rem;
-        margin-left: 1rem;
-
-        .dot {
-          box-sizing: border-box;
-          width: $dot;
-          height: $dot;
-          background: $color-theme-lightgrey;
-          border: $color-theme-darkgrey solid $dot / 6;
-          border-radius: 50%;
-          margin-bottom: $margin;
-          margin-right: $margin;
-
-          &:nth-child(5n) {
-            margin-right: 0;
-          }
-
-          &:last-child {
-            clip-path: polygon(
-              0 0,
-              var(--percentage) 0,
-              var(--percentage) 100%,
-              0 100%
-            );
-          }
-        }
-      }
-    }
-
-    &-unterstuetzungsangebot,
-    &-sorgepflichten {
-      overflow-wrap: break-word;
-
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
+    &--active {
+      &::after {
+        width: $stickwidth * 2;
+        background-color: $color-theme-darkred;
       }
 
-      li {
-        width: 50%;
-        &::before {
-          content: '+';
-        }
-      }
-    }
-
-    &-pflegegeld {
-      $baseheight: 4px;
-      $stickwidth: 2px;
-      $margin: 4px;
-      $stickamount: 7;
-      $bubblewidth: 24px;
-
-      @for $i from 1 through $stickamount {
-        .lollipop:nth-child(#{$i}) {
-          --position: #{$baseheight * $i + $baseheight + 10};
-        }
-      }
-
-      .lollipop-field {
-        display: flex;
-        position: relative;
-
-        &::after {
-          content: '';
-          height: $stickwidth;
-          width: ($bubblewidth + $margin) * ($stickamount - 1) + $stickwidth;
-          position: absolute;
-          left: $bubblewidth / 2 - $stickwidth / 2;
-          bottom: 0;
-          background: $color-theme-darkgrey;
-        }
-      }
-
-      .lollipop {
-        width: $bubblewidth;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        margin-right: $margin;
-        margin-top: 0.5rem;
-
-        &::after {
-          content: '';
-          width: $stickwidth;
-          height: var(--position);
-          background-color: $color-theme-darkgrey;
-        }
-
-        .lollipop-bubble {
-          height: $bubblewidth;
-          width: $bubblewidth;
-          border: $color-theme-darkgrey $stickwidth solid;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          margin-bottom: -10px;
-          background-color: white;
-          z-index: 1;
-        }
-
-        &-active {
-          &::after {
-            width: $stickwidth * 2;
-            background-color: $color-theme-darkred;
-          }
-
-          .lollipop-bubble {
-            border-color: $color-theme-darkred;
-            background-color: $color-theme-darkred;
-            color: white;
-          }
-        }
+      .an-mini-lollipop__bubble {
+        border-color: $color-theme-darkred;
+        background-color: $color-theme-darkred;
+        color: white;
       }
     }
   }
