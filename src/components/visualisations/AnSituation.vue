@@ -115,6 +115,7 @@ $pin-height: 60%;
     position: relative;
     border: $battery-border-width solid #333;
     border-radius: $battery-border-radius;
+    background-color: $color-theme-lightgrey;
     width: calc(100% - #{$pin-width});
 
     &::after {
