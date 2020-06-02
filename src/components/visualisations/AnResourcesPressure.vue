@@ -1,11 +1,11 @@
 <template>
   <div class="an-resources-pressure">
-    <div class="an-resources-pressure__icon-wrapper">
+    <div class="an-resources">
       <AnBalloon
         :show-ropes="pressure && pressure.length > 0"
-        class="an-resources-pressure__icon"
+        class="an-resources__icon"
       >
-        <g class="an-resources-pressure__air">
+        <g class="an-resources__air">
           <foreignObject
             v-for="(resource, i) in resources"
             :key="i"
@@ -17,7 +17,7 @@
             class="an-resources-pressure__innercircle-wrapper"
           >
             <AnBalloonCircle
-              class="an-resources-pressure__inncercircle"
+              class="an-resources__inncercircle"
               :text="resource"
             />
           </foreignObject>
@@ -26,15 +26,15 @@
     </div>
     <template v-if="pressure && pressure.length > 0">
       <div class="an-resources-pressure__ropes"></div>
-      <div class="an-resources-pressure__weight-wrapper">
-        <div
+      <ul class="an-pressure">
+        <li
           v-for="(pressureItem, i) in pressure"
           :key="i"
-          class="an-resources-pressure__weight-list"
+          class="an-pressure__item"
         >
           {{ pressureItem }}
-        </div>
-      </div>
+        </li>
+      </ul>
     </template>
   </div>
 </template>
@@ -78,7 +78,7 @@ export default {
 
       const root = packData(this.resources);
 
-      const group = select('.an-resources-pressure__air');
+      const group = select('.an-resources__air');
 
       group
         .selectAll('foreignObject')
@@ -94,22 +94,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$ringsize: 60px;
+$bordersize: 4px;
+
 .an-resources-pressure {
   margin-bottom: 20px;
-  &__icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__icon {
-    width: 100%;
-    max-width: 400px;
-  }
-
-  $ringsize: 60px;
-  $bordersize: 4px;
-
   &__ropes {
     margin: 0 auto;
     height: 80px;
@@ -136,53 +125,64 @@ export default {
       transform: translateX(10px) rotate(10deg);
     }
   }
+}
 
-  &__weight {
-    &-wrapper {
-      background-color: $color-theme-darkred;
-      padding: $bordersize;
-      text-align: center;
-      width: max-content;
-      max-width: 100%;
-      min-width: 150px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
+.an-resources {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      &::before {
-        content: '';
-        width: $ringsize;
-        height: $ringsize;
-        border: $bordersize * 4 solid $color-theme-darkred;
-        border-radius: 50%;
-        background-color: transparent;
-        position: absolute;
-        top: -($ringsize - $bordersize * 3);
-        z-index: -2;
-        margin-left: -($ringsize / 2);
-      }
+  &__icon {
+    width: 100%;
+    max-width: 400px;
+  }
+}
 
-      &::after {
-        content: '';
-        width: $ringsize - $bordersize * 2;
-        height: $ringsize - $bordersize * 2;
-        border: $bordersize * 2 solid $color-theme-red;
-        border-radius: 50%;
-        background-color: transparent;
-        position: absolute;
-        top: -($ringsize - $bordersize * 4);
-        margin-left: -($ringsize / 2 - $bordersize);
-        z-index: 0;
-      }
-    }
-    &-list {
-      background: $color-theme-red;
-      margin-bottom: $bordersize;
-      padding: $bordersize;
+.an-pressure {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  max-width: 25ch;
+  min-width: 150px;
+  position: relative;
+  text-align: center;
+  list-style: none;
+  color: white;
 
-      &:last-child {
-        margin: 0;
-      }
+  &::before {
+    content: '';
+    width: $ringsize;
+    height: $ringsize;
+    border: $bordersize * 4 solid $color-theme-darkred;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    top: -($ringsize - $bordersize * 3);
+    z-index: -2;
+    margin-left: -($ringsize / 2);
+  }
+
+  &::after {
+    content: '';
+    width: $ringsize - $bordersize * 2;
+    height: $ringsize - $bordersize * 2;
+    border: $bordersize * 2 solid $color-theme-red;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    top: -($ringsize - $bordersize * 4);
+    margin-left: -($ringsize / 2 - $bordersize);
+    z-index: 0;
+  }
+  &__item {
+    background: $color-theme-red;
+    padding: $spacer;
+    border-bottom: $bordersize solid $color-theme-darkred;
+    border-left: $bordersize solid $color-theme-darkred;
+    border-right: $bordersize solid $color-theme-darkred;
+
+    &:first-child {
+      border-top: $bordersize solid $color-theme-darkred;
     }
   }
 }
