@@ -8,7 +8,7 @@
       <h1>Auswertung</h1>
       <div class="an-visualisation__heading-wrapper">
         <h2>Überblick</h2>
-        <AnEditButton section-id="'demenzerkrankte_person'" field-id="0" />
+        <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
       </div>
       <AnBasisInformation />
 
@@ -19,7 +19,7 @@
         <h2>
           Meine Ressourcen
         </h2>
-        <AnEditButton section-id="'ressourcen_belastungen'" field-id="0" />
+        <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
       </div>
       <AnResources
         v-show="isAvailable.resources"
@@ -33,7 +33,7 @@
         <h2>
           Zusammenfassende Einschätzung der gesundheitliche Situation
         </h2>
-        <AnEditButton section-id="'gesundheit'" field-id="0" />
+        <AnEditButton section-id="gesundheit" field-id="0" />
       </div>
       <AnSituation
         v-show="isAvailable.situation"
@@ -47,7 +47,7 @@
         <h2>
           Meine Energie-Blume
         </h2>
-        <AnEditButton section-id="'ressourcen_belastungen'" field-id="2" />
+        <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
       </div>
       <AnFlower
         v-show="isAvailable.flower"
@@ -61,10 +61,7 @@
         <h2>
           Praktische Betreuungsaufgaben
         </h2>
-        <AnEditButton
-          section-id="'praktische_betreungsaufgaben'"
-          field-id="0"
-        />
+        <AnEditButton section-id="praktische_betreungsaufgaben" field-id="0" />
       </div>
       <AnCareTasks
         v-show="isAvailable.careTasks"
@@ -78,7 +75,7 @@
         <h2>
           Umgang mit Verhaltensveränderungen
         </h2>
-        <AnEditButton section-id="'verhaltensveraenderungen'" field-id="0" />
+        <AnEditButton section-id="verhaltensveraenderungen" field-id="0" />
       </div>
       <AnBehaviour
         v-show="isAvailable.behaviourChanges"
@@ -92,7 +89,7 @@
         <h2>
           Gesundheit
         </h2>
-        <AnEditButton section-id="'gesundheit'" field-id="7" />
+        <AnEditButton section-id="gesundheit" field-id="7" />
       </div>
       <AnHealth
         v-show="isAvailable.healthChanges"
@@ -106,7 +103,7 @@
         <h2>
           Ressourcen und Belastungen
         </h2>
-        <AnEditButton section-id="'ressourcen_belastungen'" field-id="0" />
+        <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
       </div>
       <AnResourcesPressure
         v-show="isAvailable.resourcespressure"
