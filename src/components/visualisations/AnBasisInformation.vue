@@ -2,7 +2,7 @@
   <div class="an-basisinformation">
     <div class="an-basisinformation__header-wrapper">
       <div class="an-basisinformation__header-headings">
-        <div>
+        <div class="betreuend">
           <span class="label">
             Betreuende Person
           </span>
@@ -13,7 +13,7 @@
         </div>
         <IconHands class="icon-hands" />
 
-        <div>
+        <div class="erkrankt">
           <span class="label">
             Demenzerkrankte Person
           </span>
@@ -127,7 +127,7 @@
 
       <!-- Demenz Person Beginn -->
 
-      <div class="an-basisinformation__info-demenz col-md-3">
+      <div class="an-basisinformation__info-demenz">
         <div
           class="an-basisinformation__info-items an-basisinformation__info-diagnose"
         >
@@ -234,7 +234,6 @@ export default {
     },
     infoErkrankt() {
       const erkranktLabels = visJson.visualisation.basisinfo.demenzperson;
-      console.log(this.getValues(erkranktLabels, 'demenzerkrankte_person'));
       return this.getValues(erkranktLabels, 'demenzerkrankte_person');
     },
     infoGeneral() {
@@ -298,7 +297,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$leftwidth: 40%;
+$centerwidth: 10%;
+$rightwidth: 50%;
+
 .an-basisinformation {
+  color-adjust: exact;
+
   .label {
     font-size: 18px;
     font-weight: bold;
@@ -315,12 +320,18 @@ export default {
         margin-right: 0.5rem;
       }
 
-      & > div {
-        flex: 1;
+      .betreuend {
+        width: $leftwidth;
       }
 
       .icon-hands {
-        margin: 0 2rem -1rem;
+        margin-bottom: -1rem;
+        width: $centerwidth;
+        height: 4rem;
+      }
+
+      .erkrankt {
+        width: $rightwidth;
       }
     }
     &-overallinfo {
@@ -350,11 +361,6 @@ export default {
     font-weight: bold;
   }
 
-  .icon-hands {
-    height: 4rem;
-    width: 4rem;
-  }
-
   &__info {
     &-items {
       margin-bottom: 0.5rem;
@@ -363,10 +369,11 @@ export default {
     &-wrapper {
       display: flex;
       justify-content: space-between;
+    }
 
-      & > div {
-        width: calc(50% - 32px - 2rem);
-      }
+    &-betreuend,
+    &-demenz {
+      width: 50%;
     }
 
     &-beruf {
@@ -411,6 +418,8 @@ export default {
 
     &-unterstuetzungsangebot,
     &-sorgepflichten {
+      overflow-wrap: break-word;
+
       ul {
         margin: 0;
         padding: 0;
