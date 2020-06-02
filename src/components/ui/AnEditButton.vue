@@ -17,8 +17,8 @@ export default {
     IconEdit
   },
   props: {
-    sectionId: { type: String, default: undefined },
-    fieldId: { type: Number, default: undefined }
+    fieldId: { type: Number, default: undefined },
+    sectionId: { type: String, default: undefined }
   }
 };
 </script>
