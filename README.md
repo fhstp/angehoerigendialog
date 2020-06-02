@@ -94,3 +94,7 @@ Contains static files such as favicons or the [`index.html`](public/index.html).
   npm run lint
   npm run lintfix
   ```
+
+### Continous Deploment
+
+When the `develop` branch updates, a new build will be automatically generated and deployed from Netlify.
