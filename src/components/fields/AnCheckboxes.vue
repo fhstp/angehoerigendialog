@@ -1,6 +1,9 @@
 <template>
   <fieldset class="an-checkboxes">
-    <div class="an-checkboxes__option">
+    <div
+      v-if="!$store.state.printMode || noneSelected"
+      class="an-checkboxes__option an-checkboxes__option--none"
+    >
       <input :id="`${field_id}-none`" v-model="noneSelected" type="checkbox" />
       <label :for="`${field_id}-none`">keine dieser Optionen</label>
     </div>
@@ -130,17 +133,21 @@ export default {
   color: black;
 
   &__option {
-    padding-top: $spacer;
-    padding-bottom: $spacer;
+    @media screen {
+      padding-top: $spacer;
+      padding-bottom: $spacer;
+    }
 
-    &:first-child {
+    &--none {
       border-bottom: 1px solid black;
     }
   }
 }
 
 .an-checkboxes_activefields {
-  padding-top: $spacer * 3;
-  padding-left: $spacer * 2;
+  padding-left: $spacer * 3;
+  @media screen {
+    padding-top: $spacer * 3;
+  }
 }
 </style>

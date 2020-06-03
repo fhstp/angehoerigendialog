@@ -1,5 +1,6 @@
 <template>
   <textarea
+    v-if="!$store.state.printMode"
     :id="field_id"
     v-model="field_data"
     :required="field_required"
@@ -7,6 +8,9 @@
     rows="3"
     class="an-text"
   />
+  <div v-else>
+    {{ field_data }}
+  </div>
 </template>
 
 <script>

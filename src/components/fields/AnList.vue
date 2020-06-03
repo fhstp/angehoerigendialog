@@ -1,6 +1,6 @@
 <template>
-  <fieldset class="an-list">
-    <ol v-if="listData.length">
+  <ol v-if="listData.length" class="an-list">
+    <template v-if="!$store.state.printMode">
       <li v-for="i in listData.length" :key="i">
         <input
           ref="listItems"
@@ -10,8 +10,13 @@
           @input="inputHandler($event, i - 1)"
         />
       </li>
-    </ol>
-  </fieldset>
+    </template>
+    <template v-else>
+      <li v-for="(item, index) in field_data" :key="index">
+        {{ item }}
+      </li>
+    </template>
+  </ol>
 </template>
 
 <script>
@@ -97,12 +102,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.an-list__add {
-  margin-bottom: $spacer * 2;
-  font-size: 1.1rem;
-}
-
 ol {
-  list-style-position: inside;
+  @media screen {
+    list-style-position: inside;
+  }
 }
 </style>

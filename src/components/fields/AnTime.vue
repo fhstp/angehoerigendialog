@@ -29,3 +29,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.an-time {
+  appearance: none;
+  border: none;
+}
+</style>

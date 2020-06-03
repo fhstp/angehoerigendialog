@@ -25,3 +25,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.an-date {
+  appearance: none;
+  border: none;
+}
+</style>

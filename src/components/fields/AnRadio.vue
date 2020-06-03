@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="an-radio">
+  <fieldset v-if="!$store.state.printMode" class="an-radio">
     <div
       v-for="(optionValue, optionKey) in fieldOptions"
       :key="`${field_id}-${optionKey}`"
@@ -15,6 +15,7 @@
       <label :for="`${field_id}-${optionKey}`">{{ optionValue }}</label>
     </div>
   </fieldset>
+  <div v-else v-text="fieldOptions[field_data]" />
 </template>
 
 <script>
@@ -36,7 +37,9 @@ export default {
 
 <style lang="scss" scoped>
 .an-radio__option {
-  padding-top: $spacer;
-  padding-bottom: $spacer;
+  @media screen {
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+  }
 }
 </style>
