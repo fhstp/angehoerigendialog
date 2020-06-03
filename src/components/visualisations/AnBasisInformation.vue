@@ -40,11 +40,10 @@
           </div>
           <template v-if="Array.isArray(infoBetreuend.sorgepflichten.value)">
             <IconWarning class="icon-warning" aria-hidden="true" />
-            <ul class="row">
+            <ul>
               <li
                 v-for="(value, i) in infoBetreuend.sorgepflichten.value"
                 :key="i"
-                class="col-3"
               >
                 {{ value }}
               </li>
@@ -100,14 +99,10 @@
           <div class="an-basisinformation-item__title">
             {{ infoBetreuend.unterstuetzungsangebot.label }}
           </div>
-          <ul
-            v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)"
-            class="row"
-          >
+          <ul v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)">
             <li
               v-for="(value, i) in infoBetreuend.unterstuetzungsangebot.value"
               :key="i"
-              class="col-3"
             >
               {{ value }}
             </li>
@@ -188,14 +183,10 @@
           <div class="an-basisinformation-item__title">
             {{ infoErkrankt.unterstuetzungsangebot.label }}
           </div>
-          <ul
-            v-if="Array.isArray(infoErkrankt.unterstuetzungsangebot.value)"
-            class="row"
-          >
+          <ul v-if="Array.isArray(infoErkrankt.unterstuetzungsangebot.value)">
             <li
               v-for="(value, i) in infoErkrankt.unterstuetzungsangebot.value"
               :key="i"
-              class="col-3"
             >
               {{ value }}
             </li>
@@ -293,7 +284,7 @@ $centerwidth: 10%;
 $rightwidth: 50%;
 
 .icon-hands {
-  margin-bottom: -1rem;
+  margin-bottom: -$spacer * 2;
   width: $centerwidth;
   height: 4rem;
 }
@@ -308,15 +299,19 @@ $rightwidth: 50%;
     align-items: flex-end;
 
     strong {
-      font-size: 18px;
       margin-right: $spacer;
+      font-size: 1.125rem;
     }
 
     &-betreuend {
+      display: flex;
+      justify-content: space-between;
       width: $leftwidth;
     }
 
     &-erkrankt {
+      display: flex;
+      justify-content: space-between;
       width: $rightwidth;
     }
 
@@ -345,6 +340,9 @@ $rightwidth: 50%;
     overflow-wrap: break-word;
 
     ul {
+      display: grid;
+      grid-template-columns: max-content max-content;
+      grid-gap: 0 $spacer * 2;
       margin: 0;
       padding: 0;
       list-style: none;
