@@ -12,7 +12,7 @@
           :key="pillIndex"
           class="an-flower__pill"
         ></div>
-        <div class="an-flower__text" v-html="answer.text"></div>
+        <div class="an-flower__text"><span v-html="answer.text"></span></div>
       </div>
       <div
         class="an-flower__overlay"
@@ -35,9 +35,8 @@
             <li
               v-for="(wateringcanItem, index) in wateringcanItems"
               :key="index"
-            >
-              <div v-html="wateringcanItem.solution"></div>
-            </li>
+              v-html="wateringcanItem.solution"
+            ></li>
           </ul>
         </div>
       </div>
@@ -86,11 +85,11 @@ export default {
 
 <style lang="scss" scoped>
 $background: #fff;
-$pill: $color-theme-lightgrey;
+$pill: #eee;
 $red: $color-theme-red;
 $blue: $color-theme-lightblue;
-$size: 290px;
-$centerSize: 80px;
+$size: 240px;
+$centerSize: 64px;
 $centerSizeHalf: $centerSize / 2;
 
 .an-flower {
@@ -126,6 +125,13 @@ $centerSizeHalf: $centerSize / 2;
 
     &.one {
       background-color: $red;
+      background-image: linear-gradient(
+        90deg,
+        transparent 50%,
+        rgba(255, 255, 255, 0.35) 50%
+      );
+      background-size: 10px 10px;
+      background-position-x: 4px; // braucht man nur, wenn background-image gedreht ist
     }
 
     &.two,
@@ -151,6 +157,13 @@ $centerSizeHalf: $centerSize / 2;
 
     &.one {
       background-color: $red;
+      background-image: linear-gradient(
+        90deg,
+        transparent 50%,
+        rgba(255, 255, 255, 0.35) 50%
+      );
+      background-size: 10px 10px;
+      background-position-x: 4px; // braucht man nur, wenn background-image gedreht ist
     }
 
     &.two,
@@ -223,19 +236,25 @@ $centerSizeHalf: $centerSize / 2;
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-left: $centerSize;
+    padding-left: $centerSize * 1.2;
     align-items: center;
-    font-size: 19px;
+    font-size: 0.9rem;
     text-align: center;
   }
 
   &__pillwrapper.reverse &__text {
     padding-left: 0;
-    padding-right: $centerSize;
+    padding-right: $centerSize * 1.2;
   }
 
   &__pillwrapper.one &__pill:nth-child(3) {
     background: $red;
+    background-image: linear-gradient(
+      90deg,
+      transparent 50%,
+      rgba(255, 255, 255, 0.35) 50%
+    );
+    background-size: 10px 10px;
   }
 
   &__pillwrapper.two &__pill:nth-child(2) {
@@ -248,12 +267,8 @@ $centerSizeHalf: $centerSize / 2;
 
   &__wateringcan {
     position: relative;
-    font-size: 17px;
+    font-size: 0.9rem;
     margin-right: 50px;
-
-    @media (max-width: 800px) {
-      margin-top: $size + $centerSize;
-    }
 
     &__innerbox {
       background-color: white;
@@ -262,14 +277,14 @@ $centerSizeHalf: $centerSize / 2;
     &__list {
       list-style-type: none;
       border-radius: 5px;
-      background-color: $color-theme-lightblue;
+      background-color: $blue;
 
       li {
-        background-color: $color-theme-lightblue;
-        height: 60px;
+        background-color: $blue;
+        height: 50px;
         display: flex;
-        justify-content: center;
         align-items: center;
+        text-align: center;
         padding: 7px;
         border-bottom: 4px solid #636261;
       }

@@ -114,15 +114,16 @@ export default {
 
 <style lang="scss" scoped>
 .an-care-tasks {
+  color-adjust: exact;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: auto auto;
   grid-auto-flow: column;
 
-  @media screen and (max-width: 800px) {
+  /* @media screen and (max-width: 800px) {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto auto;
-  }
+  } */
 
   &__category {
     display: flex;
@@ -195,18 +196,17 @@ export default {
   &__list {
     list-style: none;
     border: 5px solid $color-theme-blue;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
-    height: 90px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: $border-radius;
     margin-bottom: -5px;
+    background-color: white;
 
-    @media print {
-      font-size: 0.9rem;
-    }
+    font-size: 0.7rem;
 
     &:nth-child(2n) {
       margin-left: -6px;
@@ -223,6 +223,7 @@ export default {
     padding-right: $spacer;
     padding-left: $spacer;
     text-align: center;
+    font-size: 0.7rem;
   }
 }
 </style>

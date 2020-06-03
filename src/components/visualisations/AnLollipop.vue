@@ -43,6 +43,13 @@
               '--width': (100 * maxValue) / (maxValue + 1) + '%'
             }"
           >
+            <div class="an-lollipop__progressbar-ticks">
+              <div
+                v-for="t in labels.length"
+                :key="t"
+                class="an-lollipop__progressbar-ticks-element"
+              ></div>
+            </div>
             <div
               class="an-lollipop__progressbar"
               :class="{
@@ -75,16 +82,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$lightgrey: #cccccc;
-$darkgrey: #666666;
-$red: #660000;
-$lollipopPercentage: 60%;
+$lightgrey: $color-theme-lightgrey;
+$red: $color-theme-darkred;
+$blue: $color-theme-blue;
+$lollipopPercentage: 45%;
 
 .an-lollipop {
   color-adjust: exact;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  width: 100%;
 
   &__list {
     width: 100%;
@@ -103,6 +111,7 @@ $lollipopPercentage: 60%;
     justify-content: flex-end;
     padding-right: 2rem;
     text-align: right;
+    font-size: 0.75rem;
   }
 
   .icon-warning {
@@ -124,14 +133,35 @@ $lollipopPercentage: 60%;
     background: $lightgrey;
     border-radius: 0.3rem / 50%;
     padding: 0 0.2rem;
-    padding-top: 0.3rem;
+    padding-top: 0.25rem;
     position: relative;
     width: 100%;
   }
 
+  &__progressbar-ticks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &-element {
+      height: 100%;
+      width: 2px;
+      background-color: white;
+
+      &:first-child,
+      &:last-child {
+        opacity: 0;
+      }
+    }
+  }
+
   &__progressbar {
-    height: 0.4rem;
-    color: $darkgrey;
+    height: 0.5rem;
+    color: $blue;
     background: currentColor;
     width: var(--value);
 
@@ -159,6 +189,7 @@ $lollipopPercentage: 60%;
     height: 5rem;
     display: flex;
     padding-right: 1rem;
+    font-size: 0.8rem;
 
     &-element {
       position: relative;
@@ -168,7 +199,7 @@ $lollipopPercentage: 60%;
       &::after {
         content: '';
         height: 1rem;
-        width: 0.15rem;
+        width: 2px;
         background: $lightgrey;
         display: block;
         position: absolute;

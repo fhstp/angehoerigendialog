@@ -94,14 +94,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$ringsize: 60px;
-$bordersize: 4px;
+$ringsize: 40px;
+$bordersize: 3px;
 
 .an-resources-pressure {
-  margin-bottom: 20px;
+  color-adjust: exact;
+
   &__ropes {
     margin: 0 auto;
-    height: 80px;
+    height: 40px;
     position: relative;
 
     &::before,
@@ -119,10 +120,10 @@ $bordersize: 4px;
     }
 
     &::before {
-      transform: translateX(-10px) rotate(-10deg);
+      transform: translateX(-8px) rotate(-10deg);
     }
     &::after {
-      transform: translateX(10px) rotate(10deg);
+      transform: translateX(8px) rotate(10deg);
     }
   }
 }
@@ -134,7 +135,7 @@ $bordersize: 4px;
 
   &__icon {
     width: 100%;
-    max-width: 400px;
+    max-width: 240px;
   }
 }
 
@@ -143,11 +144,12 @@ $bordersize: 4px;
   margin-right: auto;
   width: max-content;
   max-width: 25ch;
-  min-width: 150px;
+  min-width: 90px;
   position: relative;
   text-align: center;
   list-style: none;
   color: white;
+  font-size: 0.9rem;
 
   &::before {
     content: '';
@@ -176,7 +178,7 @@ $bordersize: 4px;
   }
   &__item {
     background: $color-theme-red;
-    padding: $spacer;
+    padding: $spacer / 2;
     border-bottom: $bordersize solid $color-theme-darkred;
     border-left: $bordersize solid $color-theme-darkred;
     border-right: $bordersize solid $color-theme-darkred;
