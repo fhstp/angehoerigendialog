@@ -137,6 +137,14 @@ input[type=range] {
   }
 }
 
+.darkred {
+  color: $color-theme-darkred;
+}
+
+.d-flex {
+  display: flex;
+}
+
 .visually-hidden {
   display: initial;
   position: absolute !important;

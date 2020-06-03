@@ -6,6 +6,7 @@
         <AnSendMail />
       </div>
       <h1>Auswertung</h1>
+
       <div class="an-visualisation__heading-wrapper">
         <h2>Überblick</h2>
         <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
@@ -21,6 +22,7 @@
         </h2>
         <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
       </div>
+
       <AnResources
         v-show="isAvailable.resources"
         :available.sync="isAvailable.resources"
