@@ -24,3 +24,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.an-number {
+  @media print {
+    appearance: textfield;
+    border: none;
+  }
+}
+</style>

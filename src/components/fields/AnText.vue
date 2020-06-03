@@ -26,5 +26,8 @@ export default {
 <style lang="scss" scoped>
 .an-text {
   width: 100%;
+  @media print {
+    border: none;
+  }
 }
 </style>

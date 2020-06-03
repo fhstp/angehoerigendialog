@@ -9,7 +9,7 @@
 
       <div class="an-visualisation__heading-wrapper">
         <h2>Überblick</h2>
-        <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+        <AnEditButton section-id="demenzerkrankte_person" :field-id="0" />
       </div>
       <AnBasisInformation />
 
@@ -20,7 +20,7 @@
         <h2>
           Meine Ressourcen
         </h2>
-        <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
+        <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
       </div>
 
       <AnResources
@@ -35,7 +35,7 @@
         <h2>
           Zusammenfassende Einschätzung der gesundheitliche Situation
         </h2>
-        <AnEditButton section-id="gesundheit" field-id="0" />
+        <AnEditButton section-id="gesundheit" :field-id="0" />
       </div>
       <AnSituation
         v-show="isAvailable.situation"
@@ -49,7 +49,7 @@
         <h2>
           Meine Energie-Blume
         </h2>
-        <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
+        <AnEditButton section-id="ressourcen_belastungen" :field-id="2" />
       </div>
       <AnFlower
         v-show="isAvailable.flower"
@@ -63,7 +63,7 @@
         <h2>
           Praktische Betreuungsaufgaben
         </h2>
-        <AnEditButton section-id="praktische_betreungsaufgaben" field-id="0" />
+        <AnEditButton section-id="praktische_betreungsaufgaben" :field-id="0" />
       </div>
       <AnCareTasks
         v-show="isAvailable.careTasks"
@@ -77,7 +77,7 @@
         <h2>
           Umgang mit Verhaltensveränderungen
         </h2>
-        <AnEditButton section-id="verhaltensveraenderungen" field-id="0" />
+        <AnEditButton section-id="verhaltensveraenderungen" :field-id="0" />
       </div>
       <AnBehaviour
         v-show="isAvailable.behaviourChanges"
@@ -91,7 +91,7 @@
         <h2>
           Gesundheit
         </h2>
-        <AnEditButton section-id="gesundheit" field-id="7" />
+        <AnEditButton section-id="gesundheit" :field-id="7" />
       </div>
       <AnHealth
         v-show="isAvailable.healthChanges"
@@ -105,12 +105,15 @@
         <h2>
           Ressourcen und Belastungen
         </h2>
-        <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
+        <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
       </div>
       <AnResourcesPressure
         v-show="isAvailable.resourcespressure"
         :available.sync="isAvailable.resourcespressure"
       />
+
+      <AnPlainData />
+
       <button
         class="an-visualisation__restart btn"
         @click="restartQuestionnaire"
@@ -125,6 +128,7 @@
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
 import AnBehaviour from '@/components/visualisations/AnBehaviour.vue';
 import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
+import AnPlainData from '@/components/visualisations/AnPlainData.vue';
 import AnEditButton from '@/components/ui/AnEditButton.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
@@ -141,6 +145,7 @@ export default {
     AnBasisInformation,
     AnBehaviour,
     AnCareTasks,
+    AnPlainData,
     AnEditButton,
     AnExportPdf,
     AnFlower,

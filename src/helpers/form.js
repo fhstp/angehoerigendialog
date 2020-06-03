@@ -10,6 +10,11 @@ export const form_numberOfAccordionItems = fields => {
   return count;
 };
 
+/**
+ * takes fields and returns array of interactive fields
+ * @param {Object.<string, any>} fields
+ * @returns {Array.<Object.<string, any>>}
+ */
 export const form_filterAccordionItems = fields => {
   const filtered = [];
   for (const fieldKey in fields) {
