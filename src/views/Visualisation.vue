@@ -7,53 +7,106 @@
       </div>
       <h1>Auswertung</h1>
 
-      <h2>Überblick</h2>
+      <div class="an-visualisation__heading-wrapper">
+        <h2>Überblick</h2>
+        <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+      </div>
       <AnBasisInformation />
 
-      <h2 v-show="isAvailable.resources">
-        Meine Ressourcen
-      </h2>
+      <div
+        v-show="isAvailable.resources"
+        class="an-visualisation__heading-wrapper"
+      >
+        <h2>
+          Meine Ressourcen
+        </h2>
+        <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
+      </div>
+
       <AnResources
         v-show="isAvailable.resources"
         :available.sync="isAvailable.resources"
       />
-      <h2 v-show="isAvailable.situation" class="page-break-before">
-        Zusammenfassende Einschätzung der gesundheitliche Situation
-      </h2>
+
+      <div
+        v-show="isAvailable.situation"
+        class="an-visualisation__heading-wrapper page-break-before"
+      >
+        <h2>
+          Zusammenfassende Einschätzung der gesundheitliche Situation
+        </h2>
+        <AnEditButton section-id="gesundheit" field-id="0" />
+      </div>
       <AnSituation
         v-show="isAvailable.situation"
         :available.sync="isAvailable.situation"
       />
-      <h2 v-show="isAvailable.flower">Meine Energie-Blume</h2>
+
+      <div
+        v-show="isAvailable.flower"
+        class="an-visualisation__heading-wrapper"
+      >
+        <h2>
+          Meine Energie-Blume
+        </h2>
+        <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
+      </div>
       <AnFlower
         v-show="isAvailable.flower"
         :available.sync="isAvailable.flower"
       />
 
-      <h2 v-show="isAvailable.careTasks" class="page-break-before">
-        Praktische Betreuungsaufgaben
-      </h2>
+      <div
+        v-show="isAvailable.careTasks"
+        class="an-visualisation__heading-wrapper page-break-before"
+      >
+        <h2>
+          Praktische Betreuungsaufgaben
+        </h2>
+        <AnEditButton section-id="praktische_betreungsaufgaben" field-id="0" />
+      </div>
       <AnCareTasks
         v-show="isAvailable.careTasks"
         :available.sync="isAvailable.careTasks"
       />
-      <h2 v-show="isAvailable.behaviourChanges" class="page-break-before">
-        Umgang mit Verhaltensveränderungen
-      </h2>
+
+      <div
+        v-show="isAvailable.behaviourChanges"
+        class="an-visualisation__heading-wrapper page-break-before"
+      >
+        <h2>
+          Umgang mit Verhaltensveränderungen
+        </h2>
+        <AnEditButton section-id="verhaltensveraenderungen" field-id="0" />
+      </div>
       <AnBehaviour
         v-show="isAvailable.behaviourChanges"
         :available.sync="isAvailable.behaviourChanges"
       />
-      <h2 v-show="isAvailable.healthChanges" class="page-break-before">
-        Gesundheit
-      </h2>
+
+      <div
+        v-show="isAvailable.healthChanges"
+        class="an-visualisation__heading-wrapper page-break-before"
+      >
+        <h2>
+          Gesundheit
+        </h2>
+        <AnEditButton section-id="gesundheit" field-id="7" />
+      </div>
       <AnHealth
         v-show="isAvailable.healthChanges"
         :available.sync="isAvailable.healthChanges"
       />
-      <h2 v-show="isAvailable.resourcespressure">
-        Ressourcen und Belastungen
-      </h2>
+
+      <div
+        v-show="isAvailable.resourcespressure"
+        class="an-visualisation__heading-wrapper page-break-before"
+      >
+        <h2>
+          Ressourcen und Belastungen
+        </h2>
+        <AnEditButton section-id="ressourcen_belastungen" field-id="0" />
+      </div>
       <AnResourcesPressure
         v-show="isAvailable.resourcespressure"
         :available.sync="isAvailable.resourcespressure"
@@ -72,6 +125,7 @@
 import AnBasisInformation from '@/components/visualisations/AnBasisInformation.vue';
 import AnBehaviour from '@/components/visualisations/AnBehaviour.vue';
 import AnCareTasks from '@/components/visualisations/AnCareTasks.vue';
+import AnEditButton from '@/components/ui/AnEditButton.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnHealth from '@/components/visualisations/AnHealth.vue';
@@ -87,6 +141,7 @@ export default {
     AnBasisInformation,
     AnBehaviour,
     AnCareTasks,
+    AnEditButton,
     AnExportPdf,
     AnFlower,
     AnHealth,
@@ -128,6 +183,11 @@ export default {
     position: fixed;
     top: 1.25rem;
     right: 1.25rem;
+  }
+
+  &__heading-wrapper {
+    display: flex;
+    flex-direction: row;
   }
 }
 </style>
