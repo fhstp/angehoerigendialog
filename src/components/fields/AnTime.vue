@@ -32,7 +32,13 @@ export default {
 
 <style lang="scss" scoped>
 .an-time {
-  appearance: none;
   border: none;
+  border-radius: $border-radius;
+  padding: $spacer;
+
+  .an-checkboxes_activefields &,
+  .an-field__subfields & {
+    border: 2px solid $color-theme-lightgrey;
+  }
 }
 </style>

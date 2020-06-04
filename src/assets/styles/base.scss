@@ -59,47 +59,76 @@ input + label {
 }
 
 input, textarea {
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
 }
 
-input[type=range] {
-  background-color: transparent;
+input[type=radio],
+input[type=checkbox] {
   appearance: none;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  cursor: pointer;
+  height: 1.25em;
+  width: 1.25em;
+  background-color:white;
+  outline-offset: 2px;
+}
 
-  @mixin range-thumb {
-    box-sizing: content-box;
-    border: $range-thumb-border-size solid $color-theme-darkgrey;
+input[type=radio] {
+  border: none;
+  border-radius: 50%;
+
+  .an-field__subfields &,
+  .an-checkboxes_activefields &,
+  .an-plain-data & {
+    border: 2px solid $color-theme-darkgrey;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-    background-color: white;
-    width: $range-thumb-size - $range-thumb-border-size * 2;
-    height: $range-thumb-size - $range-thumb-border-size * 2;
-    cursor: grab;
-    appearance: none;
-  }
-  &::-webkit-slider-thumb{
-    @include range-thumb;
-    transform: translateY(-$range-track-height);
-  }
-  &::-moz-range-thumb {
-    @include range-thumb;
-  }
-  &::-ms-thumb {
-    @include range-thumb;
+    background-color: $color-theme-darkgrey;
+    width: 70%;
+    height: 70%;
+    transition: background-color 200ms ease-in-out;
   }
 
-  @mixin range-track {
-    height: $range-track-height;
-    background-color: white;
-    border-radius: $border-radius;
+  &:not(:checked)::after {
+    background-color: transparent;
   }
-  &::-webkit-slider-runnable-track{
-    @include range-track;
+}
+
+input[type=checkbox] {
+  border: 2px solid $color-theme-darkgrey;
+
+  &::after {
+    content: '';
+    display: block;
+    border: 2px solid $color-theme-darkgrey;
+    border-top: 0;
+    border-left: 0;
+    transition: opacity 200ms ease-in-out;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 25%;
+    top: -1px;
+    transform: rotate(45deg) scale(0.75);
   }
-  &::-moz-range-track {
-    @include range-track;
+
+  &:not(:checked)::after {
+    opacity: 0;
   }
-  &::-ms-track {
-    @include range-track;
+
+  &:disabled {
+    border: 2px solid $color-theme-lightgrey;
   }
 }
 
@@ -115,7 +144,6 @@ input[type=range] {
   font-size: 1rem;
   transition: background-color 200ms ease-in-out;
   text-decoration: none;
-  outline: none;
   cursor: pointer;
   font-family: 'Open Sans', sans-serif;
 
@@ -143,6 +171,12 @@ input[type=range] {
 
 .d-flex {
   display: flex;
+}
+
+.hide-print {
+  @media print {
+    display: none !important;
+  }
 }
 
 .visually-hidden {

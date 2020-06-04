@@ -28,7 +28,16 @@ export default {
 
 <style lang="scss" scoped>
 .an-date {
-  appearance: none;
   border: none;
+  border-radius: $border-radius;
+  padding: $spacer;
+
+  .an-checkboxes_activefields &,
+  .an-field__subfields &,
+  .an-plain-data {
+    @media screen {
+      border: 2px solid $color-theme-lightgrey;
+    }
+  }
 }
 </style>

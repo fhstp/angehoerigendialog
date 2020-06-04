@@ -102,9 +102,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.an-list__add {
+  margin-bottom: $spacer * 2;
+  font-size: 1.1rem;
+}
+
 ol {
   @media screen {
     list-style-position: inside;
+  }
+}
+
+li:not(:last-child) {
+  margin-bottom: $spacer * 2;
+}
+
+input {
+  border: none;
+  border-radius: $border-radius;
+  padding: $spacer;
+
+  .an-checkboxes_activefields &,
+  .an-field__subfields & {
+    @media screen {
+      border: 2px solid $color-theme-lightgrey;
+    }
   }
 }
 </style>

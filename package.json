@@ -85,8 +85,7 @@
     "trailingComma": "none"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "last 2 versions and >1%, Firefox ESR"
   ],
   "husky": {
     "hooks": {

@@ -1,5 +1,6 @@
 title: Angaben zum Zweitgespräch
 titleShort: Ende
+hideExport: true
 fields:
 
   datum:

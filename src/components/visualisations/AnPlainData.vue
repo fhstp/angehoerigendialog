@@ -30,6 +30,7 @@ export default {
   created() {
     this.form = {};
     for (const sectionId in form) {
+      if (form[sectionId].hideExport) continue;
       this.form[sectionId] = {
         title: form[sectionId].title,
         fields: form_filterAccordionItems(form[sectionId].fields)
@@ -62,9 +63,11 @@ h4::before {
   counter-increment: h4;
   content: counter(h3) '.' counter(h4) '. ';
 }
+</style>
 
-.nocount::before {
-  content: '';
-  counter-increment: none;
+<style lang="scss">
+.an-plain-data .an-field__subfields .an-field {
+  margin-top: $spacer !important;
+  margin-left: $spacer * 2;
 }
 </style>

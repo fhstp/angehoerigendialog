@@ -127,8 +127,8 @@ export default {
 <style lang="scss" scoped>
 .an-checkboxes {
   border-radius: $border-radius;
-  margin: -0.5rem;
-  padding: 0.5rem;
+  margin: -$spacer;
+  padding: $spacer;
   background-color: white;
   color: black;
 

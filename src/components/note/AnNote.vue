@@ -86,7 +86,7 @@ export default {
       },
       set(value) {
         this.showSaveHint();
-        this.$store.commit('saveNotes', value);
+        this.$store.commit('updateNotes', value);
       }
     },
     noteNewData: {
@@ -95,7 +95,7 @@ export default {
       },
       set(value) {
         this.showSaveHint();
-        this.$store.commit('saveNewNotes', value);
+        this.$store.commit('updateNewNotes', value);
       }
     },
     showAlreadyThere() {
@@ -164,7 +164,7 @@ export default {
 
       this.showAddHeading = false;
       this.$store.commit(
-        'savePrevQuestionLabel',
+        'updatePrevQuestionLabel',
         this.currentQuestionLabel_prev
       );
       this.noteData = textarea_alreadythere.value;
@@ -203,17 +203,14 @@ export default {
     },
     afterCloseNotes() {
       if (this.$store.getters.getNewNotes !== '') {
-        if (this.$store.getters.getNotes === '') {
-          this.$store.commit('saveNotes', this.$store.getters.getNewNotes);
-        } else {
-          this.$store.commit(
-            'saveNotes',
-            this.$store.getters.getNotes +
-              '\n\n' +
-              this.$store.getters.getNewNotes
-          );
-        }
-        this.$store.commit('saveNewNotes', '');
+        this.$store.commit(
+          'updateNotes',
+          this.$store.getters.getNotes === ''
+            ? this.$store.getters.getNewNotes
+            : `${this.$store.getters.getNotes}\n\n${this.$store.getters.getNewNotes}`
+        );
+
+        this.$store.commit('updateNewNotes', '');
       }
     },
     showSaveHint() {
