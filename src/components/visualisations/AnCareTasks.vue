@@ -20,7 +20,7 @@
             v-for="(figure, figureIndex) in careSvg[index]"
             :key="figure.type + figureIndex"
             class="an-care-tasks__svg"
-            :class="`an-care-tasks__svg--${figure.class}`"
+            :class="`an-care-tasks__svg--${figure.class} ${highestCategory}`"
           />
         </div>
       </div>
@@ -87,6 +87,14 @@ export default {
         return careTasksValues;
       }
       return '';
+    },
+    highestCategory() {
+      const noPerson = this.careTasks.some(item => item.length > 9);
+      if (noPerson) return 'noPerson';
+      const halfPerson = this.careTasks.some(item => item.length > 7);
+      if (halfPerson) return 'halfPerson';
+
+      return false;
     }
   },
   created() {
@@ -181,6 +189,14 @@ export default {
 
   &__svg {
     width: 40%;
+
+    &.halfPerson {
+      width: 20%;
+    }
+
+    &.noPerson {
+      width: 0%;
+    }
 
     &--filled {
       fill: $color-theme-darkgrey;

@@ -316,7 +316,7 @@ $rightwidth: 50%;
     }
 
     &-commoninfo {
-      border-top: 2px solid $color-theme-darkgrey;
+      border-top: 2px solid $color-theme-blue;
       background-color: $color-theme-lightgrey;
       width: 100%;
       text-align: center;
@@ -376,8 +376,8 @@ $rightwidth: 50%;
     box-sizing: border-box;
     width: $dot;
     height: $dot;
-    background: $color-theme-lightgrey;
-    border: $color-theme-darkgrey solid $dot / 6;
+    background: white;
+    border: $color-theme-blue solid $dot / 6;
     border-radius: 50%;
 
     &:last-child {

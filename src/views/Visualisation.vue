@@ -26,13 +26,8 @@
         <!-- Vis Seite 1 -->
 
         <div class="visualisation">
-          <div>
-            <div class="an-visualisation__heading-wrapper">
-              <h2>Überblick</h2>
-              <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
-            </div>
-            <AnBasisInformation />
-          </div>
+          <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+          <AnBasisInformation />
 
           <div>
             <div
@@ -115,7 +110,7 @@
         />
 
         <div class="balloon-wrapper">
-          <div>
+          <div class="balloon-labels">
             <div
               v-show="isAvailable.resourcespressure"
               class="an-visualisation__heading-wrapper kraft"
@@ -260,7 +255,7 @@ export default {
     h1 {
       font-size: 1.6rem;
       flex: 1;
-      color: $color-theme-blue;
+      color: $color-theme-darkred;
     }
 
     div {
@@ -314,12 +309,53 @@ export default {
     flex-grow: 1;
   }
 
+  @media print {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    .an-resources-pressure {
+      transform: rotate(-90deg);
+      margin-top: -120px;
+      margin-bottom: -120px;
+    }
+
+    .balloon-labels {
+      display: flex;
+      width: 100%;
+      padding: 0 1.25rem;
+      justify-content: space-between;
+    }
+  }
+
   .kraft {
     margin-top: 6rem;
+
+    @media print {
+      margin: 0;
+
+      h2 {
+        padding-right: 0.5rem;
+        padding-left: 2rem;
+
+        &::after {
+          content: '';
+          border-top: 1.25rem solid transparent;
+          border-bottom: 1.25rem solid transparent;
+          border-left: none;
+          border-right: 1.25rem solid $color-theme-darkgrey;
+          position: absolute;
+          left: -1.25rem;
+        }
+      }
+    }
   }
 
   .belastung {
-    margin-top: 18rem;
+    margin-top: 24rem;
+
+    @media print {
+      margin-top: 0;
+    }
   }
 }
 </style>

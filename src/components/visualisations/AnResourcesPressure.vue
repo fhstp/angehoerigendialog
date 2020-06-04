@@ -1,29 +1,27 @@
 <template>
   <div class="an-resources-pressure">
-    <div class="an-resources">
-      <AnBalloon
-        :show-ropes="pressure && pressure.length > 0"
-        class="an-resources__icon"
-      >
-        <g class="an-resources__air">
-          <foreignObject
-            v-for="(resource, i) in resources"
-            :key="i"
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            required-extensions="http://www.w3.org/2000/svg"
-            class="an-resources-pressure__innercircle-wrapper"
-          >
-            <AnBalloonCircle
-              class="an-resources__inncercircle"
-              :text="resource"
-            />
-          </foreignObject>
-        </g>
-      </AnBalloon>
-    </div>
+    <AnBalloon
+      :show-ropes="pressure && pressure.length > 0"
+      class="an-resources__icon"
+    >
+      <g class="an-resources__air">
+        <foreignObject
+          v-for="(resource, i) in resources"
+          :key="i"
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          required-extensions="http://www.w3.org/2000/svg"
+          class="an-resources-pressure__innercircle-wrapper"
+        >
+          <AnBalloonCircle
+            class="an-resources__inncercircle"
+            :text="resource"
+          />
+        </foreignObject>
+      </g>
+    </AnBalloon>
     <template v-if="pressure && pressure.length > 0">
       <div class="an-resources-pressure__ropes"></div>
       <ul class="an-pressure">
@@ -100,6 +98,9 @@ $bordersize: 3px;
 .an-resources-pressure {
   color-adjust: exact;
 
+  width: 100%;
+  max-width: 350px;
+
   &__ropes {
     margin: 0 auto;
     height: 40px;
@@ -125,17 +126,6 @@ $bordersize: 3px;
     &::after {
       transform: translateX(8px) rotate(10deg);
     }
-  }
-}
-
-.an-resources {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__icon {
-    width: 100%;
-    max-width: 240px;
   }
 }
 
