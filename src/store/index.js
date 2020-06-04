@@ -4,10 +4,24 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
+/**
+ * Answer type
+ * @typedef {Object} Answer
+ * @property {any} value    - input value
+ * @property {boolean} done - completion state
+ */
+
+/**
+ * State Object
+ * @property {Object.<string, Answer>} answers - keys are the field IDs
+ * @property {boolean} printMode
+ * @property {string} newNotes                 - notes will be written to this field while editing and saved to notes when input is closed
+ * @property {string} notes
+ * @property {string} prevQuestionLabel        - holds the label of the question which was presented in the notes before
+ */
 const initialState = {
   answers: {},
   printMode: false,
-  updshowNotes: false,
   newNotes: '',
   notes: '',
   prevQuestionLabel: ''
@@ -16,12 +30,8 @@ const initialState = {
 export default new Vuex.Store({
   state: { ...initialState },
   getters: {
-    getFieldCompletion: state => fieldId => {
-      return state.answers[fieldId]?.done;
-    },
-    getFieldValue: state => fieldId => {
-      return state.answers[fieldId]?.value;
-    },
+    getFieldCompletion: state => fieldId => state.answers[fieldId]?.done,
+    getFieldValue: state => fieldId => state.answers[fieldId]?.value,
     getSectionCompletion: state => sectionId => {
       for (const key in state.answers) {
         if (
@@ -33,18 +43,9 @@ export default new Vuex.Store({
       }
       return true;
     },
-    getShowNotes: state => {
-      return state.updshowNotes;
-    },
-    getNewNotes: state => {
-      return state.newNotes;
-    },
-    getNotes: state => {
-      return state.notes;
-    },
-    getPrevQuestionLabel: state => {
-      return state.prevQuestionLabel;
-    }
+    getNewNotes: state => state.newNotes,
+    getNotes: state => state.notes,
+    getPrevQuestionLabel: state => state.prevQuestionLabel
   },
   mutations: {
     resetState(state) {
@@ -58,7 +59,7 @@ export default new Vuex.Store({
      * @param {*} state
      * @param {Object} data
      * @param {string[]} data.fieldIds - The list of the answer IDs to receive the value
-     * @param {boolean} data.value - The value to be set
+     * @param {boolean} data.value     - The value to be set
      */
     updateAnswerCompletion(state, { fieldIds, value }) {
       for (const fieldId of fieldIds) {
@@ -77,16 +78,13 @@ export default new Vuex.Store({
     updatePrintMode(state, newVal) {
       state.printMode = newVal;
     },
-    updateShowNotes(state, newVal) {
-      state.updshowNotes = newVal;
-    },
-    saveNewNotes(state, newVal) {
+    updateNewNotes(state, newVal) {
       state.newNotes = newVal;
     },
-    saveNotes(state, newVal) {
+    updateNotes(state, newVal) {
       state.notes = newVal;
     },
-    savePrevQuestionLabel(state, newVal) {
+    updatePrevQuestionLabel(state, newVal) {
       state.prevQuestionLabel = newVal;
     }
   },
