@@ -20,9 +20,9 @@ $query: (
   'lg-and-up': 'screen and (min-width: #{map-get($grid-breakpoints, 'lg')})'
 );
 
-$range-thumb-size: 20px;
-$range-thumb-border-size: 2px;
-$range-track-height: 6px;
+$range-thumb-size: 30px;
+$range-thumb-border-size: 6px;
+$range-track-height: 15px;
 
 $color-theme-darkred: #7A0E0E;
 $color-theme-red: #d1938e;

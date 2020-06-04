@@ -204,8 +204,20 @@ export default {
     color: white;
   }
 
+  &__subfields > .an-field {
+    border-radius: $border-radius;
+    margin: -0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    color: black;
+  }
+
   &__subfields > &:first-child {
     margin-top: $spacer * 4;
+  }
+
+  &__subfields p {
+    margin-bottom: $spacer * 2;
   }
 }
 </style>
