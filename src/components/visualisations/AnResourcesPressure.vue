@@ -1,11 +1,11 @@
 <template>
   <div class="an-resources-pressure">
-    <div class="an-resources-pressure__icon-wrapper">
+    <div class="an-resources">
       <AnBalloon
         :show-ropes="pressure && pressure.length > 0"
-        class="an-resources-pressure__icon"
+        class="an-resources__icon"
       >
-        <g class="an-resources-pressure__air">
+        <g class="an-resources__air">
           <foreignObject
             v-for="(resource, i) in resources"
             :key="i"
@@ -17,25 +17,25 @@
             class="an-resources-pressure__innercircle-wrapper"
           >
             <AnBalloonCircle
-              class="an-resources-pressure__inncercircle"
+              class="an-resources__inncercircle"
               :text="resource"
             />
           </foreignObject>
         </g>
       </AnBalloon>
     </div>
-    <div
-      v-if="pressure && pressure.length > 0"
-      class="an-resources-pressure__weight-wrapper"
-    >
-      <div
-        v-for="(pressureItem, i) in pressure"
-        :key="i"
-        class="an-resources-pressure__weight-list"
-      >
-        {{ pressureItem }}
-      </div>
-    </div>
+    <template v-if="pressure && pressure.length > 0">
+      <div class="an-resources-pressure__ropes"></div>
+      <ul class="an-pressure">
+        <li
+          v-for="(pressureItem, i) in pressure"
+          :key="i"
+          class="an-pressure__item"
+        >
+          {{ pressureItem }}
+        </li>
+      </ul>
+    </template>
   </div>
 </template>
 
@@ -72,13 +72,13 @@ export default {
 
     this.$nextTick(() => {
       const packData = data =>
-        pack().size([251, 251]).padding(10)(
+        pack().size([153.8, 153.8]).padding(10)(
           hierarchy({ children: data }).sum(d => 1 + Math.random() * 0.2)
         );
 
       const root = packData(this.resources);
 
-      const group = select('.an-resources-pressure__air');
+      const group = select('.an-resources__air');
 
       group
         .selectAll('foreignObject')
@@ -94,71 +94,95 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$ringsize: 60px;
+$bordersize: 4px;
+
 .an-resources-pressure {
   margin-bottom: 20px;
-  &__icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &__ropes {
+    margin: 0 auto;
+    height: 80px;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      height: 100%;
+      width: $bordersize;
+      background: $color-theme-darkred;
+      position: absolute;
+      bottom: $ringsize / 2;
+      left: 50%;
+      margin-left: $bordersize / -2;
+      z-index: -1;
+      transform-origin: bottom center;
+    }
+
+    &::before {
+      transform: translateX(-10px) rotate(-10deg);
+    }
+    &::after {
+      transform: translateX(10px) rotate(10deg);
+    }
   }
+}
+
+.an-resources {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &__icon {
     width: 100%;
     max-width: 400px;
-    padding-bottom: $spacer * 2;
+  }
+}
+
+.an-pressure {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  max-width: 25ch;
+  min-width: 150px;
+  position: relative;
+  text-align: center;
+  list-style: none;
+  color: white;
+
+  &::before {
+    content: '';
+    width: $ringsize;
+    height: $ringsize;
+    border: $bordersize * 4 solid $color-theme-darkred;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    top: -($ringsize - $bordersize * 3);
+    z-index: -2;
+    margin-left: -($ringsize / 2);
   }
 
-  &__weight {
-    $bgcolor: #975824;
-    $fgcolor: #bd753a;
-    $ringsize: 60px;
-    $bordersize: 4px;
+  &::after {
+    content: '';
+    width: $ringsize - $bordersize * 2;
+    height: $ringsize - $bordersize * 2;
+    border: $bordersize * 2 solid $color-theme-red;
+    border-radius: 50%;
+    background-color: transparent;
+    position: absolute;
+    top: -($ringsize - $bordersize * 4);
+    margin-left: -($ringsize / 2 - $bordersize);
+    z-index: 0;
+  }
+  &__item {
+    background: $color-theme-red;
+    padding: $spacer;
+    border-bottom: $bordersize solid $color-theme-darkred;
+    border-left: $bordersize solid $color-theme-darkred;
+    border-right: $bordersize solid $color-theme-darkred;
 
-    &-wrapper {
-      background-color: $bgcolor;
-      padding: $bordersize;
-      text-align: center;
-      width: max-content;
-      max-width: 100%;
-      min-width: 150px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-
-      &::before {
-        content: '';
-        width: $ringsize;
-        height: $ringsize;
-        border: $bordersize * 4 solid $bgcolor;
-        border-radius: 50%;
-        background-color: transparent;
-        position: absolute;
-        top: -($ringsize - $bordersize * 3);
-        z-index: -2;
-        margin-left: -($ringsize / 2);
-      }
-
-      &::after {
-        content: '';
-        width: $ringsize - $bordersize * 2;
-        height: $ringsize - $bordersize * 2;
-        border: $bordersize * 2 solid $fgcolor;
-        border-radius: 50%;
-        background-color: transparent;
-        position: absolute;
-        top: -($ringsize - $bordersize * 4);
-        margin-left: -($ringsize / 2 - $bordersize);
-        z-index: 0;
-      }
-    }
-    &-list {
-      background: $fgcolor;
-      margin-bottom: $bordersize;
-      padding: $bordersize;
-
-      &:last-child {
-        margin: 0;
-      }
+    &:first-child {
+      border-top: $bordersize solid $color-theme-darkred;
     }
   }
 }
