@@ -68,6 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 $thumb-triangle-height: 0.5em;
+$thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
 .an-range {
   &__wrapper {
     align-items: flex-end;
@@ -77,19 +78,24 @@ $thumb-triangle-height: 0.5em;
     display: inline-block;
     position: relative;
     margin-top: calc(
-      #{$spacer + $range-thumb-border-size} + #{1em + $thumb-triangle-height}
+      #{$spacer + $thumb-overflow} + #{1em + $thumb-triangle-height}
     );
     margin-right: $spacer * 2;
     margin-left: $spacer * 2;
     flex-grow: 1;
+    @media print {
+      margin-top: calc(#{$spacer + $thumb-overflow} + 1em);
+    }
   }
 
   &__label-area {
     position: absolute;
-    top: -$thumb-triangle-height;
     left: $range-thumb-size / 2;
     right: $range-thumb-size / 2;
     line-height: 0;
+    @media screen {
+      top: calc(1px - #{$thumb-overflow});
+    }
   }
 
   &__thumb-label {
@@ -132,6 +138,10 @@ $thumb-triangle-height: 0.5em;
       height: $range-thumb-size - $range-thumb-border-size * 2;
       cursor: grab;
       appearance: none;
+
+      @media print {
+        display: none;
+      }
     }
     &::-webkit-slider-thumb {
       @include range-thumb;

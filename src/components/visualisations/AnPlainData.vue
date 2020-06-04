@@ -1,19 +1,31 @@
 <template>
   <div class="an-plain-data">
-    <div v-for="(section, sectionId) in form" :key="sectionId">
+    <section
+      v-for="(section, sectionId) in form"
+      :key="sectionId"
+      class="an-plain-data__section"
+    >
       <h3>{{ section.title }}</h3>
-      <template v-for="field in section.fields">
-        <h4 :key="field.fieldId">{{ field.label }}</h4>
-        <AnField
-          :key="`${field.fieldId}-AnField`"
-          :section-id="sectionId"
-          :field-id="`${sectionId}-${field.fieldId}`"
-          :field-data="prepareFieldData(field)"
-          :has-next="false"
-          :has-prev="false"
-        />
-      </template>
-    </div>
+      <div class="an-plain-data__section-fields">
+        <div
+          v-for="field in section.fields"
+          :key="field.fieldId"
+          :class="[
+            'an-plain-data__field',
+            { 'an-plain-data__field--break': field.type === 'checkboxes' }
+          ]"
+        >
+          <h4>{{ field.label }}</h4>
+          <AnField
+            :section-id="sectionId"
+            :field-id="`${sectionId}-${field.fieldId}`"
+            :field-data="prepareFieldData(field)"
+            :has-next="false"
+            :has-prev="false"
+          />
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -50,6 +62,20 @@ export default {
 <style lang="scss" scoped>
 .an-plain-data {
   counter-reset: h3;
+
+  &__section {
+    break-inside: avoid-page;
+  }
+
+  &__section-fields {
+    @media print, #{map-get($query, 'md-and-up')} {
+      column-count: 2;
+    }
+  }
+
+  &__field:not(&__field--break) {
+    break-inside: avoid-column;
+  }
 }
 h3 {
   counter-reset: h4;
@@ -66,8 +92,16 @@ h4::before {
 </style>
 
 <style lang="scss">
-.an-plain-data .an-field__subfields .an-field {
-  margin-top: $spacer !important;
-  margin-left: $spacer * 2;
+.an-plain-data {
+  .an-field__subfields {
+    .an-field {
+      margin-top: $spacer !important;
+      margin-left: $spacer * 2;
+
+      &__label {
+        margin-bottom: $spacer;
+      }
+    }
+  }
 }
 </style>
