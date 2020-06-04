@@ -25,6 +25,8 @@ export default {
 
 <style lang="scss" scoped>
 .an-text {
+  border-radius: $border-radius;
+  padding: $spacer;
   width: 100%;
 }
 </style>

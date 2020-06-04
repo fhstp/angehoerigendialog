@@ -1,21 +1,39 @@
 <template>
   <div class="an-number">
-    <button class="an-number__button--minus" @click="calc(false)"></button>
+    <button
+      class="an-number__button--minus"
+      aria-label="weniger"
+      @click="calc(false)"
+    >
+      <IconMinus />
+    </button>
     <input
       :id="field_id"
       v-model.number="field_data"
       type="number"
       :required="field_required"
     />
-    <button class="an-number__button--plus" @click="calc(true)"></button>
+    <button
+      class="an-number__button--plus"
+      aria-label="mehr"
+      @click="calc(true)"
+    >
+      <IconPlus />
+    </button>
   </div>
 </template>
 
 <script>
+import IconMinus from '@/assets/icons/minus.svg?inline';
+import IconPlus from '@/assets/icons/plus.svg?inline';
 import field from '@/mixins/field.js';
 
 export default {
   name: 'AnNumber',
+  components: {
+    IconMinus,
+    IconPlus
+  },
   mixins: [field],
   methods: {
     validate(value) {
@@ -24,15 +42,12 @@ export default {
         value !== '' && !Number.isNaN(Number(value))
       );
     },
-    calc(operator) {
+    calc(increment) {
       if (this.field_data !== undefined && this.field_data > 0) {
-        if (operator) {
+        if (increment) {
           this.field_data++;
-        } else {
+        } else if (this.field_data > 1) {
           this.field_data--;
-          if (this.field_data === 0) {
-            this.field_data = 1;
-          }
         }
       } else {
         this.field_data = 1;
@@ -47,27 +62,39 @@ export default {
   display: inline-flex;
   background-color: $color-theme-lightgrey;
   border-radius: $border-radius;
+
   input {
+    appearance: textfield;
     border-radius: 0;
+    padding: $spacer;
+    max-width: 10ch;
+    border: none;
+
+    .an-field__subfields & {
+      border-top: 2px solid $color-theme-lightgrey;
+      border-bottom: 2px solid $color-theme-lightgrey;
+    }
+
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
   }
+
   button {
-    display: block;
-    width: 27px;
     background-repeat: no-repeat;
     background-size: cover;
+    padding: $spacer;
+    width: 2.5rem;
+    height: 2.5rem;
     cursor: pointer;
     border: 0;
     background-color: transparent;
   }
 
-  &__button--minus {
-    background-position: 9px -4px;
-    background-image: url('~@/assets/icons/minus.svg');
-  }
-
-  &__button--plus {
-    background-position: 5px -2px;
-    background-image: url('~@/assets/icons/plus.svg');
+  svg {
+    height: 100%;
+    width: 100%;
+    fill: $color-theme-darkred;
   }
 }
 </style>

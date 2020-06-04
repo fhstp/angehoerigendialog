@@ -39,114 +39,86 @@ fieldset {
 input + label {
   margin-left: $spacer;
 }
-.an-field__subfields{
-  input, textarea {
+
+input, textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  appearance: none;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  cursor: pointer;
+  height: 1.25em;
+  width: 1.25em;
+  background-color:white;
+  outline-offset: 2px;
+}
+
+input[type=radio] {
+  border: none;
+  border-radius: 50%;
+
+  &::after {
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background-color: $color-theme-darkgrey;
+    transform: scale(.7);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &:not(:checked)::after {
+    opacity: 0;
+  }
+
+  .an-checkboxes__option &, .an-field__subfields & {
+    border: 2px solid $color-theme-darkgrey;
+  }
+}
+
+input[type=checkbox] {
+  border: 2px solid $color-theme-darkgrey;
+
+  &::after {
+    content: '';
+    display: block;
+    border: 2px solid $color-theme-darkgrey;
+    border-top: 0;
+    border-left: 0;
+    transition: opacity 200ms ease-in-out;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 25%;
+    top: -1px;
+    transform: rotate(45deg) scale(0.75);
+  }
+
+  &:not(:checked)::after {
+    opacity: 0;
+  }
+
+  &:disabled {
     border: 2px solid $color-theme-lightgrey;
   }
 }
 
-input, textarea {
-  font-size: 1rem;
-  border: 0;
-  border-radius: $border-radius;
-  padding: 3px 7px;
-}
-
-@supports(-webkit-appearance: none) or (-moz-appearance: none) {
-
-  input[type=radio]{
-    --border: none;
-    --bgcolor: #{$color-theme-lightgrey};
-    --bdradius: 50%;
-    &:after {
-      content: '';
-        display: block;
-        left: 0;
-        top: 0;
-        position: absolute;
-        background-color: $color-theme-darkgrey;
-        transform: scale(.7);
-        width: inherit;
-        height: inherit;
-        border-radius: 50%;
-        opacity: var(--opacity);
-        transition: opacity 200ms ease-in-out;
-    }
-  }
-
-  input[type=checkbox]{
-    --border: 2px solid #{$color-theme-darkgrey};
-    --bgcolor: white;
-    --bdradius: 0%;
-
-    &:after {
-      content: '';
-      display: block;
-      border: 2px solid $color-theme-darkgrey;
-      border-top: 0;
-      border-left: 0;
-      transition: opacity 200ms ease-in-out;
-      position: absolute;
-      background-color: none;
-      transform: scale(.7);
-      width: 5px;
-      height: 9px;
-      border-radius: 0%;
-      opacity: var(--opacity);
-      left: 7px;
-      top: 4px;
-      transform: rotate(43deg);
-    }
-
-    &:disabled{
-      --border: 2px solid #{$color-theme-lightgrey}
-    }
-  }
-
-  input[type=radio],
-  input[type=checkbox] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    margin: 0;
-    cursor: pointer;
-    border: var(--border);
-    border-radius: var(--bdradius);
-    height:21px;
-    width:21px;
-    background-color:white;
-    display: inline-block;
-
-    .an-checkboxes__option &, .an-field__subfields &{
-      background-color: var(--bgcolor);
-    }
-
-    &:checked {
-      --opacity: 1;
-    }
-
-    &:not(:checked){
-      --opacity: 0;
-    }
-  }
-
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  margin: 0;
-  }
-}
-
 input[type=range] {
-  background-color: transparent;
   appearance: none;
+  background-color: transparent;
 
   @mixin range-thumb {
     box-sizing: content-box;
+    position: relative;
     border: $range-thumb-border-size solid $color-theme-darkgrey;
     border-radius: 50%;
     background-color: white;
@@ -154,6 +126,7 @@ input[type=range] {
     height: $range-thumb-size - $range-thumb-border-size * 2;
     cursor: grab;
     appearance: none;
+    z-index: 1000;
   }
   &::-webkit-slider-thumb{
     @include range-thumb;
@@ -194,7 +167,6 @@ input[type=range] {
   font-size: 1rem;
   transition: background-color 200ms ease-in-out;
   text-decoration: none;
-  outline: none;
   cursor: pointer;
   font-family: 'Open Sans', sans-serif;
 
