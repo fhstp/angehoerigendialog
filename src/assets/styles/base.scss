@@ -144,7 +144,6 @@ input[type=range] {
     height: $range-thumb-size - $range-thumb-border-size * 2;
     cursor: grab;
     appearance: none;
-    z-index: 1000;
   }
   &::-webkit-slider-thumb{
     @include range-thumb;

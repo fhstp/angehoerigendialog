@@ -71,6 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$thumb-label-height: 5px;
 .an-range {
   &__wrapper {
     display: flex;
@@ -86,7 +87,7 @@ export default {
 
   &__label-area {
     position: absolute;
-    top: -5px;
+    top: -$thumb-label-height;
     left: $range-thumb-size / 2;
     right: $range-thumb-size / 2;
     line-height: 0;
@@ -108,12 +109,12 @@ export default {
     &::after {
       content: '';
       position: absolute;
-      bottom: -5px;
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      border-top: 5px solid #333;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
+      border-top: $thumb-label-height solid #333;
+      border-right: $thumb-label-height solid transparent;
+      border-left: $thumb-label-height solid transparent;
     }
   }
 

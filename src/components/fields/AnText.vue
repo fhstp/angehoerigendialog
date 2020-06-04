@@ -25,8 +25,14 @@ export default {
 
 <style lang="scss" scoped>
 .an-text {
+  border: none;
   border-radius: $border-radius;
   padding: $spacer;
   width: 100%;
+
+  .an-checkboxes_activefields &,
+  .an-field__subfields & {
+    border: 2px solid $color-theme-lightgrey;
+  }
 }
 </style>
