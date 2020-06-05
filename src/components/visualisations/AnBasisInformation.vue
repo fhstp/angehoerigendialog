@@ -316,7 +316,7 @@ $rightwidth: 50%;
     }
 
     &-commoninfo {
-      border-top: 2px solid $color-theme-darkgrey;
+      border-top: 2px solid $color-theme-blue;
       background-color: $color-theme-lightgrey;
       width: 100%;
       text-align: center;
@@ -360,13 +360,15 @@ $rightwidth: 50%;
 }
 
 .an-dots {
-  $width: 100px;
-  $margin: 3px;
-  $dot: ($width / 5) - $margin * 4 / 5;
+  $width: 130px;
+  $margin: 2px;
+  $dotamount: 8;
+  $dot: ($width / $dotamount) - $margin;
 
   width: $width;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat($dotamount, 1fr);
+  gap: $margin;
   margin-top: 0.3rem;
   margin-left: 1rem;
 
@@ -374,15 +376,9 @@ $rightwidth: 50%;
     box-sizing: border-box;
     width: $dot;
     height: $dot;
-    background: $color-theme-lightgrey;
-    border: $color-theme-darkgrey solid $dot / 6;
+    background: white;
+    border: $color-theme-blue solid $dot / 6;
     border-radius: 50%;
-    margin-bottom: $margin;
-    margin-right: $margin;
-
-    &:nth-child(5n) {
-      margin-right: 0;
-    }
 
     &:last-child {
       clip-path: polygon(

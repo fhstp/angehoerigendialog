@@ -17,7 +17,7 @@ export default {
     IconEdit
   },
   props: {
-    fieldId: { type: Number, default: undefined },
+    fieldId: { type: String, default: undefined },
     sectionId: { type: String, default: undefined }
   }
 };
@@ -27,6 +27,10 @@ export default {
 .an-edit-button {
   &__button {
     margin-left: 0.5rem;
+  }
+
+  @media print {
+    display: none;
   }
 }
 </style>

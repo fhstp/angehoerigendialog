@@ -20,7 +20,7 @@
             v-for="(figure, figureIndex) in careSvg[index]"
             :key="figure.type + figureIndex"
             class="an-care-tasks__svg"
-            :class="`an-care-tasks__svg--${figure.class}`"
+            :class="`an-care-tasks__svg--${figure.class} ${highestCategory}`"
           />
         </div>
       </div>
@@ -87,6 +87,14 @@ export default {
         return careTasksValues;
       }
       return '';
+    },
+    highestCategory() {
+      const noPerson = this.careTasks.some(item => item.length > 9);
+      if (noPerson) return 'an-care-tasks__svg--noPerson';
+      const halfPerson = this.careTasks.some(item => item.length > 7);
+      if (halfPerson) return 'an-care-tasks__svg--halfPerson';
+
+      return false;
     }
   },
   created() {
@@ -114,6 +122,7 @@ export default {
 
 <style lang="scss" scoped>
 .an-care-tasks {
+  color-adjust: exact;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: auto auto;
@@ -181,6 +190,16 @@ export default {
   &__svg {
     width: 40%;
 
+    @media print {
+      &--halfPerson {
+        width: 20%;
+      }
+
+      &--noPerson {
+        width: 0%;
+      }
+    }
+
     &--filled {
       fill: $color-theme-darkgrey;
       stroke: $color-theme-darkgrey;
@@ -195,18 +214,17 @@ export default {
   &__list {
     list-style: none;
     border: 5px solid $color-theme-blue;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
-    height: 90px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: $border-radius;
     margin-bottom: -5px;
+    background-color: white;
 
-    @media print {
-      font-size: 0.9rem;
-    }
+    font-size: 0.7rem;
 
     &:nth-child(2n) {
       margin-left: -6px;
@@ -223,6 +241,7 @@ export default {
     padding-right: $spacer;
     padding-left: $spacer;
     text-align: center;
+    font-size: 0.7rem;
   }
 }
 </style>

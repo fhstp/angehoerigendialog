@@ -84,9 +84,10 @@ $pin-height: 60%;
   @media print, #{map-get($query, 'md-and-up')} {
     display: flex;
     align-items: flex-end;
-    margin-left: -$spacer;
-    margin-right: -$spacer;
+    margin: $spacer auto;
   }
+
+  width: 80%;
 
   &__category {
     &:not(:first-child) {
@@ -103,6 +104,8 @@ $pin-height: 60%;
   &__heading {
     display: flex;
     align-items: center;
+    font-size: 16px;
+    font-weight: normal;
   }
 
   .icon-warning {
@@ -133,7 +136,7 @@ $pin-height: 60%;
 
   &__progressbar {
     position: relative;
-    height: 2rem;
+    height: $battery-height;
     border: $battery-border-width solid white;
     border-radius: $battery-border-radius;
     overflow: hidden;
