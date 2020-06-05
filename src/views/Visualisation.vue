@@ -6,113 +6,121 @@
         <AnSendMail />
       </div>
       <h1>Auswertung</h1>
-
-      <div class="an-visualisation__heading-wrapper">
-        <h2>Überblick</h2>
-        <AnEditButton section-id="demenzerkrankte_person" :field-id="0" />
+      <div class="print-hide">
+        <router-link to="/auswertung">Visualisierungen</router-link>
+        <router-link to="/export">Export der Daten</router-link>
       </div>
-      <AnBasisInformation />
+      <template v-if="showVisualisations">
+        <div class="an-visualisation__heading-wrapper">
+          <h2>Überblick</h2>
+          <AnEditButton section-id="demenzerkrankte_person" :field-id="0" />
+        </div>
+        <AnBasisInformation />
 
-      <div
-        v-show="isAvailable.resources"
-        class="an-visualisation__heading-wrapper"
-      >
-        <h2>
-          Meine Ressourcen
-        </h2>
-        <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
-      </div>
+        <div
+          v-show="isAvailable.resources"
+          class="an-visualisation__heading-wrapper"
+        >
+          <h2>
+            Meine Ressourcen
+          </h2>
+          <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
+        </div>
 
-      <AnResources
-        v-show="isAvailable.resources"
-        :available.sync="isAvailable.resources"
-      />
+        <AnResources
+          v-show="isAvailable.resources"
+          :available.sync="isAvailable.resources"
+        />
 
-      <div
-        v-show="isAvailable.situation"
-        class="an-visualisation__heading-wrapper page-break-before"
-      >
-        <h2>
-          Zusammenfassende Einschätzung der gesundheitliche Situation
-        </h2>
-        <AnEditButton section-id="gesundheit" :field-id="0" />
-      </div>
-      <AnSituation
-        v-show="isAvailable.situation"
-        :available.sync="isAvailable.situation"
-      />
+        <div
+          v-show="isAvailable.situation"
+          class="an-visualisation__heading-wrapper page-break-before"
+        >
+          <h2>
+            Zusammenfassende Einschätzung der gesundheitliche Situation
+          </h2>
+          <AnEditButton section-id="gesundheit" :field-id="0" />
+        </div>
+        <AnSituation
+          v-show="isAvailable.situation"
+          :available.sync="isAvailable.situation"
+        />
 
-      <div
-        v-show="isAvailable.flower"
-        class="an-visualisation__heading-wrapper"
-      >
-        <h2>
-          Meine Energie-Blume
-        </h2>
-        <AnEditButton section-id="ressourcen_belastungen" :field-id="2" />
-      </div>
-      <AnFlower
-        v-show="isAvailable.flower"
-        :available.sync="isAvailable.flower"
-      />
+        <div
+          v-show="isAvailable.flower"
+          class="an-visualisation__heading-wrapper"
+        >
+          <h2>
+            Meine Energie-Blume
+          </h2>
+          <AnEditButton section-id="ressourcen_belastungen" :field-id="2" />
+        </div>
+        <AnFlower
+          v-show="isAvailable.flower"
+          :available.sync="isAvailable.flower"
+        />
 
-      <div
-        v-show="isAvailable.careTasks"
-        class="an-visualisation__heading-wrapper page-break-before"
-      >
-        <h2>
-          Praktische Betreuungsaufgaben
-        </h2>
-        <AnEditButton section-id="praktische_betreungsaufgaben" :field-id="0" />
-      </div>
-      <AnCareTasks
-        v-show="isAvailable.careTasks"
-        :available.sync="isAvailable.careTasks"
-      />
+        <div
+          v-show="isAvailable.careTasks"
+          class="an-visualisation__heading-wrapper page-break-before"
+        >
+          <h2>
+            Praktische Betreuungsaufgaben
+          </h2>
+          <AnEditButton
+            section-id="praktische_betreungsaufgaben"
+            :field-id="0"
+          />
+        </div>
+        <AnCareTasks
+          v-show="isAvailable.careTasks"
+          :available.sync="isAvailable.careTasks"
+        />
 
-      <div
-        v-show="isAvailable.behaviourChanges"
-        class="an-visualisation__heading-wrapper page-break-before"
-      >
-        <h2>
-          Umgang mit Verhaltensveränderungen
-        </h2>
-        <AnEditButton section-id="verhaltensveraenderungen" :field-id="0" />
-      </div>
-      <AnBehaviour
-        v-show="isAvailable.behaviourChanges"
-        :available.sync="isAvailable.behaviourChanges"
-      />
+        <div
+          v-show="isAvailable.behaviourChanges"
+          class="an-visualisation__heading-wrapper page-break-before"
+        >
+          <h2>
+            Umgang mit Verhaltensveränderungen
+          </h2>
+          <AnEditButton section-id="verhaltensveraenderungen" :field-id="0" />
+        </div>
+        <AnBehaviour
+          v-show="isAvailable.behaviourChanges"
+          :available.sync="isAvailable.behaviourChanges"
+        />
 
-      <div
-        v-show="isAvailable.healthChanges"
-        class="an-visualisation__heading-wrapper page-break-before"
-      >
-        <h2>
-          Gesundheit
-        </h2>
-        <AnEditButton section-id="gesundheit" :field-id="7" />
-      </div>
-      <AnHealth
-        v-show="isAvailable.healthChanges"
-        :available.sync="isAvailable.healthChanges"
-      />
+        <div
+          v-show="isAvailable.healthChanges"
+          class="an-visualisation__heading-wrapper page-break-before"
+        >
+          <h2>
+            Gesundheit
+          </h2>
+          <AnEditButton section-id="gesundheit" :field-id="7" />
+        </div>
+        <AnHealth
+          v-show="isAvailable.healthChanges"
+          :available.sync="isAvailable.healthChanges"
+        />
 
-      <div
-        v-show="isAvailable.resourcespressure"
-        class="an-visualisation__heading-wrapper page-break-before"
-      >
-        <h2>
-          Ressourcen und Belastungen
-        </h2>
-        <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
-      </div>
-      <AnResourcesPressure
-        v-show="isAvailable.resourcespressure"
-        :available.sync="isAvailable.resourcespressure"
-      />
+        <div
+          v-show="isAvailable.resourcespressure"
+          class="an-visualisation__heading-wrapper page-break-before"
+        >
+          <h2>
+            Ressourcen und Belastungen
+          </h2>
+          <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
+        </div>
+        <AnResourcesPressure
+          v-show="isAvailable.resourcespressure"
+          :available.sync="isAvailable.resourcespressure"
+        />
+      </template>
 
-      <AnPlainData />
+      <AnPlainData v-else />
 
       <button
         class="an-visualisation__restart btn"
@@ -158,6 +166,11 @@ export default {
   data: () => ({
     isAvailable: {}
   }),
+  computed: {
+    showVisualisations() {
+      return this.$route.path === '/auswertung';
+    }
+  },
   methods: {
     restartQuestionnaire
   }
