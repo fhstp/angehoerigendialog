@@ -31,7 +31,10 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  overflow:  hidden;
+}
+
+body.fixed {
+  overflow: hidden;
 }
 
 .container {
