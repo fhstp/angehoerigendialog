@@ -1,5 +1,5 @@
 <template>
-  <div class="an-visualisation">
+  <div class="an-visualisation" :class="{ isChromium: isChromium }">
     <div class="container">
       <div class="an-visualisation__actions">
         <AnExportPdf />
@@ -141,6 +141,7 @@
           />
         </div>
       </div>
+      <div class="an-visualisation__screen_spacer"></div>
 
       <button
         class="an-visualisation__restart btn"
@@ -180,7 +181,9 @@ export default {
     AnSituation
   },
   data: () => ({
-    isAvailable: {}
+    isAvailable: {},
+    isChromium: !!window.chrome
+    // http://browserhacks.com/#hack-dee2c3ab477a0324b6a2283c434108c8
   }),
   computed: {
     headerData() {
@@ -218,8 +221,6 @@ export default {
 <style lang="scss" scoped>
 .an-visualisation {
   color-adjust: exact;
-  overflow: auto;
-  height: 100vh;
 
   @media screen {
     &__screen_spacer {
@@ -246,6 +247,7 @@ export default {
       border-left: 1.25rem solid $color-theme-darkgrey;
       position: absolute;
       right: -1.25rem;
+      bottom: 0;
     }
   }
 
@@ -300,8 +302,12 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       page-break-after: always;
-      height: 277mm;
       overflow: hidden;
+    }
+
+    &.isChromium &__page {
+      height: 277mm;
+      // overflow issues in firefox/safari, so height will be only defined in chrome
     }
 
     &__visualisation-wrapper {
@@ -375,8 +381,6 @@ export default {
 
 <style lang="scss">
 body {
-  @media print {
-    overflow: auto;
-  }
+  overflow: auto;
 }
 </style>

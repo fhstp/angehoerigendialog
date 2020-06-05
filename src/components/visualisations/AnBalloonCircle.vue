@@ -1,5 +1,5 @@
 <template>
-  <div class="an-balloon-circle">
+  <div class="an-balloon-circle" :class="{ isSafari: isSafari }">
     <div class="an-balloon-circle__shape-left" />
     <div class="an-balloon-circle__shape-right" />
     <div ref="text" class="an-balloon-circle__text">
@@ -14,8 +14,26 @@ export default {
   props: {
     text: { type: String, required: true }
   },
+  data() {
+    return {
+      isSafari: false
+    };
+  },
+  created() {
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.includes('safari')) {
+      if (!ua.includes('chrome')) {
+        this.isSafari = true;
+      }
+    }
+    // https://stackoverflow.com/a/7944490
+  },
   mounted() {
-    setTimeout(() => {
+    setTimeout(this.calculateLabels, 500);
+    setTimeout(this.calculateLabels, 5000);
+  },
+  methods: {
+    calculateLabels() {
       const getComputedStyle = (el, prop) =>
         Number(window.getComputedStyle(el)[prop].replace('px', ''));
 
@@ -42,7 +60,7 @@ export default {
           text.style.fontSize = `${fontSize}px`;
         }
       }
-    }, 500);
+    }
   }
 };
 </script>
@@ -54,6 +72,14 @@ export default {
   width: 100%;
   background-color: $color-theme-lightblue;
   border-radius: 50%;
+
+  &.isSafari {
+    position: fixed;
+    height: 200%;
+    width: 200%;
+    // foreignObject isn't supported in safari for 100%, that's why the circles need position fixed and 200% as width and height
+    // https://stackoverflow.com/a/62082096 https://bugs.webkit.org/show_bug.cgi?id=23113
+  }
 
   &__shape-left,
   &__shape-right {
