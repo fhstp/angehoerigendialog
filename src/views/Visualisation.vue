@@ -8,7 +8,7 @@
 
       <!-- Überschift mit Daten -->
 
-      <div class="page">
+      <div class="an-visualisation__page">
         <div class="an-visualisation__infos">
           <h1>Angehörigengespräch von<br />{{ headerData.caregivername }}</h1>
           <div>
@@ -25,9 +25,10 @@
 
         <!-- Vis Seite 1 -->
 
-        <div class="visualisation">
+        <div class="an-visualisation__visualisation-wrapper">
           <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
           <AnBasisInformation />
+          <div class="an-visualisation__screen_spacer"></div>
 
           <div>
             <div
@@ -48,11 +49,12 @@
             />
           </div>
         </div>
+        <div class="an-visualisation__screen_spacer"></div>
       </div>
 
       <!-- Vis Seite 2 -->
 
-      <div class="page">
+      <div class="an-visualisation__page">
         <div>
           <div
             v-show="isAvailable.behaviourChanges"
@@ -68,6 +70,7 @@
             :available.sync="isAvailable.behaviourChanges"
           />
         </div>
+        <div class="an-visualisation__screen_spacer"></div>
 
         <div>
           <div
@@ -84,11 +87,12 @@
             :available.sync="isAvailable.flower"
           />
         </div>
+        <div class="an-visualisation__screen_spacer"></div>
       </div>
 
       <!-- Vis Seite 3 -->
 
-      <div class="page">
+      <div class="an-visualisation__page">
         <div
           v-show="isAvailable.situation || isAvailable.healthChanges"
           class="an-visualisation__heading-wrapper"
@@ -108,12 +112,13 @@
           v-show="isAvailable.healthChanges"
           :available.sync="isAvailable.healthChanges"
         />
+        <div class="an-visualisation__screen_spacer"></div>
 
-        <div class="balloon-wrapper">
-          <div class="balloon-labels">
+        <div class="an-visualisation__balloon-wrapper">
+          <div class="an-visualisation__balloon-labels">
             <div
               v-show="isAvailable.resourcespressure"
-              class="an-visualisation__heading-wrapper kraft"
+              class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
             >
               <h2>
                 Das gibt mir Kraft
@@ -122,7 +127,7 @@
             </div>
             <div
               v-show="isAvailable.resourcespressure"
-              class="an-visualisation__heading-wrapper belastung"
+              class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
             >
               <h2>
                 Das belastet mich
@@ -216,6 +221,12 @@ export default {
   overflow: auto;
   height: 100vh;
 
+  @media screen {
+    &__screen_spacer {
+      margin-bottom: $spacer * 10;
+    }
+  }
+
   h2 {
     background-color: $color-theme-darkgrey;
     color: white;
@@ -282,44 +293,44 @@ export default {
     flex-direction: row;
     justify-content: space-between;
   }
-}
 
-@media print {
-  .page {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    page-break-after: always;
-    height: 277mm;
-    overflow: hidden;
+  @media print {
+    &__page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      height: 277mm;
+      overflow: hidden;
+    }
 
-    .visualisation {
+    &__visualisation-wrapper {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
   }
-}
 
-.balloon-wrapper {
-  display: flex;
+  &__balloon-wrapper {
+    display: flex;
 
+    @media print {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  }
   .an-resources-pressure {
     flex-grow: 1;
   }
-
   @media print {
-    flex-direction: column-reverse;
-    align-items: center;
-
     .an-resources-pressure {
       transform: rotate(-90deg);
       margin-top: -120px;
       margin-bottom: -120px;
     }
 
-    .balloon-labels {
+    &__balloon-labels {
       display: flex;
       width: 100%;
       padding: 0 1.25rem;
@@ -327,34 +338,36 @@ export default {
     }
   }
 
-  .kraft {
-    margin-top: 6rem;
+  &__heading-wrapper {
+    &--kraft {
+      margin-top: 6rem;
 
-    @media print {
-      margin: 0;
+      @media print {
+        margin: 0;
 
-      h2 {
-        padding-right: 0.5rem;
-        padding-left: 2rem;
+        h2 {
+          padding-right: 0.5rem;
+          padding-left: 2rem;
 
-        &::after {
-          content: '';
-          border-top: 1.25rem solid transparent;
-          border-bottom: 1.25rem solid transparent;
-          border-left: none;
-          border-right: 1.25rem solid $color-theme-darkgrey;
-          position: absolute;
-          left: -1.25rem;
+          &::after {
+            content: '';
+            border-top: 1.25rem solid transparent;
+            border-bottom: 1.25rem solid transparent;
+            border-left: none;
+            border-right: 1.25rem solid $color-theme-darkgrey;
+            position: absolute;
+            left: -1.25rem;
+          }
         }
       }
     }
-  }
 
-  .belastung {
-    margin-top: 24rem;
+    &--belastung {
+      margin-top: 24rem;
 
-    @media print {
-      margin-top: 0;
+      @media print {
+        margin-top: 0;
+      }
     }
   }
 }

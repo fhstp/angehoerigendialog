@@ -90,9 +90,9 @@ export default {
     },
     highestCategory() {
       const noPerson = this.careTasks.some(item => item.length > 9);
-      if (noPerson) return 'noPerson';
+      if (noPerson) return 'an-care-tasks__svg--noPerson';
       const halfPerson = this.careTasks.some(item => item.length > 7);
-      if (halfPerson) return 'halfPerson';
+      if (halfPerson) return 'an-care-tasks__svg--halfPerson';
 
       return false;
     }
@@ -128,10 +128,10 @@ export default {
   grid-template-rows: auto auto;
   grid-auto-flow: column;
 
-  /* @media screen and (max-width: 800px) {
+  @media screen and (max-width: 800px) {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto auto;
-  } */
+  }
 
   &__category {
     display: flex;
@@ -190,12 +190,14 @@ export default {
   &__svg {
     width: 40%;
 
-    &.halfPerson {
-      width: 20%;
-    }
+    @media print {
+      &--halfPerson {
+        width: 20%;
+      }
 
-    &.noPerson {
-      width: 0%;
+      &--noPerson {
+        width: 0%;
+      }
     }
 
     &--filled {

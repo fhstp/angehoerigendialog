@@ -84,7 +84,7 @@ $pin-height: 60%;
   @media print, #{map-get($query, 'md-and-up')} {
     display: flex;
     align-items: flex-end;
-    margin: 0 auto;
+    margin: $spacer auto;
   }
 
   width: 80%;

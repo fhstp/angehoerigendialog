@@ -13,17 +13,13 @@
           width="100%"
           height="100%"
           required-extensions="http://www.w3.org/2000/svg"
-          class="an-resources-pressure__innercircle-wrapper"
         >
-          <AnBalloonCircle
-            class="an-resources__inncercircle"
-            :text="resource"
-          />
+          <AnBalloonCircle :text="resource" />
         </foreignObject>
       </g>
     </AnBalloon>
     <template v-if="pressure && pressure.length > 0">
-      <div class="an-resources-pressure__ropes"></div>
+      <div class="an-pressure__ropes"></div>
       <ul class="an-pressure">
         <li
           v-for="(pressureItem, i) in pressure"
@@ -100,6 +96,19 @@ $bordersize: 3px;
 
   width: 100%;
   max-width: 350px;
+}
+
+.an-pressure {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  max-width: 25ch;
+  min-width: 90px;
+  position: relative;
+  text-align: center;
+  list-style: none;
+  color: white;
+  font-size: 0.9rem;
 
   &__ropes {
     margin: 0 auto;
@@ -127,19 +136,6 @@ $bordersize: 3px;
       transform: translateX(8px) rotate(10deg);
     }
   }
-}
-
-.an-pressure {
-  margin-left: auto;
-  margin-right: auto;
-  width: max-content;
-  max-width: 25ch;
-  min-width: 90px;
-  position: relative;
-  text-align: center;
-  list-style: none;
-  color: white;
-  font-size: 0.9rem;
 
   &::before {
     content: '';
