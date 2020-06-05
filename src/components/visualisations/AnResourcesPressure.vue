@@ -127,6 +127,10 @@ $bordersize: 3px;
       margin-left: $bordersize / -2;
       z-index: -1;
       transform-origin: bottom center;
+
+      @media print {
+        bottom: $ringsize / 4;
+      }
     }
 
     &::before {
