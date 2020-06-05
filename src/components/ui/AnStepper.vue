@@ -110,6 +110,11 @@ $icon_width: 50px;
 
   @media #{map-get($query, 'lg-and-up')} {
     height: 100%;
+    position: fixed;
+    left: 0;
+    width: 300px;
+    top: 0;
+    bottom: 0;
   }
 
   &__list {
@@ -175,6 +180,37 @@ $icon_width: 50px;
       }
       @media #{map-get($query, 'lg-and-up')} {
         justify-content: center;
+      }
+    }
+    @media #{map-get($query, 'lg-and-up')} {
+      &:not(&--active) > a::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 10px;
+        right: 0;
+        top: 0;
+        background-image: linear-gradient(
+          to left,
+          rgba(85, 85, 85, 0.6),
+          rgba(85, 85, 85, 0)
+        );
+      }
+    }
+
+    @media #{map-get($query, 'md-and-down')} {
+      &:not(&--active) > a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 10px;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(
+          to top,
+          rgba(85, 85, 85, 0.6),
+          rgba(85, 85, 85, 0)
+        );
       }
     }
   }

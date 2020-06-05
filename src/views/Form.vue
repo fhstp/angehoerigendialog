@@ -315,19 +315,13 @@ export default {
 
 <style lang="scss" scoped>
 .an-form {
-  @media #{map-get($query, 'lg-and-up')} {
-    display: flex;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-  }
-
   &__content {
     flex-grow: 1;
-    box-shadow: 0 0 20px 0 $color-theme-shadow;
     z-index: 1;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
     @media #{map-get($query, 'lg-and-up')} {
-      height: 100%;
-      overflow-y: scroll;
+      margin-left: 300px;
     }
   }
 
@@ -353,15 +347,6 @@ export default {
   &__scrollarea {
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    overflow-y: scroll;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-
-    @media #{map-get($query, 'lg-and-up')} {
-      flex-direction: row;
-      overflow: hidden;
-    }
   }
 
   &__done {
