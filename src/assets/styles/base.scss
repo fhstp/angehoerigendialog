@@ -134,13 +134,13 @@ input[type=checkbox] {
 
 .btn {
   display: inline-block;
-  margin: $spacer 0;
-  padding: $spacer $spacer * 2;
-  border-radius: 8px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
-  color: #000;
-  background-color: #fff;
   border: 2px solid #000;
+  border-radius: 8px;
+  margin: $spacer 0;
+  background-color: #fff;
+  padding: $spacer $spacer * 2;
+  color: #000;
   font-size: 1rem;
   transition: background-color 200ms ease-in-out;
   text-decoration: none;
@@ -155,13 +155,21 @@ input[type=checkbox] {
     background-color: #ccc;
   }
 
-  &:active{
+  &:active, &--active {
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
     transform: translateY(2px);
   }
 
-  &--block {
-    width: 100%;
+  &--text {
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+
+    &:active,  &.btn--active {
+      box-shadow: none;
+      background-color: $color-theme-lightblue;
+      transform: none;
+    }
   }
 }
 

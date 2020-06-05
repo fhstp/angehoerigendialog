@@ -1,36 +1,49 @@
 <template>
   <div class="an-visualisation">
-    <div class="container">
-      <div class="print-hide">
-        <router-link to="/auswertung">Visualisierungen</router-link>
-        <router-link to="/export">Export der Daten</router-link>
+    <div class="an-visualisation__toolbar row hide-print">
+      <nav>
+        <router-link
+          active-class="btn--active"
+          class="btn btn--text"
+          to="/auswertung"
+          >Visualisierungen</router-link
+        >
+        <router-link
+          active-class="btn--active"
+          class="btn btn--text"
+          to="/export"
+          >Export der Daten</router-link
+        >
+      </nav>
 
+      <div>
         <AnExportPdf />
         <AnSendMail />
-        <button class="btn" @click="restartQuestionnaire">
+        <button class="btn btn--text" @click="restartQuestionnaire">
           Neuen Fragebogen beginnen
         </button>
       </div>
+    </div>
 
-      <template v-if="showVisualisations">
-        <!-- Überschift mit Daten -->
-        <div class="an-visualisation__page">
-          <div class="an-visualisation__infos">
-            <h1>Angehörigengespräch von<br />{{ headerData.caregivername }}</h1>
-            <div>
-              <p>
-                Durchgeführt von {{ headerData.socialworkername }},
-                {{ headerData.date }}
-              </p>
-              <p>
-                Zweitgespräch am {{ headerData.date2 }} um
-                {{ headerData.time2 }} Uhr
-              </p>
-            </div>
+    <div class="container">
+      <div class="an-visualisation__page">
+        <div class="an-visualisation__infos row">
+          <h1 class="col-md-3">
+            Angehörigengespräch von<br />{{ headerData.caregivername }}
+          </h1>
+          <div class="col-md-3">
+            <p>
+              Durchgeführt von {{ headerData.socialworkername }},
+              {{ headerData.date }}
+            </p>
+            <p>
+              Zweitgespräch am {{ headerData.date2 }} um
+              {{ headerData.time2 }} Uhr
+            </p>
           </div>
+        </div>
 
-          <!-- Vis Seite 1 -->
-
+        <template v-if="showVisualisations">
           <div class="an-visualisation__visualisation-wrapper">
             <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
             <AnBasisInformation />
@@ -55,11 +68,13 @@
               />
             </div>
           </div>
-          <div class="an-visualisation__screen_spacer"></div>
-        </div>
+          <div class="an-visualisation__screen_spacer" />
+        </template>
+        <AnPlainData v-else />
+      </div>
 
+      <template v-if="showVisualisations">
         <!-- Vis Seite 2 -->
-
         <div class="an-visualisation__page">
           <div>
             <div
@@ -157,8 +172,6 @@
           </div>
         </div>
       </template>
-
-      <AnPlainData v-else />
     </div>
   </div>
 </template>
@@ -243,6 +256,20 @@ export default {
     }
   }
 
+  &__toolbar {
+    border-bottom: 1px solid $color-theme-lightgrey;
+    margin-bottom: $spacer * 4;
+    padding: $spacer / 2;
+
+    nav {
+      flex-grow: 1;
+    }
+
+    .btn {
+      margin: $spacer / 2;
+    }
+  }
+
   h2 {
     background-color: $color-theme-darkgrey;
     color: white;
@@ -270,18 +297,12 @@ export default {
   }
 
   &__infos {
-    margin-bottom: 1rem;
-    display: flex;
+    margin-bottom: $spacer * 2;
     align-items: flex-end;
 
     h1 {
       font-size: 1.6rem;
-      flex: 1;
       color: $color-theme-darkred;
-    }
-
-    div {
-      flex: 1;
     }
   }
 
