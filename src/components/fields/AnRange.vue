@@ -104,8 +104,8 @@ $thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
     left: calc(100% * var(--value));
     transform: translate(-50%, #{-$range-thumb-size});
     border-radius: $border-radius;
-    background-color: #333;
-    color: white;
+    background-color: white;
+    color: $color-theme-darkgrey;
     padding: $spacer / 2;
     min-width: 3ch;
     text-align: center;
@@ -117,9 +117,13 @@ $thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      border-top: $thumb-triangle-height solid #333;
+      border-top: $thumb-triangle-height solid white;
       border-right: $thumb-triangle-height solid transparent;
       border-left: $thumb-triangle-height solid transparent;
+
+      .an-plain-data & {
+        border-top-color: $color-theme-darkgrey;
+      }
     }
   }
 

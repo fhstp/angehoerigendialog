@@ -114,7 +114,9 @@ ol {
 }
 
 li:not(:last-child) {
-  margin-bottom: $spacer * 2;
+  @media screen {
+    margin-bottom: $spacer * 2;
+  }
 }
 
 input {
