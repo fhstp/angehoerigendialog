@@ -304,14 +304,10 @@ $rightwidth: 50%;
     }
 
     &-betreuend {
-      display: flex;
-      justify-content: space-between;
       width: $leftwidth;
     }
 
     &-erkrankt {
-      display: flex;
-      justify-content: space-between;
       width: $rightwidth;
     }
 

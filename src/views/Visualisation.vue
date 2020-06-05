@@ -1,12 +1,12 @@
 <template>
-  <div class="an-visualisation">
+  <div class="an-visualisation" :class="{ isChromium: isChromium }">
     <div class="container">
       <div class="an-visualisation__actions">
         <AnExportPdf />
         <AnSendMail />
       </div>
 
-      <!-- Überschift mit Daten -->
+      <!-- Überschrift mit Daten -->
 
       <div class="an-visualisation__page">
         <div class="an-visualisation__infos">
@@ -141,6 +141,7 @@
           />
         </div>
       </div>
+      <div class="an-visualisation__screen_spacer"></div>
 
       <button
         class="an-visualisation__restart btn"
@@ -180,7 +181,9 @@ export default {
     AnSituation
   },
   data: () => ({
-    isAvailable: {}
+    isAvailable: {},
+    isChromium: !!window.chrome
+    // http://browserhacks.com/#hack-dee2c3ab477a0324b6a2283c434108c8
   }),
   computed: {
     headerData() {
@@ -218,8 +221,6 @@ export default {
 <style lang="scss" scoped>
 .an-visualisation {
   color-adjust: exact;
-  overflow: auto;
-  height: 100vh;
 
   @media screen {
     &__screen_spacer {
@@ -228,25 +229,21 @@ export default {
   }
 
   h2 {
-    background-color: $color-theme-darkgrey;
-    color: white;
+    background-color: $color-theme-lightgrey;
+    color: $color-theme-darkgrey;
     height: 2.5rem;
     padding-right: 2rem;
     padding-left: 0.5rem;
     display: flex;
     align-items: center;
     position: relative;
-
-    &::after {
-      content: '';
-      width: 0;
-      height: 0;
-      border-top: 1.25rem solid transparent;
-      border-bottom: 1.25rem solid transparent;
-      border-left: 1.25rem solid $color-theme-darkgrey;
-      position: absolute;
-      right: -1.25rem;
-    }
+    clip-path: polygon(
+      0 0,
+      calc(100% - 1.25rem) 0,
+      100% 50%,
+      calc(100% - 1.25rem) 100%,
+      0 100%
+    );
   }
 
   @media print {
@@ -300,8 +297,12 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       page-break-after: always;
-      height: 277mm;
       overflow: hidden;
+    }
+
+    &.isChromium &__page {
+      height: 277mm;
+      // overflow issues in firefox/safari, so height will be only defined in chrome
     }
 
     &__visualisation-wrapper {
@@ -375,8 +376,6 @@ export default {
 
 <style lang="scss">
 body {
-  @media print {
-    overflow: auto;
-  }
+  overflow: auto;
 }
 </style>

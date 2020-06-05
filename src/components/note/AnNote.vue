@@ -115,7 +115,9 @@ export default {
           this.updateTextAreaHeight(this.$refs.ta_newtext);
         });
         document.addEventListener('keydown', this.closeNotes);
+        document.body.classList.add('fixed');
       } else {
+        document.body.classList.remove('fixed');
         this.afterCloseNotes();
         document.removeEventListener('keydown', this.closeNotes);
       }
@@ -231,9 +233,10 @@ export default {
 <style lang="scss" scoped>
 .an-note {
   width: 100%;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-  position: absolute;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color: white;
   opacity: 1;
   z-index: 1;
