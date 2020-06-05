@@ -6,7 +6,7 @@
         <AnSendMail />
       </div>
 
-      <!-- Überschift mit Daten -->
+      <!-- Überschrift mit Daten -->
 
       <div class="an-visualisation__page">
         <div class="an-visualisation__infos">
@@ -229,26 +229,21 @@ export default {
   }
 
   h2 {
-    background-color: $color-theme-darkgrey;
-    color: white;
+    background-color: $color-theme-lightgrey;
+    color: $color-theme-darkgrey;
     height: 2.5rem;
     padding-right: 2rem;
     padding-left: 0.5rem;
     display: flex;
     align-items: center;
     position: relative;
-
-    &::after {
-      content: '';
-      width: 0;
-      height: 0;
-      border-top: 1.25rem solid transparent;
-      border-bottom: 1.25rem solid transparent;
-      border-left: 1.25rem solid $color-theme-darkgrey;
-      position: absolute;
-      right: -1.25rem;
-      bottom: 0;
-    }
+    clip-path: polygon(
+      0 0,
+      calc(100% - 1.25rem) 0,
+      100% 50%,
+      calc(100% - 1.25rem) 100%,
+      0 100%
+    );
   }
 
   @media print {
