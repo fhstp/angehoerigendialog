@@ -42,7 +42,7 @@ export default {
           text.style.fontSize = `${fontSize}px`;
         }
       }
-    }, 1);
+    }, 500);
   }
 };
 </script>

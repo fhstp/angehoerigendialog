@@ -1,133 +1,164 @@
 <template>
   <div class="an-visualisation">
     <div class="container">
-      <div class="an-visualisation__actions">
-        <AnExportPdf />
-        <AnSendMail />
-      </div>
-      <h1>Auswertung</h1>
       <div class="print-hide">
         <router-link to="/auswertung">Visualisierungen</router-link>
         <router-link to="/export">Export der Daten</router-link>
+
+        <AnExportPdf />
+        <AnSendMail />
+        <button class="btn" @click="restartQuestionnaire">
+          Neuen Fragebogen beginnen
+        </button>
       </div>
+
       <template v-if="showVisualisations">
-        <div class="an-visualisation__heading-wrapper">
-          <h2>Überblick</h2>
-          <AnEditButton section-id="demenzerkrankte_person" :field-id="0" />
+        <!-- Überschift mit Daten -->
+        <div class="an-visualisation__page">
+          <div class="an-visualisation__infos">
+            <h1>Angehörigengespräch von<br />{{ headerData.caregivername }}</h1>
+            <div>
+              <p>
+                Durchgeführt von {{ headerData.socialworkername }},
+                {{ headerData.date }}
+              </p>
+              <p>
+                Zweitgespräch am {{ headerData.date2 }} um
+                {{ headerData.time2 }} Uhr
+              </p>
+            </div>
+          </div>
+
+          <!-- Vis Seite 1 -->
+
+          <div class="an-visualisation__visualisation-wrapper">
+            <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+            <AnBasisInformation />
+            <div class="an-visualisation__screen_spacer"></div>
+
+            <div>
+              <div
+                v-show="isAvailable.careTasks"
+                class="an-visualisation__heading-wrapper"
+              >
+                <h2>
+                  Praktische Betreuungsaufgaben
+                </h2>
+                <AnEditButton
+                  section-id="praktische_betreungsaufgaben"
+                  field-id="0"
+                />
+              </div>
+              <AnCareTasks
+                v-show="isAvailable.careTasks"
+                :available.sync="isAvailable.careTasks"
+              />
+            </div>
+          </div>
+          <div class="an-visualisation__screen_spacer"></div>
         </div>
-        <AnBasisInformation />
 
-        <div
-          v-show="isAvailable.resources"
-          class="an-visualisation__heading-wrapper"
-        >
-          <h2>
-            Meine Ressourcen
-          </h2>
-          <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
+        <!-- Vis Seite 2 -->
+
+        <div class="an-visualisation__page">
+          <div>
+            <div
+              v-show="isAvailable.behaviourChanges"
+              class="an-visualisation__heading-wrapper"
+            >
+              <h2>
+                Verhaltensveränderungen
+              </h2>
+              <AnEditButton
+                section-id="verhaltensveraenderungen"
+                field-id="0"
+              />
+            </div>
+            <AnBehaviour
+              v-show="isAvailable.behaviourChanges"
+              :available.sync="isAvailable.behaviourChanges"
+            />
+          </div>
+          <div class="an-visualisation__screen_spacer"></div>
+
+          <div>
+            <div
+              v-show="isAvailable.flower"
+              class="an-visualisation__heading-wrapper"
+            >
+              <h2>
+                Ressource und Belastungen
+              </h2>
+              <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
+            </div>
+            <AnFlower
+              v-show="isAvailable.flower"
+              :available.sync="isAvailable.flower"
+            />
+          </div>
+          <div class="an-visualisation__screen_spacer"></div>
         </div>
 
-        <AnResources
-          v-show="isAvailable.resources"
-          :available.sync="isAvailable.resources"
-        />
+        <!-- Vis Seite 3 -->
 
-        <div
-          v-show="isAvailable.situation"
-          class="an-visualisation__heading-wrapper page-break-before"
-        >
-          <h2>
-            Zusammenfassende Einschätzung der gesundheitliche Situation
-          </h2>
-          <AnEditButton section-id="gesundheit" :field-id="0" />
-        </div>
-        <AnSituation
-          v-show="isAvailable.situation"
-          :available.sync="isAvailable.situation"
-        />
+        <div class="an-visualisation__page">
+          <div
+            v-show="isAvailable.situation || isAvailable.healthChanges"
+            class="an-visualisation__heading-wrapper"
+          >
+            <h2>
+              Gesundheit
+            </h2>
+            <AnEditButton section-id="gesundheit" field-id="0" />
+          </div>
 
-        <div
-          v-show="isAvailable.flower"
-          class="an-visualisation__heading-wrapper"
-        >
-          <h2>
-            Meine Energie-Blume
-          </h2>
-          <AnEditButton section-id="ressourcen_belastungen" :field-id="2" />
-        </div>
-        <AnFlower
-          v-show="isAvailable.flower"
-          :available.sync="isAvailable.flower"
-        />
-
-        <div
-          v-show="isAvailable.careTasks"
-          class="an-visualisation__heading-wrapper page-break-before"
-        >
-          <h2>
-            Praktische Betreuungsaufgaben
-          </h2>
-          <AnEditButton
-            section-id="praktische_betreungsaufgaben"
-            :field-id="0"
+          <AnSituation
+            v-show="isAvailable.situation"
+            :available.sync="isAvailable.situation"
           />
-        </div>
-        <AnCareTasks
-          v-show="isAvailable.careTasks"
-          :available.sync="isAvailable.careTasks"
-        />
 
-        <div
-          v-show="isAvailable.behaviourChanges"
-          class="an-visualisation__heading-wrapper page-break-before"
-        >
-          <h2>
-            Umgang mit Verhaltensveränderungen
-          </h2>
-          <AnEditButton section-id="verhaltensveraenderungen" :field-id="0" />
-        </div>
-        <AnBehaviour
-          v-show="isAvailable.behaviourChanges"
-          :available.sync="isAvailable.behaviourChanges"
-        />
+          <AnHealth
+            v-show="isAvailable.healthChanges"
+            :available.sync="isAvailable.healthChanges"
+          />
+          <div class="an-visualisation__screen_spacer"></div>
 
-        <div
-          v-show="isAvailable.healthChanges"
-          class="an-visualisation__heading-wrapper page-break-before"
-        >
-          <h2>
-            Gesundheit
-          </h2>
-          <AnEditButton section-id="gesundheit" :field-id="7" />
+          <div class="an-visualisation__balloon-wrapper">
+            <div class="an-visualisation__balloon-labels">
+              <div
+                v-show="isAvailable.resourcespressure"
+                class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
+              >
+                <h2>
+                  Das gibt mir Kraft
+                </h2>
+                <AnEditButton
+                  section-id="ressourcen_belastungen"
+                  field-id="0"
+                />
+              </div>
+              <div
+                v-show="isAvailable.resourcespressure"
+                class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
+              >
+                <h2>
+                  Das belastet mich
+                </h2>
+                <AnEditButton
+                  section-id="ressourcen_belastungen"
+                  field-id="0"
+                />
+              </div>
+            </div>
+            <AnResourcesPressure
+              v-show="isAvailable.resourcespressure"
+              :available.sync="isAvailable.resourcespressure"
+            />
+          </div>
         </div>
-        <AnHealth
-          v-show="isAvailable.healthChanges"
-          :available.sync="isAvailable.healthChanges"
-        />
-
-        <div
-          v-show="isAvailable.resourcespressure"
-          class="an-visualisation__heading-wrapper page-break-before"
-        >
-          <h2>
-            Ressourcen und Belastungen
-          </h2>
-          <AnEditButton section-id="ressourcen_belastungen" :field-id="0" />
-        </div>
-        <AnResourcesPressure
-          v-show="isAvailable.resourcespressure"
-          :available.sync="isAvailable.resourcespressure"
-        />
       </template>
 
       <AnPlainData v-else />
-
-      <button
-        class="an-visualisation__restart btn"
-        @click="restartQuestionnaire"
-      >
-        Neuen Fragebogen beginnen
-      </button>
     </div>
   </div>
 </template>
@@ -141,7 +172,6 @@ import AnEditButton from '@/components/ui/AnEditButton.vue';
 import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnHealth from '@/components/visualisations/AnHealth.vue';
-import AnResources from '@/components/visualisations/AnResources.vue';
 import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
@@ -158,7 +188,6 @@ export default {
     AnExportPdf,
     AnFlower,
     AnHealth,
-    AnResources,
     AnResourcesPressure,
     AnSendMail,
     AnSituation
@@ -169,6 +198,31 @@ export default {
   computed: {
     showVisualisations() {
       return this.$route.path === '/auswertung';
+    },
+    headerData() {
+      return {
+        date: new Date(
+          this.$store.getters.getFieldValue('startseite-datum')
+        ).toLocaleDateString('de-AT', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }),
+        caregivername: this.$store.getters.getFieldValue(
+          'startseite-angehoerigenname'
+        ),
+        socialworkername: this.$store.getters.getFieldValue(
+          'startseite-sozialarbeitername'
+        ),
+        date2: new Date(
+          this.$store.getters.getFieldValue('ende-datum')
+        ).toLocaleDateString('de-AT', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }),
+        time2: this.$store.getters.getFieldValue('ende-uhrzeit')
+      };
     }
   },
   methods: {
@@ -179,33 +233,139 @@ export default {
 
 <style lang="scss" scoped>
 .an-visualisation {
+  color-adjust: exact;
   overflow: auto;
   height: 100vh;
 
-  @media print {
-    height: auto !important;
-
-    &__restart,
-    &__actions {
-      display: none;
+  @media screen {
+    &__screen_spacer {
+      margin-bottom: $spacer * 10;
     }
   }
 
-  &__restart {
-    position: fixed;
-    bottom: 1.25rem;
-    right: 1.25rem;
+  h2 {
+    background-color: $color-theme-darkgrey;
+    color: white;
+    height: 2.5rem;
+    padding-right: 2rem;
+    padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 1.25rem solid transparent;
+      border-bottom: 1.25rem solid transparent;
+      border-left: 1.25rem solid $color-theme-darkgrey;
+      position: absolute;
+      right: -1.25rem;
+    }
   }
 
-  &__actions {
-    position: fixed;
-    top: 1.25rem;
-    right: 1.25rem;
+  @media print {
+    height: auto !important;
+  }
+
+  &__infos {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-end;
+
+    h1 {
+      font-size: 1.6rem;
+      flex: 1;
+      color: $color-theme-darkred;
+    }
+
+    div {
+      flex: 1;
+    }
   }
 
   &__heading-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @media print {
+    &__page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      height: 277mm;
+      overflow: hidden;
+    }
+
+    &__visualisation-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &__balloon-wrapper {
+    display: flex;
+
+    @media print {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  }
+  .an-resources-pressure {
+    flex-grow: 1;
+  }
+  @media print {
+    .an-resources-pressure {
+      transform: rotate(-90deg);
+      margin-top: -120px;
+      margin-bottom: -120px;
+    }
+
+    &__balloon-labels {
+      display: flex;
+      width: 100%;
+      padding: 0 1.25rem;
+      justify-content: space-between;
+    }
+  }
+
+  &__heading-wrapper {
+    &--kraft {
+      margin-top: 6rem;
+
+      @media print {
+        margin: 0;
+
+        h2 {
+          padding-right: 0.5rem;
+          padding-left: 2rem;
+
+          &::after {
+            content: '';
+            border-top: 1.25rem solid transparent;
+            border-bottom: 1.25rem solid transparent;
+            border-left: none;
+            border-right: 1.25rem solid $color-theme-darkgrey;
+            position: absolute;
+            left: -1.25rem;
+          }
+        }
+      }
+    }
+
+    &--belastung {
+      margin-top: 24rem;
+
+      @media print {
+        margin-top: 0;
+      }
+    }
   }
 }
 </style>

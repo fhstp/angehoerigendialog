@@ -17,17 +17,17 @@ visualisation:
       haushalt: gemeinsamer Haushalt
 
   caretasks:
-    mahlzeit: Mahlzeiten zubereiten
+    mahlzeit: Zubereiten der Mahlzeiten
     nahrungsaufnahme: Nahrungsaufnahme unterstützen
     badenwaschenduschen: Baden, Waschen, Duschen
     zahnpflegehaarhautnagelpflege: Zahn-, Haar-, Haut- und Nagelpflege
-    toilette: Toilettengang, Intimpflege, Inkontinenzeinlagen wechseln
-    kleidung: An- und Auskleidung unterstützen
+    toilette: Toilettengängen, Intimpflege
+    kleidung: An- und Auskleiden
     haushalt: Haushaltsführung und Einkaufen
-    weglaufen: Weglaufen vermeiden
-    verletzungen: Stürze / Verletzungen vermeiden
-    anwesend: Persönlich verfügbar / anwesend sein
-    behoerdenwege: Behördenwege / Unterstützungleistung organisieren
+    weglaufen: Verhüten von Weglaufen
+    verletzungen: Verhüten von Stürzen und Verletzungen
+    anwesend: Persönlich verfügbar sein
+    behoerdenwege: Über Unterstützungs- leistungen informieren
 
   behaviour:
     wiederholung: Wiederholt sich oft

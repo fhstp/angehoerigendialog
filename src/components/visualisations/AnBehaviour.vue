@@ -1,5 +1,10 @@
 <template>
-  <AnLollipop :values="behaviourChanges" :labels="labels" />
+  <div class="an-behaviour">
+    <div class="an-behaviour__heading">
+      So komme ich mit diesem Verhalten zurecht:
+    </div>
+    <AnLollipop :values="behaviourChanges" :labels="labels" />
+  </div>
 </template>
 
 <script>
@@ -55,4 +60,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.an-behaviour {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  &__heading {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    width: 45%;
+    text-align: center;
+  }
+}
+</style>

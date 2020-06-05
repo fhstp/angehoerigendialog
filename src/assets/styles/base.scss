@@ -189,10 +189,4 @@ input[type=checkbox] {
   white-space: nowrap;
 }
 
-.page-break-before {
-  @media print {
-    page-break-before: always;
-  }
-}
-
 @import '_grid.scss';

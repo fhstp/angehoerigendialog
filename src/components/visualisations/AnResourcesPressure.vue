@@ -1,31 +1,25 @@
 <template>
   <div class="an-resources-pressure">
-    <div class="an-resources">
-      <AnBalloon
-        :show-ropes="pressure && pressure.length > 0"
-        class="an-resources__icon"
-      >
-        <g class="an-resources__air">
-          <foreignObject
-            v-for="(resource, i) in resources"
-            :key="i"
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            required-extensions="http://www.w3.org/2000/svg"
-            class="an-resources-pressure__innercircle-wrapper"
-          >
-            <AnBalloonCircle
-              class="an-resources__inncercircle"
-              :text="resource"
-            />
-          </foreignObject>
-        </g>
-      </AnBalloon>
-    </div>
+    <AnBalloon
+      :show-ropes="pressure && pressure.length > 0"
+      class="an-resources__icon"
+    >
+      <g class="an-resources__air">
+        <foreignObject
+          v-for="(resource, i) in resources"
+          :key="i"
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          required-extensions="http://www.w3.org/2000/svg"
+        >
+          <AnBalloonCircle :text="resource" />
+        </foreignObject>
+      </g>
+    </AnBalloon>
     <template v-if="pressure && pressure.length > 0">
-      <div class="an-resources-pressure__ropes"></div>
+      <div class="an-pressure__ropes"></div>
       <ul class="an-pressure">
         <li
           v-for="(pressureItem, i) in pressure"
@@ -94,14 +88,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$ringsize: 60px;
-$bordersize: 4px;
+$ringsize: 40px;
+$bordersize: 3px;
 
 .an-resources-pressure {
-  margin-bottom: 20px;
+  color-adjust: exact;
+
+  width: 100%;
+  max-width: 350px;
+}
+
+.an-pressure {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content;
+  max-width: 25ch;
+  min-width: 90px;
+  position: relative;
+  text-align: center;
+  list-style: none;
+  color: white;
+  font-size: 0.9rem;
+
   &__ropes {
     margin: 0 auto;
-    height: 80px;
+    height: 40px;
     position: relative;
 
     &::before,
@@ -116,38 +127,19 @@ $bordersize: 4px;
       margin-left: $bordersize / -2;
       z-index: -1;
       transform-origin: bottom center;
+
+      @media print {
+        bottom: $ringsize / 4;
+      }
     }
 
     &::before {
-      transform: translateX(-10px) rotate(-10deg);
+      transform: translateX(-8px) rotate(-10deg);
     }
     &::after {
-      transform: translateX(10px) rotate(10deg);
+      transform: translateX(8px) rotate(10deg);
     }
   }
-}
-
-.an-resources {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__icon {
-    width: 100%;
-    max-width: 400px;
-  }
-}
-
-.an-pressure {
-  margin-left: auto;
-  margin-right: auto;
-  width: max-content;
-  max-width: 25ch;
-  min-width: 150px;
-  position: relative;
-  text-align: center;
-  list-style: none;
-  color: white;
 
   &::before {
     content: '';
@@ -176,7 +168,7 @@ $bordersize: 4px;
   }
   &__item {
     background: $color-theme-red;
-    padding: $spacer;
+    padding: $spacer / 2;
     border-bottom: $bordersize solid $color-theme-darkred;
     border-left: $bordersize solid $color-theme-darkred;
     border-right: $bordersize solid $color-theme-darkred;
