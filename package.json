@@ -85,7 +85,12 @@
     "trailingComma": "none"
   },
   "browserslist": [
-    "last 2 versions and >1%, Firefox ESR"
+    "last 2 versions and > 0.2%",
+    "Firefox ESR",
+    "not IE > 0",
+    "not Edge > 0",
+    "not OperaMini all",
+    "not UCAndroid > 0"
   ],
   "husky": {
     "hooks": {

@@ -58,7 +58,7 @@ Contains static files such as favicons or the [`index.html`](public/index.html).
     - objects don't have a trailing comma after the last value
     - single quotes get replaced with double quotes when possible
     - and much more ... (component order, max line length)
-  - browserlist: only the last two versions for browsers which have a market share higher then 1% are supported — [list of browsers](https://browserl.ist/?q=last+2+versions+and+%3E1%25%2C+Firefox+ESR)
+  - browserlist: only the last two versions for browsers which have a market share higher then 1% are supported — [list of browsers](https://browserl.ist/?q=last+2+versions+and+%3E+0.2%25%2C+Firefox+ESR%2C+not+IE+%3E+0%2C+not+Edge+%3E+0%2C+not+OperaMini+all%2C+not+UCAndroid+%3E+0)
 
 
 ## Development lifecycle
