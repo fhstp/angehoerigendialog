@@ -7,15 +7,18 @@
 </template>
 
 <script>
+import mailData from '@/data/mail.json';
 export default {
   name: 'AnSendMail',
 
   data: () => ({
-    cc: 'a.a@gmx.at',
-    bcc: 'b.b@gmx.at',
-    body:
-      'Sehr%20geehrte%20Damen%20und%20Herren,%0D%0Dim%20Anhang%20senden%20wir%20Ihnen%20die%20Auswertung%20des%20Volkshilfe-Fragebogens.%0D%0DMit%20freundlichen%20Grüßen%0DIhr Volkshilfe-Team',
-    subject: 'Angehörigendialog%20Fragebogenauswertung'
-  })
+    cc: mailData.cc,
+    bcc: mailData.bcc,
+    body: mailData.body.replace(/ /g, '%20').replace(/(?:\r\n|\r|\n)/g, '%0D'),
+    subject: mailData.subject.replace(/ /g, '%20')
+  }),
+  mounted() {
+    console.log(mailData);
+  }
 };
 </script>
