@@ -2,13 +2,13 @@ visualisation:
 
   basisinfo:
     demenzperson:
-      diagnose: ärztliche Demenzdiagnose
-      pflegegeld: aktuelle Pfelgestufe
+      diagnose: Ärztliche Demenzdiagnose
+      pflegegeld: Aktuelle Pflegestufe
       pflegebedarf: Unterstüzungsbedarf
       unterstuetzungsangebot: Unterstützungsangebote
 
     betreuendeperson:
-      sorgepflichten: weitere Betreuungspflichten
+      sorgepflichten: Weitere Betreuungspflichten
       beruf: Berufstätigkeit
       unterstuetzungsangebot: Unterstützungsangebote
 

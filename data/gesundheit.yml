@@ -112,7 +112,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   eindruck:
-    label: Habe den Eindruck alles alleine schaffen zu müssen.
+    label: Habe den Eindruck, alles alleine schaffen zu müssen.
     type: radio
     options:
       stimmt: stimmt
@@ -136,7 +136,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   betreuungsaufgaben:
-    label: Es fällt mir schwer Betreuungsaufgaben abzugeben.
+    label: Es fällt mir schwer, Betreuungsaufgaben abzugeben.
     type: radio
     options:
       stimmt: stimmt
