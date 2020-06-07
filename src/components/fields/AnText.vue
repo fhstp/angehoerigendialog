@@ -4,26 +4,26 @@
     v-model="field_data"
     :required="field_required"
     class="an-text"
-    @input="updateTextAreaHeight"
+    @input="setTextareaHeight"
   />
 </template>
 
 <script>
+import { string_autosetTextareaHeight } from '@/helpers/string.js';
 import field from '@/mixins/field.js';
 
 export default {
   name: 'AnText',
   mixins: [field],
   mounted() {
-    this.updateTextAreaHeight();
+    this.setTextareaHeight();
   },
   methods: {
     validate(value) {
       this.$emit('update:field_valid', value?.replace(/^\s+/, '').length > 0);
     },
-    updateTextAreaHeight() {
-      this.$el.style.height = 'auto';
-      this.$el.style.height = `${this.$el.scrollHeight + 16}px`;
+    setTextareaHeight() {
+      string_autosetTextareaHeight(this.$el, 16);
     }
   }
 };

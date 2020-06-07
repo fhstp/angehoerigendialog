@@ -26,11 +26,22 @@
         </div>
       </div>
     </section>
+    <section class="an-plain-data__section an-plain-data__section--notes">
+      <h3>Notizen</h3>
+      <textarea
+        ref="noteField"
+        v-model="noteData"
+        class="an-plain-data__notes hide-print"
+        @input="setTextareaHeight"
+      />
+      <div v-if="$store.state.printMode" v-html="parsedNotes" />
+    </section>
   </div>
 </template>
 
 <script>
 import form from '@/data/form.json';
+import { string_autosetTextareaHeight } from '@/helpers/string.js';
 import { form_filterAccordionItems } from '@/helpers/form.js';
 import AnField from '@/components/AnField.vue';
 
@@ -38,6 +49,23 @@ export default {
   name: 'AnPlainData',
   components: {
     AnField
+  },
+  computed: {
+    noteData: {
+      get: '$store.getters.getNotes',
+      set(value) {
+        this.$store.commit('updateNotes', value);
+      }
+    },
+    parsedNotes() {
+      const sanitizedNotes = this.noteData
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      return sanitizedNotes
+        .replace(/\*(\S.*(?<!\s))\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
+    }
   },
   created() {
     this.form = {};
@@ -49,11 +77,17 @@ export default {
       };
     }
   },
+  mounted() {
+    this.setTextareaHeight();
+  },
   methods: {
     prepareFieldData(field) {
       const fieldData = { ...field };
       delete fieldData.fieldId;
       return fieldData;
+    },
+    setTextareaHeight() {
+      string_autosetTextareaHeight(this.$refs.noteField, 16);
     }
   }
 };
@@ -70,6 +104,14 @@ export default {
     @media screen {
       margin-bottom: $spacer * 8;
     }
+
+    &--notes > h3 {
+      counter-increment: none;
+
+      &::before {
+        content: '';
+      }
+    }
   }
 
   &__section-fields {
@@ -85,7 +127,17 @@ export default {
       margin-bottom: $spacer * 2;
     }
   }
+
+  &__notes {
+    resize: none;
+    border: 2px solid $color-theme-lightgrey;
+    border-radius: $border-radius;
+    padding: $spacer;
+    width: 100%;
+    line-height: 1.5;
+  }
 }
+
 h3 {
   margin-bottom: $spacer;
   counter-reset: h4;
