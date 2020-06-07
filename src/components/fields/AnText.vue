@@ -1,16 +1,11 @@
 <template>
   <textarea
-    v-if="!$store.state.printMode"
     :id="field_id"
     v-model="field_data"
     :required="field_required"
-    cols="50"
-    rows="3"
     class="an-text"
+    @input="updateTextAreaHeight"
   />
-  <div v-else>
-    {{ field_data }}
-  </div>
 </template>
 
 <script>
@@ -19,9 +14,16 @@ import field from '@/mixins/field.js';
 export default {
   name: 'AnText',
   mixins: [field],
+  mounted() {
+    this.updateTextAreaHeight();
+  },
   methods: {
     validate(value) {
       this.$emit('update:field_valid', value?.replace(/^\s+/, '').length > 0);
+    },
+    updateTextAreaHeight() {
+      this.$el.style.height = 'auto';
+      this.$el.style.height = `${this.$el.scrollHeight + 16}px`;
     }
   }
 };
@@ -32,6 +34,9 @@ export default {
   border: none;
   border-radius: $border-radius;
   width: 100%;
+  line-height: 1.5;
+  resize: none;
+  overflow: hidden;
 
   @media screen {
     padding: $spacer;

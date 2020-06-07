@@ -178,7 +178,7 @@ export default {
       const anNoteEl = document.getElementsByClassName('an-note')[0];
       const currentScrollTop = anNoteEl.scrollTop;
       textArea.style.height = 'auto';
-      textArea.style.height = textArea.scrollHeight + 'px';
+      textArea.style.height = `${textArea.scrollHeight}px`;
       anNoteEl.scrollTop = currentScrollTop;
     },
     showAddHeadingToggle() {
