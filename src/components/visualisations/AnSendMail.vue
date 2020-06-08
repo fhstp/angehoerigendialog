@@ -16,9 +16,6 @@ export default {
     bcc: mailData.bcc,
     body: mailData.body.replace(/ /g, '%20').replace(/(?:\r\n|\r|\n)/g, '%0D'),
     subject: mailData.subject.replace(/ /g, '%20')
-  }),
-  mounted() {
-    console.log(mailData);
-  }
+  })
 };
 </script>
