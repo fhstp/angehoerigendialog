@@ -12,7 +12,9 @@
           >
             <div class="an-form__header-wrapper">
               <div class="an-form__header container">
-                <h2 class="an-form__section-heading">{{ section.title }}</h2>
+                <h2 class="an-form__section-heading">
+                  {{ sectionIndex + 1 }}. {{ section.title }}
+                </h2>
                 <AnNoteOpen />
               </div>
             </div>

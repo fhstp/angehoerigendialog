@@ -87,7 +87,7 @@
 
           <div v-show="isAvailable.flower">
             <div class="an-visualisation__heading-wrapper">
-              <h2>Ressource und Belastungen</h2>
+              <h2>Ressourcen und Belastungen</h2>
               <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
             </div>
             <AnFlower :available.sync="isAvailable.flower" />
