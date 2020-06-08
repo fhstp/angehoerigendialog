@@ -68,7 +68,7 @@ fields:
     type: text
 
   zufriedenheit:
-    label: Wie zufrieden sind sie persönlich mit der derzeitigen Unterstützung?
+    label: Wie zufrieden sind Sie persönlich mit der derzeitigen Unterstützung?
     type: range
     step: 1
     min:
