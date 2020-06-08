@@ -12,5 +12,7 @@ export const string_toTitleCase = string =>
  */
 export const string_autosetTextareaHeight = (element, padding = 0) => {
   element.style.height = 'auto';
-  element.style.height = `${element.scrollHeight + padding}px`;
+  element.style.height = `${
+    (element.scrollHeight < 64 ? 64 : element.scrollHeight) + padding
+  }px`;
 };
