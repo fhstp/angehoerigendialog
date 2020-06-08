@@ -1,6 +1,9 @@
-cc: a.a@gmx.at
+cc:
+  - a.a@gmx.at
 
-bcc: b.b@gmx.at; c.c@gmx.at
+bcc:
+  - b.b@gmx.at
+  - c.c@gmx.at
 
 subject: Angehörigendialog Fragebogenauswertung
 

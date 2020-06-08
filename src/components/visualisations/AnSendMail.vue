@@ -12,10 +12,10 @@ export default {
   name: 'AnSendMail',
 
   data: () => ({
-    cc: mailData.cc,
-    bcc: mailData.bcc,
-    body: mailData.body.replace(/ /g, '%20').replace(/(?:\r\n|\r|\n)/g, '%0D'),
-    subject: mailData.subject.replace(/ /g, '%20')
+    cc: mailData.cc.join('; '),
+    bcc: mailData.bcc.join('; '),
+    body: encodeURI(mailData.body),
+    subject: mailData.subject
   })
 };
 </script>
