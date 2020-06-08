@@ -1,7 +1,7 @@
 <template>
   <a
     :href="`mailto:?cc=${cc}&bcc=${bcc}&subject=${subject}&body=${body}`"
-    class="btn an-sendmail"
+    class="an-sendmail btn btn--text"
     >E-Mail senden</a
   >
 </template>

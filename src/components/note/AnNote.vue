@@ -49,6 +49,7 @@
 <script>
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
+import { string_autosetTextareaHeight } from '@/helpers/string.js';
 import IconNavigateBefore from '@/assets/icons/navigate_before.svg?inline';
 
 export default {
@@ -177,8 +178,7 @@ export default {
       if (!textArea) return;
       const anNoteEl = document.getElementsByClassName('an-note')[0];
       const currentScrollTop = anNoteEl.scrollTop;
-      textArea.style.height = 'auto';
-      textArea.style.height = textArea.scrollHeight + 'px';
+      string_autosetTextareaHeight(textArea);
       anNoteEl.scrollTop = currentScrollTop;
     },
     showAddHeadingToggle() {
@@ -294,6 +294,7 @@ export default {
     outline: none;
     display: block;
     font-size: 1.45rem;
+    line-height: 1.5;
     overflow: hidden;
   }
 

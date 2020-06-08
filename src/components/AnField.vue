@@ -11,7 +11,7 @@
         class="an-field__navigation visually-hidden"
         @focus="$emit('goPrev')"
       />
-      <p v-if="isAccordionItem && isSubfield">
+      <p v-if="isAccordionItem && isSubfield" class="an-field__label">
         {{ preparedFieldProps.field_label }}
       </p>
       <component
@@ -216,7 +216,7 @@ export default {
     margin-top: $spacer * 4;
   }
 
-  &__subfields p {
+  &__subfields &__label {
     margin-bottom: $spacer * 2;
   }
 }

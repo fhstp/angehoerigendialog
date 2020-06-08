@@ -1,7 +1,7 @@
 <template>
   <div class="an-number">
     <button
-      class="an-number__button--minus"
+      class="an-number__button--minus hide-print"
       aria-label="weniger"
       @click="calc(false)"
     >
@@ -14,7 +14,7 @@
       :required="field_required"
     />
     <button
-      class="an-number__button--plus"
+      class="an-number__button--plus hide-print"
       aria-label="mehr"
       @click="calc(true)"
     >
@@ -66,13 +66,13 @@ export default {
   input {
     appearance: textfield;
     border-radius: 0;
-    padding: $spacer;
     max-width: 10ch;
     border: none;
 
-    .an-field__subfields & {
+    @media screen {
       border-top: 2px solid $color-theme-lightgrey;
       border-bottom: 2px solid $color-theme-lightgrey;
+      padding: $spacer;
     }
 
     &::-webkit-inner-spin-button {
@@ -87,7 +87,7 @@ export default {
     width: 2.5rem;
     height: 2.5rem;
     cursor: pointer;
-    border: 0;
+    border: none;
     background-color: transparent;
   }
 

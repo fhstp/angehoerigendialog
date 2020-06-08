@@ -1,5 +1,5 @@
 <template>
-  <button ref="button" class="btn an-exportpdf" @click="print">
+  <button ref="button" class="an-exportpdf btn btn--text" @click="print">
     Handout als PDF speichern
   </button>
 </template>
@@ -19,9 +19,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.an-exportpdf {
-  margin-right: 1rem;
-}
-</style>

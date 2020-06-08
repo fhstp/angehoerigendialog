@@ -1,9 +1,7 @@
 <template>
   <div class="an-range">
-    <div class="an-range__wrapper">
-      <span class="an-range__min-label">
-        {{ fieldMin.label }}
-      </span>
+    <div class="an-range__wrapper row">
+      <span class="an-range__min-label" v-text="fieldMin.label" />
       <div class="an-range__input-area" :style="{ '--value': valueAsPercent }">
         <div
           v-if="!Number.isNaN(Number(field_data))"
@@ -24,9 +22,7 @@
           :step="fieldStep"
         />
       </div>
-      <span class="an-range__max-label">
-        {{ fieldMax.label }}
-      </span>
+      <span class="an-range__max-label" v-text="fieldMax.label" />
     </div>
   </div>
 </template>
@@ -71,26 +67,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$thumb-label-height: 5px;
+$thumb-triangle-height: 0.5em;
+$thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
 .an-range {
   &__wrapper {
-    display: flex;
     align-items: flex-end;
   }
 
   &__input-area {
     display: inline-block;
     position: relative;
-    margin: 0 $spacer * 2;
+    margin-top: calc(
+      #{$spacer + $thumb-overflow} + #{1em + $thumb-triangle-height}
+    );
+    margin-right: $spacer * 2;
+    margin-left: $spacer * 2;
     flex-grow: 1;
+    @media print {
+      margin-top: calc(#{$spacer + $thumb-overflow} + 1em);
+    }
   }
 
   &__label-area {
     position: absolute;
-    top: -$thumb-label-height;
     left: $range-thumb-size / 2;
     right: $range-thumb-size / 2;
     line-height: 0;
+    @media screen {
+      top: calc(1px - #{$thumb-overflow});
+    }
   }
 
   &__thumb-label {
@@ -99,8 +104,8 @@ $thumb-label-height: 5px;
     left: calc(100% * var(--value));
     transform: translate(-50%, #{-$range-thumb-size});
     border-radius: $border-radius;
-    background-color: #333;
-    color: white;
+    background-color: white;
+    color: $color-theme-darkgrey;
     padding: $spacer / 2;
     min-width: 3ch;
     text-align: center;
@@ -112,14 +117,65 @@ $thumb-label-height: 5px;
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      border-top: $thumb-label-height solid #333;
-      border-right: $thumb-label-height solid transparent;
-      border-left: $thumb-label-height solid transparent;
+      border-top: $thumb-triangle-height solid white;
+      border-right: $thumb-triangle-height solid transparent;
+      border-left: $thumb-triangle-height solid transparent;
+
+      .an-plain-data & {
+        border-top-color: $color-theme-darkgrey;
+      }
     }
   }
 
   &__slider {
     width: 100%;
+    appearance: none;
+    background-color: transparent;
+
+    @mixin range-thumb {
+      box-sizing: content-box;
+      position: relative;
+      border: $range-thumb-border-size solid $color-theme-darkgrey;
+      border-radius: 50%;
+      background-color: white;
+      width: $range-thumb-size - $range-thumb-border-size * 2;
+      height: $range-thumb-size - $range-thumb-border-size * 2;
+      cursor: grab;
+      appearance: none;
+
+      @media print {
+        display: none;
+      }
+    }
+    &::-webkit-slider-thumb {
+      @include range-thumb;
+      transform: translateY(calc(-#{$range-track-height} + 7px));
+    }
+    &::-moz-range-thumb {
+      @include range-thumb;
+    }
+    &::-ms-thumb {
+      @include range-thumb;
+    }
+
+    @mixin range-track {
+      box-sizing: border-box; // will be content-box in FF otherwise
+      height: $range-track-height;
+      background-color: white;
+      border-radius: $border-radius + 5px;
+      .an-plain-data & {
+        border: 2px solid $color-theme-lightgrey;
+      }
+    }
+    &::-webkit-slider-runnable-track {
+      @include range-track;
+    }
+    &::-moz-range-track {
+      @include range-track;
+    }
+    &::-ms-track {
+      @include range-track;
+    }
   }
 }
 </style>

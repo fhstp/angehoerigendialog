@@ -29,6 +29,16 @@ const routes = [
         /* webpackPrefetch: true */
         '@/views/Visualisation.vue'
       )
+  },
+  {
+    path: '/export',
+    name: 'Export der Daten',
+    component: () =>
+      import(
+        /* webpackChunkName: "visualisation" */
+        /* webpackPrefetch: true */
+        '@/views/Visualisation.vue'
+      )
   }
 ];
 

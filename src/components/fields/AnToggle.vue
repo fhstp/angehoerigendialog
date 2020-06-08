@@ -1,22 +1,32 @@
 <template>
   <fieldset class="an-toggle">
     <input
+      v-show="!$store.state.printMode"
       :id="`${field_id}--0`"
       v-model="field_data"
       type="radio"
       :name="field_id"
       :value="false"
     />
-    <label :for="`${field_id}--0`">{{ fieldText[0] }}</label>
+    <label
+      v-show="!$store.state.printMode || !field_data"
+      :for="`${field_id}--0`"
+      >{{ fieldText[0] }}</label
+    >
 
     <input
+      v-show="!$store.state.printMode"
       :id="`${field_id}--1`"
       v-model="field_data"
       type="radio"
       :name="field_id"
       :value="true"
     />
-    <label :for="`${field_id}--1`">{{ fieldText[1] }}</label>
+    <label
+      v-show="!$store.state.printMode || field_data"
+      :for="`${field_id}--1`"
+      >{{ fieldText[1] }}</label
+    >
   </fieldset>
 </template>
 
@@ -41,7 +51,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-label:first-of-type {
-  margin-right: $spacer * 2;
+label {
+  @media print {
+    margin-left: 0;
+  }
+
+  &:first-of-type {
+    @media screen {
+      margin-right: $spacer * 2;
+    }
+  }
 }
 </style>

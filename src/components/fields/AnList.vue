@@ -1,6 +1,6 @@
 <template>
-  <fieldset class="an-list">
-    <ol v-if="listData.length">
+  <ol v-if="listData.length" class="an-list">
+    <template v-if="!$store.state.printMode">
       <li v-for="i in listData.length" :key="i">
         <input
           ref="listItems"
@@ -10,8 +10,13 @@
           @input="inputHandler($event, i - 1)"
         />
       </li>
-    </ol>
-  </fieldset>
+    </template>
+    <template v-else>
+      <li v-for="(item, index) in field_data" :key="index">
+        {{ item }}
+      </li>
+    </template>
+  </ol>
 </template>
 
 <script>
@@ -102,12 +107,16 @@ export default {
   font-size: 1.1rem;
 }
 
-li {
-  margin-bottom: 1rem;
+ol {
+  @media screen {
+    list-style-position: inside;
+  }
 }
 
-ol {
-  list-style-position: inside;
+li:not(:last-child) {
+  @media screen {
+    margin-bottom: $spacer * 2;
+  }
 }
 
 input {
@@ -116,8 +125,11 @@ input {
   padding: $spacer;
 
   .an-checkboxes_activefields &,
-  .an-field__subfields & {
-    border: 2px solid $color-theme-lightgrey;
+  .an-field__subfields &,
+  .an-plain-data & {
+    @media screen {
+      border: 2px solid $color-theme-lightgrey;
+    }
   }
 }
 </style>

@@ -33,8 +33,11 @@ export default {
   padding: $spacer;
 
   .an-checkboxes_activefields &,
-  .an-field__subfields & {
-    border: 2px solid $color-theme-lightgrey;
+  .an-field__subfields &,
+  .an-plain-data {
+    @media screen {
+      border: 2px solid $color-theme-lightgrey;
+    }
   }
 }
 </style>
