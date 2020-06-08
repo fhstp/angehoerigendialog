@@ -29,7 +29,9 @@
       <div :class="{ 'an-visualisation__page': showVisualisations }">
         <div class="an-visualisation__infos row">
           <h1 class="col-md-3">
-            Angehörigengespräch von<br />{{ headerData.caregivername }}
+            Angehörigengespräch von
+            <br />
+            {{ headerData.caregivername }}
           </h1>
           <div class="col-md-3">
             <p>
@@ -51,9 +53,7 @@
 
             <div v-show="isAvailable.careTasks">
               <div class="an-visualisation__heading-wrapper">
-                <h2>
-                  Praktische Betreuungsaufgaben
-                </h2>
+                <h2>Praktische Betreuungsaufgaben</h2>
                 <AnEditButton
                   section-id="praktische_betreungsaufgaben"
                   field-id="0"
@@ -233,12 +233,6 @@ export default {
 .an-visualisation {
   color-adjust: exact;
 
-  @media screen {
-    &__screen_spacer {
-      margin-bottom: $spacer * 10;
-    }
-  }
-
   &__toolbar {
     border-bottom: 1px solid $color-theme-lightgrey;
     margin-bottom: $spacer * 4;
@@ -251,28 +245,6 @@ export default {
     .btn {
       margin: $spacer / 2;
     }
-  }
-
-  h2 {
-    background-color: $color-theme-lightgrey;
-    color: $color-theme-darkgrey;
-    height: 2.5rem;
-    padding-right: 2rem;
-    padding-left: 0.5rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    clip-path: polygon(
-      0 0,
-      calc(100% - 1.25rem) 0,
-      100% 50%,
-      calc(100% - 1.25rem) 100%,
-      0 100%
-    );
-  }
-
-  @media print {
-    height: auto !important;
   }
 
   &__infos {
@@ -291,8 +263,14 @@ export default {
     justify-content: space-between;
   }
 
-  @media print {
-    &__page {
+  &__screen_spacer {
+    @media screen {
+      margin-bottom: $spacer * 10;
+    }
+  }
+
+  &__page {
+    @media print {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -300,12 +278,15 @@ export default {
       overflow: hidden;
     }
 
-    &.isChromium &__page {
-      height: 277mm;
-      // overflow issues in firefox/safari, so height will be only defined in chrome
+    .an-visualisation.isChromium & {
+      @media print {
+        height: 277mm; // overflow issues in firefox/safari, so height will be only defined in chrome
+      }
     }
+  }
 
-    &__visualisation-wrapper {
+  &__visualisation-wrapper {
+    @media print {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -321,17 +302,19 @@ export default {
       align-items: center;
     }
   }
+
   .an-resources-pressure {
     flex-grow: 1;
-  }
-  @media print {
-    .an-resources-pressure {
+
+    @media print {
       transform: rotate(-90deg);
       margin-top: -120px;
       margin-bottom: -120px;
     }
+  }
 
-    &__balloon-labels {
+  &__balloon-labels {
+    @media print {
       display: flex;
       width: 100%;
       padding: 0 1.25rem;
@@ -340,34 +323,41 @@ export default {
   }
 
   &__heading-wrapper {
+    h2 {
+      background-color: $color-theme-lightgrey;
+      color: $color-theme-darkgrey;
+      height: 2.5rem;
+      padding-right: $spacer * 4;
+      padding-left: $spacer;
+      display: flex;
+      align-items: center;
+      position: relative;
+      clip-path: polygon(
+        0 0,
+        calc(100% - 1.25rem) 0,
+        100% 50%,
+        calc(100% - 1.25rem) 100%,
+        0 100%
+      );
+    }
+
     &--kraft {
-      margin-top: 6rem;
+      @media screen {
+        margin-top: 6rem;
+      }
 
-      @media print {
-        margin: 0;
-
-        h2 {
-          padding-right: 0.5rem;
-          padding-left: 2rem;
-
-          &::after {
-            content: '';
-            border-top: 1.25rem solid transparent;
-            border-bottom: 1.25rem solid transparent;
-            border-left: none;
-            border-right: 1.25rem solid $color-theme-darkgrey;
-            position: absolute;
-            left: -1.25rem;
-          }
+      h2 {
+        @media print {
+          padding-right: $spacer;
+          padding-left: $spacer * 4;
+          clip-path: polygon(1.25rem 0, 100% 0, 100% 100%, 1.25rem 100%, 0 50%);
         }
       }
     }
 
     &--belastung {
-      margin-top: 24rem;
-
-      @media print {
-        margin-top: 0;
+      @media screen {
+        margin-top: 24rem;
       }
     }
   }

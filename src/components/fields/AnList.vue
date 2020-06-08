@@ -125,7 +125,8 @@ input {
   padding: $spacer;
 
   .an-checkboxes_activefields &,
-  .an-field__subfields & {
+  .an-field__subfields &,
+  .an-plain-data & {
     @media screen {
       border: 2px solid $color-theme-lightgrey;
     }

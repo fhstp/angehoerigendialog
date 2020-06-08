@@ -63,7 +63,7 @@ export default {
         .replace(/>/g, '&gt;');
 
       return sanitizedNotes
-        .replace(/\*(\S.*(?<!\s))\*/g, '<strong>$1</strong>')
+        .replace(/\*\*(\S.*([^\s]))\*\*/g, '<strong>$1</strong>')
         .replace(/\n/g, '<br>');
     }
   },
