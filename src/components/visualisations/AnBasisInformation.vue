@@ -76,17 +76,22 @@
           </div>
           <div v-if="infoBetreuend.beruf.value" class="an-dots">
             <span
-              v-for="i in Math.ceil(infoBetreuend.beruf.value)"
+              v-for="i in Math.floor(infoBetreuend.beruf.value)"
               :key="i"
+              class="an-dots__dot"
+            />
+            <span
+              v-if="
+                Math.ceil(infoBetreuend.beruf.value) !==
+                infoBetreuend.beruf.value
+              "
               class="an-dots__dot"
               :style="{
                 '--percentage':
-                  i === Math.ceil(infoBetreuend.beruf.value)
-                    ? (infoBetreuend.beruf.value -
-                        Math.floor(infoBetreuend.beruf.value)) *
-                        100 +
-                      '%'
-                    : false
+                  (infoBetreuend.beruf.value -
+                    Math.floor(infoBetreuend.beruf.value)) *
+                    100 +
+                  '%'
               }"
             />
           </div>
