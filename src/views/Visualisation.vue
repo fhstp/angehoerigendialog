@@ -78,7 +78,7 @@
             class="an-visualisation__heading-wrapper"
           >
             <h2>
-              Ressource und Belastungen
+              Ressourcen und Belastungen
             </h2>
             <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
           </div>
