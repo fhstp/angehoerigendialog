@@ -36,6 +36,12 @@
       />
       <div v-if="$store.state.printMode" v-html="parsedNotes" />
     </section>
+    <section class="an-plain-data__section an-plain-data__section--export">
+      <h3>Export Url</h3>
+      <a class="an-plain-data__export-url" :href="exportUrl"
+        >Link zum Importieren der Daten 🔗</a
+      >
+    </section>
   </div>
 </template>
 
@@ -65,6 +71,28 @@ export default {
       return sanitizedNotes
         .replace(/\*\*(\S.*([^\s]))\*\*/g, '<strong>$1</strong>')
         .replace(/\n/g, '<br>');
+    },
+    exportUrl() {
+      const data = btoa(JSON.stringify(this.$store.state));
+      return new URL(`/import#${data}`, location);
+
+      /*
+
+      field keys wegnehmen => answers object wird zu array (geht vielleicht nicht, falls es mal eine änderung der mails gibt)
+
+      answers ersetzen mit array, wo keys geändert sind :
+         value -> v
+         done -> d (true -> 1, false -> 0)
+
+      JSONC
+
+      lzw compression
+
+      ~8000 zeichen => ~800 zeichen
+
+      compressen/encoden mit gutem algorithmus um möglichst kleinen string zu bekommen, diesen dann in url geben
+
+      */
     }
   },
   created() {
@@ -135,6 +163,19 @@ export default {
     padding: $spacer;
     width: 100%;
     line-height: 1.5;
+  }
+
+  &__export-url {
+    color: black;
+
+    @media print {
+      &::after {
+        content: attr(href);
+        font-size: 10px;
+        display: block;
+        word-break: break-all;
+      }
+    }
   }
 }
 
