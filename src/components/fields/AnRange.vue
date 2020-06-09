@@ -142,7 +142,7 @@ $thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
       height: $range-thumb-size - $range-thumb-border-size * 2;
       cursor: grab;
       appearance: none;
-
+      box-shadow: 0 0 3px 2px white;
       @media print {
         display: none;
       }

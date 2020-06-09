@@ -1,7 +1,7 @@
 <template>
   <div class="an-behaviour">
     <div class="an-behaviour__heading">
-      So komme ich mit diesem Verhalten zurecht:
+      <strong>So komme ich mit diesem Verhalten zurecht:</strong>
     </div>
     <AnLollipop :values="behaviourChanges" :labels="labels" />
   </div>
@@ -67,9 +67,8 @@ export default {
   align-items: flex-end;
 
   &__heading {
-    font-size: 0.9rem;
     margin-bottom: 0.5rem;
-    width: 45%;
+    width: 50%;
     text-align: center;
   }
 }

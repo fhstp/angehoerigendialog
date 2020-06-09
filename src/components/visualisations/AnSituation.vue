@@ -87,7 +87,14 @@ $pin-height: 60%;
     margin: $spacer auto;
   }
 
-  width: 80%;
+  @media screen {
+    width: 80%;
+  }
+
+  @media print {
+    margin-right: 0;
+    margin-left: 0;
+  }
 
   &__category {
     &:not(:first-child) {
@@ -104,8 +111,8 @@ $pin-height: 60%;
   &__heading {
     display: flex;
     align-items: center;
-    font-size: 16px;
     font-weight: normal;
+    font-size: 1em;
   }
 
   .icon-warning {

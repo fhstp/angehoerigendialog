@@ -23,7 +23,11 @@
         :class="getClass(answers[1].type, 0)"
       ></div>
     </div>
+
     <div v-if="wateringcanItems.length" class="an-flower__wateringcan">
+      <div class="an-flower__wateringcan-heading">
+        <strong>Darum sollte ich mich kümmern:</strong>
+      </div>
       <div class="an-flower__wateringcan__circle"></div>
       <IconWateringcan
         class="an-flower__wateringcan__trunk"
@@ -85,7 +89,7 @@ export default {
 
 <style lang="scss" scoped>
 $background: #fff;
-$pill: #eee;
+$pill: $color-theme-lightgrey;
 $red: $color-theme-red;
 $blue: $color-theme-lightblue;
 $size: 240px;
@@ -238,7 +242,6 @@ $centerSizeHalf: $centerSize / 2;
     justify-content: center;
     padding-left: $centerSize * 1.2;
     align-items: center;
-    font-size: 0.9rem;
     text-align: center;
   }
 
@@ -267,8 +270,12 @@ $centerSizeHalf: $centerSize / 2;
 
   &__wateringcan {
     position: relative;
-    font-size: 0.9rem;
     margin-right: 50px;
+
+    &-heading {
+      position: absolute;
+      top: -80px;
+    }
 
     &__innerbox {
       background-color: white;

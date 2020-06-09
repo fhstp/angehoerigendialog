@@ -19,7 +19,7 @@
       <div>
         <AnExportPdf />
         <AnSendMail />
-        <button class="btn btn--text" @click="restartQuestionnaire">
+        <button class="btn btn--text" @click="form_restartQuestionnaire">
           Neuen Fragebogen beginnen
         </button>
       </div>
@@ -45,21 +45,23 @@
           </div>
         </div>
 
+        <!-- Vis Page 1 -->
+
         <template v-if="showVisualisations">
           <div class="an-visualisation__visualisation-wrapper">
             <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
             <AnBasisInformation />
             <div class="an-visualisation__screen_spacer" />
 
-            <div v-show="isAvailable.careTasks">
+            <div v-show="isAvailable.flower">
               <div class="an-visualisation__heading-wrapper">
-                <h2>Praktische Betreuungsaufgaben</h2>
+                <h2>Dafür habe ich Zeit</h2>
                 <AnEditButton
-                  section-id="praktische_betreungsaufgaben"
-                  field-id="0"
+                  section-id="ressourcen_belastungen"
+                  field-id="2"
                 />
               </div>
-              <AnCareTasks :available.sync="isAvailable.careTasks" />
+              <AnFlower :available.sync="isAvailable.flower" />
             </div>
           </div>
           <div class="an-visualisation__screen_spacer" />
@@ -67,8 +69,9 @@
         <AnPlainData v-else />
       </div>
 
+      <!-- Vis Page 2 -->
+
       <template v-if="showVisualisations">
-        <!-- Vis Page 2 -->
         <div
           v-show="isAvailable.behaviourChanges || isAvailable.flower"
           class="an-visualisation__page"
@@ -85,26 +88,6 @@
           </div>
           <div class="an-visualisation__screen_spacer" />
 
-          <div v-show="isAvailable.flower">
-            <div class="an-visualisation__heading-wrapper">
-              <h2>Ressourcen und Belastungen</h2>
-              <AnEditButton section-id="ressourcen_belastungen" field-id="2" />
-            </div>
-            <AnFlower :available.sync="isAvailable.flower" />
-          </div>
-          <div class="an-visualisation__screen_spacer" />
-        </div>
-
-        <!-- Vis Page 3 -->
-
-        <div
-          v-show="
-            isAvailable.situation ||
-            isAvailable.healthChanges ||
-            isAvailable.resourcespressure
-          "
-          class="an-visualisation__page"
-        >
           <div
             v-show="isAvailable.situation || isAvailable.healthChanges"
             class="an-visualisation__heading-wrapper"
@@ -117,43 +100,70 @@
             v-show="isAvailable.situation"
             :available.sync="isAvailable.situation"
           />
+          <div class="an-visualisation__screen_spacer" />
 
           <AnHealth
             v-show="isAvailable.healthChanges"
             :available.sync="isAvailable.healthChanges"
           />
-          <div class="an-visualisation__screen_spacer" />
 
-          <div
-            v-show="isAvailable.resourcespressure"
-            class="an-visualisation__balloon-wrapper"
-          >
-            <div class="an-visualisation__balloon-labels">
-              <div
-                class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
-              >
-                <h2>Das gibt mir Kraft</h2>
-                <AnEditButton
-                  section-id="ressourcen_belastungen"
-                  field-id="0"
-                />
+          <div class="an-visualisation__screen_spacer" />
+        </div>
+
+        <!-- Vis Page 3 -->
+
+        <div
+          v-show="isAvailable.careTasks"
+          class="an-visualisation__page an-visualisation__page--caretasks"
+        >
+          <div class="an-visualisation__heading-wrapper">
+            <h2>Praktische Betreuungsaufgaben</h2>
+            <AnEditButton
+              section-id="praktische_betreungsaufgaben"
+              field-id="0"
+            />
+          </div>
+          <AnCareTasks :available.sync="isAvailable.careTasks" />
+        </div>
+        <div class="an-visualisation__screen_spacer" />
+
+        <!-- Vis Page 4 -->
+
+        <template v-if="showVisualisations">
+          <div class="an-visualisation__page">
+            <div
+              v-show="isAvailable.resourcespressure"
+              class="an-visualisation__balloon-wrapper"
+            >
+              <div class="an-visualisation__balloon-labels">
+                <div
+                  class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
+                >
+                  <h2>Das gibt mir Kraft</h2>
+                  <AnEditButton
+                    section-id="ressourcen_belastungen"
+                    field-id="0"
+                  />
+                </div>
+                <div
+                  class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
+                >
+                  <h2>Das belastet mich</h2>
+                  <AnEditButton
+                    section-id="ressourcen_belastungen"
+                    field-id="0"
+                  />
+                </div>
               </div>
-              <div
-                class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
-              >
-                <h2>Das belastet mich</h2>
-                <AnEditButton
-                  section-id="ressourcen_belastungen"
-                  field-id="0"
+              <div class="an-visualisation__balloon-container">
+                <AnResourcesPressure
+                  :available.sync="isAvailable.resourcespressure"
                 />
               </div>
             </div>
-            <AnResourcesPressure
-              :available.sync="isAvailable.resourcespressure"
-            />
+            <div class="an-visualisation__screen_spacer" />
           </div>
-        </div>
-        <div class="an-visualisation__screen_spacer" />
+        </template>
       </template>
     </div>
   </div>
@@ -171,7 +181,7 @@ import AnHealth from '@/components/visualisations/AnHealth.vue';
 import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
-import { restartQuestionnaire } from '@/helpers/form.js';
+import { form_restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Visualisation',
@@ -224,7 +234,7 @@ export default {
     }
   },
   methods: {
-    restartQuestionnaire
+    form_restartQuestionnaire
   }
 };
 </script>
@@ -283,6 +293,12 @@ export default {
         height: 277mm; // overflow issues in firefox/safari, so height will be only defined in chrome
       }
     }
+
+    &--caretasks {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   }
 
   &__visualisation-wrapper {
@@ -296,69 +312,44 @@ export default {
 
   &__balloon-wrapper {
     display: flex;
-
-    @media print {
-      flex-direction: column-reverse;
-      align-items: center;
-    }
   }
 
-  .an-resources-pressure {
-    flex-grow: 1;
-
-    @media print {
-      transform: rotate(-90deg);
-      margin-top: -120px;
-      margin-bottom: -120px;
-    }
-  }
-
-  &__balloon-labels {
-    @media print {
-      display: flex;
-      width: 100%;
-      padding: 0 1.25rem;
-      justify-content: space-between;
-    }
+  &__balloon-container {
+    display: flex;
+    justify-content: center;
+    flex: 1;
   }
 
   &__heading-wrapper {
     h2 {
       background-color: $color-theme-lightgrey;
       color: $color-theme-darkgrey;
-      height: 2.5rem;
+      padding-top: 0.2em;
       padding-right: $spacer * 4;
+      padding-bottom: 0.2em;
       padding-left: $spacer;
       display: flex;
       align-items: center;
       position: relative;
       clip-path: polygon(
         0 0,
-        calc(100% - 1.25rem) 0,
+        calc(100% - 1em) 0,
         100% 50%,
-        calc(100% - 1.25rem) 100%,
+        calc(100% - 1em) 100%,
         0 100%
       );
+
+      @media print {
+        font-size: 14pt;
+      }
     }
 
     &--kraft {
-      @media screen {
-        margin-top: 6rem;
-      }
-
-      h2 {
-        @media print {
-          padding-right: $spacer;
-          padding-left: $spacer * 4;
-          clip-path: polygon(1.25rem 0, 100% 0, 100% 100%, 1.25rem 100%, 0 50%);
-        }
-      }
+      margin-top: 10rem;
     }
 
     &--belastung {
-      @media screen {
-        margin-top: 24rem;
-      }
+      margin-top: 30rem;
     }
   }
 }

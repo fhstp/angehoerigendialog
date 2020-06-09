@@ -305,7 +305,6 @@ $rightwidth: 50%;
 
     strong {
       margin-right: $spacer;
-      font-size: 1.125rem;
     }
 
     &-betreuend {
@@ -355,7 +354,6 @@ $rightwidth: 50%;
   }
 
   &__title {
-    font-size: 1.125rem;
     font-weight: 700;
   }
 }

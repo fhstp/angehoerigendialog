@@ -150,7 +150,7 @@ export default {
     addHeading() {
       const textarea_alreadythere = this.$refs.ta_alreadythere;
       const textarea_newtext = this.$refs.ta_newtext;
-      const heading_inserted = `*${this.currentQuestionLabel}*`;
+      const heading_inserted = `**${this.currentQuestionLabel}**`;
       this.currentQuestionLabel_prev = this.currentQuestionLabel;
 
       if (textarea_alreadythere.value !== '') {

@@ -24,10 +24,10 @@ export const form_filterAccordionItems = fields => {
   return filtered;
 };
 
-export function restartQuestionnaire() {
+export function form_restartQuestionnaire() {
   if (
     !confirm(
-      'Möchten sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
+      'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
     )
   )
     return;
