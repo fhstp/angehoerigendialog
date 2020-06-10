@@ -89,9 +89,9 @@ export default {
       return '';
     },
     highestCategory() {
-      const noPerson = this.careTasks.some(item => item.length > 9);
+      const noPerson = this.careTasks.some(item => item.length > 10);
       if (noPerson) return 'an-care-tasks__svg--noPerson';
-      const halfPerson = this.careTasks.some(item => item.length > 7);
+      const halfPerson = this.careTasks.some(item => item.length > 9);
       if (halfPerson) return 'an-care-tasks__svg--halfPerson';
 
       return false;
@@ -216,15 +216,13 @@ export default {
     border: 5px solid $color-theme-blue;
     padding: 5px;
     text-align: center;
-    height: 40px;
+    height: 89px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: $border-radius;
     margin-bottom: -5px;
     background-color: white;
-
-    font-size: 0.7rem;
 
     &:nth-child(2n) {
       margin-left: -6px;
@@ -241,7 +239,6 @@ export default {
     padding-right: $spacer;
     padding-left: $spacer;
     text-align: center;
-    font-size: 0.7rem;
   }
 }
 </style>

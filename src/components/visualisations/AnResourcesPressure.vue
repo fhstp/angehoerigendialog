@@ -95,7 +95,7 @@ $bordersize: 3px;
   color-adjust: exact;
 
   width: 100%;
-  max-width: 350px;
+  max-width: 400px;
 }
 
 .an-pressure {
@@ -108,7 +108,6 @@ $bordersize: 3px;
   text-align: center;
   list-style: none;
   color: white;
-  font-size: 0.9rem;
 
   &__ropes {
     margin: 0 auto;

@@ -31,6 +31,9 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+  @media print {
+    font-size: 11pt;
+  }
 }
 
 body.fixed {

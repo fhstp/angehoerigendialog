@@ -55,7 +55,7 @@
           <template v-else>
             <button
               class="btn an-start__startbutton"
-              @click="restartQuestionnaire"
+              @click="form_restartQuestionnaire"
             >
               Start
             </button>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { restartQuestionnaire } from '@/helpers/form.js';
+import { form_restartQuestionnaire } from '@/helpers/form.js';
 import IconTextLogo from '@/assets/icons/text-logo.svg?inline';
 
 const fieldGenerator = field_id => ({
@@ -102,7 +102,7 @@ export default {
     this.date = new Date().toISOString().slice(0, 10);
   },
   methods: {
-    restartQuestionnaire
+    form_restartQuestionnaire
   }
 };
 </script>

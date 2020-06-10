@@ -86,6 +86,7 @@ $lightgrey: $color-theme-lightgrey;
 $red: $color-theme-darkred;
 $blue: $color-theme-blue;
 $lollipopPercentage: 45%;
+$lollipopBarHeight: 0.75rem;
 
 .an-lollipop {
   color-adjust: exact;
@@ -100,8 +101,12 @@ $lollipopPercentage: 45%;
 
   &__list-element {
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: $spacer * 2;
     align-items: center;
+
+    @media print {
+      margin-bottom: $spacer;
+    }
   }
 
   &__text {
@@ -109,16 +114,15 @@ $lollipopPercentage: 45%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 2rem;
+    padding-right: $spacer * 4;
     text-align: right;
-    font-size: 0.75rem;
   }
 
   .icon-warning {
     height: 1.5rem;
     width: 1.5rem;
     fill: $red;
-    margin-right: 1rem;
+    margin-right: $spacer * 2;
     flex-shrink: 0;
   }
 
@@ -129,11 +133,11 @@ $lollipopPercentage: 45%;
   }
 
   &__progressbar-wrapper {
-    height: 1rem;
+    height: $lollipopBarHeight;
     background: $lightgrey;
     border-radius: 0.3rem / 50%;
     padding: 0 0.2rem;
-    padding-top: 0.25rem;
+    padding-top: 3px;
     position: relative;
     width: 100%;
   }
@@ -160,10 +164,13 @@ $lollipopPercentage: 45%;
   }
 
   &__progressbar {
-    height: 0.5rem;
+    height: calc(#{$lollipopBarHeight} - 6px);
     color: $blue;
     background: currentColor;
-    width: var(--value);
+    width: calc(var(--value) - 0.4rem);
+    position: absolute;
+    left: 0.2rem;
+    border-radius: 0.15rem/50%;
 
     &--max {
       color: $red;
@@ -179,7 +186,7 @@ $lollipopPercentage: 45%;
       display: block;
       position: absolute;
       transform: translate(-50%, -50%);
-      left: var(--value);
+      left: calc(100% + 0.2rem);
       top: 50%;
     }
   }
@@ -189,7 +196,6 @@ $lollipopPercentage: 45%;
     height: 5rem;
     display: flex;
     padding-right: 1rem;
-    font-size: 0.8rem;
 
     &-element {
       position: relative;
@@ -214,6 +220,7 @@ $lollipopPercentage: 45%;
         transform: rotate(20deg);
         position: absolute;
         right: 0;
+        text-align: right;
       }
     }
   }
