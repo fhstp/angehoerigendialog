@@ -20,3 +20,11 @@ This bug is reproducable in the current Version (83.0.4103.97) of Google Chrome 
 - A solution could be that the [wave](src/assets/icons/welle.svg) is not implemented as [background-image](src/components/visualisations/AnFlower.vue#L304) but instead and directly embedded as an svg.
 
 > Watch out: this bug does not appear when the handout is exported as a PDF-File and then printed afterwards, it only happens when printing directly.
+
+## E-Mail Export New Line
+
+When an email is sent over the **E-Mail Senden**-Button on the Visualisation page, new lines won't get shown in the GMail Android App.
+
+### Findings
+
+It can be fixed for GMail Android by using the `<br>` html tag istead of the `\n` newline char, but this breaks all other email clients on both mobile and desktop.
