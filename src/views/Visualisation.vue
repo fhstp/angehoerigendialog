@@ -19,9 +19,9 @@
       <div>
         <AnExportPdf />
         <AnSendMail class="btn--text" />
-        <button class="btn btn--text" @click="form_restartQuestionnaire">
-          Neuen Fragebogen beginnen
-        </button>
+        <router-link class="btn btn--text" :to="({ name: 'Start' })">
+          Zurück zum Start
+        </router-link>
       </div>
     </div>
 
@@ -183,7 +183,6 @@ import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSendMailPopup from '@/components/visualisations/AnSendMailPopup.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
-import { form_restartQuestionnaire } from '@/helpers/form.js';
 
 export default {
   name: 'Visualisation',
@@ -235,9 +234,6 @@ export default {
         time2: this.$store.getters.getFieldValue('ende-uhrzeit')
       };
     }
-  },
-  methods: {
-    form_restartQuestionnaire
   }
 };
 </script>
