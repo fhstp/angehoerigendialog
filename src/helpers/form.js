@@ -23,14 +23,3 @@ export const form_filterAccordionItems = fields => {
   }
   return filtered;
 };
-
-export function form_restartQuestionnaire() {
-  if (
-    !confirm(
-      'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
-    )
-  )
-    return;
-  this.$store.commit('resetState');
-  this.$router.push({ path: 'fragebogen' });
-}
