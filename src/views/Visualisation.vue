@@ -20,7 +20,7 @@
         <AnExportPdf />
         <AnSendMail />
         <router-link class="btn btn--text" :to="({ name: 'Start' })">
-          Neuen Fragebogen beginnen
+          Zurück zum Start
         </router-link>
       </div>
     </div>
