@@ -18,7 +18,7 @@
 
       <div>
         <AnExportPdf />
-        <AnSendMail />
+        <AnSendMail class="btn--text" />
         <button class="btn btn--text" @click="form_restartQuestionnaire">
           Neuen Fragebogen beginnen
         </button>
@@ -166,6 +166,7 @@
         </template>
       </template>
     </div>
+    <AnSendMailPopup />
   </div>
 </template>
 
@@ -180,6 +181,7 @@ import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnHealth from '@/components/visualisations/AnHealth.vue';
 import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
 import AnSendMail from '@/components/visualisations/AnSendMail.vue';
+import AnSendMailPopup from '@/components/visualisations/AnSendMailPopup.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
 import { form_restartQuestionnaire } from '@/helpers/form.js';
 
@@ -196,6 +198,7 @@ export default {
     AnHealth,
     AnResourcesPressure,
     AnSendMail,
+    AnSendMailPopup,
     AnSituation
   },
   data: () => ({

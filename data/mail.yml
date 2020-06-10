@@ -1,18 +1,19 @@
-cc:
-  - a.a@gmx.at
+cc: a.a@gmx.at
 
-bcc:
-  - b.b@gmx.at
-  - c.c@gmx.at
+bcc: b.b@gmx.at
 
 subject: Angehörigendialog Fragebogenauswertung
 
-body: Sehr geehrte Damen und Herren,
+body:
+  "!!!! Bitte beachten Sie, dass das exportierte PDF ängehängt werden muss !!!!
 
 
-      im Anhang senden wir Ihnen die Auswertung des Volkshilfe-Fragebogens.
+  Sehr geehrte Damen und Herren,
 
 
-      Mit freundlichen Grüßen
+  im Anhang senden wir Ihnen die Auswertung des Volkshilfe-Fragebogens.
 
-      Ihr Volkshilfe-Team
+
+  Mit freundlichen Grüßen
+
+  Ihr Volkshilfe-Team"

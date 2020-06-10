@@ -1,7 +1,7 @@
 <template>
   <a
     :href="`mailto:?cc=${cc}&bcc=${bcc}&subject=${subject}&body=${body}`"
-    class="an-sendmail btn btn--text"
+    class="an-sendmail btn"
     >E-Mail senden</a
   >
 </template>
@@ -12,8 +12,8 @@ export default {
   name: 'AnSendMail',
 
   data: () => ({
-    cc: mailData.cc.join('; '),
-    bcc: mailData.bcc.join('; '),
+    cc: mailData.cc,
+    bcc: mailData.bcc,
     body: encodeURI(mailData.body),
     subject: mailData.subject
   })
