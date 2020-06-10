@@ -47,19 +47,17 @@
         <div>
           <router-link
             v-if="!existingQuestionnaire"
-            to="fragebogen"
+            :to="{ name: 'Fragebogen' }"
             class="btn an-start__startbutton"
-            start
             >Start</router-link
           >
           <template v-else>
-            <button
-              class="btn an-start__startbutton"
-              @click="form_restartQuestionnaire"
-            >
+            <button class="btn an-start__startbutton" @click="startNew">
               Start
             </button>
-            <router-link to="fragebogen" class="btn an-start__previousbutton"
+            <router-link
+              :to="{ name: 'Fragebogen' }"
+              class="btn an-start__previousbutton"
               >Vorherigen Fragebogen laden</router-link
             >
           </template>
@@ -70,7 +68,6 @@
 </template>
 
 <script>
-import { form_restartQuestionnaire } from '@/helpers/form.js';
 import IconTextLogo from '@/assets/icons/text-logo.svg?inline';
 
 const fieldGenerator = field_id => ({
@@ -92,8 +89,8 @@ export default {
     IconTextLogo
   },
   computed: {
-    date: fieldGenerator('startseite-datum'),
     caregivername: fieldGenerator('startseite-angehoerigenname'),
+    date: fieldGenerator('startseite-datum'),
     socialworkername: fieldGenerator('startseite-sozialarbeitername')
   },
   created() {
@@ -102,7 +99,20 @@ export default {
     this.date = new Date().toISOString().slice(0, 10);
   },
   methods: {
-    form_restartQuestionnaire
+    startNew() {
+      if (
+        !confirm(
+          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
+        )
+      )
+        return;
+      const temp = [this.caregivername, this.date, this.socialworkername];
+      this.$store.commit('resetState');
+      this.caregivername = temp[0];
+      this.date = temp[1];
+      this.socialworkername = temp[2];
+      this.$router.push({ name: 'Fragebogen' });
+    }
   }
 };
 </script>
