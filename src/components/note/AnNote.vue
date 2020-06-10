@@ -12,7 +12,7 @@
         Notizen werden automatisch gespeichert
       </div>
     </div>
-    <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere()">
+    <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere">
       <div class="an-note__content container">
         <h2 class="an-note__heading">Meine Notizen</h2>
         <div class="an-note__input-area">
@@ -23,8 +23,8 @@
           >
           </textarea>
           <template v-if="showAddHeading && currentQuestionLabel">
-            <div class="an-note-current" @click="focusTaNewText()">
-              <button class="an-note-current__action btn" @click="addHeading()">
+            <div class="an-note-current">
+              <button class="an-note-current__action btn" @click="addHeading">
                 Aktuell offene Frage als Überschrift<br />zu meinen Notizen
                 hinzufügen
               </button>
@@ -40,10 +40,10 @@
               @input="updateTextAreaHeight($event.currentTarget)"
             ></textarea>
           </template>
+          <div class="an-note__focusdiv" @click="focusTaNewText" />
         </div>
       </div>
     </div>
-    <div class="an-note__focusdiv" @click="focusTaNewText()" />
   </div>
 </template>
 <script>
@@ -265,7 +265,6 @@ export default {
   &__input-area {
     border: 2px solid $color-theme-darkgrey;
     border-radius: $border-radius;
-    padding: $spacer;
     background-color: white;
     min-height: 100vh;
     display: flex;
@@ -289,8 +288,9 @@ export default {
 
   textarea {
     resize: none;
-    width: 100%;
     border: 0;
+    padding: $spacer;
+    width: 100%;
     outline: none;
     display: block;
     font-size: 1.45rem;
@@ -300,7 +300,6 @@ export default {
 
   &__focusdiv {
     flex-grow: 1;
-    background-color: $color-theme-lightgrey;
   }
 
   &__savehint > svg {
@@ -340,10 +339,6 @@ export default {
     width: 40%;
     flex-shrink: 0;
     margin-right: 17px;
-  }
-
-  &__textarea {
-    flex-grow: 1;
   }
 }
 
