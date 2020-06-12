@@ -124,6 +124,7 @@ export default {
   }
 
   &__text {
+    font-size: 6px;
     text-align: center;
     margin: 0;
   }
