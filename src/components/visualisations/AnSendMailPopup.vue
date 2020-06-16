@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="an-sendmailpopup">
+  <div v-if="show" class="an-sendmailpopup hide-print">
     <div class="an-sendmailpopup__popup">
       <p>Das exportierte PDF kann jetzt als E-Mail Anhang verschickt werden.</p>
       <div class="an-sendmailpopup__actions">
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import AnSendMail from './AnSendMail';
+import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 
 export default {
   name: 'AnSendMailPopup',
