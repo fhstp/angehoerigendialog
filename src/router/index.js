@@ -39,6 +39,16 @@ const routes = [
         /* webpackPrefetch: true */
         '@/views/Visualisation.vue'
       )
+  },
+  {
+    path: '/demo',
+    name: 'Demo',
+    component: () =>
+      import(
+        /* webpackChunkName: "visualisation" */
+        /* webpackPrefetch: true */
+        '@/views/Demo.vue'
+      )
   }
 ];
 

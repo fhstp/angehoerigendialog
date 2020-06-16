@@ -54,6 +54,9 @@ export default new Vuex.Store({
       }
       Object.assign(state, { ...initialState });
     },
+    importState(state, importedState) {
+      Object.assign(state, importedState);
+    },
     /**
      * Update the completion state of fields
      * @param {*} state
