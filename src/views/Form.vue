@@ -3,7 +3,7 @@
     <AnNote />
     <div class="an-form__scrollarea">
       <AnStepper :steps="steps" @input="stepperNavigation()" />
-      <main ref="main" class="an-form__content">
+      <main class="an-form__content">
         <template v-for="(section, sectionId, sectionIndex) in form">
           <section
             v-if="$route.query.step === sectionId"
@@ -178,7 +178,7 @@ export default {
       return steps;
     },
     openQuestions() {
-      const openQuestions = [[], [], [], [], [], [], [], [], [], []];
+      const openQuestions = [[], [], [], [], [], [], [], [], [], []]; // TODO refactor
       let i = 0;
 
       for (const sectionId in form) {
@@ -214,7 +214,7 @@ export default {
   watch: {
     '$route.query.step'(newValue, oldValue) {
       if (newValue !== oldValue) {
-        this.$refs.main.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
       }
     },
     openQuestions(newValue) {
