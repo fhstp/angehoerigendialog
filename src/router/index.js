@@ -41,13 +41,13 @@ const routes = [
       )
   },
   {
-    path: '/import',
-    name: 'Import',
+    path: '/demo',
+    name: 'Demo',
     component: () =>
       import(
         /* webpackChunkName: "visualisation" */
         /* webpackPrefetch: true */
-        '@/views/Import.vue'
+        '@/views/Demo.vue'
       )
   }
 ];
