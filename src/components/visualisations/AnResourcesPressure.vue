@@ -34,8 +34,14 @@
 </template>
 
 <script>
-import { hierarchy, pack } from 'd3-hierarchy';
 import { select } from 'd3-selection';
+import { range } from 'd3-array';
+import {
+  forceSimulation,
+  forceCenter,
+  forceCollide,
+  forceManyBody
+} from 'd3-force';
 import AnBalloon from './AnBalloon';
 import AnBalloonCircle from './AnBalloonCircle';
 import visualisation from '@/mixins/visualisation.js';
@@ -64,25 +70,47 @@ export default {
       this.resources?.length > 0 || this.pressure?.length > 0
     );
 
-    this.$nextTick(() => {
-      const packData = data =>
-        pack().size([153.8, 153.8]).padding(10)(
-          hierarchy({ children: data }).sum(d => 1 + Math.random() * 0.2)
-        );
+    this.$nextTick(this.packCircles);
+  },
+  methods: {
+    packCircles() {
+      const minCircleSpace = 10;
 
-      const root = packData(this.resources);
+      const width = 153.8;
+      const height = 153.8;
 
-      const group = select('.an-resources__air');
+      const numNodes = this.resources.length;
 
-      group
+      const radius = 50.45 * numNodes ** -0.4;
+      const nodes = range(numNodes).map(function (d) {
+        return { radius };
+      });
+
+      const simulation = forceSimulation(nodes)
+        .force('charge', forceManyBody().strength(200))
+        .force('center', forceCenter(width / 2, height / 2))
+        .force('collision', forceCollide().radius(radius))
+        .stop();
+
+      for (let i = 0; i < 500; i++) {
+        simulation.tick();
+      }
+
+      select('.an-resources__air')
         .selectAll('foreignObject')
-        .data(root.leaves())
-        .attr('transform', d => `translate(${d.x + 1},${d.y + 1})`)
-        .attr('height', d => d.r * 2)
-        .attr('width', d => d.r * 2)
-        .attr('x', d => -d.r)
-        .attr('y', d => -d.r);
-    });
+        .data(nodes)
+        .attr('transform', d => {
+          const dx = (d.x = Math.max(radius, Math.min(width - radius, d.x)));
+          const dy = (d.y = Math.max(radius, Math.min(height - radius, d.y)));
+
+          const x = dx - radius + minCircleSpace / 2;
+          const y = dy - radius + minCircleSpace / 2;
+
+          return `translate(${x},${y})`;
+        })
+        .attr('height', d => radius * 2 - minCircleSpace)
+        .attr('width', d => radius * 2 - minCircleSpace);
+    }
   }
 };
 </script>
