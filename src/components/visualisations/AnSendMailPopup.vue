@@ -25,7 +25,9 @@ export default {
   watch: {
     '$store.state.printMode'(newValue, oldValue) {
       if (newValue !== oldValue && newValue === false) {
-        this.show = true;
+        if (this.$route.path === '/auswertung') {
+          this.show = true;
+        }
       }
     }
   },

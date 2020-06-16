@@ -269,7 +269,7 @@ export default {
   &__heading-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
   }
 
   &__screen_spacer {

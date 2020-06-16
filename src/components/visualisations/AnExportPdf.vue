@@ -1,6 +1,6 @@
 <template>
   <button ref="button" class="an-exportpdf btn btn--text" @click="print">
-    Handout als PDF speichern
+    Als PDF speichern
   </button>
 </template>
 
