@@ -19,13 +19,12 @@
     <div class="an-demo__mobile-notice">
       <h2>Mobile Support</h2>
       <p>
-        Die Anwendung / Visualisierungen sind für Tabblets / Desktop Browser
-        optimiert. Auf mobilen Endgeräten könnten manche Sachen nicht
-        funktionieren.
+        Die Visualisierungen sind für Tabblets / Desktop Browser optimiert. Auf
+        mobilen Endgeräten könnten manche Sachen nicht funktionieren.
       </p>
       <p>
-        The application / visualisations are optimized for tablet / desktop
-        browsers. Things could be broken on mobile devices.
+        The visualisations are optimised for tablet / desktop browsers. Things
+        could be broken on mobile devices.
       </p>
     </div>
   </div>
@@ -61,6 +60,10 @@ export default {
   &__mobile-notice {
     display: none;
     padding: 1rem;
+
+    p {
+      margin-top: 0.5rem;
+    }
   }
 
   @media (max-width: 50rem) {
