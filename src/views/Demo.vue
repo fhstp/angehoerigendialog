@@ -3,7 +3,7 @@
     <div class="an-demo__lang">
       <h1>Demo Modus</h1>
       <p>
-        Durck klicken vom folgenden Button, können Beispiel Daten für die
+        Durch klicken des folgenden Buttons, können Beispiel Daten für die
         Visualisierungen importiert werden.
       </p>
       <button class="btn" @click="importData">Demo Daten importieren</button>
