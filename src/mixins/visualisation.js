@@ -11,7 +11,6 @@ export default {
   }),
   mounted() {
     const observerOptions = {
-      root: document.querySelector('.an-visualisation'),
       threshold: 0.75
     };
     const observer = new IntersectionObserver(entries => {
