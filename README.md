@@ -1,5 +1,7 @@
 # Angehörigendialog
 
+This project started as an analogue questionnaire which was designed to help social workers from Volkshilfe to conduct professional conversations with people who take care of a family member with dementia at home. Our task was to digitise this questionnaire and to redesign the visualisations of the evaluation.
+
 ## Project structure
 
 ### data
@@ -9,8 +11,9 @@ The sequence of the sections is defined in [`_inhaltsverzeichnis.yml`](data/_inh
 
 The file [`visualisation.yml`](data/visualisation.yml) defines properties for the visualisations.
 
-[`_converter.js`](data/_converter.js) is the script which compiles the data and saves it to `src/data`.
+[`mail.yml`](data/mail.yml) contains the text for the prefilled mail.
 
+[`_converter.js`](data/_converter.js) is the script which compiles the data and saves it to `src/data`.
 
 ### public
 Contains static files such as favicons or the [`index.html`](public/index.html).
@@ -18,9 +21,9 @@ Contains static files such as favicons or the [`index.html`](public/index.html).
 
 ### src
 
-- [`assets`](src/assets): Assets are resources passed through Webpack</summary>
+- [`assets`](src/assets): Assets are resources passed through Webpack
   - [`fonts`](src/assets/fonts): Open Sans Regular (400) + Bold (700)
-  - [`icons`](src/assets/icons): miscellaneous vector graphics for form / visualisations *TODO folder needs rename*
+  - [`icons`](src/assets/icons): miscellaneous vector graphics for form / visualisations
   - [`images`](src/assets/images): images in the assets folder are passed through Webpack as opposed to the `public` folder
   - [`styles`](src/assets/styles):
     - [`_variables.scss`](src/assets/styles/_variables.scss) defines SCSS variables which are available in the `style`-tags of the Single File Components. Includes predefined colors and media queries.
@@ -98,3 +101,9 @@ Contains static files such as favicons or the [`index.html`](public/index.html).
 ### Continous Deploment
 
 When the `develop` branch updates, a new build will be automatically generated and deployed from Netlify.
+
+## Demo
+
+For previewing the capabilities of the app visit the route `/demo`. It will prefill the questionnaire. This can be also used for faster development to skip the step of filling out all the fields.
+
+Demo data can be found in [`src/demo.json`](src/demo.json) and is simply a 1:1 copy from LocalStorage.
