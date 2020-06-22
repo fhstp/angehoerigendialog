@@ -123,6 +123,8 @@ input {
   border: none;
   border-radius: $border-radius;
   padding: $spacer;
+  width: 100%;
+  max-width: 40ch;
 
   .an-checkboxes_activefields &,
   .an-field__subfields &,
