@@ -294,9 +294,9 @@ export default {
     }
 
     &--caretasks {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      @media print {
+        display: block;
+      }
     }
   }
 

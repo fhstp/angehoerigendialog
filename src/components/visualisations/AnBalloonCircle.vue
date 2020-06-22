@@ -31,8 +31,20 @@ export default {
   mounted() {
     setTimeout(this.calculateLabels, 500);
     setTimeout(this.calculateLabels, 5000);
+    if (this.isSafari) {
+      setTimeout(this.setCircleDimensions, 400);
+      window.addEventListener('resize', this.setCircleDimensions);
+    }
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.setCircleDimensions);
   },
   methods: {
+    setCircleDimensions() {
+      const { height, width } = this.$el.parentElement.getBoundingClientRect();
+      this.$el.style.width = width;
+      this.$el.style.height = height;
+    },
     calculateLabels() {
       const getComputedStyle = (el, prop) =>
         Number(window.getComputedStyle(el)[prop].replace('px', ''));
@@ -54,6 +66,7 @@ export default {
           paddingTop++;
         }
       } else {
+        console.log('resize', this.text);
         // reduce font size until text fits inside circle
         while (getComputedStyle(text, 'height') > circleHeight) {
           fontSize -= 0.1;
@@ -75,9 +88,10 @@ export default {
 
   &.isSafari {
     position: fixed;
-    height: 200%;
-    width: 200%;
-    // foreignObject isn't supported in safari for 100%, that's why the circles need position fixed and 200% as width and height
+    height: 260%;
+    width: 260%;
+    // foreignObject isn't supported in safari for 100%, that's why the circles need position fixed and 260% as width and height
+    // in safari elements inside of foreignObject use html coordinate system instead of svg coordinate system
     // https://stackoverflow.com/a/62082096 https://bugs.webkit.org/show_bug.cgi?id=23113
   }
 
@@ -127,6 +141,10 @@ export default {
     font-size: 6px;
     text-align: center;
     margin: 0;
+
+    .isSafari & {
+      font-size: 12px;
+    }
   }
 }
 </style>
