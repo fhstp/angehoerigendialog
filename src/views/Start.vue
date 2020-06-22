@@ -19,8 +19,8 @@
       <div class="an-start__header">
         <img
           src="@/assets/images/logo.png"
-          alt="Volkshilfe"
-          class="an-start__vh-logo"
+          alt="Logo der Pflegeorganisation"
+          class="an-start__po-logo"
         />
         <h1 class="an-start__an-logo">
           <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
@@ -89,7 +89,7 @@ const fieldGenerator = field_id => ({
 export default {
   name: 'Start',
   components: {
-    IconV: () => import('@/assets/icons/v.svg?inline'),
+    IconV: () => import('@/assets/icons/icon.svg?inline'),
     IconTextLogo
   },
   computed: {
@@ -138,6 +138,7 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    position: relative;
   }
 
   &__header {
@@ -149,10 +150,10 @@ export default {
     flex-grow: 1;
   }
 
-  &__vh-logo {
+  &__po-logo {
     max-width: 100%;
     width: 220px;
-    margin-bottom: $spacer * 2;
+    margin-bottom: $spacer;
   }
 
   &__an-logo {
@@ -240,8 +241,8 @@ export default {
 
   &__links {
     position: absolute;
-    bottom: $spacer * 3;
-    right: $spacer * 3;
+    top: 100%;
+    right: 0;
     color: white;
     text-shadow: 0 0 10px black;
   }
