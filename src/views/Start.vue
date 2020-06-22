@@ -63,6 +63,10 @@
           </template>
         </div>
       </div>
+
+      <router-link class="an-start__links" to="/legal"
+        >Impressum und Datenshutz</router-link
+      >
     </div>
   </div>
 </template>
@@ -232,6 +236,14 @@ export default {
       font-size: 1.5rem;
       margin-bottom: $spacer;
     }
+  }
+
+  &__links {
+    position: absolute;
+    bottom: $spacer * 3;
+    right: $spacer * 3;
+    color: white;
+    text-shadow: 0 0 10px black;
   }
 }
 </style>

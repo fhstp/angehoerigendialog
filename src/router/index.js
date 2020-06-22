@@ -41,11 +41,21 @@ const routes = [
       )
   },
   {
+    path: '/legal',
+    name: 'Impressum und Datenschutz',
+    component: () =>
+      import(
+        /* webpackChunkName: "legal" */
+        /* webpackPrefetch: true */
+        '@/views/Legal.vue'
+      )
+  },
+  {
     path: '/demo',
     name: 'Demo',
     component: () =>
       import(
-        /* webpackChunkName: "visualisation" */
+        /* webpackChunkName: "demo" */
         /* webpackPrefetch: true */
         '@/views/Demo.vue'
       )
