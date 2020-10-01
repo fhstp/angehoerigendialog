@@ -4,4 +4,3 @@ fields:
   hoffnung:
     label: Haben Sie noch Anmerkungen zu unserem Gespräch oder gibt es noch Dinge, die Sie fragen möchten?
     type: text
-    required: true

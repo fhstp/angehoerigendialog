@@ -1,5 +1,208 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+       url('assets/fonts/open-sans-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('assets/fonts/open-sans-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'),
+       url('assets/fonts/open-sans-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('assets/fonts/open-sans-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
 }
+
+@page {
+  size: A4 portrait;
+  margin: 1cm;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  @media print {
+    font-size: 11pt;
+  }
+}
+
+body.fixed {
+  overflow: hidden;
+}
+
+.container {
+  max-width: 95ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacer;
+  padding-right: $spacer;
+
+  @media print {
+    max-width: 100%;
+  }
+}
+
+ul, ol {
+  list-style-position: inside;
+}
+
+fieldset {
+  border: 0;
+}
+
+input + label {
+  margin-left: $spacer;
+}
+
+input, textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  appearance: none;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  cursor: pointer;
+  height: 1.25em;
+  width: 1.25em;
+  background-color:white;
+  outline-offset: 2px;
+}
+
+input[type=radio] {
+  border: none;
+  border-radius: 50%;
+
+  .an-field__subfields &,
+  .an-checkboxes_activefields &,
+  .an-plain-data & {
+    border: 2px solid $color-theme-darkgrey;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: $color-theme-darkgrey;
+    width: 70%;
+    height: 70%;
+    transition: background-color 200ms ease-in-out;
+  }
+
+  &:not(:checked)::after {
+    background-color: transparent;
+  }
+}
+
+input[type=checkbox] {
+  border: 2px solid $color-theme-darkgrey;
+
+  &::after {
+    content: '';
+    display: block;
+    border: 2px solid $color-theme-darkgrey;
+    border-top: 0;
+    border-left: 0;
+    transition: opacity 200ms ease-in-out;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 25%;
+    top: -1px;
+    transform: rotate(45deg) scale(0.75);
+  }
+
+  &:not(:checked)::after {
+    opacity: 0;
+  }
+
+  &:disabled {
+    border: 2px solid $color-theme-lightgrey;
+  }
+}
+
+.btn {
+  display: inline-block;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+  border: 2px solid #000;
+  border-radius: 8px;
+  margin: $spacer 0;
+  background-color: #fff;
+  padding: $spacer $spacer * 2;
+  color: #000;
+  font-size: 1rem;
+  transition: background-color 200ms ease-in-out;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+
+  &:hover {
+    background-color: $color-theme-lightgrey;
+  }
+
+  &:focus {
+    background-color: #ccc;
+  }
+
+  &:active, &--active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+  }
+
+  &--text {
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+
+    &:active,  &.btn--active {
+      box-shadow: none;
+      background-color: $color-theme-lightblue;
+      transform: none;
+    }
+  }
+}
+
+.darkred {
+  color: $color-theme-darkred;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.hide-print {
+  @media print {
+    display: none !important;
+  }
+}
+
+.visually-hidden {
+  display: initial;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+@import '_grid.scss';

@@ -1,0 +1,12 @@
+title: Angaben zum Zweitgespräch
+titleShort: Ende
+hideExport: true
+fields:
+
+  datum:
+    label: Datum für Zweitgespräch wählen
+    type: date
+
+  uhrzeit:
+    label: Uhrzeit für Zweitgespräch wählen
+    type: time

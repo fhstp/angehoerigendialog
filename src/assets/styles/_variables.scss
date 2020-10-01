@@ -1,1 +1,36 @@
-$spacer: .25rem;
+$spacer: .5rem;
+
+$grid-breakpoints: (
+  'sm': 500px,
+  'md': 700px,
+  'lg': 800px
+);
+
+$query: (
+  'print-only': 'only print',
+  'screen-only': 'only screen',
+  'xs-only': 'screen and (max-width: #{map-get($grid-breakpoints, 'sm') - 1})',
+  'sm-only': 'screen and (min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+  'sm-and-down': 'screen and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+  'sm-and-up': 'screen and (min-width: #{map-get($grid-breakpoints, 'sm')})',
+  'md-only': 'screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+  'md-and-down': 'screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+  'md-and-up': 'screen and (min-width: #{map-get($grid-breakpoints, 'md')})',
+  'lg-only': 'screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+  'lg-and-up': 'screen and (min-width: #{map-get($grid-breakpoints, 'lg')})'
+);
+
+$range-thumb-size: 2rem;
+$range-thumb-border-size: 0.5rem;
+$range-track-height: 1rem;
+
+$color-theme-darkred: #7A0E0E;
+$color-theme-red: #d1938e;
+$color-theme-lightred: lighten(desaturate($color-theme-darkred, 50%), 60%);
+$color-theme-lightgrey: lighten(desaturate($color-theme-darkred, 100%), 60%);
+$color-theme-darkgrey: lighten(desaturate($color-theme-darkred, 100%), 10%);
+$color-theme-blue: #49a1c0;
+$color-theme-lightblue: lighten($color-theme-blue, 20%);
+$color-theme-shadow: #555;
+
+$border-radius: 3px;

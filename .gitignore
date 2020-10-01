@@ -22,3 +22,5 @@ yarn-error.log*
 
 #data
 form.json
+visualisation.json
+mail.json

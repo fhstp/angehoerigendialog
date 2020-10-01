@@ -1,22 +1,34 @@
 <template>
   <div id="app">
-    <AnForm />
-    <AnVisualisation />
+    <router-view />
   </div>
 </template>
 
 <script>
-import AnForm from '@/components/AnForm.vue';
-import AnVisualisation from '@/components/AnVisualisation.vue';
-
 export default {
-  components: {
-    AnForm,
-    AnVisualisation
+  name: 'App',
+  mounted() {
+    window.addEventListener('beforeprint', () => {
+      this.$store.commit('updatePrintMode', true);
+    });
+    window.addEventListener('afterprint', () => {
+      this.$store.commit('updatePrintMode', false);
+    });
+    // detect Ctrl+p
+    window.addEventListener('keydown', event => {
+      if (
+        event.ctrlKey &&
+        !event.altKey &&
+        !event.metaKey &&
+        event.keyCode === 80
+      ) {
+        this.$store.commit('updatePrintMode', true);
+      }
+    });
   }
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/styles/base.scss";
+@import '@/assets/styles/base.scss';
 </style>

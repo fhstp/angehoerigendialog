@@ -1,0 +1,78 @@
+visualisation:
+
+  basisinfo:
+    demenzperson:
+      diagnose: Ärztliche Demenzdiagnose
+      pflegegeld: Aktuelle Pflegestufe
+      pflegebedarf: Unterstüzungsbedarf
+      unterstuetzungsangebot: Unterstützungsangebote
+
+    betreuendeperson:
+      sorgepflichten: Weitere Betreuungspflichten
+      beruf: Berufstätigkeit
+      unterstuetzungsangebot: Unterstützungsangebote
+
+    allgemein:
+      verhaeltnis: Verwandschaftliches Verhältnis
+      haushalt: gemeinsamer Haushalt
+
+  caretasks:
+    mahlzeit: Zubereiten der Mahlzeiten
+    nahrungsaufnahme: Nahrungsaufnahme unterstützen
+    badenwaschenduschen: Baden, Waschen, Duschen
+    zahnpflegehaarhautnagelpflege: Zahn-, Haar-, Haut- und Nagelpflege
+    toilette: Toilettengängen, Intimpflege
+    kleidung: An- und Auskleiden
+    haushalt: Haushaltsführung und Einkaufen
+    weglaufen: Verhüten von Weglaufen
+    verletzungen: Verhüten von Stürzen und Verletzungen
+    anwesend: Persönlich verfügbar sein
+    behoerdenwege: Über Unterstützungs- leistungen informieren
+
+  behaviour:
+    wiederholung: Wiederholt sich oft
+    sachverhalte: Begreift schwierige Sachverhalte nicht mehr
+    erzaehltes: Vergisst Erzähltes schnell
+    merkwuerdigedinge: Merkwürdiges oder unlogisches Verhalten
+    unruhig: Ist unruhig
+    aggresiv: Wird verbal aggresiv
+    handgfreilich: Wird handgreiflich
+    wahnhafteideen: Sieht/hört Dinge, die nicht da sind
+    schwankendeverfassung: Schwankende Verfassung
+    verhaltenweise: Gefährdet sich selbst
+
+  health:
+    erschoepfung: Ich fühle mich oft körperlich erschöpft.
+    pflegegesundheit: Durch die Pflege wird meine Gesundheit angegriffen.
+    eigenekraft: Die Pflege kostet viel von meiner eigenen Kraft.
+    eigenegesundheit: Ich kann mich zu wenig um meine eigene Gesundheit kümmern.
+    schlafstoerung: Ich leide unter Schlafstörungen.
+    eindruck: Habe den Eindruck alles alleine schaffen zu müssen.
+    zuviel: Es fällt mir schwer zuzugeben, dass es mir manchmal zuviel wird.
+    hemmungen: Habe Hemmungen um Hilfe zu bitten.
+    betreuungsaufgaben: Es fällt mir schwer Betreuungsaufgaben abzugeben.
+
+  situation:
+    gesundheit-gesundheitszustand: Gesundheitszustand
+    gesundheit-nervlichebelastung: Mentaler Zustand
+    gesundheit-energiereserven: Energiereserven
+
+  flower:
+    - fieldID: ressourcen_belastungen-rueckzugsmoeglichkeit
+      text: Rückzugs- möglichkeiten
+      solution: Rückzugsmöglich-keiten schaffen
+    - fieldID: ressourcen_belastungen-hobbysinteressen
+      text: Hobbys & Interessen
+      solution: Zeit für meine Hobbys schaffen
+    - fieldID: ressourcen_belastungen-freizeitaktivitaeten
+      text: Menschen treffen
+      solution: Mehr Menschen treffen
+    - fieldID: ressourcen_belastungen-zeitfuermichselbst
+      text: Erholungszeit
+      solution: Erholungszeit einplanen
+    - fieldID: ressourcen_belastungen-beziehungen
+      text: Familie & Freunde
+      solution: Zeit für Familie & Freunde einplanen
+    - fieldID: ressourcen_belastungen-anforderungen
+      text: Ausgleich Pflege & Freizeit
+      solution: Pflege mit Freizeit vereinbaren

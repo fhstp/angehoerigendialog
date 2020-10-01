@@ -1,36 +1,100 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import form from '@/data/form.json';
 
 Vue.use(Vuex);
 
-const emptyForm = {}
-for (const section in form) {
-  emptyForm[section] = {};
-}
+/**
+ * Answer type
+ * @typedef {Object} Answer
+ * @property {any} value    - input value
+ * @property {boolean} done - completion state
+ */
+
+/**
+ * State Object
+ * @property {Object.<string, Answer>} answers - keys are the field IDs
+ * @property {boolean} printMode
+ * @property {string} newNotes                 - notes will be written to this field while editing and saved to notes when input is closed
+ * @property {string} notes
+ * @property {string} prevQuestionLabel        - holds the label of the question which was presented in the notes before
+ */
+const initialState = {
+  answers: {},
+  printMode: false,
+  newNotes: '',
+  notes: '',
+  prevQuestionLabel: ''
+};
 
 export default new Vuex.Store({
-  state: {
-    answers: emptyForm
+  state: { ...initialState },
+  getters: {
+    getFieldCompletion: state => fieldId => state.answers[fieldId]?.done,
+    getFieldValue: state => fieldId => state.answers[fieldId]?.value,
+    getSectionCompletion: state => sectionId => {
+      for (const key in state.answers) {
+        if (
+          key.startsWith(`${sectionId}-`) &&
+          state.answers[key].done !== true
+        ) {
+          return false;
+        }
+      }
+      return true;
+    },
+    getNewNotes: state => state.newNotes,
+    getNotes: state => state.notes,
+    getPrevQuestionLabel: state => state.prevQuestionLabel
   },
   mutations: {
-    initAnswers(state) {
-      state.answers = emptyForm;
+    resetState(state) {
+      for (const key in state.answers) {
+        Vue.delete(state.answers, key);
+      }
+      Object.assign(state, { ...initialState });
     },
-    updateAnswer(state, {fieldId, value}) {
-      const fieldParts = fieldId.split('-');
-      const section = fieldParts.shift();
-      const key = fieldParts.join('-');
-      state.answers[section][key] = value;
-    }
-  },
-  actions: {
-    resetForm({commit}) {
-      commit('initAnswers');
+    importState(state, importedState) {
+      Object.assign(state, importedState);
+    },
+    /**
+     * Update the completion state of fields
+     * @param {*} state
+     * @param {Object} data
+     * @param {string[]} data.fieldIds - The list of the answer IDs to receive the value
+     * @param {boolean} data.value     - The value to be set
+     */
+    updateAnswerCompletion(state, { fieldIds, value }) {
+      for (const fieldId of fieldIds) {
+        if (!Object.hasOwnProperty.call(state.answers, fieldId)) {
+          Vue.set(state.answers, fieldId, {});
+        }
+        Vue.set(state.answers[fieldId], 'done', value);
+      }
+    },
+    updateAnswerValue(state, { fieldId, value }) {
+      if (!Object.hasOwnProperty.call(state.answers, fieldId)) {
+        Vue.set(state.answers, fieldId, {});
+      }
+      Vue.set(state.answers[fieldId], 'value', value);
+    },
+    updatePrintMode(state, newVal) {
+      state.printMode = newVal;
+    },
+    updateNewNotes(state, newVal) {
+      state.newNotes = newVal;
+    },
+    updateNotes(state, newVal) {
+      state.notes = newVal;
+    },
+    updatePrevQuestionLabel(state, newVal) {
+      state.prevQuestionLabel = newVal;
     }
   },
   strict: process.env.NODE_ENV !== 'production',
-  plugins: [createPersistedState()]
-  // https://vuex.vuejs.org/guide/getters.html#method-style-access
+  plugins: [
+    createPersistedState({
+      filter: mutation => mutation.type !== 'updatePrintMode'
+    })
+  ]
 });

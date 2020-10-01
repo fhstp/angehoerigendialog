@@ -1,6 +1,14 @@
 title: Gesundheit
 fields:
 
+  gesundheithinweis:
+    label: Wir haben bisher über die Pflege und Unterstützung gesprochen, die Sie
+           für Ihre/n Angehörige/n leisten. Ich möchte in der Folge mit Ihnen darüber
+           sprechen, wie es Ihnen selbst geht. Zum Beispiel über Ihre eigene Gesundheit
+           und die Hilfe, die Sie von anderen erhalten oder benötigen.
+    type: hint
+    size: medium
+
   gesundheit:
     label: Offene Fragen zur Gesundheit der angehörigen Person
     type: heading
@@ -11,134 +19,126 @@ fields:
     type: range
     step: 1
     min:
-      - 1
-      - sehr schlecht
+      value: 1
+      label: sehr schlecht
     max:
-      - 10
-      - sehr gesund
-    required: true
+      value: 10
+      label: sehr gesund
 
   nervlichebelastung:
     label: Wie schätzen Sie Ihre nervliche Belastung ein?
     type: range
     step: 1
     min:
-      - 1
-      - nicht belastend
+      value: 1
+      label: sehr stark belastend
     max:
-      - 10
-      - sehr stark belastend
-    required: true
+      value: 10
+      label: nicht belastend
 
   energiereserven:
     label: Wie schätzen Sie Ihre Energiereserven ein?
     type: range
     step: 1
     min:
-      - 1
-      - beinahe vollständig verbraucht
+      value: 1
+      label: beinahe vollständig verbraucht
     max:
-      - 10
-      - sehr gute Energiereserven
-    required: true
+      value: 10
+      label: sehr gute Energiereserven
 
   einschaetzung:
     label: Sorgen Sie Ihrer Einschätzung nach gut dafür, dass es Ihnen selbst gut geht?
     type: text
-    required: true
 
   kraefte:
     label: Ich nehme an, Sie haben sich schon überlegt, wie Sie für sich selbst sorgen können. Was hilft Ihnen, Ihre Kräfte zu erhalten?
     type: text
-    required: true
 
   koerperlichebeschwerden:
     label: Haben Sie körperliche Beschwerden, die Ihnen bei der Pflege und Betreuung Ihres/Ihrer Angehörigen im Wege stehen? Zum Beispiel Probleme beim Gehen oder Rückenschmerzen?
     type: text
-    required: true
 
   gefuehle:
     label: Welche Gefühle kommen bei Ihnen während der Betreuung manchmal zum Vorschein?
     type: text
-    required: true
+
+  gesundheitszustandhinweis:
+    label: Andere pflegende Angehörige berichten davon, dass die Pflege und
+          Betreuung den eigenen Gesundheitszustand beeinflussen. Können
+          Sie bitte ankreuzen, inwiefern folgende Aussagen auf Sie zutreffend sind?
+          Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
+    type: hint
+    size: medium
 
   erschoepfung:
     label: Ich fühle mich oft körperlich erschöpft.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   pflegegesundheit:
     label: Durch die Pflege wird meine Gesundheit angegriffen.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   eigenekraft:
     label: Die Pflege kostet viel von meiner eigenen Kraft.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   eigenegesundheit:
     label: Ich kann mich zu wenig um meine eigene Gesundheit kümmern.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   schlafstoerung:
     label: Ich leide unter Schlafstörungen.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   eindruck:
-    label: Habe den Eindruck alles alleine schaffen zu müssen.
+    label: Habe den Eindruck, alles alleine schaffen zu müssen.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   zuviel:
     label: Es fällt mir schwer zuzugeben, dass es mir manchmal zuviel wird.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   hemmungen:
     label: Habe Hemmungen um Hilfe zu bitten.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   betreuungsaufgaben:
-    label: Es fällt mir schwer Betreuungsaufgaben abzugeben.
+    label: Es fällt mir schwer, Betreuungsaufgaben abzugeben.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht

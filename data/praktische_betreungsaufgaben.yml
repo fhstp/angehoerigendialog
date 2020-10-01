@@ -1,0 +1,40 @@
+title: Praktische Betreuungsaufgaben
+fields:
+
+  praktischebetreuungsaufgabenhinweis:
+    label: Um einen Einblick in den derzeitigen Pflege- und Unterstützungsbedarf
+          Ihres/Ihrer Angehörigen und einen Eindruck von dem, was Sie leisten, zu
+          bekommen, stelle ich Ihnen nun einige Fragen zu den praktischen Betreuungsaufgaben.
+          Wir werden gemeinsam eine Liste mit 11 Tätigkeiten durchgehen,
+          von denen wir wissen, dass andere demenzerkrankte Personen
+          dabei häufig auf Hilfe angewiesen sind. Bitte geben Sie an, ob Ihr/e Angehörige/
+          r derzeit – laufend oder auch nur fallweise – Hilfe in den genannten
+          Bereichen benötigt und wenn ja, von wem diese Hilfe geleistet wird bzw.
+          wer diese Hilfe organisiert (z. B. Essen auf Rädern, 24-Stunden-Betreuung).
+    type: hint
+    size: medium
+
+  situationseinschaetzung:
+    label: Benötigen Sie Ihrer Einschätzung nach bei der Durchführung oder Organisation in folgenden Bereichen Unterstützung?
+    type: checkboxes
+    options:
+      mahlzeit: Zubereiten der Mahlzeiten
+      nahrungsaufnahme: Nahrungsaufnahme
+      badenwaschenduschen: Baden, Waschen, Duschen
+      zahnpflegehaarhautnagelpflege: Zahnpflege, Haar-, Haut- und Nagelpflege
+      toilette: Toilettengängen bzw. Inkontinenzvorlagen wechseln, Intimpflege
+      kleidung: An- und Auskleiden bzw. Zurechtlegen der Kleidung
+      haushalt: Haushaltsführung bzw. Einkäufen
+      weglaufen: Vermeiden des Weglaufens
+      verletzungen: Vermeiden von Stürzen und Verletzungen
+      anwesend: Persönlich verfügbar/anwesend sein
+      behoerdenwege: Behördenwege erledigen, sich über Unterstützungsleistungen informieren und/oder diese organisieren
+    activefields:
+      details:
+        label: Von wem wird diese Unterstützung geleistet?
+        type: radio
+        options:
+          anderer:  Jemand anderer leistet die Unterstützung.
+          teilen: Ich teile mir die Unterstützung mit jemandem zu in etwa gleichen Teilen
+          ichmeist: Ich leiste den größten Teil der Unterstützung, jemand anderer unterstützt mich fallweise
+          ich:  Ich leiste die gesamte Unterstützung.

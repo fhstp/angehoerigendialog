@@ -1,20 +1,26 @@
 title: Angaben zur demenzerkrankten Person
+titleShort: Demenzerkrankte Person
 fields:
+
+  angabenpersonhinweis:
+    label: Zu Beginn des Gesprächs bitte ich Sie um kurze Informationen zu der
+          demenzerkrankten Person, die Sie pflegen und/oder betreuen und zu
+          Ihnen selbst, um einen ersten Überblick über Ihre individuelle Situation
+          zu bekommen. Alle Ihre Angaben werden vertraulich behandelt.
+    type: hint
+    size: medium
 
   verhaeltnis:
     label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
     type: text
-    required: true
 
   alter:
     label: Wie alt ist er/sie?
     type: number
-    required: true
 
   pflegebedarf:
     label: Seit wann hat er/sie verstärkten Unterstützungs- und/oder Pflegebedarf?
     type: text
-    required: true
 
   diagnose:
     label: Gibt es eine ärztliche Demenzdiagnose?
@@ -34,11 +40,13 @@ fields:
         label: Welche Stufe Pflegegeld erhält er/sie?
         type: radio
         options:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
+          1: 1
+          2: 2
+          3: 3
+          4: 4
+          5: 5
+          6: 6
+          7: 7
         when:
           pflegegeld: true
 
@@ -52,6 +60,6 @@ fields:
     subfields:
       unterstuetzungsangebotdetail:
         label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
-        type: text
+        type: list
         when:
-          diagnose: true
+          unterstuetzungsangebot: true

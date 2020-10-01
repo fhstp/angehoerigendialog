@@ -1,15 +1,25 @@
 title: Persönliche Ressourcen und Belastungen
+titleShort: Ressourcen und Belastungen
 fields:
 
   kraftausdauer:
     label: Alles in allem, was ist Ihrer Meinung nach hilfreich und gibt Ihnen Kraft und Ausdauer?
     type: list
-    required: true
 
   belastend:
     label: Welche drei Aspekte sind Ihrer Einschätzung nach besonders belastend für Sie?
     type: list
-    required: true
+    min: 3
+    max: 3
+
+  einschraenkungenhinweis:
+    label: Andere pflegende Angehörige von demenzerkrankten Menschen berichten
+          häufig davon, dass sie durch die Pflege- und Betreuungsaufgaben, die
+          sie oft über Jahre hinweg leisten, persönliche Einschränkungen erleben.
+          Beispielsweise ist es nicht immer einfach, sich Zeit für sich selbst und die
+          eigenen Interessen nehmen zu können.
+    type: hint
+    size: medium
 
   individuelleSituation:
     label: Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
@@ -21,51 +31,45 @@ fields:
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   hobbysinteressen:
     label: Mir steht ausreichend Zeit für meine Hobbys und Interessen zur Verfügung.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   freizeitaktivitaeten:
     label: Es ist mir regelmäßig möglich, mich mit anderen Menschen zu treffen (z. B. Freizeitaktivitäten, Ausflüge, Kaffee trinken etc.).
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   zeitfuermichselbst:
     label: Ich habe genug Zeit für mich selbst, um mich zu erholen.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   beziehungen:
     label: Es ist mir regelmäßig möglich, meine Beziehung zu Familienangehörigen, Verwandten, FreundInnen und Bekannten zu pflegen.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
 
   anforderungen:
     label: Ich kann die Anforderungen meiner Umgebung (z. B. Familie, Arbeitsplatz) und die Anforderungen durch die Pflege gut vereinbaren.
     type: radio
     options:
       stimmt: stimmt
-      stimmt teilweise: stimmt teilweise
-      stimmt nicht: stimmt nicht
-    required: true
+      stimmt_teilweise: stimmt teilweise
+      stimmt_nicht: stimmt nicht
