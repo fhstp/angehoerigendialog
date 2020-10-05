@@ -20,11 +20,14 @@ fields:
       wiederholung: … wiederholt sich oft (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
       sachverhalte: … begreift schwierige Sachverhalte nicht mehr (z. B. kann einer längeren Erklärung nicht folgen)
       erzaehltes: … vergisst Erzähltes schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
+      apatisch: … ist gleichgültig/apatisch
       merkwuerdigedinge: … tut Dinge, die mir merkwürdig oder unlogisch erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
       unruhig: … ist unruhig (z. B. hat einen erhöhten Bewegungsdrang)
+      weglaufen: … läuft von zu Hause weg
       aggresiv: … wird verbal aggresiv (z.B. schimpft, wird laut)
       handgfreilich: … wird handgreiflich (z. B. hält mich stark fest und/oder schlägt mich)
-      wahnhafteideen: … sieht/hört Dinge, die nicht da sind (z. B. wahnhafte Ideen)
+      halluzinationen: … sieht/hört Dinge, die nicht da sind (z. B. Halluzinationen, paranoide Ideen)
+      wahnhafteideen: … hat wahnhafte Ideen
       schwankendeverfassung: … zeigt schwankende Verfassung (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
       verhaltenweise: … zeigt Verhaltensweisen, die ihn/sie selbst gefährden (z. B. schaltet den Herd ein und vergisst darauf)
     activefields:
