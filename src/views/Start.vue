@@ -65,7 +65,7 @@
       </div>
 
       <router-link class="an-start__links" to="/legal"
-        >Impressum und Datenshutz</router-link
+        >Impressum und Datenschutz</router-link
       >
     </div>
   </div>
