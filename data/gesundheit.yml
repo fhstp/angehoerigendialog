@@ -31,10 +31,10 @@ fields:
     step: 1
     min:
       value: 1
-      label: sehr stark belastend
+      label: sehr stark belastet
     max:
       value: 10
-      label: nicht belastend
+      label: nicht belastet
 
   energiereserven:
     label: Wie schätzen Sie Ihre Energiereserven ein?
