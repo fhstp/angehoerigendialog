@@ -29,9 +29,9 @@
                 />
                 <AnAccordionItem v-else :key="fieldId">
                   <template #header>
-                    <span class="an-accordion-item__header-text">{{
-                      field.label
-                    }}</span>
+                    <span class="an-accordion-item__header-text">
+                      {{ $safeHTML(field.label) }}
+                    </span>
                     <span class="an-accordion-item__header-icon">
                       <IconCheckmark
                         v-if="
