@@ -1,6 +1,44 @@
 <template>
   <div class="an-flower">
-    <div class="an-flower__flower">
+    <div class="grid-container">
+      <div v-if="highItems.length" class="an-High">
+        <div class="an-Text"></div>
+        <div class="an-Image">Image</div>
+        <div class="an-Boxes">
+          <div v-for="(answer, index) in highItems" :key="index">
+            <span v-html="answer.text"></span>
+          </div>
+        </div>
+      </div>
+      <div v-if="mediumItems.length" class="an-Medium">
+        <div class="an-Text2"></div>
+        <div class="an-Image2">Image</div>
+        <div class="an-Boxes2">
+          <div v-for="(answer, index) in mediumItems" :key="index">
+            <span v-html="answer.text"></span>
+          </div>
+        </div>
+      </div>
+      <div v-if="wateringcanItems.length" class="an-Low">
+        <div class="an-Text3">
+          <div class="an-watering-heading">
+            <strong>... und darum muss ich mich kümmern:</strong>
+          </div>
+        </div>
+        <div class="an-Image3">
+          <IconWateringcan
+            class="an-flower__wateringcan__trunk"
+            :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
+          />
+        </div>
+        <div class="an-Boxes3">
+          <div v-for="(answer, index) in mediumItems" :key="index">
+            <span v-html="answer.text"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="an-flower__flower">
       <div
         v-for="(answer, index) in answers"
         :key="index"
@@ -22,9 +60,9 @@
         class="an-flower__overlay_line"
         :class="getClass(answers[1].type, 0)"
       ></div>
-    </div>
+    </div> -->
 
-    <div v-if="wateringcanItems.length" class="an-flower__wateringcan">
+    <!-- <div v-if="wateringcanItems.length" class="an-flower__wateringcan">
       <div class="an-flower__wateringcan-heading">
         <strong>Darum sollte ich mich kümmern:</strong>
       </div>
@@ -44,7 +82,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -70,6 +108,12 @@ export default {
       this.$emit('update:available', questionsAreAnswered);
       return data;
     },
+    highItems() {
+      return this.answers.filter(obj => obj.type === 'stimmt');
+    },
+    mediumItems() {
+      return this.answers.filter(obj => obj.type === 'stimmt_teilweise');
+    },
     wateringcanItems() {
       return this.answers.filter(object => {
         return object.type === 'stimmt_nicht';
@@ -88,6 +132,92 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.grid-container {
+  margin-top: 40px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: 'an-High an-Medium an-Low';
+  gap: 10px 10px;
+}
+
+.an-High {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    'an-Text'
+    'an-Image'
+    'an-Boxes';
+  grid-area: an-High;
+}
+
+.an-Text {
+  grid-area: an-Text;
+}
+
+.an-Image {
+  grid-area: an-Image;
+}
+
+.an-Boxes {
+  grid-area: an-Boxes;
+}
+
+.an-Medium {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    'an-Text2'
+    'an-Image2'
+    'an-Boxes2';
+  grid-area: an-Medium;
+}
+
+.an-Text2 {
+  grid-area: an-Text2;
+}
+
+.an-Image2 {
+  grid-area: an-Image2;
+}
+
+.an-Boxes2 {
+  grid-area: an-Boxes2;
+}
+
+.an-Low {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    'an-Text3'
+    'an-Image3'
+    'an-Boxes3';
+  grid-area: an-Low;
+}
+
+.an-Text3 {
+  grid-area: an-Text3;
+}
+
+.an-Image3 {
+  grid-area: an-Image3;
+}
+
+.an-Boxes3 {
+  grid-area: an-Boxes3;
+}
+
+/**
+  OLD STUFF
+ */
 $background: #fff;
 $pill: $color-theme-lightgrey;
 $red: $color-theme-red;
