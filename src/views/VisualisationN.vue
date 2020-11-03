@@ -18,7 +18,6 @@
 
       <div>
         <AnExportPdf />
-        <AnSendMail class="btn--text" />
         <router-link class="btn btn--text" :to="({ name: 'Start' })">
           Zurück zum Start
         </router-link>
@@ -192,7 +191,6 @@ import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnHealth from '@/components/visualisations/AnHealth.vue';
 import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
-import AnSendMail from '@/components/visualisations/AnSendMail.vue';
 import AnSendMailPopup from '@/components/visualisations/AnSendMailPopup.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
@@ -209,7 +207,6 @@ export default {
     AnFlower,
     AnHealth,
     AnResourcesPressure,
-    AnSendMail,
     AnSendMailPopup,
     AnSituation,
     AnStepper
@@ -230,7 +227,7 @@ export default {
           title: menu[sectionId].titleShort ?? menu[sectionId].title,
           icon: menu[sectionId].icon ?? sectionId,
           id: sectionId,
-          done: this.$store.getters.getSectionCompletion(sectionId)
+          done: ''
         });
       }
       return steps;
@@ -285,7 +282,7 @@ export default {
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
     @media #{map-get($query, 'lg-and-up')} {
-      margin-left: 300px;
+      margin-left: 200px;
     }
   }
 
