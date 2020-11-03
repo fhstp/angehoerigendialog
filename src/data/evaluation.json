@@ -1,0 +1,17 @@
+{
+  "visuelle_auswertung": {
+    "title": "1. Visuelle Auswertung",
+    "titleShort": "Visuelle Auswertung",
+    "icon": "icon"
+  },
+  "schriftiliche_auswertung": {
+    "title": "2. Schriftliche Auswertung",
+    "titleShort": "Schriftliche Auswertung",
+    "icon": "icon"
+  },
+  "ende": {
+    "title": "3. Ende",
+    "titleShort": "Ende",
+    "icon": "icon"
+  }
+}

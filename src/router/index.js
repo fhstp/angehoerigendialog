@@ -27,7 +27,7 @@ const routes = [
       import(
         /* webpackChunkName: "visualisation" */
         /* webpackPrefetch: true */
-        '@/views/Visualisation.vue'
+        '@/views/VisualisationN.vue'
       )
   },
   {
@@ -37,7 +37,7 @@ const routes = [
       import(
         /* webpackChunkName: "visualisation" */
         /* webpackPrefetch: true */
-        '@/views/Visualisation.vue'
+        '@/views/VisualisationN.vue'
       )
   },
   {
