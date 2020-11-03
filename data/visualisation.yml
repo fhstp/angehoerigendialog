@@ -62,8 +62,8 @@ visualisation:
 
   flower:
     - fieldID: ressourcen_belastungen-rueckzugsmoeglichkeit
-      text: Rückzugs- möglichkeiten
-      solution: Rückzugsmöglich-keiten schaffen
+      text: Rückzugsmöglichkeiten
+      solution: Rückzugsmöglichkeiten schaffen
     - fieldID: ressourcen_belastungen-hobbysinteressen
       text: Hobbys & Interessen
       solution: Zeit für meine Hobbys schaffen

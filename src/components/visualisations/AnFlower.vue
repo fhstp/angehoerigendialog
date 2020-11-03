@@ -5,7 +5,12 @@
         <div class="an-Text"></div>
         <div class="an-Image">Image</div>
         <div class="an-Boxes">
-          <div v-for="(answer, index) in highItems" :key="index">
+          <div
+            v-for="(answer, index) in highItems"
+            :key="index"
+            class="an-textBox"
+            :class="index === 0 ? 'no-offset' : ''"
+          >
             <span v-html="answer.text"></span>
           </div>
         </div>
@@ -14,8 +19,13 @@
         <div class="an-Text2"></div>
         <div class="an-Image2">Image</div>
         <div class="an-Boxes2">
-          <div v-for="(answer, index) in mediumItems" :key="index">
-            <span v-html="answer.text"></span>
+          <div
+            v-for="(answer, index) in mediumItems"
+            :key="index"
+            class="an-textBox"
+            :class="index === 0 ? 'no-offset' : ''"
+          >
+            <span class="an-answerText" v-html="answer.text"></span>
           </div>
         </div>
       </div>
@@ -25,14 +35,14 @@
             <strong>... und darum muss ich mich kümmern:</strong>
           </div>
         </div>
-        <div class="an-Image3">
-          <IconWateringcan
-            class="an-flower__wateringcan__trunk"
-            :style="{ '--stroke': -0.4 * wateringcanItems.length + 3.4 + 'px' }"
-          />
-        </div>
+        <div class="an-Image3">Image</div>
         <div class="an-Boxes3">
-          <div v-for="(answer, index) in mediumItems" :key="index">
+          <div
+            v-for="(answer, index) in wateringcanItems"
+            :key="index"
+            class="an-textBox"
+            :class="index === 0 ? 'no-offset' : ''"
+          >
             <span v-html="answer.text"></span>
           </div>
         </div>
@@ -89,10 +99,10 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
-import IconWateringcan from '@/assets/icons/wateringcan.svg?inline';
+// import IconWateringcan from '@/assets/icons/wateringcan.svg?inline';
 export default {
   name: 'AnFlower',
-  components: { IconWateringcan },
+  // components: { IconWateringcan },
   mixins: [visualisation],
   computed: {
     answers() {
@@ -132,15 +142,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$grey: $color-theme-lightgrey;
+$centerSize: 64px;
+
 .grid-container {
   margin-top: 40px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 0.7fr 0.7fr 0.7fr;
   grid-template-rows: 1fr;
-  gap: 0px 0px;
   grid-template-areas: 'an-High an-Medium an-Low';
-  gap: 10px 10px;
+  gap: 0px 20px;
 }
 
 .an-High {
@@ -213,6 +225,21 @@ export default {
 
 .an-Boxes3 {
   grid-area: an-Boxes3;
+}
+
+.an-textBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $grey;
+  border-radius: 6px;
+  height: $centerSize;
+  padding: 5px;
+  margin: 4px 0;
+}
+
+.no-offset {
+  margin-top: 0px;
 }
 
 /**
