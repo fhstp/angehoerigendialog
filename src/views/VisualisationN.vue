@@ -31,147 +31,157 @@
       />
       <div class="an-form__content">
         <div class="container">
-          <div :class="{ 'an-visualisation__page': showVisualisations }">
-            <div class="an-visualisation__infos row">
-              <h1 class="col-md-3">
-                Angehörigengespräch von
-                <br />
-                {{ headerData.caregivername }}
-              </h1>
-              <div class="col-md-3">
-                <p>
-                  Durchgeführt von {{ headerData.socialworkername }},
-                  {{ headerData.date }}
-                </p>
-                <p>
-                  Zweitgespräch am {{ headerData.date2 }} um
-                  {{ headerData.time2 }} Uhr
-                </p>
-              </div>
-            </div>
-
-            <!-- Vis Page 1 -->
-
-            <template v-if="showVisualisations">
-              <div class="an-visualisation__visualisation-wrapper">
-                <AnEditButton
-                  section-id="demenzerkrankte_person"
-                  field-id="0"
-                />
-                <AnBasisInformation />
-                <div class="an-visualisation__screen_spacer" />
-
-                <div v-show="isAvailable.flower">
-                  <div class="an-visualisation__heading-wrapper">
-                    <h2>Dafür habe ich Zeit</h2>
-                    <AnEditButton
-                      section-id="ressourcen_belastungen"
-                      field-id="2"
-                    />
-                  </div>
-                  <AnFlower :available.sync="isAvailable.flower" />
+          <template v-if="currView === 'visuelle_auswertung'">
+            <div :class="{ 'an-visualisation__page': showVisualisations }">
+              <div class="an-visualisation__infos row">
+                <h1 class="col-md-3">
+                  Angehörigengespräch von
+                  <br />
+                  {{ headerData.caregivername }}
+                </h1>
+                <div class="col-md-3">
+                  <p>
+                    Durchgeführt von {{ headerData.socialworkername }},
+                    {{ headerData.date }}
+                  </p>
+                  <p>
+                    Zweitgespräch am {{ headerData.date2 }} um
+                    {{ headerData.time2 }} Uhr
+                  </p>
                 </div>
               </div>
-              <div class="an-visualisation__screen_spacer" />
-            </template>
-            <AnPlainData v-else />
-          </div>
 
-          <!-- Vis Page 2 -->
+              <!-- Vis Page 1 -->
 
-          <template v-if="showVisualisations">
-            <div
-              v-show="isAvailable.behaviourChanges || isAvailable.flower"
-              class="an-visualisation__page"
-            >
-              <div v-show="isAvailable.behaviourChanges">
-                <div class="an-visualisation__heading-wrapper">
-                  <h2>Verhaltensveränderungen</h2>
+              <template v-if="showVisualisations">
+                <div class="an-visualisation__visualisation-wrapper">
                   <AnEditButton
-                    section-id="verhaltensveraenderungen"
+                    section-id="demenzerkrankte_person"
+                    field-id="0"
+                  />
+                  <AnBasisInformation />
+                  <div class="an-visualisation__screen_spacer" />
+
+                  <div v-show="isAvailable.flower">
+                    <div class="an-visualisation__heading-wrapper">
+                      <h2>Dafür habe ich Zeit</h2>
+                      <AnEditButton
+                        section-id="ressourcen_belastungen"
+                        field-id="2"
+                      />
+                    </div>
+                    <AnFlower :available.sync="isAvailable.flower" />
+                  </div>
+                </div>
+                <div class="an-visualisation__screen_spacer" />
+              </template>
+              <AnPlainData v-else />
+            </div>
+
+            <!-- Vis Page 2 -->
+
+            <template v-if="showVisualisations">
+              <div
+                v-show="isAvailable.behaviourChanges || isAvailable.flower"
+                class="an-visualisation__page"
+              >
+                <div v-show="isAvailable.behaviourChanges">
+                  <div class="an-visualisation__heading-wrapper">
+                    <h2>Verhaltensveränderungen</h2>
+                    <AnEditButton
+                      section-id="verhaltensveraenderungen"
+                      field-id="0"
+                    />
+                  </div>
+                  <AnBehaviour :available.sync="isAvailable.behaviourChanges" />
+                </div>
+                <div class="an-visualisation__screen_spacer" />
+
+                <div
+                  v-show="isAvailable.situation || isAvailable.healthChanges"
+                  class="an-visualisation__heading-wrapper"
+                >
+                  <h2>Gesundheit</h2>
+                  <AnEditButton section-id="gesundheit" field-id="0" />
+                </div>
+
+                <AnSituation
+                  v-show="isAvailable.situation"
+                  :available.sync="isAvailable.situation"
+                />
+                <div class="an-visualisation__screen_spacer" />
+
+                <AnHealth
+                  v-show="isAvailable.healthChanges"
+                  :available.sync="isAvailable.healthChanges"
+                />
+
+                <div class="an-visualisation__screen_spacer" />
+              </div>
+
+              <!-- Vis Page 3 -->
+
+              <div
+                v-show="isAvailable.careTasks"
+                class="an-visualisation__page an-visualisation__page--caretasks"
+              >
+                <div class="an-visualisation__heading-wrapper">
+                  <h2>Praktische Betreuungsaufgaben</h2>
+                  <AnEditButton
+                    section-id="praktische_betreungsaufgaben"
                     field-id="0"
                   />
                 </div>
-                <AnBehaviour :available.sync="isAvailable.behaviourChanges" />
+                <AnCareTasks :available.sync="isAvailable.careTasks" />
               </div>
               <div class="an-visualisation__screen_spacer" />
 
-              <div
-                v-show="isAvailable.situation || isAvailable.healthChanges"
-                class="an-visualisation__heading-wrapper"
-              >
-                <h2>Gesundheit</h2>
-                <AnEditButton section-id="gesundheit" field-id="0" />
-              </div>
+              <!-- Vis Page 4 -->
 
-              <AnSituation
-                v-show="isAvailable.situation"
-                :available.sync="isAvailable.situation"
-              />
-              <div class="an-visualisation__screen_spacer" />
-
-              <AnHealth
-                v-show="isAvailable.healthChanges"
-                :available.sync="isAvailable.healthChanges"
-              />
-
-              <div class="an-visualisation__screen_spacer" />
-            </div>
-
-            <!-- Vis Page 3 -->
-
-            <div
-              v-show="isAvailable.careTasks"
-              class="an-visualisation__page an-visualisation__page--caretasks"
-            >
-              <div class="an-visualisation__heading-wrapper">
-                <h2>Praktische Betreuungsaufgaben</h2>
-                <AnEditButton
-                  section-id="praktische_betreungsaufgaben"
-                  field-id="0"
-                />
-              </div>
-              <AnCareTasks :available.sync="isAvailable.careTasks" />
-            </div>
-            <div class="an-visualisation__screen_spacer" />
-
-            <!-- Vis Page 4 -->
-
-            <template v-if="showVisualisations">
-              <div class="an-visualisation__page">
-                <div
-                  v-show="isAvailable.resourcespressure"
-                  class="an-visualisation__balloon-wrapper"
-                >
-                  <div class="an-visualisation__balloon-labels">
-                    <div
-                      class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
-                    >
-                      <h2>Das gibt mir Kraft</h2>
-                      <AnEditButton
-                        section-id="ressourcen_belastungen"
-                        field-id="0"
-                      />
+              <template v-if="showVisualisations">
+                <div class="an-visualisation__page">
+                  <div
+                    v-show="isAvailable.resourcespressure"
+                    class="an-visualisation__balloon-wrapper"
+                  >
+                    <div class="an-visualisation__balloon-labels">
+                      <div
+                        class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
+                      >
+                        <h2>Das gibt mir Kraft</h2>
+                        <AnEditButton
+                          section-id="ressourcen_belastungen"
+                          field-id="0"
+                        />
+                      </div>
+                      <div
+                        class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
+                      >
+                        <h2>Das belastet mich</h2>
+                        <AnEditButton
+                          section-id="ressourcen_belastungen"
+                          field-id="0"
+                        />
+                      </div>
                     </div>
-                    <div
-                      class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
-                    >
-                      <h2>Das belastet mich</h2>
-                      <AnEditButton
-                        section-id="ressourcen_belastungen"
-                        field-id="0"
+                    <div class="an-visualisation__balloon-container">
+                      <AnResourcesPressure
+                        :available.sync="isAvailable.resourcespressure"
                       />
                     </div>
                   </div>
-                  <div class="an-visualisation__balloon-container">
-                    <AnResourcesPressure
-                      :available.sync="isAvailable.resourcespressure"
-                    />
-                  </div>
+                  <div class="an-visualisation__screen_spacer" />
                 </div>
-                <div class="an-visualisation__screen_spacer" />
-              </div>
+              </template>
             </template>
+          </template>
+
+          <template v-if="currView === 'schriftiliche_auswertung'">
+            <h2>Schriftliche Auswertung</h2>
+          </template>
+
+          <template v-if="currView === 'ende'">
+            <h2>Ende</h2>
           </template>
         </div>
         <AnSendMailPopup />
@@ -212,6 +222,7 @@ export default {
     AnStepper
   },
   data: () => ({
+    currView: 'visuelle_auswertung',
     isAvailable: {},
     isChromium: !!window.chrome
     // http://browserhacks.com/#hack-dee2c3ab477a0324b6a2283c434108c8
@@ -260,8 +271,23 @@ export default {
   },
   methods: {
     stepperNavigation() {
-      if (Number(this.$route.query.field) !== 0)
-        this.$router.replace({ query: { ...this.$route.query, field: 0 } });
+      const step = this.$route.query.step;
+      this.currView = step;
+
+      // switch (step) {
+      //   case 'visuelle_auswertung':
+      //     this.$router.push('/auswertung');
+      //     break;
+      //   case 'schriftiliche_auswertung':
+      //     this.$router.push('/export');
+      //     break;
+      //   case 'ende':
+      //     this.currView = step;
+      //     break;
+      //   default:
+      //     this.$router.push('/auswertung');
+      //     break;
+      // }
     }
   }
 };
@@ -269,26 +295,23 @@ export default {
 
 <style lang="scss" scoped>
 .an-form {
-  &__scrollarea {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.an-form {
   &__content {
     flex-grow: 1;
     z-index: 1;
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
     @media #{map-get($query, 'lg-and-up')} {
-      margin-left: 200px;
+      margin-left: 150px;
     }
   }
 
   &__scrollarea {
     display: flex;
     flex-direction: column;
+
+    > .an-stepper {
+      z-index: 2;
+    }
   }
 }
 
