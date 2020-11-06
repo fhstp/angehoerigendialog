@@ -1,7 +1,7 @@
 <template>
   <div class="an-flower">
     <div class="grid-container">
-      <div v-if="highItems.length" class="an-High">
+      <div v-if="highItems.length" class="an-High" :class="checkSmall()">
         <div class="an-Text"></div>
         <div class="an-Image">
           <IconFlowerBig class="flowerBig" />
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div v-if="mediumItems.length" class="an-Medium">
+      <div v-if="mediumItems.length" class="an-Medium" :class="checkSmall()">
         <div class="an-Text2"></div>
         <div class="an-Image2">
           <IconFlowerSmall class="flowerSmall" />
@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div v-if="wateringcanItems.length" class="an-Low">
+      <div v-if="wateringcanItems.length" class="an-Low" :class="checkSmall()">
         <div class="an-Text3">
           <strong>... und darum muss ich mich kümmern:</strong>
         </div>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { numberOfNonEmptyArrays } from '@/helpers/util.js';
 import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
 import IconFlowerBig from '@/assets/icons/blume_gross.svg?inline';
@@ -92,12 +93,15 @@ export default {
     }
   },
   methods: {
-    getClass: (type, index) => ({
-      one: type === 'stimmt_nicht',
-      two: type === 'stimmt_teilweise',
-      three: type === 'stimmt',
-      reverse: index > 2
-    })
+    checkSmall() {
+      const cols = numberOfNonEmptyArrays(
+        this.highItems,
+        this.mediumItems,
+        this.wateringcanItems
+      );
+      const columnCssClasses = ['oneCol', 'twoCols', ''];
+      return columnCssClasses[cols - 1];
+    }
   }
 };
 </script>
@@ -233,5 +237,13 @@ $centerSize: 64px;
 
 .no-offset {
   margin-top: 0px;
+}
+
+.twoCols {
+  grid-template-rows: 0.2fr 1fr 1fr;
+}
+
+.oneCol {
+  grid-template-rows: 0fr auto 1fr;
 }
 </style>
