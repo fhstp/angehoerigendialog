@@ -1,6 +1,6 @@
 <template>
   <div class="an-visualisation" :class="{ isChromium: isChromium }">
-    <div class="an-visualisation__toolbar row hide-print">
+    <!-- <div class="an-visualisation__toolbar row hide-print">
       <nav>
         <router-link
           active-class="btn--active"
@@ -22,7 +22,7 @@
           Zurück zum Start
         </router-link>
       </div>
-    </div>
+    </div> -->
     <div class="an-form__scrollarea">
       <AnStepper
         class="hide-print"
@@ -31,26 +31,28 @@
       />
       <div class="an-form__content">
         <div class="container">
+          <div v-if="currView !== 'ende'" class="an-visualisation__infos row">
+            <h1 class="col-md-3">
+              Angehörigengespräch von
+              <br />
+              {{ headerData.caregivername }}
+            </h1>
+            <div class="col-md-3">
+              <p>
+                Durchgeführt von {{ headerData.socialworkername }},
+                {{ headerData.date }}
+              </p>
+              <p>
+                Zweitgespräch am {{ headerData.date2 }} um
+                {{ headerData.time2 }} Uhr
+              </p>
+            </div>
+          </div>
+
+          <AnExportPdf />
+
           <template v-if="currView === 'visuelle_auswertung'">
             <div :class="{ 'an-visualisation__page': showVisualisations }">
-              <div class="an-visualisation__infos row">
-                <h1 class="col-md-3">
-                  Angehörigengespräch von
-                  <br />
-                  {{ headerData.caregivername }}
-                </h1>
-                <div class="col-md-3">
-                  <p>
-                    Durchgeführt von {{ headerData.socialworkername }},
-                    {{ headerData.date }}
-                  </p>
-                  <p>
-                    Zweitgespräch am {{ headerData.date2 }} um
-                    {{ headerData.time2 }} Uhr
-                  </p>
-                </div>
-              </div>
-
               <!-- Vis Page 1 -->
 
               <template v-if="showVisualisations">
@@ -177,14 +179,13 @@
           </template>
 
           <template v-if="currView === 'schriftiliche_auswertung'">
-            <h2>Schriftliche Auswertung</h2>
+            <AnPlainData />
           </template>
 
           <template v-if="currView === 'ende'">
             <h2>Ende</h2>
           </template>
         </div>
-        <AnSendMailPopup />
       </div>
     </div>
   </div>
@@ -201,7 +202,6 @@ import AnExportPdf from '@/components/visualisations/AnExportPdf.vue';
 import AnFlower from '@/components/visualisations/AnFlower.vue';
 import AnHealth from '@/components/visualisations/AnHealth.vue';
 import AnResourcesPressure from '@/components/visualisations/AnResourcesPressure.vue';
-import AnSendMailPopup from '@/components/visualisations/AnSendMailPopup.vue';
 import AnSituation from '@/components/visualisations/AnSituation.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 
@@ -217,7 +217,6 @@ export default {
     AnFlower,
     AnHealth,
     AnResourcesPressure,
-    AnSendMailPopup,
     AnSituation,
     AnStepper
   },
@@ -271,23 +270,7 @@ export default {
   },
   methods: {
     stepperNavigation() {
-      const step = this.$route.query.step;
-      this.currView = step;
-
-      // switch (step) {
-      //   case 'visuelle_auswertung':
-      //     this.$router.push('/auswertung');
-      //     break;
-      //   case 'schriftiliche_auswertung':
-      //     this.$router.push('/export');
-      //     break;
-      //   case 'ende':
-      //     this.currView = step;
-      //     break;
-      //   default:
-      //     this.$router.push('/auswertung');
-      //     break;
-      // }
+      this.currView = this.$route.query.step;
     }
   }
 };
