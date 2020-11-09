@@ -49,7 +49,13 @@
             </div>
           </div>
 
-          <AnExportPdf />
+          <div class="an-btn-menu">
+            <router-link
+              class="btn btn--text an-btnBack"
+              :to="({ name: 'Start' })"
+            />
+            <AnExportPdf v-if="currView !== 'ende'" />
+          </div>
 
           <template v-if="currView === 'visuelle_auswertung'">
             <div :class="{ 'an-visualisation__page': showVisualisations }">
@@ -188,9 +194,10 @@
             <p>Alles erledigt.</p>
             <br />
             <br />
-            <router-link class="btn btn--text" :to="({ name: 'Start' })">
-              Zurück zum Start
-            </router-link>
+            <router-link
+              class="btn btn--text an-btnBack"
+              :to="({ name: 'Start' })"
+            />
             <p>Zurück zum <strong>Start</strong></p>
           </template>
         </div>
@@ -277,7 +284,7 @@ export default {
     }
   },
   created() {
-    this.currView = this.$route.query.step;
+    this.currView = this.$route.query.step || 'visuelle_auswertung';
   },
   methods: {
     stepperNavigation() {
@@ -307,6 +314,37 @@ export default {
       z-index: 2;
     }
   }
+}
+
+.an-btn-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: fixed;
+  bottom: 2vh;
+  right: 2vh;
+  z-index: 1000;
+
+  > * {
+    margin: 0 10px;
+  }
+}
+
+.an-btnBack {
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 #666;
+  transition: all 0.1s ease-in-out;
+  background-image: url('~@/assets/icons/back.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+.an-btnBack:hover {
+  box-shadow: 0 6px 14px 0 #666;
+  transform: scale(1.05);
 }
 
 .an-visualisation {

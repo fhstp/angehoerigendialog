@@ -1,7 +1,9 @@
 <template>
-  <button ref="button" class="an-exportpdf btn btn--text" @click="print">
-    Als PDF speichern
-  </button>
+  <button
+    ref="button"
+    class="an-exportpdf btn btn--text"
+    @click="print"
+  ></button>
 </template>
 
 <script>
@@ -22,10 +24,18 @@ export default {
 
 <style lang="scss" scoped>
 .an-exportpdf {
-  position: fixed;
-  bottom: 2vh;
-  right: 2vh;
   border-radius: 50%;
-  z-index: 1000;
+  box-shadow: 0 6px 10px 0 #666;
+  transition: all 0.1s ease-in-out;
+  background-image: url('~@/assets/icons/pdf.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+.an-exportpdf:hover {
+  box-shadow: 0 6px 14px 0 #666;
+  transform: scale(1.05);
 }
 </style>
