@@ -178,12 +178,20 @@
             </template>
           </template>
 
-          <template v-if="currView === 'schriftiliche_auswertung'">
+          <template v-if="currView === 'schriftliche_auswertung'">
             <AnPlainData />
           </template>
 
           <template v-if="currView === 'ende'">
             <h2>Ende</h2>
+            <br />
+            <p>Alles erledigt.</p>
+            <br />
+            <br />
+            <router-link class="btn btn--text" :to="({ name: 'Start' })">
+              Zurück zum Start
+            </router-link>
+            <p>Zurück zum <strong>Start</strong></p>
           </template>
         </div>
       </div>
@@ -267,6 +275,9 @@ export default {
         time2: this.$store.getters.getFieldValue('ende-uhrzeit')
       };
     }
+  },
+  created() {
+    this.currView = this.$route.query.step;
   },
   methods: {
     stepperNavigation() {
