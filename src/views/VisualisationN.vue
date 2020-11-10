@@ -1,28 +1,5 @@
 <template>
   <div class="an-visualisation" :class="{ isChromium: isChromium }">
-    <!-- <div class="an-visualisation__toolbar row hide-print">
-      <nav>
-        <router-link
-          active-class="btn--active"
-          class="btn btn--text"
-          to="/auswertung"
-          >Visualisierungen</router-link
-        >
-        <router-link
-          active-class="btn--active"
-          class="btn btn--text"
-          to="/export"
-          >Export der Daten</router-link
-        >
-      </nav>
-
-      <div>
-        <AnExportPdf />
-        <router-link class="btn btn--text" :to="({ name: 'Start' })">
-          Zurück zum Start
-        </router-link>
-      </div>
-    </div> -->
     <div class="an-form__scrollarea">
       <AnStepper
         class="hide-print"
@@ -52,14 +29,6 @@
           <!-- Thats how we can force a page break if needed -->
           <!-- <div class="pagebreak" /> -->
 
-          <div class="an-btn-menu hide-print">
-            <router-link
-              class="btn btn--text an-fabBtn-back"
-              :to="'/fragebogen?step=ende&field=0'"
-            />
-            <AnExportPdf v-if="currView !== 'ende'" />
-          </div>
-
           <template v-if="currView === 'visuelle_auswertung'">
             <div :class="{ 'an-visualisation__page': showVisualisations }">
               <!-- Vis Page 1 -->
@@ -86,7 +55,6 @@
                 </div>
                 <div class="an-visualisation__screen_spacer" />
               </template>
-              <AnPlainData v-else />
             </div>
 
             <!-- Vis Page 2 -->
@@ -204,6 +172,13 @@
             <p>Zurück zum <strong>Start</strong></p>
           </template>
         </div>
+      </div>
+      <div class="an-btn-menu hide-print">
+        <router-link
+          class="btn btn--text an-fabBtn-back"
+          :to="'/fragebogen?step=ende&field=0'"
+        />
+        <AnExportPdf v-if="currView !== 'ende'" />
       </div>
     </div>
   </div>
@@ -368,20 +343,6 @@ export default {
 
 .an-visualisation {
   color-adjust: exact;
-
-  &__toolbar {
-    border-bottom: 1px solid $color-theme-lightgrey;
-    margin-bottom: $spacer * 4;
-    padding: $spacer / 2;
-
-    nav {
-      flex-grow: 1;
-    }
-
-    .btn {
-      margin: $spacer / 2;
-    }
-  }
 
   &__infos {
     margin-bottom: $spacer * 2;
