@@ -55,7 +55,7 @@
           <div class="an-btn-menu hide-print">
             <router-link
               class="btn btn--text an-fabBtn-back"
-              :to="({ name: 'Start' })"
+              :to="'/fragebogen?step=ende&field=0'"
             />
             <AnExportPdf v-if="currView !== 'ende'" />
           </div>
