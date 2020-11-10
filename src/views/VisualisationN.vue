@@ -30,7 +30,7 @@
         @input="stepperNavigation()"
       />
       <div class="an-form__content">
-        <div class="container">
+        <div class="container" style="margin-top: 40px;">
           <div v-if="currView !== 'ende'" class="an-visualisation__infos row">
             <h1 class="col-md-3">
               Angehörigengespräch von
@@ -49,9 +49,12 @@
             </div>
           </div>
 
-          <div class="an-btn-menu">
+          <!-- Thats how we can force a page break if needed -->
+          <!-- <div class="pagebreak" /> -->
+
+          <div class="an-btn-menu hide-print">
             <router-link
-              class="btn btn--text an-btnBack"
+              class="btn btn--text an-fabBtn-back"
               :to="({ name: 'Start' })"
             />
             <AnExportPdf v-if="currView !== 'ende'" />
@@ -195,7 +198,7 @@
             <br />
             <br />
             <router-link
-              class="btn btn--text an-btnBack"
+              class="btn btn--text an-fabBtn-home"
               :to="({ name: 'Start' })"
             />
             <p>Zurück zum <strong>Start</strong></p>
@@ -331,20 +334,36 @@ export default {
   }
 }
 
-.an-btnBack {
+.an-fabBtn-back {
   border-radius: 50%;
   box-shadow: 0 6px 10px 0 #666;
   transition: all 0.1s ease-in-out;
+  min-width: $fab-button-size;
+  min-height: $fab-button-size;
   background-image: url('~@/assets/icons/back.svg');
-  background-repeat: no-repeat;
   background-position: center center;
-  min-width: 80px;
-  min-height: 80px;
+  background-repeat: no-repeat;
+
+  &:hover {
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
+  }
 }
 
-.an-btnBack:hover {
-  box-shadow: 0 6px 14px 0 #666;
-  transform: scale(1.05);
+.an-fabBtn-home {
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 #666;
+  transition: all 0.1s ease-in-out;
+  min-width: $fab-button-size;
+  min-height: $fab-button-size;
+  background-image: url('~@/assets/icons/home.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &:hover {
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
+  }
 }
 
 .an-visualisation {
@@ -391,7 +410,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      page-break-after: always;
+      break-after: page;
       overflow: hidden;
     }
 

@@ -30,8 +30,8 @@ export default {
   background-image: url('~@/assets/icons/pdf.svg');
   background-repeat: no-repeat;
   background-position: center center;
-  min-width: 80px;
-  min-height: 80px;
+  min-width: $fab-button-size;
+  min-height: $fab-button-size;
 }
 
 .an-exportpdf:hover {
