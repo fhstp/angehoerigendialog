@@ -25,6 +25,7 @@ export default {
 <style lang="scss" scoped>
 .an-exportpdf {
   border-radius: 50%;
+  outline: none;
   box-shadow: 0 6px 10px 0 #666;
   transition: all 0.1s ease-in-out;
   background-image: url('~@/assets/icons/pdf.svg');
@@ -32,10 +33,10 @@ export default {
   background-position: center center;
   min-width: $fab-button-size;
   min-height: $fab-button-size;
-}
 
-.an-exportpdf:hover {
-  box-shadow: 0 6px 14px 0 #666;
-  transform: scale(1.05);
+  &:hover {
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
+  }
 }
 </style>
