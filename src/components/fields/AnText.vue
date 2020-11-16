@@ -31,8 +31,10 @@ export default {
 
 <style lang="scss" scoped>
 .an-text {
-  border: none;
-  border-radius: $border-radius;
+  border-color: $color-theme-darkgrey;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: none;
   width: 100%;
   line-height: 1.5;
   resize: none;

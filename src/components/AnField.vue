@@ -201,7 +201,7 @@ export default {
 .an-field {
   &--not-supported {
     background: darkred;
-    color: white;
+    //color: green;
   }
 
   &__subfields > .an-field {
@@ -209,7 +209,7 @@ export default {
     margin: -0.5rem;
     padding: 0.5rem;
     background-color: white;
-    color: black;
+    color: $color-theme-darkgrey;
   }
 
   &__subfields > &:first-child {
