@@ -97,7 +97,7 @@ $icon_width: 50px;
   background-color: white;
   box-shadow: 0 0 20px 0 $color-theme-shadow;
   & p {
-  color: black;
+    color: black;
   }
 }
 
@@ -252,8 +252,8 @@ $icon_width: 50px;
     margin-left: $icon_width / 2;
     width: 1.2rem;
 
-.an-stepper__step--active & {
-         margin-left: ($icon_width + 15px) / 2;
+    .an-stepper__step--active & {
+      margin-left: ($icon_width + 15px) / 2;
       width: 1.3rem;
       color: black;
     }

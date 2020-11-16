@@ -27,17 +27,18 @@
                   :section-id="sectionId"
                   :field-id="`${sectionId}-${fieldId}`"
                 />
-                <AnAccordionItem v-else :key="fieldId" :ready="$store.getters.getFieldCompletion(
-                            `${sectionId}-${fieldId}`
-                          )">
-
+                <AnAccordionItem
+                  v-else
+                  :key="fieldId"
+                  :ready="
+                    $store.getters.getFieldCompletion(`${sectionId}-${fieldId}`)
+                  "
+                >
                   <template #header>
-                    <span class="an-accordion-item__header-text">{{
-                      field.label
-                    }}
+                    <span class="an-accordion-item__header-text"
+                      >{{ field.label }}
                     </span>
-                    <span class="an-accordion-item__header-icon">
-                    </span>
+                    <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
                     <AnField
@@ -134,7 +135,6 @@ import AnField from '@/components/AnField.vue';
 import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
-import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 import IconWarning from '@/assets/icons/warning.svg?inline';
 
 export default {
@@ -146,7 +146,6 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark,
     IconWarning
   },
   data() {

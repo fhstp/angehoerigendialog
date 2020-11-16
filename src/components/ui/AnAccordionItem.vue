@@ -1,5 +1,10 @@
 <template>
-  <div :class="['an-accordion-item', { 'an-accordion-item--open': active, 'an-accordion-item__ready': ready }]">
+  <div
+    :class="[
+      'an-accordion-item',
+      { 'an-accordion-item--open': active, 'an-accordion-item__ready': ready }
+    ]"
+  >
     <div class="an-accordion-item__header" @click="$parent.changeActive(index)">
       <slot name="header" />
     </div>
@@ -20,13 +25,13 @@ export default {
   data() {
     return {
       /** index of accordion item in accordion */
-      index: undefined,
+      index: undefined
     };
   },
   computed: {
     active() {
       return this.$parent.internalValue === this.index;
-    },
+    }
   },
   mounted() {
     this.index = this.$parent.items.indexOf(this);
@@ -48,8 +53,8 @@ export default {
   border-left-width: 7px;
   border-left-style: solid;
 
-  &__border-highlight{
-     border-left-color: $color-theme-yellow;
+  &__border-highlight {
+    border-left-color: $color-theme-yellow;
   }
 
   &__ready {
@@ -57,8 +62,7 @@ export default {
   }
 
   &--open {
-  background-color: $color-theme-white;
-
+    background-color: $color-theme-white;
   }
   &__header {
     padding: $spacer * 2;
@@ -73,10 +77,10 @@ export default {
     border-color: $color-theme-darkgrey;
 
     .an-accordion-item--open & {
-    cursor: auto;
-    border-left-color: $color-theme-yellow;
-    color: black;
-    border: none;
+      cursor: auto;
+      border-left-color: $color-theme-yellow;
+      color: black;
+      border: none;
     }
   }
 
