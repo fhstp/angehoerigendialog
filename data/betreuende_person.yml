@@ -3,51 +3,51 @@ titleShort: Betreuende Person
 fields:
 
   alter:
-    label: Wie alt sind Sie?
+    label: Wie <strong>alt</strong> sind Sie?
     type: number
 
   beruf:
-    label: Sind Sie berufstätig?
+    label: Sind Sie <strong>berufstätig</strong>?
     type: toggle
     subfields:
       berufdetail:
-        label: In welchen wöchentlichen Stundenausmaß sind Sie berufstätig?
+        label: In welchen wöchentlichen <strong>Stundenausmaß</strong> sind Sie <strong>berufstätig</strong>?
         type: number
         when:
           beruf: true
 
   sorgepflichten:
-    label: Haben Sie noch weitere Betreuungs- oder Sorgepflichten, etwa für Kinder oder andere (pflegebedürftige) Angehörige?
+    label: Haben Sie noch <strong>weitere Betreuungs- oder Sorgepflichten</strong>, etwa für Kinder oder andere (pflegebedürftige) <strong>Angehörige</strong>?
     type: toggle
     subfields:
       sorgepflichtendetail:
-        label: Welche Betreuungs- oder Sorgepflichten haben Sie?
+        label: Welche <strong>Betreuungs- oder Sorgepflichten</strong> haben Sie?
         type: list
         when:
           sorgepflichten: true
 
   unterstuetzungsangebot:
-    label: Nehmen Sie derzeit Unterstützungsangebote für pflegende Angehörige in Anspruch?
+    label: Nehmen Sie derzeit <strong>Unterstützungsangebote für pflegende Angehörige</strong> in Anspruch?
     type: toggle
     subfields:
       unterstuetzungsangebotdetail:
-        label: Welche Unterstützungsangebote nehmen Sie in Anspruch (etwa Angehörigenstammtisch, Gespräche mit professionellen HelferInnen)
+        label: Welche <strong>Unterstützungsangebote</strong> nehmen Sie in Anspruch (etwa Angehörigenstammtisch, Gespräche mit professionellen HelferInnen)
         type: list
         when:
           unterstuetzungsangebot: true
 
   demenz:
-    label: Haben Sie bereits Vorwissen über die Erkrankung Demenz und ihren Verlauf?
+    label: Haben Sie bereits <strong>Vorwissen</strong> über die Erkrankung <strong>Demenz</strong> und ihren Verlauf?
     type: toggle
     subfields:
       demenzdetails:
-        label: Welches Vorwissen besitzen Sie über die Erkrankung Demenz?
+        label: Welches <strong>Vorwissen</strong> besitzen Sie über die <strong>Erkrankung Demenz</strong>?
         type: text
         when:
           demenz: true
 
   beratungsgespraech:
-    label: Welche Erwartungen an das Beratungsgespräch haben Sie für sich selbst und für Ihre/n Angehörige/n?
+    label: Welche <strong>Erwartungen</strong> an das Beratungsgespräch haben Sie <strong>für sich selbst und für Ihre/n Angehörige/n</strong>?
     type: text
 
   situationseinschaetzung:
@@ -56,19 +56,19 @@ fields:
     size: medium
 
   pflege:
-    label: Wie ist es dazu gekommen, dass Sie selbst für Ihre/n Angehörige/n sorgen und wie lange machen Sie das schon?
+    label: Wie ist es dazu gekommen, dass <strong>Sie</strong> selbst für <strong>Ihre/n Angehörige/n sorgen</strong> und <strong>wie lange machen Sie das schon</strong>?
     type: text
 
   verantwortung:
-    label: Wer fühlt sich sonst noch verantwortlich für Ihre/n Angehörige/n?
+    label: Wer fühlt sich sonst noch <strong>verantwortlich für Ihre/n Angehörige/n</strong>?
     type: text
 
   professionelleHilfe:
-    label: Wird Ihr/e Angehörige/r auch von professionellen HelferInnen unterstützt, beispielsweise Hauskrankenhilfe, Heimhilfe, 24h-Betreuung oder in Tageszentren?
+    label: Wird Ihr/e Angehörige/r auch von <strong>professionellen HelferInnen</strong> unterstützt, beispielsweise Hauskrankenhilfe, Heimhilfe, 24h-Betreuung oder in Tageszentren?
     type: text
 
   zufriedenheit:
-    label: Wie zufrieden sind Sie persönlich mit der derzeitigen Unterstützung?
+    label: Wie <strong>zufrieden</strong> sind Sie persönlich mit der <strong>derzeitigen Unterstützung</strong>?
     type: range
     step: 1
     min:
@@ -79,5 +79,5 @@ fields:
       label: sehr zufrieden
     subfields:
       zufriedenheitdetail:
-        label: Was sind die Gründe Ihrer Einschätzung?
+        label: Was sind die <strong>Gründe Ihrer Einschätzung</strong>?
         type: text

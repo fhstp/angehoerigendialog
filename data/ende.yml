@@ -4,9 +4,9 @@ hideExport: true
 fields:
 
   datum:
-    label: Datum für Zweitgespräch wählen
+    label: <strong>Datum</strong> für <strong>Zweitgespräch</strong> wählen
     type: date
 
   uhrzeit:
-    label: Uhrzeit für Zweitgespräch wählen
+    label: <strong>Uhrzeit</strong> für <strong>Zweitgespräch</strong> wählen
     type: time

@@ -2,20 +2,20 @@ title: Praktische Betreuungsaufgaben
 fields:
 
   praktischebetreuungsaufgabenhinweis:
-    label: Um einen Einblick in den derzeitigen Pflege- und Unterstützungsbedarf
-          Ihres/Ihrer Angehörigen und einen Eindruck von dem, was Sie leisten, zu
-          bekommen, stelle ich Ihnen nun einige Fragen zu den praktischen Betreuungsaufgaben.
-          Wir werden gemeinsam eine Liste mit 11 Tätigkeiten durchgehen,
-          von denen wir wissen, dass andere demenzerkrankte Personen
-          dabei häufig auf Hilfe angewiesen sind. Bitte geben Sie an, ob Ihr/e Angehörige/
-          r derzeit – laufend oder auch nur fallweise – Hilfe in den genannten
-          Bereichen benötigt und wenn ja, von wem diese Hilfe geleistet wird bzw.
-          wer diese Hilfe organisiert (z. B. Essen auf Rädern, 24-Stunden-Betreuung).
+    label: Um einen <strong>Einblick</strong> in den derzeitigen <strong>Pflege- und Unterstützungsbedarf
+          Ihres/Ihrer Angehörigen</strong> und einen Eindruck von dem, was <strong>Sie leisten</strong>, zu
+          bekommen, stelle ich Ihnen nun einige <strong>Fragen</strong> zu den <strong>praktischen Betreuungsaufgaben</strong>.
+          Wir werden <strong>gemeinsam</strong> eine <strong>Liste mit 11 Tätigkeiten</strong> durchgehen,
+          von denen wir wissen, dass <strong>andere demenzerkrankte Personen</strong>
+          dabei häufig auf <strong>Hilfe angewiesen</strong> sind. Bitte geben Sie an, ob <strong>Ihr/e Angehörige/
+          r</strong> derzeit – laufend oder auch nur fallweise – <strong>Hilfe</strong> in den genannten
+          Bereichen <strong>benötigt</strong> und wenn ja, von wem diese <strong>Hilfe geleistet</strong> wird bzw.
+          wer diese <strong>Hilfe organisiert</strong> (z. B. Essen auf Rädern, 24-Stunden-Betreuung).
     type: hint
     size: medium
 
   situationseinschaetzung:
-    label: Benötigen Sie Ihrer Einschätzung nach bei der Durchführung oder Organisation in folgenden Bereichen Unterstützung?
+    label: <strong>Benötigen</strong> Sie Ihrer Einschätzung nach bei der <strong>Durchführung</strong> oder <strong>Organisation</strong> in folgenden Bereichen <strong>Unterstützung</strong>?
     type: checkboxes
     options:
       mahlzeit: Zubereiten der Mahlzeiten

@@ -3,9 +3,9 @@ titleShort: Zukunft
 fields:
 
   hoffnung:
-    label: Wenn Sie an die Zukunft denken, was gibt Ihnen Hoffnung?
+    label: Wenn Sie an die <strong>Zukunft</strong> denken, was gibt Ihnen <strong>Hoffnung</strong>?
     type: text
 
   zukunft:
-    label: Was würden Sie sich für die Zukunft wünschen?
+    label: Was würden Sie sich für die <strong>Zukunft wünschen</strong>?
     type: text
