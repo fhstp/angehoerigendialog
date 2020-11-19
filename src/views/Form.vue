@@ -35,8 +35,20 @@
                   "
                 >
                   <template #header>
-                    <span class="an-accordion-item__header-text"
-                      >{{ field.label }}
+                    <span
+                      v-html-safe="field.label"
+                      class="an-accordion-item__header-text"
+                    ></span>
+
+                    <span class="an-accordion-item__header-icon">
+                      <IconCheckmark
+                        v-if="
+                          $store.getters.getFieldCompletion(
+                            `${sectionId}-${fieldId}`
+                          )
+                        "
+                        aria-label="fertig ausgefüllt"
+                      />
                     </span>
                     <span class="an-accordion-item__header-icon"> </span>
                   </template>
