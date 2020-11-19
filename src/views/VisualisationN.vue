@@ -4,6 +4,7 @@
       <AnStepper
         class="hide-print"
         :steps="steps"
+        :special="true"
         @input="stepperNavigation()"
       />
       <div class="an-form__content">
