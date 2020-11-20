@@ -325,22 +325,22 @@ export default {
       transform: scale(1.05);
     }
   }
+}
 
-  .an-fabBtn-home {
-    border-radius: 50%;
-    outline: none;
-    box-shadow: 0 6px 10px 0 #666;
-    transition: all 0.1s ease-in-out;
-    min-width: $fab-button-size;
-    min-height: $fab-button-size;
-    background-image: url('~@/assets/icons/home.svg');
-    background-position: center center;
-    background-repeat: no-repeat;
+.an-fabBtn-home {
+  border-radius: 50%;
+  outline: none;
+  box-shadow: 0 6px 10px 0 #666;
+  transition: all 0.1s ease-in-out;
+  min-width: $fab-button-size;
+  min-height: $fab-button-size;
+  background-image: url('~@/assets/icons/home.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
 
-    &:hover {
-      box-shadow: 0 6px 14px 0 #666;
-      transform: scale(1.05);
-    }
+  &:hover {
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
   }
 }
 
