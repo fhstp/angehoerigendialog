@@ -45,7 +45,9 @@
 
         <template v-if="showVisualisations">
           <div class="an-visualisation__visualisation-wrapper">
-            <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+            <div class="an-visualisation__heading-wrapper">
+              <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+            </div>
             <AnBasisInformation />
             <div class="an-visualisation__screen_spacer" />
 
