@@ -1,36 +1,41 @@
 <template>
   <div class="an-basisinformation">
-    <div class="an-basisinformation__header">
-      <div class="an-basisinformation__header-betreuend">
-        <strong>Betreuende Person</strong>
-        <template v-if="infoGeneral.values.alterBetreuend"
-          >{{ infoGeneral.values.alterBetreuend }} Jahre
-        </template>
-      </div>
-      <IconHands class="icon-hands" />
-      <div class="an-basisinformation__header-erkrankt">
-        <strong>Demenzerkrankte Person</strong>
-        <template v-if="infoGeneral.values.alterErkrankt">
-          {{ infoGeneral.values.alterErkrankt }} Jahre</template
-        >
-      </div>
-
-      <div class="an-basisinformation__header-commoninfo">
-        <div v-if="infoGeneral.values.verhaeltnis">
-          {{
-            `${infoGeneral.labels.verhaeltnis}: ${infoGeneral.values.verhaeltnis}`
-          }}
+    <div class="row">
+      <div class="col-3">
+        <div class="an-basisinformation__header">
+          <strong>Betreuende Person</strong>
+          <template v-if="infoGeneral.values.alterBetreuend"
+            >{{ infoGeneral.values.alterBetreuend }} Jahre
+          </template>
         </div>
-        <div v-if="infoGeneral.values.haushalt">
-          {{ infoGeneral.labels.haushalt }}
+      </div>
+      <div class="col-3">
+        <div class="an-basisinformation__header" style="float: right;">
+          <strong>Demenzerkrankte Person</strong>
+          <template v-if="infoGeneral.values.alterErkrankt">
+            {{ infoGeneral.values.alterErkrankt }} Jahre</template
+          >
         </div>
       </div>
     </div>
 
     <!-- Betreuende Person Beginn -->
 
-    <div class="row">
-      <div class="col-3">
+    <div class="rowSpecial">
+      <div class="colSm">
+        <PersonMe class="iconMe" />
+      </div>
+      <div class="colMd box leftBox">
+        <div class="an-basisinformation">
+          <div v-if="infoGeneral.values.verhaeltnis">
+            {{
+              `${infoGeneral.labels.verhaeltnis}: ${infoGeneral.values.verhaeltnis}`
+            }}
+          </div>
+          <div v-if="infoGeneral.values.haushalt">
+            {{ infoGeneral.labels.haushalt }}
+          </div>
+        </div>
         <div
           v-if="infoBetreuend.sorgepflichten"
           class="an-basisinformation-item an-basisinformation-item--sorgepflichten"
@@ -104,14 +109,18 @@
           <div class="an-basisinformation-item__title">
             {{ infoBetreuend.unterstuetzungsangebot.label }}
           </div>
-          <ul v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)">
-            <li
+          <div v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)">
+            <span
               v-for="(value, i) in infoBetreuend.unterstuetzungsangebot.value"
               :key="i"
             >
-              {{ value }}
-            </li>
-          </ul>
+              {{
+                i !== infoBetreuend.unterstuetzungsangebot.value.length - 1
+                  ? value + ','
+                  : value
+              }}
+            </span>
+          </div>
           <div v-else class="d-flex">
             <IconWarning class="icon-warning" aria-hidden="true" />
             <strong class="darkred">KEINE</strong>
@@ -121,7 +130,7 @@
 
       <!-- Demenz Person Beginn -->
 
-      <div class="col-3">
+      <div class="colMd box rightBox">
         <div v-if="infoErkrankt.diagnose" class="an-basisinformation-item">
           <div class="an-basisinformation-item__title">
             {{ infoErkrankt.diagnose.label }}
@@ -202,6 +211,9 @@
           </div>
         </div>
       </div>
+      <div class="colSm">
+        <PersonOther class="iconOther" />
+      </div>
     </div>
   </div>
 </template>
@@ -209,11 +221,12 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import IconWarning from '@/assets/icons/warning.svg?inline';
-import IconHands from '@/assets/icons/hands.svg?inline';
+import PersonMe from '@/assets/icons/person-arms-down_ich.svg?inline';
+import PersonOther from '@/assets/icons/person-arms-down_puzzle.svg?inline';
 
 export default {
   name: 'AnBasisinformation',
-  components: { IconWarning, IconHands },
+  components: { IconWarning, PersonMe, PersonOther },
   computed: {
     infoBetreuend() {
       const betreuendLabels = visJson.visualisation.basisinfo.betreuendeperson;
@@ -287,11 +300,55 @@ export default {
 $leftwidth: 40%;
 $centerwidth: 10%;
 $rightwidth: 50%;
+$yellow-color: #ffbe1b;
+$blue-color: #3566aa;
 
-.icon-hands {
-  margin-bottom: -$spacer * 2;
-  width: $centerwidth;
-  height: 4rem;
+.rowSpecial {
+  display: flex;
+  flex-wrap: wrap;
+
+  .colSm {
+    width: 5%;
+  }
+
+  .colMd {
+    width: 40%;
+  }
+}
+
+.iconMe {
+  height: 8rem;
+  width: 100%;
+  fill: $yellow-color;
+}
+
+.iconOther {
+  height: 8rem;
+  width: 100%;
+  fill: $blue-color;
+}
+
+.box {
+  padding: 30px 15px;
+  border: 2px solid $color-theme-lightgrey;
+  margin: 0 2%;
+}
+
+.leftBox {
+  border-left-width: 7px;
+  border-left-style: solid;
+  border-left-color: $yellow-color;
+}
+
+.rightBox {
+  text-align: right;
+  border-right-width: 7px;
+  border-right-style: solid;
+  border-right-color: $blue-color;
+
+  > * {
+    float: right;
+  }
 }
 
 .an-basisinformation {
@@ -313,13 +370,6 @@ $rightwidth: 50%;
 
     &-erkrankt {
       width: $rightwidth;
-    }
-
-    &-commoninfo {
-      border-top: 2px solid $color-theme-blue;
-      background-color: $color-theme-lightgrey;
-      width: 100%;
-      text-align: center;
     }
   }
 
