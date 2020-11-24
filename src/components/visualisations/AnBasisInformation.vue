@@ -26,11 +26,10 @@
         <PersonMe class="iconMe" />
       </div>
       <div class="colMd box leftBox">
-        <div class="an-basisinformation">
+        <div class="an-basisinformation__basic">
           <div v-if="infoGeneral.values.verhaeltnis">
-            {{
-              `${infoGeneral.labels.verhaeltnis}: ${infoGeneral.values.verhaeltnis}`
-            }}
+            <strong> {{ infoGeneral.labels.verhaeltnis }} </strong>
+            <span>{{ `: ${infoGeneral.values.verhaeltnis}` }}</span>
           </div>
           <div v-if="infoGeneral.values.haushalt">
             {{ infoGeneral.labels.haushalt }}
@@ -353,6 +352,12 @@ $blue-color: #3566aa;
 
 .an-basisinformation {
   color-adjust: exact;
+
+  &__basic {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 
   &__header {
     margin-bottom: $spacer;
