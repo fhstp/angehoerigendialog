@@ -22,7 +22,7 @@ fields:
     size: medium
 
   individuelleSituation:
-    label: Sie sehen hier nun <strong>einige Aussagen</strong> von anderen <strong>pflegenden Angehörigen</strong>. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
+    label: Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
     type: heading
     size: medium
 

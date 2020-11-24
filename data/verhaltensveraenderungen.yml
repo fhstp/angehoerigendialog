@@ -3,16 +3,16 @@ titleShort: Verhaltensveränderungen
 fields:
 
   verhaltensveraenderungenhinweis:
-    label: Häufig treten <strong>bei Demenz</strong> bestimmte <strong>Denk- oder Verhaltensveränderungen</strong>
-          auf. Oft ist es sehr <strong>irritierend</strong> und <strong>belastend</strong>, solche <strong>Persönlichkeitsveränderungen</strong>
-          bei bisher vertrauten Menschen <strong>zu erleben</strong>. Ich nenne Ihnen
-          nun einige <strong>Veränderungen</strong> im Denken oder Handeln, die <strong>bei demenzerkrankten
-          Menschen</strong> auftreten können.
+    label: Häufig treten bei Demenz bestimmte <strong>Denk- oder Verhaltensveränderungen</strong>
+          auf. Oft ist es sehr irritierend und belastend, solche <strong>Persönlichkeitsveränderungen</strong>
+          bei bisher vertrauten Menschen zu erleben. Ich nenne Ihnen
+          nun einige Veränderungen im Denken oder Handeln, die bei demenzerkrankten
+          Menschen auftreten können.
     type: hint
     size: medium
 
   veraenderungen:
-    label: Bitte geben Sie an, ob die <strong>folgenden Veränderungen</strong> zurzeit auch <strong>bei Ihrem/Ihrer
+    label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch <strong>bei Ihrem/Ihrer
           Angehörigen auftreten</strong> und wie Sie damit <strong>zurechtkommen</strong>. Die Skala, auf der Sie das
           einschätzen können, reicht von „sehr gut“ bis „schlecht“. Der/die Angehörige …
     type: checkboxes

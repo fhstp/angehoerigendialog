@@ -2,7 +2,7 @@ title: Finanzen und Wohnsituation
 fields:
 
   finanziell:
-    label: <strong>Führt die Pflege</strong> Ihres/Ihrer Angehörigen bei Ihnen zu <strong>finanziellen Problemen</strong> oder müssen Sie dadurch <strong>an anderer Stelle kürzertreten</strong>?
+    label: Führt die Pflege Ihres/Ihrer Angehörigen bei Ihnen zu <strong>finanziellen Problemen</strong> oder müssen Sie dadurch an anderer Stelle <strong>kürzertreten</strong>?
     type: text
 
   hohekosten:

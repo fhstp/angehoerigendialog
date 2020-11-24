@@ -3,9 +3,9 @@ fields:
 
   gesundheithinweis:
     label: Wir haben bisher über die <strong>Pflege und Unterstützung</strong> gesprochen, die Sie
-           für Ihre/n Angehörige/n <strong>leisten</strong>. Ich möchte in der Folge mit Ihnen darüber
+           für Ihre/n Angehörige/n leisten. Ich möchte in der Folge mit Ihnen darüber
            sprechen, wie es Ihnen selbst geht. Zum Beispiel über <strong>Ihre eigene Gesundheit</strong>
-           und die <strong>Hilfe, die Sie</strong> von anderen <strong>erhalten</strong> oder <strong>benötigen</strong>.
+           und die <strong>Hilfe</strong>, die Sie von anderen <strong>erhalten</strong> oder <strong>benötigen</strong>.
     type: hint
     size: medium
 

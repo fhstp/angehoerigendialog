@@ -34,6 +34,7 @@ export default {
   border-color: $color-theme-darkgrey;
   border-width: 1px;
   border-style: solid;
+  border-color: black;
   border-radius: none;
   width: 100%;
   line-height: 1.5;

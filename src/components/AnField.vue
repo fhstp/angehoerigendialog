@@ -201,7 +201,6 @@ export default {
 .an-field {
   &--not-supported {
     background: darkred;
-    //color: green;
   }
 
   &__subfields > .an-field {
@@ -218,6 +217,7 @@ export default {
 
   &__subfields &__label {
     margin-bottom: $spacer * 2;
+    color: black;
   }
 }
 </style>

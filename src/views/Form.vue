@@ -345,7 +345,6 @@ export default {
     padding-bottom: $spacer;
     margin-bottom: $spacer * 2;
     z-index: 1;
-
     color: black;
   }
 

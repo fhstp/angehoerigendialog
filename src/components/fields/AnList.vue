@@ -120,11 +120,14 @@ li:not(:last-child) {
 }
 
 input {
-  border: none;
   border-radius: $border-radius;
   padding: $spacer;
   width: 100%;
   max-width: 40ch;
+  border-width: 1px;
+  border-style: solid;
+  margin-left: 5px;
+  border-color: $color-theme-darkgrey;
 
   .an-checkboxes_activefields &,
   .an-field__subfields &,
