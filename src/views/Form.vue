@@ -27,11 +27,19 @@
                   :section-id="sectionId"
                   :field-id="`${sectionId}-${fieldId}`"
                 />
-                <AnAccordionItem v-else :key="fieldId">
+                <AnAccordionItem
+                  v-else
+                  :key="fieldId"
+                  :ready="
+                    $store.getters.getFieldCompletion(`${sectionId}-${fieldId}`)
+                  "
+                >
                   <template #header>
-                    <span class="an-accordion-item__header-text">{{
-                      field.label
-                    }}</span>
+                    <span
+                      v-html-safe="field.label"
+                      class="an-accordion-item__header-text"
+                    ></span>
+
                     <span class="an-accordion-item__header-icon">
                       <IconCheckmark
                         v-if="
@@ -42,6 +50,7 @@
                         aria-label="fertig ausgefüllt"
                       />
                     </span>
+                    <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
                     <AnField
@@ -338,7 +347,7 @@ export default {
     padding-bottom: $spacer;
     margin-bottom: $spacer * 2;
     z-index: 1;
-    color: $color-theme-darkred;
+    color: black;
   }
 
   &__header {
@@ -370,7 +379,7 @@ export default {
       padding: $spacer * 2;
       border-radius: 3px;
       background-color: $color-theme-lightred;
-      color: black;
+      color: $color-theme-darkgrey;
     }
 
     &-heading-wrapper {

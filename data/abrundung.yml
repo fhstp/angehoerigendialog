@@ -2,5 +2,5 @@ title: Abrundung des Gesprächs
 fields:
 
   hoffnung:
-    label: Haben Sie noch Anmerkungen zu unserem Gespräch oder gibt es noch Dinge, die Sie fragen möchten?
+    label: Haben Sie noch <strong>Anmerkungen</strong> zu unserem Gespräch oder gibt es noch Dinge, die Sie <strong>fragen</strong> möchten?
     type: text

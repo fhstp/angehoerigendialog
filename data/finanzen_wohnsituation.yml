@@ -2,13 +2,13 @@ title: Finanzen und Wohnsituation
 fields:
 
   finanziell:
-    label: Führt die Pflege Ihres/Ihrer Angehörigen bei Ihnen zu finanziellen Problemen oder müssen Sie dadurch an anderer Stelle kürzertreten?
+    label: Führt die Pflege Ihres/Ihrer Angehörigen bei Ihnen zu <strong>finanziellen Problemen</strong> oder müssen Sie dadurch an anderer Stelle <strong>kürzertreten</strong>?
     type: text
 
   hohekosten:
-    label: Gibt es Dinge, die Ihnen einiges erleichtern würden, auf die Sie aber wegen der hohen Kosten verzichten (z. B. Taxifahrten oder eine Haushaltshilfe)?
+    label: Gibt es <strong>Dinge</strong>, die Ihnen einiges <strong>erleichtern</strong> würden, auf die Sie aber wegen der <strong>hohen Kosten verzichten</strong> (z. B. Taxifahrten oder eine Haushaltshilfe)?
     type: text
 
   haus:
-    label: Ist das Haus/die Wohnung im Hinblick auf die Pflege Ihres/Ihrer Angehörigen praktisch eingerichtet? Was könnte Ihrer Meinung nach noch verbessert werden?
+    label: Ist das <strong>Haus/die Wohnung</strong> im Hinblick auf die Pflege Ihres/Ihrer Angehörigen <strong>praktisch eingerichtet</strong>? Was könnte Ihrer Meinung nach noch <strong>verbessert werden</strong>?
     type: text

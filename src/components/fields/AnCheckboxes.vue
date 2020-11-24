@@ -20,7 +20,7 @@
         :value="optionId"
         type="checkbox"
       />
-      <label :for="`${field_id}-${optionId}`">{{ option }}</label>
+      <label v-html-safe="option" :for="`${field_id}-${optionId}`"></label>
       <div
         v-if="Object.keys(fieldActivefields).length > 0"
         v-show="!noneSelected && visibleFields[optionId]"

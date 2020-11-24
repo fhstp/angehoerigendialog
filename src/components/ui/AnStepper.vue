@@ -97,7 +97,7 @@ $icon_width: 50px;
   background-color: white;
   box-shadow: 0 0 20px 0 $color-theme-shadow;
   & p {
-    color: $color-theme-darkred;
+    color: black;
   }
 }
 
@@ -171,7 +171,7 @@ $icon_width: 50px;
       position: relative;
       display: flex;
       flex-direction: column;
-      color: black;
+      color: $color-theme-darkgrey;
       padding: $spacer * 4;
       justify-content: flex-start;
       z-index: 2;
@@ -224,13 +224,12 @@ $icon_width: 50px;
     justify-content: center;
     align-items: center;
     position: relative;
-    height: $icon_width + 15px;
   }
 
   &__icon {
     display: block;
     border-radius: 50%;
-    width: $icon_width;
+    width: $icon_width + 15px;
     height: auto;
 
     > circle:first-child {
@@ -241,7 +240,7 @@ $icon_width: 50px;
       width: $icon_width + 15px;
 
       & > circle:first-child {
-        fill: $color-theme-darkred;
+        fill: $color-theme-yellow;
       }
     }
   }
@@ -256,6 +255,7 @@ $icon_width: 50px;
     .an-stepper__step--active & {
       margin-left: ($icon_width + 15px) / 2;
       width: 1.3rem;
+      color: black;
     }
   }
 
@@ -263,6 +263,7 @@ $icon_width: 50px;
     word-break: normal;
     overflow-wrap: anywhere;
     text-align: center;
+    color: black;
   }
 }
 </style>

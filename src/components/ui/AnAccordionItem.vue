@@ -1,5 +1,10 @@
 <template>
-  <div :class="['an-accordion-item', { 'an-accordion-item--open': active }]">
+  <div
+    :class="[
+      'an-accordion-item',
+      { 'an-accordion-item--open': active, 'an-accordion-item__ready': ready }
+    ]"
+  >
     <div class="an-accordion-item__header" @click="$parent.changeActive(index)">
       <slot name="header" />
     </div>
@@ -12,6 +17,11 @@
 <script>
 export default {
   name: 'AnAccordionItem',
+  props: {
+    ready: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       /** index of accordion item in accordion */
@@ -30,31 +40,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.an-accordion-item__header-border {
+  background-color: $color-theme-white;
+  padding-right: 10px;
+  float: left;
+  height: 100%;
+  padding-right: 10px;
+  height: auto;
+}
 .an-accordion-item {
-  border-radius: $border-radius;
-  background-color: $color-theme-lightred;
+  border-left-color: $color-theme-darkblue;
+  border-left-width: 7px;
+  border-left-style: solid;
+
+  &__border-highlight {
+    border-left-color: $color-theme-yellow;
+  }
+
+  &__ready {
+    border-left-color: $color-theme-yellow;
+  }
 
   &--open {
-    background-color: $color-theme-darkred;
+    background-color: $color-theme-white;
   }
   &__header {
     padding: $spacer * 2;
     font-size: 1.2rem;
     color: black;
-    fill: black;
+    //fill: pink;
     text-decoration: none;
     cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    margin-left: 5px;
+    border-color: $color-theme-darkgrey;
 
     .an-accordion-item--open & {
       cursor: auto;
-      color: white;
-      fill: white;
+      border-left-color: $color-theme-yellow;
+      color: black;
+      border: none;
     }
   }
 
   &__content {
     padding: $spacer * 2;
-    color: white;
+    color: black;
   }
 }
 </style>

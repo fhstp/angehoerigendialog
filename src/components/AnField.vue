@@ -11,9 +11,11 @@
         class="an-field__navigation visually-hidden"
         @focus="$emit('goPrev')"
       />
-      <p v-if="isAccordionItem && isSubfield" class="an-field__label">
-        {{ preparedFieldProps.field_label }}
-      </p>
+      <p
+        v-if="isAccordionItem && isSubfield"
+        v-html-safe="preparedFieldProps.field_label"
+        class="an-field__label"
+      ></p>
       <component
         :is="fieldComponentName"
         v-bind="preparedFieldProps"
@@ -201,7 +203,6 @@ export default {
 .an-field {
   &--not-supported {
     background: darkred;
-    color: white;
   }
 
   &__subfields > .an-field {
@@ -209,7 +210,7 @@ export default {
     margin: -0.5rem;
     padding: 0.5rem;
     background-color: white;
-    color: black;
+    color: $color-theme-darkgrey;
   }
 
   &__subfields > &:first-child {
@@ -218,6 +219,7 @@ export default {
 
   &__subfields &__label {
     margin-bottom: $spacer * 2;
+    color: black;
   }
 }
 </style>

@@ -3,8 +3,8 @@ titleShort: Verhaltensveränderungen
 fields:
 
   verhaltensveraenderungenhinweis:
-    label: Häufig treten bei Demenz bestimmte Denk- oder Verhaltensveränderungen
-          auf. Oft ist es sehr irritierend und belastend, solche Persönlichkeitsveränderungen
+    label: Häufig treten bei Demenz bestimmte <strong>Denk- oder Verhaltensveränderungen</strong>
+          auf. Oft ist es sehr irritierend und belastend, solche <strong>Persönlichkeitsveränderungen</strong>
           bei bisher vertrauten Menschen zu erleben. Ich nenne Ihnen
           nun einige Veränderungen im Denken oder Handeln, die bei demenzerkrankten
           Menschen auftreten können.
@@ -12,27 +12,27 @@ fields:
     size: medium
 
   veraenderungen:
-    label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch bei Ihrem/Ihrer
-          Angehörigen auftreten und wie Sie damit zurechtkommen. Die Skala, auf der Sie das
+    label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch <strong>bei Ihrem/Ihrer
+          Angehörigen auftreten</strong> und wie Sie damit <strong>zurechtkommen</strong>. Die Skala, auf der Sie das
           einschätzen können, reicht von „sehr gut“ bis „schlecht“. Der/die Angehörige …
     type: checkboxes
     options:
-      wiederholung: … wiederholt sich oft (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
-      sachverhalte: … begreift schwierige Sachverhalte nicht mehr (z. B. kann einer längeren Erklärung nicht folgen)
-      erzaehltes: … vergisst Erzähltes schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
-      apatisch: … ist gleichgültig/apatisch
-      merkwuerdigedinge: … tut Dinge, die mir merkwürdig oder unlogisch erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
-      unruhig: … ist unruhig (z. B. hat einen erhöhten Bewegungsdrang)
-      weglaufen: … läuft von zu Hause weg
-      aggresiv: … wird verbal aggresiv (z.B. schimpft, wird laut)
-      handgfreilich: … wird handgreiflich (z. B. hält mich stark fest und/oder schlägt mich)
-      halluzinationen: … sieht/hört Dinge, die nicht da sind (z. B. Halluzinationen, paranoide Ideen)
-      wahnhafteideen: … hat wahnhafte Ideen
-      schwankendeverfassung: … zeigt schwankende Verfassung (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
-      verhaltenweise: … zeigt Verhaltensweisen, die ihn/sie selbst gefährden (z. B. schaltet den Herd ein und vergisst darauf)
+      wiederholung: … <strong>wiederholt</strong> sich <strong>oft</strong> (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
+      sachverhalte: … <strong>begreift</strong> schwierige <strong>Sachverhalte nicht</strong> mehr (z. B. kann einer längeren Erklärung nicht folgen)
+      erzaehltes: … <strong>vergisst Erzähltes</strong> schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
+      apatisch: … ist <strong>gleichgültig/apatisch</strong>
+      merkwuerdigedinge: … tut <strong>Dinge</strong>, die mir <strong>merkwürdig</strong> oder <strong>unlogisch</strong> erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
+      unruhig: … ist <strong>unruhig</strong> (z. B. hat einen erhöhten Bewegungsdrang)
+      weglaufen: … <strong>läuft</strong> von zu Hause <strong>weg</strong>
+      aggresiv: … wird <strong>verbal aggresiv</strong> (z.B. schimpft, wird laut)
+      handgfreilich: … wird <strong>handgreiflich</strong> (z. B. hält mich stark fest und/oder schlägt mich)
+      halluzinationen: … <strong>sieht/hört Dinge</strong>, die <strong>nicht da</strong> sind (z. B. Halluzinationen, paranoide Ideen)
+      wahnhafteideen: … hat <strong>wahnhafte Ideen</strong>
+      schwankendeverfassung: … zeigt <strong>schwankende Verfassung</strong> (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
+      verhaltenweise: … zeigt Verhaltensweisen, die <strong>ihn/sie selbst gefährden</strong> (z. B. schaltet den Herd ein und vergisst darauf)
     activefields:
       details:
-        label: Wie kommen Sie selbst mit diesem Verhalten zurecht?
+        label: Wie <strong>kommen Sie</strong> selbst mit diesem <strong>Verhalten zurecht</strong>?
         type: radio
         options:
           sehr_gut: sehr gut

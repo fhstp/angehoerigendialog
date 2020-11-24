@@ -42,17 +42,12 @@
       E-mail: csc@fhstp.ac.at
     </p>
 
-    <h3>EntwicklerInnenteam:</h3>
+    <h3>Team:</h3>
     <p>
-      Felix De Montis, Barbara Ehrenhöfer, Johannes Gerstbauer, Jan Kollars,
-      Annika Schweighofer
-    </p>
-
-    <h3>Beteiligte LektorInnen:</h3>
-
-    <p>
-      Wolfgang Aigner, Florian Grassinger, Peter Judmaier, Magdalena Boucher,
-      Christina Stoiber
+      Wolfgang Aigner, Magdalena Boucher, Felix De Montis, Barbara Ehrenhöfer,
+      Johannes Gerstbauer, Florian Grassinger, Stefanie Größbacher, Peter
+      Judmaier, Jan Kollars, Johannes Pflegerl, Lydia Popp, Alexander Rind,
+      Annika Schweighofer, Christina Stoiber
     </p>
 
     <h2>Gegenstand des Unternehmens</h2>

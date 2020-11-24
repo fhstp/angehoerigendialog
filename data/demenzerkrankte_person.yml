@@ -3,41 +3,41 @@ titleShort: Demenzerkrankte Person
 fields:
 
   angabenpersonhinweis:
-    label: Zu Beginn des Gesprächs bitte ich Sie um kurze Informationen zu der
-          demenzerkrankten Person, die Sie pflegen und/oder betreuen und zu
-          Ihnen selbst, um einen ersten Überblick über Ihre individuelle Situation
+    label: Zu Beginn des Gesprächs bitte ich Sie um kurze <strong>Informationen</strong> zu der
+          <strong>demenzerkrankten Person</strong>, die Sie pflegen und/oder betreuen und zu
+          Ihnen selbst, um einen ersten Überblick über Ihre <strong>individuelle Situation</strong>
           zu bekommen. Alle Ihre Angaben werden vertraulich behandelt.
     type: hint
     size: medium
 
   verhaeltnis:
-    label: In welchem verwandtschaftlichen Verhältnis stehen Sie zur demenzerkrankten Person?
+    label: In welchem <strong>verwandtschaftlichen Verhältnis</strong> stehen Sie zur demenzerkrankten Person?
     type: text
 
   alter:
-    label: Wie alt ist er/sie?
+    label: Wie <strong>alt</strong> ist er/sie?
     type: number
 
   pflegebedarf:
-    label: Seit wann hat er/sie verstärkten Unterstützungs- und/oder Pflegebedarf?
+    label: Seit wann hat er/sie verstärkten <strong>Unterstützungs- und/oder Pflegebedarf?</strong>
     type: text
 
   diagnose:
-    label: Gibt es eine ärztliche Demenzdiagnose?
+    label: Gibt es eine ärztliche <strong>Demenzdiagnose</strong>?
     type: toggle
     subfields:
       diagnosedetail:
-        label: Welche Demenzdiagnose gibt es?
+        label: Welche <strong>Demenzdiagnose</strong> gibt es?
         type: text
         when:
           diagnose: true
 
   pflegegeld:
-    label: Bekommt er/sie Pflegegeld?
+    label: Bekommt er/sie <strong>Pflegegeld</strong>?
     type: toggle
     subfields:
       pflegegelddetail:
-        label: Welche Stufe Pflegegeld erhält er/sie?
+        label: Welche <strong>Stufe</strong> Pflegegeld erhält er/sie?
         type: radio
         options:
           1: 1
@@ -51,15 +51,15 @@ fields:
           pflegegeld: true
 
   haushalt:
-    label: Leben Sie in einem gemeinsamen Haushalt?
+    label: Leben Sie in einem <strong>gemeinsamen</strong> Haushalt?
     type: toggle
 
   unterstuetzungsangebot:
-    label: Nimmt er/sie derzeit Unterstützungsangebote für demenzerkrankte Personen in Anspruch?
+    label: Nimmt er/sie derzeit <strong>Unterstützungsangebote</strong> für demenzerkrankte Personen in Anspruch?
     type: toggle
     subfields:
       unterstuetzungsangebotdetail:
-        label: Welche Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
+        label: <strong>Welche</strong> Unterstüztungsangebote nimmt er/sie in Anspruch, z. B. Tageszentrum, Gedächtnistraining, andere Betreuungen?
         type: list
         when:
           unterstuetzungsangebot: true
