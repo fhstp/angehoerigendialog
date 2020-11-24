@@ -14,6 +14,29 @@
         ]"
       >
         <router-link
+          v-if="special"
+          exact-active-class="router-link-exact-active-special"
+          :to="{ query: { ...$route.query, step: step.id } }"
+          @click.native="$emit('input')"
+        >
+          <div class="an-stepper__icon-wrapper">
+            <component
+              :is="step.icon"
+              :class="[
+                'an-stepper__icon',
+                { 'an-stepper__icon--active': $route.query.step === step.id }
+              ]"
+            />
+            <IconCheckmark v-if="step.done" class="an-stepper__status" />
+          </div>
+          <p class="an-stepper__text">
+            <span aria-hidden="true">{{ i + 1 }}.</span>
+            &nbsp;{{ step.title }}
+          </p>
+        </router-link>
+
+        <router-link
+          v-else
           :to="{ query: { ...$route.query, step: step.id } }"
           @click.native="$emit('input')"
         >
@@ -47,6 +70,10 @@ export default {
     steps: {
       type: Array,
       default: () => []
+    },
+    special: {
+      type: Boolean,
+      default: () => false
     }
   },
   watch: {
@@ -98,6 +125,14 @@ $icon_width: 50px;
   box-shadow: 0 0 20px 0 $color-theme-shadow;
   & p {
     color: black;
+  }
+}
+
+.router-link-exact-active-special {
+  background-color: #ffbe1b;
+  box-shadow: 0 0 20px 0 $color-theme-shadow;
+  & p {
+    color: $color-theme-darkred;
   }
 }
 
