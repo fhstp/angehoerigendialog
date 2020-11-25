@@ -120,9 +120,10 @@
                       }
                     }"
                   >
-                    <div class="an-form__openquestions-item">
-                      {{ question.label }}
-                    </div>
+                    <div
+                      v-html-safe="question.label"
+                      class="an-form__openquestions-item"
+                    ></div>
                   </router-link>
                 </div>
               </div>
