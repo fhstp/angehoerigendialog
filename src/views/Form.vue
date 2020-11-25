@@ -40,7 +40,7 @@
                       class="an-accordion-item__header-text"
                     ></span>
 
-                    <span class="an-accordion-item__header-icon">
+                    <!-- <span class="an-accordion-item__header-icon">
                       <IconCheckmark
                         v-if="
                           $store.getters.getFieldCompletion(
@@ -49,7 +49,7 @@
                         "
                         aria-label="fertig ausgefüllt"
                       />
-                    </span>
+                    </span> -->
                     <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
@@ -147,7 +147,6 @@ import AnField from '@/components/AnField.vue';
 import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
-import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 import IconWarning from '@/assets/icons/warning.svg?inline';
 
 export default {
@@ -159,7 +158,6 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark,
     IconWarning
   },
   data() {
