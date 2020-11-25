@@ -15,7 +15,7 @@
             { 'an-plain-data__field--break': field.type === 'checkboxes' }
           ]"
         >
-          <h4>{{ field.label }}</h4>
+          <h4 v-html-safe="field.label"></h4>
           <AnField
             :section-id="sectionId"
             :field-id="`${sectionId}-${field.fieldId}`"
