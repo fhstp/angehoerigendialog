@@ -5,12 +5,13 @@
 <rect y="135" width="127" height="4"/>
 <g>
 	<g>
-		<rect x="-6.83" y="47.08" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.3109 64.4765)" width="145" height="29.02"/>
+		<g>
+			
+				<rect x="-7.02" y="47.02" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.3258 64.3231)" fill="#FFFFFF" width="145" height="29.02"/>
+		</g>
+		<polygon fill="#FFFFFF" points="3.95,102.53 1.13,125.88 24.47,123.05 		"/>
 	</g>
-	<polyline points="24.67,123.11 1.41,125.92 4.22,102.66 	"/>
-	
-		<rect x="0.96" y="110.29" transform="matrix(0.7071 0.7071 -0.7071 0.7071 83.5776 21.8032)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.8856" stroke-miterlimit="10" width="29.02" height="3"/>
-	
-		<rect x="89.27" y="22.53" transform="matrix(0.7071 0.7071 -0.7071 0.7071 47.3897 -66.3465)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.8856" stroke-miterlimit="10" width="29.02" height="3"/>
+	<rect x="13.33" y="96.16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -73.4694 43.962)" width="6" height="29.02"/>
+	<rect x="99.98" y="9.51" transform="matrix(0.7071 -0.7071 0.7071 0.7071 13.1761 79.8544)" width="6" height="29.02"/>
 </g>
 </svg>

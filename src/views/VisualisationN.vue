@@ -9,13 +9,13 @@
       />
       <div class="an-form__content">
         <div class="container" style="margin-top: 40px;">
-          <div v-if="currView !== 'ende'" class="an-visualisation__infos row">
-            <h1 class="col-md-3">
+          <div v-if="currView !== 'ende'" class="an-visualisation__infos">
+            <h1 :style="{ marginBottom: '20px' }">
               Angehörigengespräch von
               <br />
               {{ headerData.caregivername }}
             </h1>
-            <div class="col-md-3">
+            <div>
               <p>
                 Durchgeführt von {{ headerData.socialworkername }},
                 {{ headerData.date }}
@@ -25,10 +25,15 @@
                 {{ headerData.time2 }} Uhr
               </p>
             </div>
+            <div style="float: right; margin-top: -25px;">
+              <AnEditButton
+                class="hide-print"
+                section-id="demenzerkrankte_person"
+                field-id="0"
+                :special="true"
+              />
+            </div>
           </div>
-
-          <!-- Thats how we can force a page break if needed -->
-          <!-- <div class="pagebreak" /> -->
 
           <template v-if="currView === 'visuelle_auswertung'">
             <div :class="{ 'an-visualisation__page': showVisualisations }">
@@ -36,10 +41,6 @@
 
               <template v-if="showVisualisations">
                 <div class="an-visualisation__visualisation-wrapper">
-                  <AnEditButton
-                    section-id="demenzerkrankte_person"
-                    field-id="0"
-                  />
                   <AnBasisInformation />
                   <div class="an-visualisation__screen_spacer" />
 
@@ -57,6 +58,9 @@
                 <div class="an-visualisation__screen_spacer" />
               </template>
             </div>
+
+            <!-- Thats how we can force a page break if needed -->
+            <!-- <div class="pagebreak" /> -->
 
             <!-- Vis Page 2 -->
 
@@ -349,11 +353,12 @@ export default {
 
   &__infos {
     margin-bottom: $spacer * 2;
-    align-items: flex-end;
+    background-color: #8393a7;
+    color: white;
+    padding: 26px 34px;
 
     h1 {
       font-size: 1.6rem;
-      color: $color-theme-darkred;
     }
   }
 
