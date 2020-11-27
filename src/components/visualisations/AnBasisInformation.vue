@@ -288,7 +288,7 @@ export default {
 $leftwidth: 40%;
 $centerwidth: 10%;
 $rightwidth: 50%;
-$yellow-color: #ffbe1b;
+$yellow-color: #ffd700;
 $blue-color: #3566aa;
 
 .rowSpecial {
