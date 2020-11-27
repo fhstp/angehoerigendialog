@@ -27,29 +27,27 @@
 
     <div class="container">
       <div :class="{ 'an-visualisation__page': showVisualisations }">
-        <div class="an-visualisation__infos row">
-          <h1 class="col-md-3">
-            Angehörigengespräch von
-            <br />
-            {{ headerData.caregivername }}
+        <div class="an-visualisation__infos">
+          <h1 :style="{ marginBottom: '20px' }">
+            Angehörigengespräch von {{ headerData.caregivername }}
           </h1>
-          <div class="col-md-3">
-            <p>
-              Durchgeführt von {{ headerData.socialworkername }},
-              {{ headerData.date }}
-            </p>
-            <p>
-              Zweitgespräch am {{ headerData.date2 }} um
-              {{ headerData.time2 }} Uhr
-            </p>
-          </div>
+          <p>
+            Durchgeführt von {{ headerData.socialworkername }},
+            {{ headerData.date }}
+          </p>
+          <p>
+            Zweitgespräch am {{ headerData.date2 }} um
+            {{ headerData.time2 }} Uhr
+          </p>
         </div>
 
         <!-- Vis Page 1 -->
 
         <template v-if="showVisualisations">
           <div class="an-visualisation__visualisation-wrapper">
-            <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+            <div class="an-visualisation__heading-wrapper">
+              <AnEditButton section-id="demenzerkrankte_person" field-id="0" />
+            </div>
             <AnBasisInformation />
             <div class="an-visualisation__screen_spacer" />
 
@@ -258,11 +256,12 @@ export default {
 
   &__infos {
     margin-bottom: $spacer * 2;
-    align-items: flex-end;
+    background-color: #8393a7;
+    color: white;
+    padding: 26px 34px;
 
     h1 {
       font-size: 1.6rem;
-      color: $color-theme-darkred;
     }
   }
 

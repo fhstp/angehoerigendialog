@@ -32,5 +32,12 @@ export default {
   @media print {
     display: none;
   }
+
+  svg {
+    width: 25px;
+    fill: $color-theme-lightgrey;
+    stroke: black;
+    stroke-width: 5px;
+  }
 }
 </style>

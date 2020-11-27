@@ -1,3 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-  <path d="M9.96 8.26c-.56-.58-.53-1.5.05-2.07L15.96.42c.29-.28.66-.42 1.03-.42.38 0 .75.15 1.04.44L9.96 8.26zM.18 22.96a.6.6 0 00.84.87l1-.97-.84-.88-1 .98zm10.94-8.66l-3.41 3.32a10.96 10.96 0 01-3.61 2.39c.66-1.45 1.4-2.47 2.5-3.54L10 13.16l-1.38-1.44-3.42 3.32a14.13 14.13 0 00-3.64 5.91l1.5 1.56a14.1 14.1 0 006.03-3.45l3.42-3.32-1.4-1.44zM20 2.95l-7.37 7.14 1.65 1.71 7.37-7.15c1.13-1.1-.55-2.77-1.65-1.7zM24 3.8c0 .83-.32 1.67-.97 2.3l-8.8 8.53-4.44-4.58 8.8-8.54A3.2 3.2 0 0124 3.8z"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 127 139" enable-background="new 0 0 127 139" xml:space="preserve">
+<rect y="135" width="127" height="4"/>
+<g>
+	<g>
+		<rect x="-6.83" y="47.08" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.3109 64.4765)" width="145" height="29.02"/>
+	</g>
+	<polyline points="24.67,123.11 1.41,125.92 4.22,102.66 	"/>
+	
+		<rect x="0.96" y="110.29" transform="matrix(0.7071 0.7071 -0.7071 0.7071 83.5776 21.8032)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.8856" stroke-miterlimit="10" width="29.02" height="3"/>
+	
+		<rect x="89.27" y="22.53" transform="matrix(0.7071 0.7071 -0.7071 0.7071 47.3897 -66.3465)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.8856" stroke-miterlimit="10" width="29.02" height="3"/>
+</g>
 </svg>
