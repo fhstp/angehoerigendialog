@@ -396,6 +396,7 @@ export default {
 
     &-heading-section {
       color: $color-theme-darkblue;
+      font-weight: bold;
     }
 
     &-icon-warning {

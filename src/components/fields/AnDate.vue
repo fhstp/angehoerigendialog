@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .an-date {
-  border: none;
+  border: 1px solid #5e5e5e;
   border-radius: $border-radius;
   padding: $spacer;
 
