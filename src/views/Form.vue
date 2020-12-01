@@ -359,11 +359,12 @@ export default {
   }
 
   &__done {
-    width: 25vh;
-    height: 10vh;
+    width: 15vh;
+    height: 15vh;
     border: none;
     box-shadow: 0 0 0 0 #ffd700;
-    border-radius: 8%;
+    border-radius: 50%;
+    padding: 3px;
     background-color: #ffbe1b;
     text-transform: uppercase;
     font-weight: bolder;
