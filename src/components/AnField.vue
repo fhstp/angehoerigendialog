@@ -11,9 +11,11 @@
         class="an-field__navigation visually-hidden"
         @focus="$emit('goPrev')"
       />
-      <p v-if="isAccordionItem && isSubfield" class="an-field__label">
-        {{ preparedFieldProps.field_label }}
-      </p>
+      <p
+        v-if="isAccordionItem && isSubfield"
+        v-html-safe="preparedFieldProps.field_label"
+        class="an-field__label"
+      ></p>
       <component
         :is="fieldComponentName"
         v-bind="preparedFieldProps"
