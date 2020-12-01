@@ -1,21 +1,23 @@
 <template>
   <div v-if="showNotes" class="an-note">
     <div class="an-note__top-bar container">
-      <button
-        aria-label="Schließen"
-        class="an-note__close btn"
-        @click="closeNotes"
-      >
-        <IconNavigateBefore /> Zum Fragebogen zurückkehren
-      </button>
       <div :style="{ opacity: isSaveHint ? 1 : 0 }" class="an-note__save-hint">
         Notizen werden automatisch gespeichert
       </div>
     </div>
     <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere">
       <div class="an-note__content container">
-        <h2 class="an-note__heading">Meine Notizen</h2>
         <div class="an-note__input-area">
+          <div>
+            <button
+              aria-label="Schließen"
+              class="an-note__close btn"
+              @click="closeNotes"
+            >
+              <IconClose />
+            </button>
+            <h2 class="an-note__heading">Meine Notizen</h2>
+          </div>
           <textarea
             v-show="showAlreadyThere"
             ref="ta_alreadythere"
@@ -24,13 +26,43 @@
           </textarea>
           <template v-if="showAddHeading && currentQuestionLabel">
             <div class="an-note-current">
-              <button class="an-note-current__action btn" @click="addHeading">
-                Aktuell offene Frage als Überschrift<br />zu meinen Notizen
-                hinzufügen
-              </button>
-              <span class="an-note-current__question">
-                > {{ currentQuestionLabel }}</span
-              >
+              <div>
+                <button class="an-note-current__action btn" @click="addHeading">
+                  <IconAddPlus />
+                </button>
+
+                <span class="an-note-current__label"
+                  >Aktuelle Kategorie zu meinen Notizen hinzufügen
+                </span>
+
+                <span class="an-note-current__question">
+                  > {{ currentQuestionLabel }}</span
+                >
+              </div>
+            </div>
+            <div>
+              <div class="an-note-current__line">
+                <hr
+                  style="
+                    background: black;
+                    border: none;
+                    color: black;
+                    height: 0.5px;
+                    width: 75%;
+                  "
+                />
+              </div>
+              <div>
+                <button class="an-note-current__action btn" @click="addHeading">
+                  <IconAddPlus />
+                </button>
+                <span class="an-note-current__label"
+                  >Aktuelle Frage zu meinen Notizen hinzufügen
+                </span>
+                <span class="an-note-current__question">
+                  > {{ currentQuestionLabel }}</span
+                >
+              </div>
             </div>
             <textarea
               ref="ta_newtext"
@@ -50,12 +82,14 @@
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
 import { string_autosetTextareaHeight } from '@/helpers/string.js';
-import IconNavigateBefore from '@/assets/icons/navigate_before.svg?inline';
+import IconClose from '@/assets/icons/close.svg?inline';
+import IconAddPlus from '@/assets/icons/add_plus.svg?inline';
 
 export default {
   name: 'AnNote',
   components: {
-    IconNavigateBefore
+    IconClose,
+    IconAddPlus
   },
   data() {
     return {
@@ -243,52 +277,77 @@ export default {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  background-color: $color-theme-lightgrey;
 
   &__heading {
-    color: $color-theme-darkred;
+    color: $color-theme-black;
+    float: left;
+    width: 50%;
+    padding: 0px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    background: white;
+    box-sizing: border-box;
   }
 
   &__elementwrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $color-theme-lightgrey;
+    background-color: white;
   }
 
   &__content {
     padding-top: $spacer * 2;
     padding-bottom: $spacer * 2;
     width: 100%;
+    background-color: white;
   }
 
   &__input-area {
-    border: 2px solid $color-theme-darkgrey;
-    border-radius: $border-radius;
-    background-color: white;
+    border: 1px solid $color-theme-darkgrey;
+    border-radius: none;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: right;
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
   }
 
   &__close {
-    margin-right: $spacer;
-    padding-left: $spacer;
-    display: inline-flex;
+    box-shadow: none;
+    border: 2px solid $color-theme-yellow;
+    fill: $color-theme-yellow;
+    border-radius: 0;
+    display: flex;
+    margin: 0;
+    padding: 5px;
+    float: right;
+    background: white;
+    box-sizing: border-box;
+    cursor: pointer;
 
     > svg {
-      height: 1.2rem;
+      width: 15px;
+      height: 15px;
+      fill: $color-theme-yellow;
+      stroke: $color-theme-yellow;
     }
   }
 
   &__save-hint {
     color: $color-theme-darkgrey;
     transition: opacity 150ms ease-in-out;
+    float: left;
+    stroke: $color-theme-yellow;
+    width: 100%;
   }
 
   textarea {
     resize: none;
-    border: 0;
+    border: none;
+    border-top: 1px solid $color-theme-darkgrey;
     padding: $spacer;
     width: 100%;
     outline: none;
@@ -296,6 +355,7 @@ export default {
     font-size: 1.45rem;
     line-height: 1.5;
     overflow: hidden;
+    background-color: white;
   }
 
   &__focusdiv {
@@ -318,28 +378,64 @@ export default {
     padding-top: $spacer;
     padding-bottom: $spacer;
     width: 100%;
-    background-color: $color-theme-lightgrey;
   }
 }
 
 .an-note-current {
   display: flex;
   justify-content: space-between;
-  border-radius: $border-radius;
-  padding: $spacer * 2;
+  border-radius: none;
   align-items: flex-start;
+  float: left;
+  margin-left: 0px;
+  margin-top: 0px;
 
   &__question {
+    vertical-align: middle;
     color: #aaa;
+    margin-left: 6.5%;
+    padding: 0 0 0 0px;
+    float: left;
+    hyphens: auto;
   }
 
   &__action {
+    vertical-align: middle;
     margin: 0;
-
-    width: 40%;
+    width: 100%;
     flex-shrink: 0;
-    margin-right: 17px;
+    box-shadow: none;
+    width: 5%;
+    height: 5%;
+    display: inline-block;
+    border: none;
+    border-radius: 0;
+    padding: 5px;
+    color: white;
+    font-size: 1rem;
+    transition: none;
+    cursor: pointer;
   }
+
+  &__label {
+    vertical-align: middle;
+    color: black;
+    margin: 10px;
+    padding: 0px;
+  }
+
+  &__line {
+    vertical-align: middle;
+    color: black;
+    margin: 0 0 0 10px;
+    padding: 10px;
+  }
+}
+
+.hr {
+  color: $color-theme-darkgrey;
+  border: none;
+  width: 75%;
 }
 
 textarea {
