@@ -39,17 +39,6 @@
                       v-html-safe="field.label"
                       class="an-accordion-item__header-text"
                     ></span>
-
-                    <!-- <span class="an-accordion-item__header-icon">
-                      <IconCheckmark
-                        v-if="
-                          $store.getters.getFieldCompletion(
-                            `${sectionId}-${fieldId}`
-                          )
-                        "
-                        aria-label="fertig ausgefüllt"
-                      />
-                    </span> -->
                     <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
@@ -360,10 +349,64 @@ export default {
   }
 
   &__done {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  &__done {
+    width: 25vh;
+    height: 10vh;
+    border: none;
+    box-shadow: 0 0 0 0 #ffd700;
+    border-radius: 8%;
+    background-color: #ffbe1b;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: center;
+    // background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/173024/jonathanlarradet_copy.png);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    cursor: pointer;
+    -webkit-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  &__done:hover {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -ms-animation: none;
+    animation: none;
+
+    border: 2px solid $color-theme-darkgrey;
+    background: #ffbe1b;
+  }
+
+  @-webkit-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @-moz-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @-ms-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
   }
 
   &__openquestions {
