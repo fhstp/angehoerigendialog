@@ -11,9 +11,7 @@
         <div class="container" style="margin-top: 40px;">
           <div v-if="currView !== 'ende'" class="an-visualisation__infos">
             <h1 :style="{ marginBottom: '20px' }">
-              Angehörigengespräch von
-              <br />
-              {{ headerData.caregivername }}
+              Angehörigengespräch von {{ headerData.caregivername }}
             </h1>
             <div>
               <p>
