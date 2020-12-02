@@ -3,7 +3,7 @@
     <router-link
       class="an-edit-button__button"
       :to="`/fragebogen?step=${sectionId}&field=${fieldId}`"
-      ><IconEdit />
+      ><IconEdit :class="special ? 'white' : ''" />
     </router-link>
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
   },
   props: {
     fieldId: { type: String, default: undefined },
-    sectionId: { type: String, default: undefined }
+    sectionId: { type: String, default: undefined },
+    special: { type: Boolean, default: false }
   }
 };
 </script>
@@ -31,6 +32,16 @@ export default {
 
   @media print {
     display: none;
+  }
+
+  svg {
+    width: 25px;
+    stroke: $color-theme-darkgrey;
+    stroke-width: 5px;
+  }
+
+  .white {
+    stroke: white;
   }
 }
 </style>

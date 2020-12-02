@@ -46,8 +46,10 @@ export default {
       this.$el.style.height = height;
     },
     calculateLabels() {
-      const getComputedStyle = (el, prop) =>
-        Number(window.getComputedStyle(el)[prop].replace('px', ''));
+      const getComputedStyle = (el, prop) => {
+        if (el)
+          return Number(window.getComputedStyle(el)[prop].replace('px', ''));
+      };
 
       const circleHeight = getComputedStyle(this.$el, 'height');
       const text = this.$refs.text;

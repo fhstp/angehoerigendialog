@@ -40,7 +40,7 @@
                       class="an-accordion-item__header-text"
                     ></span>
 
-                    <span class="an-accordion-item__header-icon">
+                    <!-- <span class="an-accordion-item__header-icon">
                       <IconCheckmark
                         v-if="
                           $store.getters.getFieldCompletion(
@@ -49,7 +49,7 @@
                         "
                         aria-label="fertig ausgefüllt"
                       />
-                    </span>
+                    </span> -->
                     <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
@@ -120,9 +120,10 @@
                       }
                     }"
                   >
-                    <div class="an-form__openquestions-item">
-                      {{ question.label }}
-                    </div>
+                    <div
+                      v-html-safe="question.label"
+                      class="an-form__openquestions-item"
+                    ></div>
                   </router-link>
                 </div>
               </div>
@@ -147,7 +148,6 @@ import AnField from '@/components/AnField.vue';
 import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
-import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 import IconWarning from '@/assets/icons/warning.svg?inline';
 
 export default {
@@ -159,7 +159,6 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark,
     IconWarning
   },
   data() {
@@ -376,10 +375,13 @@ export default {
     &-item {
       margin-bottom: $spacer * 2;
       margin-top: $spacer * 2;
-      padding: $spacer * 2;
-      border-radius: 3px;
-      background-color: $color-theme-lightred;
+      padding: 1rem;
       color: $color-theme-darkgrey;
+      text-decoration: none;
+      cursor: pointer;
+      border-width: 1px;
+      border-style: solid;
+      border-color: $color-theme-lightgrey;
     }
 
     &-heading-wrapper {
@@ -389,13 +391,18 @@ export default {
     }
 
     &-heading {
-      color: $color-theme-darkred;
+      color: $color-theme-darkblue;
+    }
+
+    &-heading-section {
+      color: $color-theme-darkblue;
+      font-weight: bold;
     }
 
     &-icon-warning {
       width: 35px;
       margin-right: 0.5rem;
-      fill: $color-theme-darkred;
+      fill: $color-theme-darkblue;
     }
   }
   .router-link-active {

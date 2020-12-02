@@ -1,0 +1,15 @@
+{
+  "visuelle_auswertung": {
+    "title": "1. Visuelle Auswertung",
+    "titleShort": "Visuelle Auswertung"
+  },
+  "schriftliche_auswertung": {
+    "title": "2. Schriftliche Auswertung",
+    "titleShort": "Schriftliche Auswertung"
+  },
+  "ende": {
+    "title": "3. Ende",
+    "titleShort": "Ende",
+    "icon": "ende_new"
+  }
+}

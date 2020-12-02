@@ -1,206 +1,206 @@
 <template>
   <div class="an-basisinformation">
-    <div class="an-basisinformation__header">
-      <div class="an-basisinformation__header-betreuend">
-        <strong>Betreuende Person</strong>
-        <template v-if="infoGeneral.values.alterBetreuend"
-          >{{ infoGeneral.values.alterBetreuend }} Jahre
-        </template>
-      </div>
-      <IconHands class="icon-hands" />
-      <div class="an-basisinformation__header-erkrankt">
-        <strong>Demenzerkrankte Person</strong>
-        <template v-if="infoGeneral.values.alterErkrankt">
-          {{ infoGeneral.values.alterErkrankt }} Jahre</template
-        >
-      </div>
+    <div class="rowSpecial">
+      <!-- Betreuende Person Beginn -->
 
-      <div class="an-basisinformation__header-commoninfo">
-        <div v-if="infoGeneral.values.verhaeltnis">
-          {{
-            `${infoGeneral.labels.verhaeltnis}: ${infoGeneral.values.verhaeltnis}`
-          }}
+      <div class="colSm">
+        <PersonMe class="iconMe" />
+      </div>
+      <div class="colMd">
+        <div class="an-basisinformation__header">
+          <strong>Betreuende Person</strong>
+          <template v-if="infoGeneral.values.alterBetreuend"
+            >{{ infoGeneral.values.alterBetreuend }} Jahre
+          </template>
         </div>
-        <div v-if="infoGeneral.values.haushalt">
-          {{ infoGeneral.labels.haushalt }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Betreuende Person Beginn -->
-
-    <div class="row">
-      <div class="col-3">
-        <div
-          v-if="infoBetreuend.sorgepflichten"
-          class="an-basisinformation-item an-basisinformation-item--sorgepflichten"
-        >
-          <div class="an-basisinformation-item__title">
-            {{ infoBetreuend.sorgepflichten.label }}
+        <div class="box leftBox" style="flex: 1;">
+          <div class="an-basisinformation__basic">
+            <div v-if="infoGeneral.values.verhaeltnis">
+              <strong> {{ infoGeneral.labels.verhaeltnis + ':' }} </strong>
+              <span>{{ ` ${infoGeneral.values.verhaeltnis}` }}</span>
+            </div>
+            <div v-if="infoGeneral.values.haushalt">
+              {{ infoGeneral.labels.haushalt }}
+            </div>
           </div>
-          <template v-if="Array.isArray(infoBetreuend.sorgepflichten.value)">
-            <IconWarning class="icon-warning" aria-hidden="true" />
-            <ul>
-              <li
+
+          <div
+            v-if="infoBetreuend.sorgepflichten"
+            class="an-basisinformation-item an-basisinformation-item--sorgepflichten"
+          >
+            <div class="an-basisinformation-item__title">
+              {{ infoBetreuend.sorgepflichten.label + ':' }}
+            </div>
+            <template v-if="Array.isArray(infoBetreuend.sorgepflichten.value)">
+              <!-- <IconWarning class="icon-warning" aria-hidden="true" /> -->
+              <span
                 v-for="(value, i) in infoBetreuend.sorgepflichten.value"
                 :key="i"
               >
-                {{ value }}
-              </li>
-            </ul>
-          </template>
-          <template v-else>
-            keine
-          </template>
-        </div>
+                {{
+                  i !== infoBetreuend.sorgepflichten.value.length - 1
+                    ? value + ','
+                    : value
+                }}
+              </span>
+            </template>
+            <template v-else>
+              keine
+            </template>
+          </div>
 
-        <div v-if="infoBetreuend.beruf" class="an-basisinformation-item row">
-          <div>
+          <div v-if="infoBetreuend.beruf" class="an-basisinformation-item">
+            <div>
+              <div class="an-basisinformation-item__title">
+                {{ infoBetreuend.beruf.label + ':' }}
+              </div>
+              <div v-if="infoBetreuend.beruf.value" class="d-flex">
+                <IconWarning
+                  v-if="infoBetreuend.beruf.value > 40"
+                  class="icon-warning"
+                  aria-hidden="true"
+                />
+                <component
+                  :is="infoBetreuend.beruf.value > 40 ? 'strong' : 'span'"
+                  :class="{ darkred: infoBetreuend.beruf.value > 40 }"
+                >
+                  {{ infoBetreuend.beruf.value }}h/Woche
+                </component>
+              </div>
+              <template v-else>keine</template>
+            </div>
+          </div>
+
+          <div
+            v-if="infoBetreuend.unterstuetzungsangebot"
+            class="an-basisinformation-item an-basisinformation-item--unterstuetzungsangebot"
+          >
             <div class="an-basisinformation-item__title">
-              {{ infoBetreuend.beruf.label }}
+              {{ infoBetreuend.unterstuetzungsangebot.label + ':' }}
             </div>
-            <div v-if="infoBetreuend.beruf.value" class="d-flex">
-              <IconWarning
-                v-if="infoBetreuend.beruf.value > 40"
-                class="icon-warning"
-                aria-hidden="true"
-              />
-              <component
-                :is="infoBetreuend.beruf.value > 40 ? 'strong' : 'span'"
-                :class="{ darkred: infoBetreuend.beruf.value > 40 }"
-              >
-                {{ infoBetreuend.beruf.value }}h/Woche
-              </component>
-            </div>
-            <template v-else>keine</template>
-          </div>
-          <div v-if="infoBetreuend.beruf.value" class="an-dots">
-            <span
-              v-for="i in Math.floor(infoBetreuend.beruf.value)"
-              :key="i"
-              class="an-dots__dot"
-            />
-            <span
-              v-if="
-                Math.ceil(infoBetreuend.beruf.value) !==
-                infoBetreuend.beruf.value
-              "
-              class="an-dots__dot"
-              :style="{
-                '--percentage':
-                  (infoBetreuend.beruf.value -
-                    Math.floor(infoBetreuend.beruf.value)) *
-                    100 +
-                  '%'
-              }"
-            />
-          </div>
-        </div>
-
-        <div
-          v-if="infoBetreuend.unterstuetzungsangebot"
-          class="an-basisinformation-item an-basisinformation-item--unterstuetzungsangebot"
-        >
-          <div class="an-basisinformation-item__title">
-            {{ infoBetreuend.unterstuetzungsangebot.label }}
-          </div>
-          <ul v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)">
-            <li
-              v-for="(value, i) in infoBetreuend.unterstuetzungsangebot.value"
-              :key="i"
+            <div
+              v-if="Array.isArray(infoBetreuend.unterstuetzungsangebot.value)"
             >
-              {{ value }}
-            </li>
-          </ul>
-          <div v-else class="d-flex">
-            <IconWarning class="icon-warning" aria-hidden="true" />
-            <strong class="darkred">KEINE</strong>
+              <span
+                v-for="(value, i) in infoBetreuend.unterstuetzungsangebot.value"
+                :key="i"
+              >
+                {{
+                  i !== infoBetreuend.unterstuetzungsangebot.value.length - 1
+                    ? value + ','
+                    : value
+                }}
+              </span>
+            </div>
+            <div v-else class="d-flex">
+              <IconWarning class="icon-warning" aria-hidden="true" />
+              <strong class="darkred">KEINE</strong>
+            </div>
           </div>
         </div>
       </div>
-
       <!-- Demenz Person Beginn -->
 
-      <div class="col-3">
-        <div v-if="infoErkrankt.diagnose" class="an-basisinformation-item">
-          <div class="an-basisinformation-item__title">
-            {{ infoErkrankt.diagnose.label }}
-          </div>
-          <div>
-            <template v-if="infoErkrankt.diagnose.value">
-              {{ infoErkrankt.diagnose.value }}
-            </template>
-            <div v-else class="d-flex">
-              <IconWarning class="icon-warning" aria-hidden="true" />
-              <strong class="darkred">KEINE</strong>
-            </div>
-          </div>
+      <div class="colMd">
+        <div class="an-basisinformation__header" style="margin-left: auto;">
+          <strong>Demenzerkrankte Person</strong>
+          <template v-if="infoGeneral.values.alterErkrankt">
+            {{ infoGeneral.values.alterErkrankt }} Jahre</template
+          >
         </div>
-
-        <div v-if="infoErkrankt.pflegegeld" class="an-basisinformation-item">
-          <div class="an-basisinformation-item__title">
-            {{ infoErkrankt.pflegegeld.label }}
-          </div>
-          <div>
-            <template v-if="infoErkrankt.pflegegeld.value">
-              <span
-                v-html="pflegegeldLabels[infoErkrankt.pflegegeld.value]"
-              ></span>
-              <div class="an-mini-lollipop">
-                <div
-                  v-for="i in 7"
-                  :key="i"
-                  class="an-mini-lollipop__item"
-                  :class="{
-                    'an-mini-lollipop__item--active':
-                      i === Number(infoErkrankt.pflegegeld.value)
-                  }"
-                >
-                  <div class="an-mini-lollipop__bubble">{{ i }}</div>
-                </div>
+        <div class="box rightBox" style="flex: 1;">
+          <div
+            v-if="infoErkrankt.diagnose"
+            class="an-basisinformation-item--first"
+          >
+            <div class="an-basisinformation-item__title">
+              {{ infoErkrankt.diagnose.label }}
+            </div>
+            <div>
+              <template v-if="infoErkrankt.diagnose.value">
+                {{ infoErkrankt.diagnose.value }}
+              </template>
+              <div v-else>
+                <strong class="darkred">KEINE</strong>
               </div>
-            </template>
-            <div v-else class="d-flex">
-              <IconWarning class="icon-warning" aria-hidden="true" />
+            </div>
+          </div>
+
+          <div v-if="infoErkrankt.pflegegeld" class="an-basisinformation-item">
+            <div class="an-basisinformation-item__title">
+              {{ infoErkrankt.pflegegeld.label }}
+            </div>
+            <div>
+              <template v-if="infoErkrankt.pflegegeld.value">
+                <span
+                  v-html="pflegegeldLabels[infoErkrankt.pflegegeld.value]"
+                ></span>
+                <div class="an-mini-lollipop">
+                  <div
+                    v-for="i in 7"
+                    :key="i"
+                    class="an-mini-lollipop__item"
+                    :class="{
+                      'an-mini-lollipop__item--active':
+                        i === Number(infoErkrankt.pflegegeld.value)
+                    }"
+                  >
+                    <div class="an-mini-lollipop__bubble">{{ i }}</div>
+                  </div>
+                </div>
+              </template>
+              <div v-else>
+                <strong class="darkred">KEINE</strong>
+              </div>
+            </div>
+          </div>
+
+          <div
+            v-if="infoErkrankt.pflegebedarf"
+            class="an-basisinformation-item"
+          >
+            <div class="an-basisinformation-item__title">
+              {{ infoErkrankt.pflegebedarf.label }}
+            </div>
+            <div>
+              <template v-if="infoErkrankt.pflegebedarf.value">
+                {{ infoErkrankt.pflegebedarf.value }}
+              </template>
+              <template v-else>
+                <strong class="darkred">KEINE</strong>
+              </template>
+            </div>
+          </div>
+
+          <div
+            v-if="infoErkrankt.unterstuetzungsangebot"
+            class="an-basisinformation-item an-basisinformation-item--unterstuetzungsangebot"
+          >
+            <div class="an-basisinformation-item__title">
+              {{ infoErkrankt.unterstuetzungsangebot.label }}
+            </div>
+            <div
+              v-if="Array.isArray(infoErkrankt.unterstuetzungsangebot.value)"
+            >
+              <span
+                v-for="(value, i) in infoErkrankt.unterstuetzungsangebot.value"
+                :key="i"
+              >
+                {{
+                  i !== infoErkrankt.unterstuetzungsangebot.value.length - 1
+                    ? value + ','
+                    : value
+                }}
+              </span>
+            </div>
+            <div v-else>
               <strong class="darkred">KEINE</strong>
             </div>
           </div>
         </div>
-
-        <div v-if="infoErkrankt.pflegebedarf" class="an-basisinformation-item">
-          <div class="an-basisinformation-item__title">
-            {{ infoErkrankt.pflegebedarf.label }}
-          </div>
-          <div>
-            <template v-if="infoErkrankt.pflegebedarf.value">
-              {{ infoErkrankt.pflegebedarf.value }}
-            </template>
-            <template v-else>
-              KEINE
-            </template>
-          </div>
-        </div>
-
-        <div
-          v-if="infoErkrankt.unterstuetzungsangebot"
-          class="an-basisinformation-item an-basisinformation-item--unterstuetzungsangebot"
-        >
-          <div class="an-basisinformation-item__title">
-            {{ infoErkrankt.unterstuetzungsangebot.label }}
-          </div>
-          <ul v-if="Array.isArray(infoErkrankt.unterstuetzungsangebot.value)">
-            <li
-              v-for="(value, i) in infoErkrankt.unterstuetzungsangebot.value"
-              :key="i"
-            >
-              {{ value }}
-            </li>
-          </ul>
-          <div v-else class="d-flex">
-            <IconWarning class="icon-warning" aria-hidden="true" />
-            <strong class="darkred">KEINE</strong>
-          </div>
-        </div>
+      </div>
+      <div class="colSm">
+        <PersonOther class="iconOther" />
       </div>
     </div>
   </div>
@@ -209,11 +209,12 @@
 <script>
 import visJson from '@/data/visualisation.json';
 import IconWarning from '@/assets/icons/warning.svg?inline';
-import IconHands from '@/assets/icons/hands.svg?inline';
+import PersonMe from '@/assets/icons/person-arms-down_ich.svg?inline';
+import PersonOther from '@/assets/icons/person-arms-down_puzzle.svg?inline';
 
 export default {
   name: 'AnBasisinformation',
-  components: { IconWarning, IconHands },
+  components: { IconWarning, PersonMe, PersonOther },
   computed: {
     infoBetreuend() {
       const betreuendLabels = visJson.visualisation.basisinfo.betreuendeperson;
@@ -287,15 +288,74 @@ export default {
 $leftwidth: 40%;
 $centerwidth: 10%;
 $rightwidth: 50%;
+$yellow-color: #ffd700;
+$blue-color: #3566aa;
 
-.icon-hands {
-  margin-bottom: -$spacer * 2;
-  width: $centerwidth;
-  height: 4rem;
+.rowSpecial {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  .colSm {
+    display: flex;
+    flex-direction: column;
+    flex: 0.2;
+  }
+
+  .colMd {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    @media screen {
+      padding: 10px 0;
+    }
+  }
+}
+
+.iconMe {
+  height: 10rem;
+  width: 100%;
+  fill: $yellow-color;
+}
+
+.iconOther {
+  height: 10rem;
+  width: 100%;
+  fill: $blue-color;
+}
+
+.box {
+  padding: 30px 15px;
+  border: 2px solid $color-theme-lightgrey;
+  margin: 0 2%;
+}
+
+.leftBox {
+  border-left-width: 7px;
+  border-left-style: solid;
+  border-left-color: $yellow-color;
+}
+
+.rightBox {
+  text-align: right;
+  border-right-width: 7px;
+  border-right-style: solid;
+  border-right-color: $blue-color;
+
+  > * {
+    float: right;
+  }
 }
 
 .an-basisinformation {
   color-adjust: exact;
+
+  &__basic {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 
   &__header {
     margin-bottom: $spacer;
@@ -314,13 +374,6 @@ $rightwidth: 50%;
     &-erkrankt {
       width: $rightwidth;
     }
-
-    &-commoninfo {
-      border-top: 2px solid $color-theme-blue;
-      background-color: $color-theme-lightgrey;
-      width: 100%;
-      text-align: center;
-    }
   }
 
   .icon-warning {
@@ -333,7 +386,7 @@ $rightwidth: 50%;
 }
 
 .an-basisinformation-item {
-  margin-bottom: $spacer;
+  margin-top: 20px;
 
   &--unterstuetzungsangebot,
   &--sorgepflichten {
@@ -397,6 +450,7 @@ $rightwidth: 50%;
   $stickamount: 7;
   $bubblewidth: 24px;
   display: flex;
+  float: right;
   position: relative;
 
   &::after {
@@ -447,12 +501,12 @@ $rightwidth: 50%;
     &--active {
       &::after {
         width: $stickwidth * 2;
-        background-color: $color-theme-darkred;
+        background-color: $color-theme-darkgrey;
       }
 
       .an-mini-lollipop__bubble {
-        border-color: $color-theme-darkred;
-        background-color: $color-theme-darkred;
+        border-color: $color-theme-darkgrey;
+        background-color: $color-theme-darkgrey;
         color: white;
       }
     }

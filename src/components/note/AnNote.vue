@@ -179,7 +179,11 @@ export default {
       const textarea_alreadythere = this.$refs.ta_alreadythere;
       const textarea_newtext = this.$refs.ta_newtext;
       const category = categoryMap[this.$route.query.step];
-      const heading_inserted = `**${category}**: _${this.currentQuestionLabel}_`;
+      const cleanedLabel = this.currentQuestionLabel.replace(
+        /(<([^>]+)>)/gi,
+        ''
+      );
+      const heading_inserted = `**${category}**: _${cleanedLabel}_`;
       this.currentQuestionLabel_prev = this.currentQuestionLabel;
 
       if (textarea_alreadythere.value !== '') {
