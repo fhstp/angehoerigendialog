@@ -2,7 +2,7 @@
   <div v-if="showNotes" class="an-note">
     <div class="an-note__top-bar container">
       <div :style="{ opacity: isSaveHint ? 1 : 0 }" class="an-note__save-hint">
-        Notizen werden automatisch gespeichert
+        Notizen werden automatisch gespeichert...
       </div>
     </div>
     <div class="an-note__elementwrapper" @click.self="focusTaAlreadyThere">
@@ -18,6 +18,17 @@
             </button>
             <h2 class="an-note__heading">Meine Notizen</h2>
           </div>
+          <div class="an-note__controls">
+            <span>Mögliche Formatierungen</span>
+            <ul>
+              <li>
+                **Text** oder __Text__ verwenden für
+                <strong>Text (fett)</strong>
+              </li>
+              <li>*Text* oder _Text_ verwenden für <i>Text (kursiv)</i></li>
+            </ul>
+          </div>
+          <hr />
           <textarea
             v-show="showAlreadyThere"
             ref="ta_alreadythere"
@@ -32,38 +43,17 @@
                 </button>
 
                 <span class="an-note-current__label"
-                  >Aktuelle Kategorie zu meinen Notizen hinzufügen
+                  >Aktuelle <strong>Kategorie</strong> und <i>Frage</i> zu
+                  meinen Notizen hinzufügen
                 </span>
 
                 <span class="an-note-current__question">
-                  > {{ currentQuestionLabel }}</span
+                  > <strong>{{ currentQuestionCategory }}: </strong>
+                  <i>{{ currentQuestionLabel }}</i></span
                 >
               </div>
             </div>
-            <div>
-              <div class="an-note-current__line">
-                <hr
-                  style="
-                    background: black;
-                    border: none;
-                    color: black;
-                    height: 0.5px;
-                    width: 75%;
-                  "
-                />
-              </div>
-              <div>
-                <button class="an-note-current__action btn" @click="addHeading">
-                  <IconAddPlus />
-                </button>
-                <span class="an-note-current__label"
-                  >Aktuelle Frage zu meinen Notizen hinzufügen
-                </span>
-                <span class="an-note-current__question">
-                  > {{ currentQuestionLabel }}</span
-                >
-              </div>
-            </div>
+            <hr />
             <textarea
               ref="ta_newtext"
               v-model="noteNewData"
@@ -82,6 +72,7 @@
 import formJson from '@/data/form.json';
 import { form_filterAccordionItems } from '@/helpers/form.js';
 import { string_autosetTextareaHeight } from '@/helpers/string.js';
+import { categoryMap } from '@/helpers/note.js';
 import IconClose from '@/assets/icons/close.svg?inline';
 import IconAddPlus from '@/assets/icons/add_plus.svg?inline';
 
@@ -114,6 +105,9 @@ export default {
         );
       }
       return undefined;
+    },
+    currentQuestionCategory() {
+      return categoryMap[this.$route.query.step];
     },
     noteData: {
       get() {
@@ -184,7 +178,8 @@ export default {
     addHeading() {
       const textarea_alreadythere = this.$refs.ta_alreadythere;
       const textarea_newtext = this.$refs.ta_newtext;
-      const heading_inserted = `**${this.currentQuestionLabel}**`;
+      const category = categoryMap[this.$route.query.step];
+      const heading_inserted = `**${category}**: _${this.currentQuestionLabel}_`;
       this.currentQuestionLabel_prev = this.currentQuestionLabel;
 
       if (textarea_alreadythere.value !== '') {
@@ -265,6 +260,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+hr {
+  margin-top: 10px;
+  margin-bottom: 4px;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0184, 184, 184, 0.2),
+    rgba(184, 184, 184, 0.45),
+    rgba(184, 184, 184, 0.2)
+  );
+}
+
 .an-note {
   width: 100%;
   height: 100%;
@@ -344,10 +352,23 @@ export default {
     width: 100%;
   }
 
+  &__controls {
+    font-size: 0.6em;
+    color: $color-theme-darkgrey;
+    margin-left: 5px;
+    ul {
+      list-style-type: none;
+
+      li {
+        margin-left: 2px;
+        padding: 2px 0px;
+      }
+    }
+  }
+
   textarea {
     resize: none;
     border: none;
-    border-top: 1px solid $color-theme-darkgrey;
     padding: $spacer;
     width: 100%;
     outline: none;

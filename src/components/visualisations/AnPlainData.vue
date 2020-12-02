@@ -62,8 +62,22 @@ export default {
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
+      /**
+       * Advanced regex thanks to Karl Rathmanner
+       */
       return sanitizedNotes
-        .replace(/\*\*(\S.*([^\s]))\*\*/g, '<strong>$1</strong>')
+        .replace(
+          /((?<!\\)(?:\*\*\*|___))(?=\S)(.+?)(?<!\s|\\)\1/gms,
+          '<strong><i>$2</i></strong>'
+        ) // Consume combined strong and italics markers first, so tags are nested correctly
+
+        .replace(
+          /((?<!\\)(?:\*\*|__))(?=\S)(.+?)(?<!\s|\\)\1/gms,
+          '<strong>$2</strong>'
+        ) // Add strong tags
+
+        .replace(/((?<!\\)[*_])(?=\S)(.+?)(?<!\s|\\)\1/gms, '<i>$2</i>') // Add italics tags
+        .replace(/\\([*_])/gm, '$1') // Unescape the remaining escaped asterisks and underscores
         .replace(/\n/g, '<br>');
     }
   },
