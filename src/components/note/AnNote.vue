@@ -49,7 +49,7 @@
 
                 <span class="an-note-current__question">
                   > <strong>{{ currentQuestionCategory }}: </strong>
-                  <i>{{ currentQuestionLabel }}</i></span
+                  <i>{{ currentQuestionLabel | strippedContent }}</i></span
                 >
               </div>
             </div>
@@ -81,6 +81,11 @@ export default {
   components: {
     IconClose,
     IconAddPlus
+  },
+  filters: {
+    strippedContent(string) {
+      return string.replace(/<\/?[^>]+>/gi, ' ');
+    }
   },
   data() {
     return {
