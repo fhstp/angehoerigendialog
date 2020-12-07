@@ -356,18 +356,19 @@ export default {
     margin-top: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
-  }
-
-  &__done {
     width: 15vh;
     height: 15vh;
+
     border: none;
     box-shadow: 0 0 0 0 #ffd700;
     border-radius: 50%;
     padding: 3px;
     background-color: #ffbe1b;
-    text-transform: uppercase;
-    font-weight: bolder;
+    outline: none;
+
+    font-weight: bold;
+    font-size: 0.9em;
+    color: $color-theme-darkgrey;
     text-align: center;
     // background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/173024/jonathanlarradet_copy.png);
     // background-size: cover;
@@ -385,7 +386,8 @@ export default {
     -ms-animation: none;
     animation: none;
 
-    border: 2px solid $color-theme-darkgrey;
+    border: 2px solid $color-theme-lightgrey;
+    box-shadow: 0 2px 5px 0 #666;
     background: #ffbe1b;
   }
 
