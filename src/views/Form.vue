@@ -63,19 +63,23 @@
               >
                 {{ buttonText }}
               </button>
-              <router-link
-                v-else
-                :to="{
-                  query: {
-                    ...$route.query,
-                    step: Object.keys(form)[sectionIndex + 1],
-                    field: 0
-                  }
-                }"
-                class="btn"
-              >
-                Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
-              </router-link>
+              <div v-else class="an-form__further">
+                <router-link
+                  :to="{
+                    query: {
+                      ...$route.query,
+                      step: Object.keys(form)[sectionIndex + 1],
+                      field: 0
+                    }
+                  }"
+                  class="an-form__further-btn btn"
+                >
+                  <IconTriangle />
+                </router-link>
+                <span>
+                  Weiter zu <b>{{ steps[sectionIndex + 1].title }}</b></span
+                >
+              </div>
 
               <div
                 v-if="
@@ -138,6 +142,7 @@ import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconWarning from '@/assets/icons/warning.svg?inline';
+import IconTriangle from '@/assets/icons/dreieck.svg?inline';
 
 export default {
   name: 'Form',
@@ -148,7 +153,8 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconWarning
+    IconWarning,
+    IconTriangle
   },
   data() {
     return {
@@ -389,6 +395,15 @@ export default {
     border: 2px solid $color-theme-lightgrey;
     box-shadow: 0 2px 5px 0 #666;
     background: #ffbe1b;
+  }
+
+  &__further {
+    &-btn {
+      border: 2px solid #ffbe1b;
+      svg {
+        fill: #ffbe1b;
+      }
+    }
   }
 
   @-webkit-keyframes pulse {
