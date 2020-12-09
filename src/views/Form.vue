@@ -404,7 +404,7 @@ export default {
     &-btn {
       margin-right: 10px;
       border: 2px solid #ffbe1b;
-      min-width: 40px;
+      width: 40px;
       text-align: center;
       svg {
         position: relative;
