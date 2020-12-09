@@ -39,17 +39,6 @@
                       v-html-safe="field.label"
                       class="an-accordion-item__header-text"
                     ></span>
-
-                    <!-- <span class="an-accordion-item__header-icon">
-                      <IconCheckmark
-                        v-if="
-                          $store.getters.getFieldCompletion(
-                            `${sectionId}-${fieldId}`
-                          )
-                        "
-                        aria-label="fertig ausgefüllt"
-                      />
-                    </span> -->
                     <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
@@ -74,19 +63,23 @@
               >
                 {{ buttonText }}
               </button>
-              <router-link
-                v-else
-                :to="{
-                  query: {
-                    ...$route.query,
-                    step: Object.keys(form)[sectionIndex + 1],
-                    field: 0
-                  }
-                }"
-                class="btn"
-              >
-                Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
-              </router-link>
+              <div v-else class="an-form__further">
+                <router-link
+                  :to="{
+                    query: {
+                      ...$route.query,
+                      step: Object.keys(form)[sectionIndex + 1],
+                      field: 0
+                    }
+                  }"
+                  class="an-form__further-btn btn"
+                >
+                  <IconTriangle />
+                </router-link>
+                <span>
+                  Weiter zu <b>{{ steps[sectionIndex + 1].title }}</b></span
+                >
+              </div>
 
               <div
                 v-if="
@@ -149,6 +142,7 @@ import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
 import IconWarning from '@/assets/icons/warning.svg?inline';
+import IconTriangle from '@/assets/icons/dreieck.svg?inline';
 
 export default {
   name: 'Form',
@@ -159,7 +153,8 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconWarning
+    IconWarning,
+    IconTriangle
   },
   data() {
     return {
@@ -360,10 +355,76 @@ export default {
   }
 
   &__done {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
+    width: 15vh;
+    height: 15vh;
+
+    border: none;
+    box-shadow: 0 0 0 0 #ffd700;
+    border-radius: 50%;
+    padding: 3px;
+    background-color: #ffbe1b;
+    outline: none;
+
+    font-weight: bold;
+    font-size: 0.9em;
+    color: $color-theme-darkgrey;
+    text-align: center;
+    // background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/173024/jonathanlarradet_copy.png);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    cursor: pointer;
+    -webkit-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  &__done:hover {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -ms-animation: none;
+    animation: none;
+
+    border: 2px solid $color-theme-lightgrey;
+    box-shadow: 0 2px 5px 0 #666;
+    background: #ffbe1b;
+  }
+
+  &__further {
+    &-btn {
+      border: 2px solid #ffbe1b;
+      svg {
+        fill: #ffbe1b;
+      }
+    }
+  }
+
+  @-webkit-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @-moz-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @-ms-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
   }
 
   &__openquestions {
