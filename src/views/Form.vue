@@ -398,10 +398,25 @@ export default {
   }
 
   &__further {
+    display: flex;
+    align-items: center;
+
     &-btn {
+      margin-right: 10px;
       border: 2px solid #ffbe1b;
+      min-width: 40px;
+      text-align: center;
       svg {
+        position: relative;
+        left: 50%;
+        -webkit-transform: scale(10) translateY(-8%);
+        -ms-transform: scale(10) translateY(-8%);
+        transform: scale(10) translateY(-8%);
         fill: #ffbe1b;
+      }
+
+      &:hover {
+        background-color: transparent;
       }
     }
   }
