@@ -9,6 +9,7 @@
       />
       <div class="an-form__content">
         <div class="container" style="margin-top: 40px;">
+          <!-- General Information -->
           <div v-if="currView !== 'ende'" class="an-visualisation__infos">
             <h1 :style="{ marginBottom: '20px' }">
               Angehörigengespräch von {{ headerData.caregivername }}
@@ -34,128 +35,122 @@
           </div>
 
           <template v-if="currView === 'visuelle_auswertung'">
-            <div :class="{ 'an-visualisation__page': showVisualisations }">
-              <!-- Vis Page 1 -->
-
-              <template v-if="showVisualisations">
-                <div class="an-visualisation__visualisation-wrapper">
-                  <AnBasisInformation />
-                  <div class="an-visualisation__screen_spacer" />
-
-                  <div v-show="isAvailable.flower">
-                    <div class="an-visualisation__heading-wrapper">
-                      <h2>Dafür habe ich Zeit</h2>
-                      <AnEditButton
-                        section-id="ressourcen_belastungen"
-                        field-id="2"
-                      />
-                    </div>
-                    <AnFlower :available.sync="isAvailable.flower" />
-                  </div>
-                </div>
-                <div class="an-visualisation__screen_spacer" />
-              </template>
+            <!-- Vis Page 1 -->
+            <div class="an-visualisation__page">
+              <div class="an-visualisation__visualisation-wrapper">
+                <AnBasisInformation />
+              </div>
+              <div class="an-visualisation__screen_spacer" />
             </div>
 
-            <!-- Thats how we can force a page break if needed -->
-            <!-- <div class="pagebreak" /> -->
-
             <!-- Vis Page 2 -->
-
-            <template v-if="showVisualisations">
-              <div
-                v-show="isAvailable.behaviourChanges || isAvailable.flower"
-                class="an-visualisation__page"
-              >
-                <div v-show="isAvailable.behaviourChanges">
+            <div v-if="showVisualisations" class="an-visualisation__page">
+              <div class="an-visualisation__visualisation-wrapper">
+                <div v-show="isAvailable.flower">
                   <div class="an-visualisation__heading-wrapper">
-                    <h2>Verhaltensveränderungen</h2>
+                    <h2>Dafür habe ich Zeit</h2>
                     <AnEditButton
-                      section-id="verhaltensveraenderungen"
-                      field-id="0"
+                      section-id="ressourcen_belastungen"
+                      field-id="2"
                     />
                   </div>
-                  <AnBehaviour :available.sync="isAvailable.behaviourChanges" />
+                  <AnFlower :available.sync="isAvailable.flower" />
                 </div>
-                <div class="an-visualisation__screen_spacer" />
-
-                <div
-                  v-show="isAvailable.situation || isAvailable.healthChanges"
-                  class="an-visualisation__heading-wrapper"
-                >
-                  <h2>Gesundheit</h2>
-                  <AnEditButton section-id="gesundheit" field-id="0" />
-                </div>
-
-                <AnSituation
-                  v-show="isAvailable.situation"
-                  :available.sync="isAvailable.situation"
-                />
-                <div class="an-visualisation__screen_spacer" />
-
-                <AnHealth
-                  v-show="isAvailable.healthChanges"
-                  :available.sync="isAvailable.healthChanges"
-                />
-
-                <div class="an-visualisation__screen_spacer" />
               </div>
+              <div class="an-visualisation__screen_spacer" />
+            </div>
 
-              <!-- Vis Page 3 -->
-
-              <div
-                v-show="isAvailable.careTasks"
-                class="an-visualisation__page an-visualisation__page--caretasks"
-              >
+            <!-- Vis Page 3 -->
+            <div
+              v-show="isAvailable.behaviourChanges || isAvailable.flower"
+              class="an-visualisation__page"
+            >
+              <div v-show="isAvailable.behaviourChanges">
                 <div class="an-visualisation__heading-wrapper">
-                  <h2>Praktische Betreuungsaufgaben</h2>
+                  <h2>Verhaltensveränderungen</h2>
                   <AnEditButton
-                    section-id="praktische_betreungsaufgaben"
+                    section-id="verhaltensveraenderungen"
                     field-id="0"
                   />
                 </div>
-                <AnCareTasks :available.sync="isAvailable.careTasks" />
+                <AnBehaviour :available.sync="isAvailable.behaviourChanges" />
               </div>
               <div class="an-visualisation__screen_spacer" />
 
-              <!-- Vis Page 4 -->
+              <div
+                v-show="isAvailable.situation || isAvailable.healthChanges"
+                class="an-visualisation__heading-wrapper"
+              >
+                <h2>Gesundheit</h2>
+                <AnEditButton section-id="gesundheit" field-id="0" />
+              </div>
 
-              <template v-if="showVisualisations">
-                <div class="an-visualisation__page">
+              <AnSituation
+                v-show="isAvailable.situation"
+                :available.sync="isAvailable.situation"
+              />
+              <div class="an-visualisation__screen_spacer" />
+
+              <AnHealth
+                v-show="isAvailable.healthChanges"
+                :available.sync="isAvailable.healthChanges"
+              />
+              <div class="an-visualisation__screen_spacer" />
+            </div>
+
+            <!-- Vis Page 4 -->
+            <div
+              v-show="isAvailable.careTasks"
+              class="an-visualisation__page an-visualisation__page--caretasks"
+            >
+              <div class="an-visualisation__heading-wrapper">
+                <h2>Praktische Betreuungsaufgaben</h2>
+                <AnEditButton
+                  section-id="praktische_betreungsaufgaben"
+                  field-id="0"
+                />
+              </div>
+              <AnCareTasks
+                :available.sync="isAvailable.careTasks"
+                style="margin-top: 35px;"
+              />
+              <div class="an-visualisation__screen_spacer" />
+            </div>
+
+            <!-- Vis Page 5 -->
+            <div class="an-visualisation__page">
+              <div
+                v-show="isAvailable.resourcespressure"
+                class="an-visualisation__balloon-wrapper"
+              >
+                <div class="an-visualisation__balloon-labels">
                   <div
-                    v-show="isAvailable.resourcespressure"
-                    class="an-visualisation__balloon-wrapper"
+                    class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
                   >
-                    <div class="an-visualisation__balloon-labels">
-                      <div
-                        class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--kraft"
-                      >
-                        <h2>Das gibt mir Kraft</h2>
-                        <AnEditButton
-                          section-id="ressourcen_belastungen"
-                          field-id="0"
-                        />
-                      </div>
-                      <div
-                        class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
-                      >
-                        <h2>Das belastet mich</h2>
-                        <AnEditButton
-                          section-id="ressourcen_belastungen"
-                          field-id="0"
-                        />
-                      </div>
-                    </div>
-                    <div class="an-visualisation__balloon-container">
-                      <AnResourcesPressure
-                        :available.sync="isAvailable.resourcespressure"
-                      />
-                    </div>
+                    <h2>Das gibt mir Kraft</h2>
+                    <AnEditButton
+                      section-id="ressourcen_belastungen"
+                      field-id="0"
+                    />
                   </div>
-                  <div class="an-visualisation__screen_spacer" />
+                  <div
+                    class="an-visualisation__heading-wrapper an-visualisation__heading-wrapper--belastung"
+                  >
+                    <h2>Das belastet mich</h2>
+                    <AnEditButton
+                      section-id="ressourcen_belastungen"
+                      field-id="0"
+                    />
+                  </div>
                 </div>
-              </template>
-            </template>
+                <div class="an-visualisation__balloon-container">
+                  <AnResourcesPressure
+                    :available.sync="isAvailable.resourcespressure"
+                  />
+                </div>
+              </div>
+              <div class="an-visualisation__screen_spacer" />
+            </div>
           </template>
 
           <template v-if="currView === 'schriftliche_auswertung'">
@@ -383,7 +378,7 @@ export default {
 
     .an-visualisation.isChromium & {
       @media print {
-        height: 277mm; // overflow issues in firefox/safari, so height will be only defined in chrome
+        height: 100%; // overflow issues in firefox/safari, so height will be only defined in chrome
       }
     }
 

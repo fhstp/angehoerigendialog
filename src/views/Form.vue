@@ -56,31 +56,6 @@
               </template>
             </AnAccordion>
             <div class="container">
-              <button
-                v-if="steps.length === sectionIndex + 1"
-                class="an-form__done btn"
-                @click="handleFinish()"
-              >
-                {{ buttonText }}
-              </button>
-              <div v-else class="an-form__further">
-                <router-link
-                  :to="{
-                    query: {
-                      ...$route.query,
-                      step: Object.keys(form)[sectionIndex + 1],
-                      field: 0
-                    }
-                  }"
-                  class="an-form__further-btn btn"
-                >
-                  <IconTriangle />
-                </router-link>
-                <span>
-                  Weiter zu <b>{{ steps[sectionIndex + 1].title }}</b></span
-                >
-              </div>
-
               <div
                 v-if="
                   steps.length === sectionIndex + 1 && showOpenQuestions == true
@@ -119,6 +94,31 @@
                     ></div>
                   </router-link>
                 </div>
+              </div>
+
+              <button
+                v-if="steps.length === sectionIndex + 1"
+                class="an-form__done btn"
+                @click="handleFinish()"
+              >
+                {{ buttonText }}
+              </button>
+              <div v-else class="an-form__further">
+                <router-link
+                  :to="{
+                    query: {
+                      ...$route.query,
+                      step: Object.keys(form)[sectionIndex + 1],
+                      field: 0
+                    }
+                  }"
+                  class="an-form__further-btn btn"
+                >
+                  <IconTriangle />
+                </router-link>
+                <span>
+                  Weiter zu <b>{{ steps[sectionIndex + 1].title }}</b></span
+                >
               </div>
             </div>
           </section>
@@ -360,6 +360,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin-top: $spacer * 10;
+    margin-bottom: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
     width: 15vh;
@@ -443,7 +444,7 @@ export default {
   }
 
   &__openquestions {
-    margin-top: $spacer * 2;
+    margin-top: $spacer * 8;
     margin-bottom: $spacer * 2;
     border-radius: 3px;
     font-size: 1.2rem;
