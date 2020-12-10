@@ -202,12 +202,12 @@ export default {
     }
 
     &--yellow {
-      fill: #ffd700;
+      fill: $color-theme-yellow;
       // stroke: $color-theme-darkgrey;
     }
 
     &--green {
-      fill: #35aa6c;
+      fill: $color-theme-green;
       // stroke: $color-theme-darkgrey;
     }
   }

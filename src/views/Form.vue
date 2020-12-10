@@ -370,7 +370,7 @@ export default {
     box-shadow: 0 0 0 0 #ffd700;
     border-radius: 50%;
     padding: 3px;
-    background-color: #ffbe1b;
+    background-color: $color-theme-yellow;
     outline: none;
 
     font-weight: bold;

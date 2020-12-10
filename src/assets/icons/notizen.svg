@@ -3,7 +3,7 @@
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
 <g transform="matrix(1, 0, 0, 1, 1005.4, 688.4)">
-	<path id="Kreis-2" fill="#FFD700" d="M-905.4-688.4c55.23,0,100,44.77,100,100s-44.77,100-100,100s-100-44.77-100-100l0,0
+	<path id="Kreis-2" fill="#FFBE1B" d="M-905.4-688.4c55.23,0,100,44.77,100,100s-44.77,100-100,100s-100-44.77-100-100l0,0
 		C-1005.4-643.63-960.63-688.4-905.4-688.4z"/>
 </g>
 <g id="Gruppe_890" transform="translate(1040.951 718.693)">
@@ -16,13 +16,13 @@
 					c0,1.87-1.52,3.39-3.39,3.39H616.7c-1.87,0-3.39-1.52-3.39-3.39v-70.88C613.32-980.07,614.83-981.59,616.7-981.59z"/>
 			</g>
 			<g id="Gruppe_868" transform="translate(0 40.247) rotate(-90)">
-				
+
 					<line id="Linie_164" fill="none" stroke="#707070" stroke-width="11.2867" stroke-linecap="round" x1="620.02" y1="-983.27" x2="620.02" y2="-977.24"/>
-				
+
 					<line id="Linie_165" fill="none" stroke="#707070" stroke-width="11.2867" stroke-linecap="round" x1="646.15" y1="-983.27" x2="646.15" y2="-977.24"/>
-				
+
 					<line id="Linie_166" fill="none" stroke="#707070" stroke-width="11.2867" stroke-linecap="round" x1="672.28" y1="-983.27" x2="672.28" y2="-977.24"/>
-				
+
 					<line id="Linie_167" fill="none" stroke="#707070" stroke-width="11.2867" stroke-linecap="round" x1="698.41" y1="-983.27" x2="698.41" y2="-977.24"/>
 			</g>
 			<g id="Rechteck_868" transform="translate(9.374 9.77)">
@@ -35,18 +35,18 @@
 	</g>
 	<g id="Gruppe_889" transform="translate(39.129 19.747) rotate(19)">
 		<g id="Rechteck_866" transform="translate(0 0)">
-			
+
 				<rect x="-1123.33" y="-276.62" transform="matrix(2.229608e-06 1 -1 2.229608e-06 -1352.0256 816.8169)" fill="#BEBEBE" width="77.81" height="18.03"/>
-			
+
 				<rect x="-1122.2" y="-275.49" transform="matrix(2.229608e-06 1 -1 2.229608e-06 -1352.0256 816.8169)" fill="none" stroke="#707070" stroke-width="2.2573" width="75.55" height="15.77"/>
 		</g>
-		
+
 			<rect id="Rechteck_867" x="-1086.79" y="-237.49" transform="matrix(2.229607e-06 1 -1 2.229607e-06 -1315.2638 853.5787)" fill="#BEBEBE" width="4.74" height="13.28"/>
 		<g id="Polygon_174" transform="translate(7.987 39.723) rotate(180)">
 			<path fill="#BEBEBE" d="M1099.15,267.3h-13.48l6.74-8.87L1099.15,267.3z"/>
 			<path fill="#707070" d="M1092.41,260.3l-4.46,5.87h8.93L1092.41,260.3 M1092.41,256.56l9.01,11.86h-18.03L1092.41,256.56z"/>
 		</g>
-		
+
 			<line id="Linie_242" fill="none" stroke="#707070" stroke-width="2.2573" x1="-1092.25" y1="-298.21" x2="-1076.59" y2="-298.21"/>
 	</g>
 </g>
