@@ -2,15 +2,15 @@ title: Praktische Betreuungsaufgaben
 fields:
 
   praktischebetreuungsaufgabenhinweis:
-    label: Um einen <strong>Einblick</strong> in den derzeitigen Pflege- und Unterstützungsbedarf
+    label: Um einen <strong>Einblick</strong> in den derzeitigen <strong>Pflege- und Unterstützungsbedarf</strong>
           Ihres/Ihrer Angehörigen und einen Eindruck von dem, was Sie leisten, zu
           bekommen, stelle ich Ihnen nun einige Fragen zu den <strong>praktischen Betreuungsaufgaben</strong>.
           Wir werden gemeinsam eine Liste mit 11 <strong>Tätigkeiten</strong> durchgehen,
           von denen wir wissen, dass andere demenzerkrankte Personen
           dabei häufig auf <strong>Hilfe angewiesen</strong> sind. Bitte geben Sie an, ob Ihr/e Angehörige/
-          r derzeit – laufend oder auch nur fallweise – <strong>Hilfe</strong> in den genannten
-          Bereichen <strong>benötigt</strong> und wenn ja, von wem diese Hilfe geleistet wird bzw.
-          wer diese Hilfe organisiert (z. B. Essen auf Rädern, 24-Stunden-Betreuung).
+          r derzeit – <strong>laufend</strong> oder auch nur <strong>fallweise – Hilfe</strong> in den genannten
+          Bereichen <strong>benötigt</strong> und wenn ja, <strong>von wem diese Hilfe geleistet wird bzw.
+          wer diese Hilfe organisiert</strong> (z. B. Essen auf Rädern, 24-Stunden-Betreuung).
     type: hint
     size: medium
 
@@ -18,17 +18,17 @@ fields:
     label: <strong>Benötigen</strong> Sie Ihrer Einschätzung nach bei der Durchführung oder Organisation in folgenden Bereichen <strong>Unterstützung</strong>?
     type: checkboxes
     options:
-      mahlzeit: Zubereiten der Mahlzeiten
-      nahrungsaufnahme: Nahrungsaufnahme
-      badenwaschenduschen: Baden, Waschen, Duschen
-      zahnpflegehaarhautnagelpflege: Zahnpflege, Haar-, Haut- und Nagelpflege
-      toilette: Toilettengängen bzw. Inkontinenzvorlagen wechseln, Intimpflege
-      kleidung: An- und Auskleiden bzw. Zurechtlegen der Kleidung
-      haushalt: Haushaltsführung bzw. Einkäufen
-      weglaufen: Vermeiden des Weglaufens
-      verletzungen: Vermeiden von Stürzen und Verletzungen
-      anwesend: Persönlich verfügbar/anwesend sein
-      behoerdenwege: Behördenwege erledigen, sich über Unterstützungsleistungen informieren und/oder diese organisieren
+      mahlzeit: 3.1 Zubereiten der Mahlzeiten
+      nahrungsaufnahme: 3.2 Nahrungsaufnahme
+      badenwaschenduschen: 3.3 Baden, Waschen, Duschen
+      zahnpflegehaarhautnagelpflege: 3.4 Zahnpflege, Haar-, Haut- und Nagelpflege
+      toilette: 3.5 Toilettengängen bzw. Inkontinenzvorlagen wechseln, Intimpflege
+      kleidung: 3.6 An- und Auskleiden bzw. Zurechtlegen der Kleidung
+      haushalt: 3.7 Haushaltsführung bzw. Einkäufen
+      weglaufen: 3.8 Vermeiden des Weglaufens
+      verletzungen: 3.9 Vermeiden von Stürzen und Verletzungen
+      anwesend: 3.10 Persönlich verfügbar/anwesend sein
+      behoerdenwege: 3.11 Behördenwege erledigen, sich über Unterstützungsleistungen informieren und/oder diese organisieren
     activefields:
       details:
         label: Von wem wird diese Unterstützung geleistet?

@@ -11,19 +11,19 @@ fields:
     size: medium
 
   verhaeltnis:
-    label: In welchem <strong>verwandtschaftlichen Verhältnis</strong> stehen Sie zur demenzerkrankten Person?
+    label: 1.1. In welchem <strong>verwandtschaftlichen Verhältnis</strong> stehen Sie zur demenzerkrankten Person?
     type: text
 
   alter:
-    label: Wie <strong>alt</strong> ist er/sie?
+    label: 1.2 Wie <strong>alt</strong> ist er/sie?
     type: number
 
   pflegebedarf:
-    label: Seit wann hat er/sie verstärkten <strong>Unterstützungs- und/oder Pflegebedarf?</strong>
+    label: 1.3 Seit wann hat er/sie <strong>verstärkten Unterstützungs- und/oder Pflegebedarf?</strong>
     type: text
 
   diagnose:
-    label: Gibt es eine ärztliche <strong>Demenzdiagnose</strong>?
+    label: 1.4 Gibt es eine <strong>ärztliche Demenzdiagnose?</strong>
     type: toggle
     subfields:
       diagnosedetail:
@@ -33,7 +33,7 @@ fields:
           diagnose: true
 
   pflegegeld:
-    label: Bekommt er/sie <strong>Pflegegeld</strong>?
+    label: 1.5 Bekommt er/sie <strong>Pflegegeld</strong>?
     type: toggle
     subfields:
       pflegegelddetail:
@@ -51,11 +51,11 @@ fields:
           pflegegeld: true
 
   haushalt:
-    label: Leben Sie in einem <strong>gemeinsamen</strong> Haushalt?
+    label: 1.6 Leben Sie in einem <strong>gemeinsamen Haushalt</strong>?
     type: toggle
 
   unterstuetzungsangebot:
-    label: Nimmt er/sie derzeit <strong>Unterstützungsangebote</strong> für demenzerkrankte Personen in Anspruch?
+    label: 1.7 Nimmt er/sie derzeit <strong>Unterstützungsangebote für demenzerkrankte Personen</strong> in Anspruch?
     type: toggle
     subfields:
       unterstuetzungsangebotdetail:

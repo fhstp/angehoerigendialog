@@ -3,11 +3,11 @@ titleShort: Betreuende Person
 fields:
 
   alter:
-    label: Wie <strong>alt</strong> sind Sie?
+    label: 2.1 Wie <strong>alt</strong> sind Sie?
     type: number
 
   beruf:
-    label: Sind Sie <strong>berufstätig</strong>?
+    label: 2.2 Sind Sie <strong>berufstätig</strong>?
     type: toggle
     subfields:
       berufdetail:
@@ -17,7 +17,7 @@ fields:
           beruf: true
 
   sorgepflichten:
-    label: Haben Sie noch <strong>weitere Betreuungs- oder Sorgepflichten</strong>, etwa für Kinder oder andere (pflegebedürftige) Angehörige?
+    label: 2.3 Haben Sie noch <strong>weitere Betreuungs- oder Sorgepflichten</strong>, etwa für Kinder oder andere (pflegebedürftige) Angehörige?
     type: toggle
     subfields:
       sorgepflichtendetail:
@@ -27,7 +27,7 @@ fields:
           sorgepflichten: true
 
   unterstuetzungsangebot:
-    label: Nehmen Sie derzeit <strong>Unterstützungsangebote</strong> für pflegende Angehörige in Anspruch?
+    label: 2.4 Nehmen Sie derzeit <strong>Unterstützungsangebote für pflegende Angehörige</strong> in Anspruch?
     type: toggle
     subfields:
       unterstuetzungsangebotdetail:
@@ -37,7 +37,7 @@ fields:
           unterstuetzungsangebot: true
 
   demenz:
-    label: Haben Sie bereits <strong>Vorwissen</strong> über die Erkrankung <strong>Demenz</strong> und ihren Verlauf?
+    label: 2.5 Haben Sie bereits <strong>Vorwissen</strong> über die Erkrankung <strong>Demenz</strong> und ihren Verlauf?
     type: toggle
     subfields:
       demenzdetails:
@@ -47,28 +47,28 @@ fields:
           demenz: true
 
   beratungsgespraech:
-    label: Welche <strong>Erwartungen</strong> an das Beratungsgespräch haben Sie für sich selbst und für Ihre/n Angehörige/n?
+    label: 2.6 Welche <strong>Erwartungen</strong> an das Beratungsgespräch haben Sie für sich selbst und für Ihre/n Angehörige/n?
     type: text
 
   situationseinschaetzung:
-    label: Offene Fragen zur Situationseinschätzung
+    label: 2.7 Offene Fragen zur Situationseinschätzung
     type: heading
     size: medium
 
   pflege:
-    label: Wie ist es dazu gekommen, dass Sie selbst für <strong>Ihre/n Angehörige/n sorgen</strong> und <strong>wie lange</strong> machen Sie das schon?
+    label: 2.8 Wie ist es dazu gekommen, dass Sie selbst für <strong>Ihre/n Angehörige/n sorgen</strong> und <strong>wie lange</strong> machen Sie das schon?
     type: text
 
   verantwortung:
-    label: Wer fühlt sich sonst noch <strong>verantwortlich</strong> für Ihre/n Angehörige/n?
+    label: 2.9 Wer fühlt sich sonst noch <strong>verantwortlich</strong> für Ihre/n Angehörige/n?
     type: text
 
   professionelleHilfe:
-    label: Wird Ihr/e Angehörige/r auch von <strong>professionellen HelferInnen</strong> unterstützt, beispielsweise Hauskrankenhilfe, Heimhilfe, 24h-Betreuung oder in Tageszentren?
+    label: 2.10 Wird Ihr/e Angehörige/r auch von <strong>professionellen HelferInnen</strong> unterstützt, beispielsweise Hauskrankenhilfe, Heimhilfe, 24h-Betreuung oder in Tageszentren?
     type: text
 
   zufriedenheit:
-    label: Wie <strong>zufrieden</strong> sind Sie persönlich mit der derzeitigen Unterstützung?
+    label: 2.11 Wie <strong>zufrieden</strong> sind Sie persönlich mit der derzeitigen Unterstützung?
     type: range
     step: 1
     min:
