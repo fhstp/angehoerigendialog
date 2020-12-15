@@ -13,23 +13,23 @@ fields:
 
   veraenderungen:
     label: Bitte geben Sie an, ob die folgenden Veränderungen zurzeit auch <strong>bei Ihrem/Ihrer
-          Angehörigen auftreten</strong> und wie Sie damit <strong>zurechtkommen</strong>. Die Skala, auf der Sie das
+          Angehörigen auftreten</strong> und <strong>wie Sie damit zurechtkommen</strong>. Die Skala, auf der Sie das
           einschätzen können, reicht von „sehr gut“ bis „schlecht“. Der/die Angehörige …
     type: checkboxes
     options:
-      wiederholung: … <strong>wiederholt</strong> sich <strong>oft</strong> (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
-      sachverhalte: … <strong>begreift</strong> schwierige <strong>Sachverhalte nicht</strong> mehr (z. B. kann einer längeren Erklärung nicht folgen)
-      erzaehltes: … <strong>vergisst Erzähltes</strong> schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
-      apatisch: … ist <strong>gleichgültig/apatisch</strong>
-      merkwuerdigedinge: … tut <strong>Dinge</strong>, die mir <strong>merkwürdig</strong> oder <strong>unlogisch</strong> erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
-      unruhig: … ist <strong>unruhig</strong> (z. B. hat einen erhöhten Bewegungsdrang)
-      weglaufen: … <strong>läuft</strong> von zu Hause <strong>weg</strong>
-      aggresiv: … wird <strong>verbal aggresiv</strong> (z.B. schimpft, wird laut)
-      handgfreilich: … wird <strong>handgreiflich</strong> (z. B. hält mich stark fest und/oder schlägt mich)
-      halluzinationen: … <strong>sieht/hört Dinge</strong>, die <strong>nicht da</strong> sind (z. B. Halluzinationen, paranoide Ideen)
-      wahnhafteideen: … hat <strong>wahnhafte Ideen</strong>
-      schwankendeverfassung: … zeigt <strong>schwankende Verfassung</strong> (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
-      verhaltenweise: … zeigt Verhaltensweisen, die <strong>ihn/sie selbst gefährden</strong> (z. B. schaltet den Herd ein und vergisst darauf)
+      wiederholung: 4.1 … <strong>wiederholt</strong> sich <strong>oft</strong> (z. B. stellt dieselbe Frage, erzählt dieselben Dinge)
+      sachverhalte: 4.2 … <strong>begreift</strong> schwierige <strong>Sachverhalte nicht</strong> mehr (z. B. kann einer längeren Erklärung nicht folgen)
+      erzaehltes: 4.3 … <strong>vergisst Erzähltes</strong> schnell (z. B. kann sich nach kurzer Zeit an Erzähltes nicht mehr erinnern)
+      apatisch: 4.4 … ist <strong>gleichgültig/apatisch</strong>
+      merkwuerdigedinge: 4.5 … tut <strong>Dinge</strong>, die mir <strong>merkwürdig</strong> oder <strong>unlogisch</strong> erscheinen (z. B. versteckt Gegenstände und/oder räumt Kleidung um)
+      unruhig: 4.6 … ist <strong>unruhig</strong> (z. B. hat einen erhöhten Bewegungsdrang)
+      weglaufen: 4.7 … <strong>läuft</strong> von zu Hause <strong>weg</strong>
+      aggresiv: 4.8 … wird <strong>verbal aggresiv</strong> (z.B. schimpft, wird laut)
+      handgfreilich: 4.9 … wird <strong>handgreiflich</strong> (z. B. hält mich stark fest und/oder schlägt mich)
+      halluzinationen: 4.10 … <strong>sieht/hört Dinge</strong>, die <strong>nicht da</strong> sind (z. B. Halluzinationen, paranoide Ideen)
+      wahnhafteideen: 4.11 … hat <strong>wahnhafte Ideen</strong>
+      schwankendeverfassung: 4.12 … zeigt <strong>schwankende Verfassung</strong> (z.B. in einem kurzen Zeitraum schneller Stimmungswechsel)
+      verhaltenweise: 4.13 … zeigt Verhaltensweisen, die <strong>ihn/sie selbst gefährden</strong> (z. B. schaltet den Herd ein und vergisst darauf)
     activefields:
       details:
         label: Wie <strong>kommen Sie</strong> selbst mit diesem <strong>Verhalten zurecht</strong>?

@@ -169,6 +169,7 @@ $thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
     }
     &::-webkit-slider-runnable-track {
       @include range-track;
+      border: 2px solid $color-theme-darkgrey;
     }
     &::-moz-range-track {
       @include range-track;

@@ -15,7 +15,7 @@ fields:
     size: medium
 
   gesundheitszustand:
-    label: Wenn Sie auf die <strong>letzten zwei Wochen</strong> zurückblicken, <strong>wie gesund</strong> fühlen Sie sich derzeit?
+    label: 5.1 Wenn Sie auf die <strong>letzten zwei Wochen</strong> zurückblicken, <strong>wie gesund</strong> fühlen Sie sich derzeit?
     type: range
     step: 1
     min:
@@ -26,7 +26,7 @@ fields:
       label: sehr gesund
 
   nervlichebelastung:
-    label: Wie schätzen Sie Ihre <strong>nervliche Belastung</strong> ein?
+    label: 5.2 Wie schätzen Sie Ihre <strong>nervliche Belastung</strong> ein?
     type: range
     step: 1
     min:
@@ -37,7 +37,7 @@ fields:
       label: nicht belastet
 
   energiereserven:
-    label: Wie schätzen Sie Ihre <strong>Energiereserven</strong> ein?
+    label: 5.3 Wie schätzen Sie Ihre <strong>Energiereserven</strong> ein?
     type: range
     step: 1
     min:
@@ -48,19 +48,19 @@ fields:
       label: sehr gute Energiereserven
 
   einschaetzung:
-    label: <strong>Sorgen</strong> Sie Ihrer Einschätzung nach gut dafür, dass <strong>es Ihnen selbst gut geht</strong>?
+    label: 5.4 <strong>Sorgen</strong> Sie Ihrer Einschätzung nach gut dafür, dass <strong>es Ihnen selbst gut geht</strong>?
     type: text
 
   kraefte:
-    label: Ich nehme an, Sie haben sich schon überlegt, wie Sie für sich selbst sorgen können. Was <strong>hilft</strong> Ihnen, Ihre <strong>Kräfte zu erhalten</strong>?
+    label: 5.5 Ich nehme an, Sie haben sich schon überlegt, wie Sie für sich selbst sorgen können. Was <strong>hilft</strong> Ihnen, Ihre <strong>Kräfte zu erhalten</strong>?
     type: text
 
   koerperlichebeschwerden:
-    label: Haben Sie <strong>körperliche Beschwerden</strong>, die Ihnen bei der Pflege und Betreuung Ihres/Ihrer Angehörigen im Wege stehen? Zum Beispiel Probleme beim Gehen oder Rückenschmerzen?
+    label: 5.6 Haben Sie <strong>körperliche Beschwerden</strong>, die Ihnen bei der Pflege und Betreuung Ihres/Ihrer Angehörigen im Wege stehen? Zum Beispiel Probleme beim Gehen oder Rückenschmerzen?
     type: text
 
   gefuehle:
-    label: Welche <strong>Gefühle</strong> kommen bei Ihnen während der <strong>Betreuung</strong> manchmal zum Vorschein?
+    label: 5.7 Welche <strong>Gefühle</strong> kommen bei Ihnen während der <strong>Betreuung</strong> manchmal zum Vorschein?
     type: text
 
   gesundheitszustandhinweis:
@@ -72,7 +72,7 @@ fields:
     size: medium
 
   erschoepfung:
-    label: Ich fühle mich oft <strong>körperlich erschöpft</strong>.
+    label: 5.8 Ich fühle mich oft <strong>körperlich erschöpft</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -80,7 +80,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   pflegegesundheit:
-    label: Durch die Pflege wird meine <strong>Gesundheit angegriffen</strong>.
+    label: 5.9 Durch die Pflege wird meine <strong>Gesundheit angegriffen</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -88,7 +88,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   eigenekraft:
-    label: Die Pflege <strong>kostet viel</strong> von meiner eigenen <strong>Kraft</strong>.
+    label: 5.10 Die Pflege <strong>kostet viel</strong> von meiner eigenen <strong>Kraft</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -96,7 +96,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   eigenegesundheit:
-    label: Ich kann mich <strong>zu wenig</strong> um meine <strong>eigene Gesundheit</strong> kümmern.
+    label: 5.11 Ich kann mich <strong>zu wenig</strong> um meine <strong>eigene Gesundheit</strong> kümmern.
     type: radio
     options:
       stimmt: stimmt
@@ -104,7 +104,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   schlafstoerung:
-    label: Ich leide unter <strong>Schlafstörungen</strong>.
+    label: 5.12 Ich leide unter <strong>Schlafstörungen</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -112,7 +112,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   eindruck:
-    label: Habe den Eindruck, <strong>alles alleine schaffen</strong> zu müssen.
+    label: 5.13 Habe den Eindruck, <strong>alles alleine schaffen</strong> zu müssen.
     type: radio
     options:
       stimmt: stimmt
@@ -120,7 +120,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   zuviel:
-    label: Es fällt mir schwer zuzugeben, dass es mir <strong>manchmal zuviel</strong> wird.
+    label: 5.14 Es fällt mir schwer zuzugeben, dass es mir <strong>manchmal zuviel</strong> wird.
     type: radio
     options:
       stimmt: stimmt
@@ -128,7 +128,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   hemmungen:
-    label: Habe Hemmungen um <strong>Hilfe</strong> zu <strong>bitten</strong>.
+    label: 5.15 Habe Hemmungen um <strong>Hilfe</strong> zu <strong>bitten</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -136,7 +136,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   betreuungsaufgaben:
-    label: Es fällt mir schwer, <strong>Betreuungsaufgaben abzugeben</strong>.
+    label: 5.16 Es fällt mir schwer, <strong>Betreuungsaufgaben abzugeben</strong>.
     type: radio
     options:
       stimmt: stimmt
