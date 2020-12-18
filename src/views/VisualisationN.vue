@@ -292,6 +292,13 @@ export default {
   }
 }
 
+.container {
+  @media #{map-get($query, 'lg-only')} {
+    margin-right: 20px;
+    width: 75ch;
+  }
+}
+
 .an-btn-menu {
   display: flex;
   align-items: center;

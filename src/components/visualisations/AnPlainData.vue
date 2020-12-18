@@ -43,6 +43,7 @@
 import form from '@/data/form.json';
 import { string_autosetTextareaHeight } from '@/helpers/string.js';
 import { form_filterAccordionItems } from '@/helpers/form.js';
+import { convertMarkdown } from '@/helpers/util.js';
 import AnField from '@/components/AnField.vue';
 
 export default {
@@ -65,20 +66,7 @@ export default {
       /**
        * Advanced regex thanks to Karl Rathmanner
        */
-      return sanitizedNotes
-        .replace(
-          /((?<!\\)(?:\*\*\*|___))(?=\S)(.+?)(?<!\s|\\)\1/gms,
-          '<strong><i>$2</i></strong>'
-        ) // Consume combined strong and italics markers first, so tags are nested correctly
-
-        .replace(
-          /((?<!\\)(?:\*\*|__))(?=\S)(.+?)(?<!\s|\\)\1/gms,
-          '<strong>$2</strong>'
-        ) // Add strong tags
-
-        .replace(/((?<!\\)[*_])(?=\S)(.+?)(?<!\s|\\)\1/gms, '<i>$2</i>') // Add italics tags
-        .replace(/\\([*_])/gm, '$1') // Unescape the remaining escaped asterisks and underscores
-        .replace(/\n/g, '<br>');
+      return convertMarkdown(sanitizedNotes);
     }
   },
   created() {
