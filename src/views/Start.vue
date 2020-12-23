@@ -56,18 +56,18 @@
             <button class="btn an-start__startbutton" @click="startNew">
               <IconStart class="an-start__icon-start" />
             </button>
-            <button class="an-start__label_button_start" @click="startNew"
-              >Start</button
-            >
+            <button class="an-start__label_button_start" @click="startNew">
+              Start
+            </button>
             <div class="an-start__space"></div>
             <router-link
               :to="{ name: 'Fragebogen' }"
               class="btn an-start__previousbutton"
             >
               <IconBack class="an-start__icon-back" />
-            <div class="an-start__label_button_previous">
-              Vorherigen Fragebogen laden
-            </div>
+              <div class="an-start__label_button_previous">
+                Vorherigen Fragebogen laden
+              </div>
             </router-link>
           </template>
         </div>
@@ -323,9 +323,9 @@ export default {
       outline: none;
       padding: 3px 7px;
       &:focus {
-       box-shadow: 0 0 3px 2px $color-theme-lightred;
+        box-shadow: 0 0 3px 2px $color-theme-lightred;
+      }
     }
-}
 
     label {
       font-size: 1.5rem;
