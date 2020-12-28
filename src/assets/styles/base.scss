@@ -27,6 +27,10 @@
   border-radius: none;
 }
 
+*:focus {
+  outline: none;
+}
+
 @page {
   size: A4 portrait;
   margin: 1cm;
