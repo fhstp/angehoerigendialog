@@ -25,13 +25,13 @@
                 - Um
                 <strong>Text bold</strong>
                 darzustellen versehen Sie die gewünschten Passagen bitte mit
-                __Text__
+                __Text__ oder **Text**
               </li>
               <li>
                 - Um
                 <i>Text kursiv</i>
                 darzustellen versehen Sie die gewünschten Passagen bitte mit
-                _Text_
+                _Text_ oder *Text*
               </li>
             </ul>
           </div>
@@ -369,7 +369,7 @@ hr {
   }
 
   &__controls {
-    font-size: 0.7em;
+    font-size: 8pt;
     color: $color-theme-darkgrey;
     margin-left: 5px;
     ul {
