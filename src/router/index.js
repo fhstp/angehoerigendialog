@@ -30,16 +30,6 @@ const routes = [
         '@/views/VisualisationN.vue'
       )
   },
-  // {
-  //   path: '/export',
-  //   name: 'Export der Daten',
-  //   component: () =>
-  //     import(
-  //       /* webpackChunkName: "visualisation" */
-  //       /* webpackPrefetch: true */
-  //       '@/views/VisualisationN.vue'
-  //     )
-  // },
   {
     path: '/legal',
     name: 'Impressum und Datenschutz',
