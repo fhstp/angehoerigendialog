@@ -303,7 +303,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   position: fixed;
   bottom: 2vh;
   right: 2vh;

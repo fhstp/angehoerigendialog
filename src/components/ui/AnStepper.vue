@@ -132,7 +132,7 @@ $icon_width: 50px;
   background-color: #ffbe1b;
   box-shadow: 0 0 20px 0 $color-theme-shadow;
   & p {
-    color: $color-theme-darkred;
+    color: black;
   }
 }
 

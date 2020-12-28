@@ -68,7 +68,6 @@ export default {
     padding: $spacer * 2;
     font-size: 1.2rem;
     color: black;
-    //fill: pink;
     text-decoration: none;
     cursor: pointer;
     border-width: 1px;
