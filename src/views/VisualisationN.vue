@@ -278,7 +278,7 @@ export default {
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
     @media #{map-get($query, 'lg-and-up')} {
-      margin-left: 150px;
+      margin-left: 300px;
     }
   }
 
@@ -287,7 +287,8 @@ export default {
     flex-direction: column;
 
     > .an-stepper {
-      z-index: 2;
+      z-index: 1;
+      flex-shrink: 0;
     }
   }
 }
