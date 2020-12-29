@@ -295,8 +295,10 @@ $icon_width: 50px;
   }
 
   &__text {
-    word-break: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
     text-align: center;
     color: black;
   }
