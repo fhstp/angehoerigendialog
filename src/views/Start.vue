@@ -41,7 +41,12 @@
 
           <div class="an-start__inputwrapper">
             <label for="date">Datum</label>
-            <input id="date" v-model="date" type="date" />
+            <input
+              id="date"
+              v-model="date"
+              type="date"
+              placeholder="dd.mm.yyyy"
+            />
           </div>
         </div>
         <div class="an-start__space_column"></div>

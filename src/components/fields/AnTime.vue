@@ -3,6 +3,7 @@
     :id="field_id"
     v-model="field_data"
     type="time"
+    placeholder="hh:mm"
     required
     class="an-time"
   />
