@@ -25,6 +25,14 @@ export default {
         this.$store.commit('updatePrintMode', true);
       }
     });
+
+    window.addEventListener(
+      'orientationchange',
+      () => {
+        location.reload();
+      },
+      false
+    );
   }
 };
 </script>
