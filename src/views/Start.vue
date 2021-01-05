@@ -17,11 +17,17 @@
 
     <div class="an-start__content">
       <div class="an-start__header">
-        <img
-          src="@/assets/icons/logo.svg"
-          alt="Logo der Pflegeorganisation"
-          class="an-start__po-logo"
-        />
+        <a
+          href="https://www.volkshilfe.at/"
+          title="Zur Webseite der Volkshilfe"
+          target="__blank"
+        >
+          <img
+            src="@/assets/icons/logo.svg"
+            alt="Logo der Pflegeorganisation"
+            class="an-start__po-logo"
+          />
+        </a>
         <h1 class="an-start__an-logo">
           <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
         </h1>
