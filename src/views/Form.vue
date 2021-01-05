@@ -398,6 +398,7 @@ export default {
 
     &-btn {
       margin-right: 10px;
+      border-radius: 4px;
       border: 2px solid #ffbe1b;
       width: 40px;
       text-align: center;
