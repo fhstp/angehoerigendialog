@@ -121,18 +121,28 @@ export default {
   },
   methods: {
     startNew() {
-      if (
-        !confirm(
-          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
-        )
-      )
-        return;
-      const temp = [this.caregivername, this.date, this.socialworkername];
-      this.$store.commit('resetState');
-      this.caregivername = temp[0];
-      this.date = temp[1];
-      this.socialworkername = temp[2];
-      this.$router.push({ name: 'Fragebogen' });
+      this.$swal({
+        title: 'Information',
+        text:
+          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?',
+        showCancelButton: true,
+        confirmButtonText: `Ja`,
+        cancelButtonText: `Nein`,
+        focusCancel: true,
+        showCloseButton: true,
+        customClass: {
+          container: 'specialDialog'
+        }
+      }).then(result => {
+        if (result.isConfirmed) {
+          const temp = [this.caregivername, this.date, this.socialworkername];
+          this.$store.commit('resetState');
+          this.caregivername = temp[0];
+          this.date = temp[1];
+          this.socialworkername = temp[2];
+          this.$router.push({ name: 'Fragebogen' });
+        }
+      });
     }
   }
 };
@@ -348,6 +358,21 @@ export default {
     color: white;
     text-shadow: 0 0 10px black;
     margin-top: 15px;
+  }
+}
+</style>
+
+<style lang="scss">
+.specialDialog {
+  font-family: 'Open Sans', sans-serif !important;
+
+  button {
+    color: $color-theme-darkgrey !important;
+  }
+
+  button:focus {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 </style>
