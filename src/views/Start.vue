@@ -41,7 +41,12 @@
 
           <div class="an-start__inputwrapper">
             <label for="date">Datum</label>
-            <input id="date" v-model="date" type="date" />
+            <input
+              id="date"
+              v-model="date"
+              type="date"
+              placeholder="dd.mm.yyyy"
+            />
           </div>
         </div>
         <div class="an-start__space_column"></div>
@@ -56,23 +61,22 @@
             <button class="btn an-start__startbutton" @click="startNew">
               <IconStart class="an-start__icon-start" />
             </button>
-            <div class="an-start__label_button_start">
+            <button class="an-start__label_button_start" @click="startNew">
               Start
-            </div>
+            </button>
             <div class="an-start__space"></div>
             <router-link
               :to="{ name: 'Fragebogen' }"
               class="btn an-start__previousbutton"
             >
               <IconBack class="an-start__icon-back" />
+              <div class="an-start__label_button_previous">
+                Vorherigen Fragebogen laden
+              </div>
             </router-link>
-            <div class="an-start__label_button_previous">
-              Vorherigen Fragebogen laden
-            </div>
           </template>
         </div>
       </div>
-
       <router-link class="an-start__links" to="/legal"
         >Impressum und Datenschutz</router-link
       >
@@ -117,18 +121,28 @@ export default {
   },
   methods: {
     startNew() {
-      if (
-        !confirm(
-          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
-        )
-      )
-        return;
-      const temp = [this.caregivername, this.date, this.socialworkername];
-      this.$store.commit('resetState');
-      this.caregivername = temp[0];
-      this.date = temp[1];
-      this.socialworkername = temp[2];
-      this.$router.push({ name: 'Fragebogen' });
+      this.$swal({
+        title: 'Information',
+        text:
+          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?',
+        showCancelButton: true,
+        confirmButtonText: `Ja`,
+        cancelButtonText: `Nein`,
+        focusCancel: true,
+        showCloseButton: true,
+        customClass: {
+          container: 'specialDialog'
+        }
+      }).then(result => {
+        if (result.isConfirmed) {
+          const temp = [this.caregivername, this.date, this.socialworkername];
+          this.$store.commit('resetState');
+          this.caregivername = temp[0];
+          this.date = temp[1];
+          this.socialworkername = temp[2];
+          this.$router.push({ name: 'Fragebogen' });
+        }
+      });
     }
   }
 };
@@ -204,7 +218,9 @@ export default {
   }
 
   &__label_button_start {
-    width: 30px;
+    width: 50px;
+    background-color: white;
+    border: none;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 1rem;
@@ -216,9 +232,11 @@ export default {
     padding-left: 7px;
     padding-bottom: 10px;
     position: relative;
+    cursor: pointer;
   }
 
   &__icon-start {
+    fill: $color-theme-yellow;
     height: 100%;
     position: relative;
     left: 16.3em;
@@ -257,7 +275,7 @@ export default {
     color: #000;
     text-align: left;
     margin: 10px;
-    padding-top: 82px;
+    padding-top: 10px;
     padding-left: 6px;
     padding-bottom: 10px;
     position: absolute;
@@ -340,6 +358,21 @@ export default {
     color: white;
     text-shadow: 0 0 10px black;
     margin-top: 15px;
+  }
+}
+</style>
+
+<style lang="scss">
+.specialDialog {
+  font-family: 'Open Sans', sans-serif !important;
+
+  button {
+    color: $color-theme-darkgrey !important;
+  }
+
+  button:focus {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 </style>

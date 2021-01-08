@@ -278,7 +278,7 @@ export default {
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
     @media #{map-get($query, 'lg-and-up')} {
-      margin-left: 150px;
+      margin-left: 300px;
     }
   }
 
@@ -287,8 +287,16 @@ export default {
     flex-direction: column;
 
     > .an-stepper {
-      z-index: 2;
+      z-index: 1;
+      flex-shrink: 0;
     }
+  }
+}
+
+.container {
+  @media #{map-get($query, 'lg-only')} {
+    margin-right: 20px;
+    width: 75ch;
   }
 }
 
@@ -296,7 +304,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   position: fixed;
   bottom: 2vh;
   right: 2vh;

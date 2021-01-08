@@ -4,14 +4,14 @@
 	 viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
 <g id="Gruppe_1326" transform="translate(-854 -649)">
 	<g transform="matrix(1, 0, 0, 1, 854, 649)">
-		<path id="Kreis-2-2" fill="#FFBE1B" d="M100,0c55.23,0,100,44.77,100,100s-44.77,100-100,100C44.77,200,0,155.23,0,100v0l0,0
-			C0,44.77,44.77,0,100,0z"/>
+		<path id="Kreis-2-2" fill="#FFBE1B" d="M100,0c55.2,0,100,44.8,100,100s-44.8,100-100,100S0,155.2,0,100l0,0l0,0
+			C0,44.8,44.8,0,100,0z"/>
 	</g>
 	<g id="Gruppe_1319" transform="translate(760.596 340.638)">
-		<path id="Pfad_351" fill="none" stroke="#757474" stroke-width="11.2867" stroke-miterlimit="10" d="M211.71,376.08
-			c12.39,0,22.44,10.05,22.44,22.44c0,12.39-10.05,22.44-22.44,22.44h-57.36"/>
-		<path id="Pfad_352" fill="none" stroke="#757474" stroke-width="11.2867" stroke-miterlimit="10" d="M185.77,389.54l-31.42,31.41
-			l29.62,29.62"/>
+		<path id="Pfad_351" fill="none" stroke="#757474" stroke-width="17" stroke-miterlimit="10" d="M211.7,376.1
+			c12.4,0,22.4,10,22.4,22.4S224.1,421,211.7,421h-57.4"/>
+		<path id="Pfad_352" fill="none" stroke="#757474" stroke-width="17" stroke-miterlimit="10" d="M185.8,389.5L154.4,421l29.6,29.6"
+			/>
 	</g>
 </g>
 </svg>

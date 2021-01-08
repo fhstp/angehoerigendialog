@@ -3,6 +3,7 @@
     :id="field_id"
     v-model="field_data"
     type="date"
+    placeholder="dd.mm.yyyy"
     required
     class="an-date"
   />

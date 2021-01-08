@@ -19,13 +19,20 @@
             <h2 class="an-note__heading">Meine Notizen</h2>
           </div>
           <div class="an-note__controls">
-            <span>Mögliche Formatierungen</span>
+            <span>Sie können Ihre Notizen bei Bedarf selbst formatieren. </span>
             <ul>
               <li>
-                **Text** oder __Text__ verwenden für
-                <strong>Text (fett)</strong>
+                - Um
+                <strong>Text bold</strong>
+                darzustellen versehen Sie die gewünschten Passagen bitte mit
+                __Text__ oder **Text**
               </li>
-              <li>*Text* oder _Text_ verwenden für <i>Text (kursiv)</i></li>
+              <li>
+                - Um
+                <i>Text kursiv</i>
+                darzustellen versehen Sie die gewünschten Passagen bitte mit
+                _Text_ oder *Text*
+              </li>
             </ul>
           </div>
           <hr />
@@ -362,7 +369,7 @@ hr {
   }
 
   &__controls {
-    font-size: 0.6em;
+    font-size: 8pt;
     color: $color-theme-darkgrey;
     margin-left: 5px;
     ul {
@@ -382,7 +389,7 @@ hr {
     width: 100%;
     outline: none;
     display: block;
-    font-size: 1.45rem;
+    font-size: 1.3rem;
     line-height: 1.5;
     overflow: hidden;
     background-color: white;
@@ -430,6 +437,8 @@ hr {
   }
 
   &__action {
+    background-color: white;
+    border-color: none;
     vertical-align: middle;
     margin: 0;
     width: 100%;
