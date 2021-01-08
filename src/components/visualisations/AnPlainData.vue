@@ -154,10 +154,10 @@ h4 {
   margin-bottom: $spacer;
   padding-bottom: $spacer / 2;
   font-weight: normal;
-  &::before {
-    counter-increment: h4;
-    content: counter(h3) '.' counter(h4) '. ';
-  }
+  // &::before {
+  //   counter-increment: h4;
+  //   content: counter(h3) '.' counter(h4) '. ';
+  // }
 }
 </style>
 
