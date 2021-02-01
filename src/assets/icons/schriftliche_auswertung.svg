@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+<path id="Pfad_345" fill="#FFFFFF" d="M100,0c55.23,0,100,44.77,100,100s-44.77,100-100,100S0,155.23,0,100C0,44.77,44.77,0,100,0
+	C100,0,100,0,100,0z"/>
+<g>
+	<path id="Pfad_284" fill="#FFFFFF" stroke="#FFBE1B" stroke-width="4.766" d="M145.04,158.61c0,2.11-1.71,3.83-3.83,3.83
+		c0,0,0,0,0,0H61.02c-2.11,0-3.83-1.71-3.83-3.83c0,0,0,0,0,0V50.12c0-2.12,1.72-3.83,3.83-3.83h61.03l22.98,22.98L145.04,158.61z"
+		/>
+	<path id="Pfad_285" fill="#FFBE1B" stroke="#FFBE1B" stroke-width="4.766" d="M145.04,69.28h-19.3c-2.03,0-3.67-1.64-3.67-3.67
+		c0,0,0,0,0,0v-19.3"/>
+	<path id="Pfad_337" fill="none" stroke="#FFBE1B" stroke-width="4.766" d="M74.43,96.67h56.48"/>
+	<path id="Pfad_338" fill="none" stroke="#FFBE1B" stroke-width="4.766" d="M74.43,119.66h56.48"/>
+	<path id="Pfad_339" fill="none" stroke="#FFBE1B" stroke-width="4.766" d="M74.43,142.64h39"/>
+	<path id="Pfad_340" opacity="0.19" fill="#FFBE1B" stroke="#FFBE1B" stroke-width="4.766" enable-background="new    " d="
+		M145.04,158.61c0,2.11-1.71,3.83-3.83,3.83c0,0,0,0,0,0H61.02c-2.11,0-3.83-1.71-3.83-3.83c0,0,0,0,0,0V50.12
+		c0-2.12,1.72-3.83,3.83-3.83h61.03l22.98,22.98L145.04,158.61z"/>
+	<g id="Gruppe_889" transform="translate(38.604 13.527) rotate(37)">
+		<g id="Rechteck_866" transform="translate(0 0)">
+			
+				<rect x="108.36" y="5.97" transform="matrix(2.793981e-06 1 -1 2.793981e-06 154.9665 -122.6263)" fill="#FFFFFF" width="60.87" height="20.4"/>
+			
+				<rect x="110.75" y="8.36" transform="matrix(2.793981e-06 1 -1 2.793981e-06 154.9665 -122.6263)" fill="none" stroke="#FFBE1B" stroke-width="4.766" width="56.1" height="15.63"/>
+		</g>
+		<g id="Polygon_174" transform="translate(8.559 31.173) rotate(180)">
+			<path fill="#FFFFFF" d="M-124.84-17.81l-10.79,0l5.39-7.1L-124.84-17.81z"/>
+			<path fill="#FFBE1B" d="M-130.24-28.85l10.2,13.42l-20.4,0L-130.24-28.85z"/>
+		</g>
+		<line id="Linie_242" fill="none" stroke="#FFBE1B" stroke-width="4.766" x1="129.94" y1="-4.87" x2="147.65" y2="-4.87"/>
+	</g>
+</g>
+</svg>

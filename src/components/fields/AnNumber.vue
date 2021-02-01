@@ -94,7 +94,7 @@ export default {
   svg {
     height: 100%;
     width: 100%;
-    fill: $color-theme-darkred;
+    fill: $color-theme-darkgrey;
   }
 }
 </style>

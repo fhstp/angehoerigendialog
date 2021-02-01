@@ -15,7 +15,7 @@
             { 'an-plain-data__field--break': field.type === 'checkboxes' }
           ]"
         >
-          <h4>{{ field.label }}</h4>
+          <h4 v-html-safe="field.label"></h4>
           <AnField
             :section-id="sectionId"
             :field-id="`${sectionId}-${field.fieldId}`"
@@ -43,6 +43,7 @@
 import form from '@/data/form.json';
 import { string_autosetTextareaHeight } from '@/helpers/string.js';
 import { form_filterAccordionItems } from '@/helpers/form.js';
+import { convertMarkdown } from '@/helpers/util.js';
 import AnField from '@/components/AnField.vue';
 
 export default {
@@ -62,9 +63,10 @@ export default {
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
-      return sanitizedNotes
-        .replace(/\*\*(\S.*([^\s]))\*\*/g, '<strong>$1</strong>')
-        .replace(/\n/g, '<br>');
+      /**
+       * Advanced regex thanks to Karl Rathmanner
+       */
+      return convertMarkdown(sanitizedNotes);
     }
   },
   created() {
@@ -152,10 +154,10 @@ h4 {
   margin-bottom: $spacer;
   padding-bottom: $spacer / 2;
   font-weight: normal;
-  &::before {
-    counter-increment: h4;
-    content: counter(h3) '.' counter(h4) '. ';
-  }
+  // &::before {
+  //   counter-increment: h4;
+  //   content: counter(h3) '.' counter(h4) '. ';
+  // }
 }
 </style>
 

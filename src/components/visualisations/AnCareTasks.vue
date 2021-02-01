@@ -36,10 +36,11 @@ import visJson from '@/data/visualisation.json';
 import visualisation from '@/mixins/visualisation.js';
 import IconPersonArmsUp from '@/assets/icons/person-arms-up.svg?inline';
 import IconPersonArmUp from '@/assets/icons/person-arm-up.svg?inline';
+import IconPersonArmsUpAlt from '@/assets/icons/person-arms-up-alt.svg?inline';
 
 export default {
   name: 'AnCareTasks',
-  components: { IconPersonArmsUp, IconPersonArmUp },
+  components: { IconPersonArmsUp, IconPersonArmUp, IconPersonArmsUpAlt },
   mixins: [visualisation],
   data() {
     return {
@@ -99,16 +100,16 @@ export default {
   },
   created() {
     this.careSvg = [
-      [{ type: 'IconPersonArmsUp', class: 'filled' }],
+      [{ type: 'IconPersonArmsUp', class: 'yellow' }],
       [
-        { type: 'IconPersonArmsUp', class: 'filled' },
-        { type: 'IconPersonArmUp', class: 'empty' }
+        { type: 'IconPersonArmsUp', class: 'yellow' },
+        { type: 'IconPersonArmUp', class: 'green' }
       ],
       [
-        { type: 'IconPersonArmsUp', class: 'filled' },
-        { type: 'IconPersonArmsUp', class: 'empty' }
+        { type: 'IconPersonArmsUp', class: 'yellow' },
+        { type: 'IconPersonArmsUpAlt', class: 'green' }
       ],
-      [{ type: 'IconPersonArmsUp', class: 'empty' }]
+      [{ type: 'IconPersonArmsUpAlt', class: 'green' }]
     ];
     this.careLabels = [
       'Ich leiste die gesamte Unterstützung',
@@ -200,20 +201,20 @@ export default {
       }
     }
 
-    &--filled {
-      fill: $color-theme-darkgrey;
-      stroke: $color-theme-darkgrey;
+    &--yellow {
+      fill: $color-theme-yellow;
+      // stroke: $color-theme-darkgrey;
     }
 
-    &--empty {
-      fill: white;
-      stroke: $color-theme-darkgrey;
+    &--green {
+      fill: $color-theme-green;
+      // stroke: $color-theme-darkgrey;
     }
   }
 
   &__list {
     list-style: none;
-    border: 5px solid $color-theme-blue;
+    border: 4px solid $color-theme-darkgrey;
     padding: 5px;
     text-align: center;
     height: 89px;

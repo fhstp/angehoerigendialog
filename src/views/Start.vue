@@ -17,11 +17,17 @@
 
     <div class="an-start__content">
       <div class="an-start__header">
-        <img
-          src="@/assets/images/logo.png"
-          alt="Logo der Pflegeorganisation"
-          class="an-start__po-logo"
-        />
+        <a
+          href="https://www.volkshilfe.at/"
+          title="Zur Webseite der Volkshilfe"
+          target="__blank"
+        >
+          <img
+            src="@/assets/icons/logo.svg"
+            alt="Logo der Pflegeorganisation"
+            class="an-start__po-logo"
+          />
+        </a>
         <h1 class="an-start__an-logo">
           <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
         </h1>
@@ -41,10 +47,16 @@
 
           <div class="an-start__inputwrapper">
             <label for="date">Datum</label>
-            <input id="date" v-model="date" type="date" />
+            <input
+              id="date"
+              v-model="date"
+              type="date"
+              placeholder="dd.mm.yyyy"
+            />
           </div>
         </div>
-        <div>
+        <div class="an-start__space_column"></div>
+        <div class="an-start__an-btn-start">
           <router-link
             v-if="!existingQuestionnaire"
             :to="{ name: 'Fragebogen' }"
@@ -53,19 +65,26 @@
           >
           <template v-else>
             <button class="btn an-start__startbutton" @click="startNew">
+              <IconStart class="an-start__icon-start" />
+            </button>
+            <button class="an-start__label_button_start" @click="startNew">
               Start
             </button>
+            <div class="an-start__space"></div>
             <router-link
               :to="{ name: 'Fragebogen' }"
               class="btn an-start__previousbutton"
-              >Vorherigen Fragebogen laden</router-link
             >
+              <IconBack class="an-start__icon-back" />
+              <div class="an-start__label_button_previous">
+                Vorherigen Fragebogen laden
+              </div>
+            </router-link>
           </template>
         </div>
       </div>
-
       <router-link class="an-start__links" to="/legal"
-        >Impressum und Datenshutz</router-link
+        >Impressum und Datenschutz</router-link
       >
     </div>
   </div>
@@ -73,6 +92,8 @@
 
 <script>
 import IconTextLogo from '@/assets/icons/text-logo.svg?inline';
+import IconStart from '@/assets/icons/start.svg?inline';
+import IconBack from '@/assets/icons/back.svg?inline';
 
 const fieldGenerator = field_id => ({
   get() {
@@ -90,7 +111,9 @@ export default {
   name: 'Start',
   components: {
     IconV: () => import('@/assets/icons/icon.svg?inline'),
-    IconTextLogo
+    IconTextLogo,
+    IconStart,
+    IconBack
   },
   computed: {
     caregivername: fieldGenerator('startseite-angehoerigenname'),
@@ -104,18 +127,28 @@ export default {
   },
   methods: {
     startNew() {
-      if (
-        !confirm(
-          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?'
-        )
-      )
-        return;
-      const temp = [this.caregivername, this.date, this.socialworkername];
-      this.$store.commit('resetState');
-      this.caregivername = temp[0];
-      this.date = temp[1];
-      this.socialworkername = temp[2];
-      this.$router.push({ name: 'Fragebogen' });
+      this.$swal({
+        title: 'Information',
+        text:
+          'Möchten Sie den vorherigen Fragebogen wirklich überschreiben/löschen?',
+        showCancelButton: true,
+        confirmButtonText: `Ja`,
+        cancelButtonText: `Nein`,
+        focusCancel: true,
+        showCloseButton: true,
+        customClass: {
+          container: 'specialDialog'
+        }
+      }).then(result => {
+        if (result.isConfirmed) {
+          const temp = [this.caregivername, this.date, this.socialworkername];
+          this.$store.commit('resetState');
+          this.caregivername = temp[0];
+          this.date = temp[1];
+          this.socialworkername = temp[2];
+          this.$router.push({ name: 'Fragebogen' });
+        }
+      });
     }
   }
 };
@@ -164,18 +197,94 @@ export default {
   }
 
   &__form {
+    border-radius: none;
+  }
+
+  &__an-btn-start {
     display: flex;
     flex-direction: column;
-    align-self: flex-start;
+    align-self: flex-end;
+    float: left;
+    position: relative;
+    flex-grow: 1;
   }
 
   &__startbutton {
-    text-transform: uppercase;
     font-weight: bold;
+    box-shadow: none;
+    border: none;
+    border-radius: 50px;
+    width: 320px;
+    height: 60px;
+    display: flex;
+    padding: 0;
+    margin: 0 0 0 0;
+    background-color: #fff;
+    position: absolute;
+  }
+
+  &__label_button_start {
+    width: 50px;
+    background-color: white;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000;
+    text-align: left;
+    vertical-align: middle;
+    margin: 10px;
+    padding-top: 10px;
+    padding-left: 7px;
+    padding-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__icon-start {
+    fill: $color-theme-yellow;
+    height: 100%;
+    position: relative;
+    left: 16.3em;
+  }
+
+  &__space {
+    margin-top: 10px;
   }
 
   &__previousbutton {
-    margin-left: $spacer * 2;
+    font-weight: bold;
+    box-shadow: none;
+    border: none;
+    border-radius: 50px;
+    width: 320px;
+    height: 60px;
+    display: flex;
+    vertical-align: middle;
+    text-align: left;
+    padding: 0;
+    margin: 0 0 0 0;
+    background-color: #fff;
+    position: relative;
+  }
+
+  &__icon-back {
+    height: 100%;
+    position: absolute;
+    left: 16.3em;
+  }
+
+  &__label_button_previous {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000;
+    text-align: left;
+    margin: 10px;
+    padding-top: 10px;
+    padding-left: 6px;
+    padding-bottom: 10px;
+    position: absolute;
   }
 
   &__background {
@@ -208,10 +317,16 @@ export default {
   }
 
   &__inputbackground {
+    margin-right: 50px;
+    margin-bottom: 20px;
+    display: block;
+    flex-direction: column;
     padding: $spacer * 3;
-    border-radius: $border-radius;
+    border-radius: none;
     border: 1.5px solid $color-theme-lightgrey;
     background-color: white;
+    width: 320px;
+    float: left;
   }
 
   &__inputwrapper {
@@ -240,11 +355,30 @@ export default {
   }
 
   &__links {
-    position: absolute;
-    top: 100%;
-    right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: flex-end;
     color: white;
     text-shadow: 0 0 10px black;
+    margin-top: 15px;
+  }
+}
+</style>
+
+<style lang="scss">
+.specialDialog {
+  font-family: 'Open Sans', sans-serif !important;
+
+  button {
+    color: $color-theme-darkgrey !important;
+  }
+
+  button:focus {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 </style>

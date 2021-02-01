@@ -27,21 +27,19 @@
                   :section-id="sectionId"
                   :field-id="`${sectionId}-${fieldId}`"
                 />
-                <AnAccordionItem v-else :key="fieldId">
+                <AnAccordionItem
+                  v-else
+                  :key="fieldId"
+                  :ready="
+                    $store.getters.getFieldCompletion(`${sectionId}-${fieldId}`)
+                  "
+                >
                   <template #header>
-                    <span class="an-accordion-item__header-text">{{
-                      field.label
-                    }}</span>
-                    <span class="an-accordion-item__header-icon">
-                      <IconCheckmark
-                        v-if="
-                          $store.getters.getFieldCompletion(
-                            `${sectionId}-${fieldId}`
-                          )
-                        "
-                        aria-label="fertig ausgefüllt"
-                      />
-                    </span>
+                    <span
+                      v-html-safe="field.label"
+                      class="an-accordion-item__header-text"
+                    ></span>
+                    <span class="an-accordion-item__header-icon"> </span>
                   </template>
                   <template #content>
                     <AnField
@@ -58,27 +56,6 @@
               </template>
             </AnAccordion>
             <div class="container">
-              <button
-                v-if="steps.length === sectionIndex + 1"
-                class="an-form__done btn"
-                @click="handleFinish()"
-              >
-                {{ buttonText }}
-              </button>
-              <router-link
-                v-else
-                :to="{
-                  query: {
-                    ...$route.query,
-                    step: Object.keys(form)[sectionIndex + 1],
-                    field: 0
-                  }
-                }"
-                class="btn"
-              >
-                Zur Kategorie &bdquo;{{ steps[sectionIndex + 1].title }}&ldquo;
-              </router-link>
-
               <div
                 v-if="
                   steps.length === sectionIndex + 1 && showOpenQuestions == true
@@ -111,11 +88,37 @@
                       }
                     }"
                   >
-                    <div class="an-form__openquestions-item">
-                      {{ question.label }}
-                    </div>
+                    <div
+                      v-html-safe="question.label"
+                      class="an-form__openquestions-item"
+                    ></div>
                   </router-link>
                 </div>
+              </div>
+
+              <button
+                v-if="steps.length === sectionIndex + 1"
+                class="an-form__done btn"
+                @click="handleFinish()"
+              >
+                {{ buttonText }}
+              </button>
+              <div v-else class="an-form__further">
+                <router-link
+                  :to="{
+                    query: {
+                      ...$route.query,
+                      step: Object.keys(form)[sectionIndex + 1],
+                      field: 0
+                    }
+                  }"
+                  class="an-form__further-btn btn"
+                >
+                  <IconTriangle />
+                </router-link>
+                <span>
+                  Weiter zu <b>{{ steps[sectionIndex + 1].title }}</b></span
+                >
               </div>
             </div>
           </section>
@@ -138,8 +141,8 @@ import AnField from '@/components/AnField.vue';
 import AnNote from '@/components/note/AnNote.vue';
 import AnNoteOpen from '@/components/note/AnNoteOpen.vue';
 import AnStepper from '@/components/ui/AnStepper.vue';
-import IconCheckmark from '@/assets/icons/checkmark.svg?inline';
 import IconWarning from '@/assets/icons/warning.svg?inline';
+import IconTriangle from '@/assets/icons/dreieck.svg?inline';
 
 export default {
   name: 'Form',
@@ -150,8 +153,8 @@ export default {
     AnNote,
     AnNoteOpen,
     AnStepper,
-    IconCheckmark,
-    IconWarning
+    IconWarning,
+    IconTriangle
   },
   data() {
     return {
@@ -338,7 +341,7 @@ export default {
     padding-bottom: $spacer;
     margin-bottom: $spacer * 2;
     z-index: 1;
-    color: $color-theme-darkred;
+    color: black;
   }
 
   &__header {
@@ -352,14 +355,91 @@ export default {
   }
 
   &__done {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: $spacer * 10;
+    margin-bottom: $spacer * 10;
     margin-right: auto;
     margin-left: auto;
+    width: 15vh;
+    height: 15vh;
+    border: none;
+    box-shadow: 0 0 0 0 #ffd700;
+    transition: all 0.1s ease-in-out;
+    border-radius: 50%;
+    padding: 3px;
+    background-color: $color-theme-yellow;
+    outline: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: $color-theme-darkgrey;
+    text-align: center;
+    cursor: pointer;
+    -webkit-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  &__done:hover {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -ms-animation: none;
+    animation: none;
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
+  }
+
+  &__further {
+    display: flex;
+    align-items: center;
+
+    &-btn {
+      margin-right: 10px;
+      border-radius: 4px;
+      border: 2px solid #ffbe1b;
+      width: 40px;
+      text-align: center;
+      svg {
+        position: relative;
+        left: 50%;
+        -webkit-transform: scale(10) translateY(-8%);
+        -ms-transform: scale(10) translateY(-8%);
+        transform: scale(10) translateY(-8%);
+        fill: #ffbe1b;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @-webkit-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @-moz-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @-ms-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
+  }
+  @keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(241, 204, 35, 0);
+    }
   }
 
   &__openquestions {
-    margin-top: $spacer * 2;
+    margin-top: $spacer * 8;
     margin-bottom: $spacer * 2;
     border-radius: 3px;
     font-size: 1.2rem;
@@ -367,10 +447,13 @@ export default {
     &-item {
       margin-bottom: $spacer * 2;
       margin-top: $spacer * 2;
-      padding: $spacer * 2;
-      border-radius: 3px;
-      background-color: $color-theme-lightred;
-      color: black;
+      padding: 1rem;
+      color: $color-theme-darkgrey;
+      text-decoration: none;
+      cursor: pointer;
+      border-width: 1px;
+      border-style: solid;
+      border-color: $color-theme-lightgrey;
     }
 
     &-heading-wrapper {
@@ -380,13 +463,18 @@ export default {
     }
 
     &-heading {
-      color: $color-theme-darkred;
+      color: $color-theme-darkblue;
+    }
+
+    &-heading-section {
+      color: $color-theme-darkblue;
+      font-weight: bold;
     }
 
     &-icon-warning {
       width: 35px;
       margin-right: 0.5rem;
-      fill: $color-theme-darkred;
+      fill: $color-theme-darkblue;
     }
   }
   .router-link-active {

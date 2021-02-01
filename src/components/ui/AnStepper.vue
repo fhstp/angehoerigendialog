@@ -14,6 +14,29 @@
         ]"
       >
         <router-link
+          v-if="special"
+          exact-active-class="router-link-exact-active-special"
+          :to="{ query: { ...$route.query, step: step.id } }"
+          @click.native="$emit('input')"
+        >
+          <div class="an-stepper__icon-wrapper">
+            <component
+              :is="step.icon"
+              :class="[
+                'an-stepper__icon',
+                { 'an-stepper__icon--active': $route.query.step === step.id }
+              ]"
+            />
+            <IconCheckmark v-if="step.done" class="an-stepper__status" />
+          </div>
+          <p class="an-stepper__text">
+            <span aria-hidden="true">{{ i + 1 }}.</span>
+            &nbsp;{{ step.title }}
+          </p>
+        </router-link>
+
+        <router-link
+          v-else
           :to="{ query: { ...$route.query, step: step.id } }"
           @click.native="$emit('input')"
         >
@@ -47,6 +70,10 @@ export default {
     steps: {
       type: Array,
       default: () => []
+    },
+    special: {
+      type: Boolean,
+      default: () => false
     }
   },
   watch: {
@@ -97,7 +124,15 @@ $icon_width: 50px;
   background-color: white;
   box-shadow: 0 0 20px 0 $color-theme-shadow;
   & p {
-    color: $color-theme-darkred;
+    color: black;
+  }
+}
+
+.router-link-exact-active-special {
+  background-color: #ffbe1b;
+  box-shadow: 0 0 20px 0 $color-theme-shadow;
+  & p {
+    color: black;
   }
 }
 
@@ -171,7 +206,7 @@ $icon_width: 50px;
       position: relative;
       display: flex;
       flex-direction: column;
-      color: black;
+      color: $color-theme-darkgrey;
       padding: $spacer * 4;
       justify-content: flex-start;
       z-index: 2;
@@ -224,13 +259,12 @@ $icon_width: 50px;
     justify-content: center;
     align-items: center;
     position: relative;
-    height: $icon_width + 15px;
   }
 
   &__icon {
     display: block;
     border-radius: 50%;
-    width: $icon_width;
+    width: $icon_width + 15px;
     height: auto;
 
     > circle:first-child {
@@ -241,7 +275,7 @@ $icon_width: 50px;
       width: $icon_width + 15px;
 
       & > circle:first-child {
-        fill: $color-theme-darkred;
+        fill: $color-theme-yellow;
       }
     }
   }
@@ -256,13 +290,17 @@ $icon_width: 50px;
     .an-stepper__step--active & {
       margin-left: ($icon_width + 15px) / 2;
       width: 1.3rem;
+      color: black;
     }
   }
 
   &__text {
-    word-break: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
     text-align: center;
+    color: black;
   }
 }
 </style>

@@ -72,6 +72,11 @@ $thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
 .an-range {
   &__wrapper {
     align-items: flex-end;
+    flex-wrap: nowrap;
+
+    // div + span {
+    //   margin-left: auto;
+    // }
   }
 
   &__input-area {
@@ -163,12 +168,14 @@ $thumb-overflow: ($range-thumb-size - $range-track-height) / 2;
       height: $range-track-height;
       background-color: white;
       border-radius: $border-radius + 5px;
+      border: 2px solid $color-theme-darkgrey;
       .an-plain-data & {
         border: 2px solid $color-theme-lightgrey;
       }
     }
     &::-webkit-slider-runnable-track {
       @include range-track;
+      border: 2px solid $color-theme-darkgrey;
     }
     &::-moz-range-track {
       @include range-track;

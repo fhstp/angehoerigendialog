@@ -3,6 +3,7 @@
     :id="field_id"
     v-model="field_data"
     type="time"
+    placeholder="hh:mm"
     required
     class="an-time"
   />
@@ -32,7 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 .an-time {
-  border: none;
+  border: 1px solid #5e5e5e;
   border-radius: $border-radius;
   padding: $spacer;
 

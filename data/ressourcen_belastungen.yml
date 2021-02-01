@@ -3,31 +3,31 @@ titleShort: Ressourcen und Belastungen
 fields:
 
   kraftausdauer:
-    label: Alles in allem, was ist Ihrer Meinung nach hilfreich und gibt Ihnen Kraft und Ausdauer?
+    label: 6.1 Alles in allem, was ist Ihrer Meinung nach <strong>hilfreich</strong> und gibt Ihnen <strong>Kraft und Ausdauer</strong>?
     type: list
 
   belastend:
-    label: Welche drei Aspekte sind Ihrer Einschätzung nach besonders belastend für Sie?
+    label: 6.2 Welche <strong>drei Aspekte</strong> sind Ihrer Einschätzung nach <strong>besonders belastend</strong> für Sie?
     type: list
     min: 3
     max: 3
 
   einschraenkungenhinweis:
-    label: Andere pflegende Angehörige von demenzerkrankten Menschen berichten
-          häufig davon, dass sie durch die Pflege- und Betreuungsaufgaben, die
-          sie oft über Jahre hinweg leisten, persönliche Einschränkungen erleben.
+    label: 6.3 Andere <strong>pflegende Angehörige</strong> von <strong>demenzerkrankten Menschen</strong> berichten
+          häufig davon, dass sie durch die <strong>Pflege- und Betreuungsaufgaben</strong>, die
+          sie oft über Jahre hinweg leisten, <strong>persönliche Einschränkungen erleben</strong>.
           Beispielsweise ist es nicht immer einfach, sich Zeit für sich selbst und die
           eigenen Interessen nehmen zu können.
     type: hint
     size: medium
 
   individuelleSituation:
-    label: Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
+    label: 6.4 Sie sehen hier nun einige Aussagen von anderen pflegenden Angehörigen. Können Sie bitte angeben, ob diese Aussagen auch für Ihre individuelle Situation stimmen? Die Skala reicht von „stimmt“ bis hin zu „stimmt nicht“.
     type: heading
     size: medium
 
   rueckzugsmoeglichkeit:
-    label: Ich habe das Gefühl, dass ich genügend Rückzugsmöglichkeiten habe.
+    label: 6.5 Ich habe das Gefühl, dass ich <strong>genügend Rückzugsmöglichkeiten</strong> habe.
     type: radio
     options:
       stimmt: stimmt
@@ -35,7 +35,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   hobbysinteressen:
-    label: Mir steht ausreichend Zeit für meine Hobbys und Interessen zur Verfügung.
+    label: 6.6 Mir steht <strong>ausreichend Zeit</strong> für meine <strong>Hobbys und Interessen</strong> zur Verfügung.
     type: radio
     options:
       stimmt: stimmt
@@ -43,7 +43,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   freizeitaktivitaeten:
-    label: Es ist mir regelmäßig möglich, mich mit anderen Menschen zu treffen (z. B. Freizeitaktivitäten, Ausflüge, Kaffee trinken etc.).
+    label: 6.7 Es ist mir <strong>regelmäßig</strong> möglich, mich <strong>mit anderen Menschen zu treffen</strong> (z. B. Freizeitaktivitäten, Ausflüge, Kaffee trinken etc.).
     type: radio
     options:
       stimmt: stimmt
@@ -51,7 +51,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   zeitfuermichselbst:
-    label: Ich habe genug Zeit für mich selbst, um mich zu erholen.
+    label: 6.8 Ich habe <strong>genug Zeit</strong> für mich selbst, um <strong>mich zu erholen</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -59,7 +59,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   beziehungen:
-    label: Es ist mir regelmäßig möglich, meine Beziehung zu Familienangehörigen, Verwandten, FreundInnen und Bekannten zu pflegen.
+    label: 6.9 Es ist mir <strong>regelmäßig</strong> möglich, meine <strong>Beziehung</strong> zu Familienangehörigen, Verwandten, FreundInnen und Bekannten <strong>zu pflegen</strong>.
     type: radio
     options:
       stimmt: stimmt
@@ -67,7 +67,7 @@ fields:
       stimmt_nicht: stimmt nicht
 
   anforderungen:
-    label: Ich kann die Anforderungen meiner Umgebung (z. B. Familie, Arbeitsplatz) und die Anforderungen durch die Pflege gut vereinbaren.
+    label: 6.10 Ich kann die <strong>Anforderungen meiner Umgebung</strong> (z. B. Familie, Arbeitsplatz) <strong>und die Anforderungen durch die Pflege gut vereinbaren.</strong>
     type: radio
     options:
       stimmt: stimmt
