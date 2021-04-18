@@ -29,7 +29,7 @@
           />
         </a>
         <h1 class="an-start__an-logo">
-          <IconTextLogo class="icon-text-logo" aria-label="Angehörigendialog" />
+          <IconTextLogo aria-label="Angehörigendialog" />
         </h1>
       </div>
 
@@ -55,32 +55,24 @@
             />
           </div>
         </div>
-        <div class="an-start__space_column"></div>
-        <div class="an-start__an-btn-start">
-          <router-link
-            v-if="!existingQuestionnaire"
-            :to="{ name: 'Fragebogen' }"
-            class="btn an-start__startbutton"
-            >Start</router-link
+        <div class="an-start__buttons">
+          <component
+            :is="existingQuestionnaire ? 'button' : 'router-link'"
+            class="btn"
+            :to="!existingQuestionnaire ? { name: 'Fragebogen' } : undefined"
+            @click="existingQuestionnaire ? startNew() : undefined"
           >
-          <template v-else>
-            <button class="btn an-start__startbutton" @click="startNew">
-              <IconStart class="an-start__icon-start" />
-            </button>
-            <button class="an-start__label_button_start" @click="startNew">
-              Start
-            </button>
-            <div class="an-start__space"></div>
-            <router-link
-              :to="{ name: 'Fragebogen' }"
-              class="btn an-start__previousbutton"
-            >
-              <IconBack class="an-start__icon-back" />
-              <div class="an-start__label_button_previous">
-                Vorherigen Fragebogen laden
-              </div>
-            </router-link>
-          </template>
+            <span>Start</span>
+            <IconStart class="yellow--fill" />
+          </component>
+          <router-link
+            v-if="existingQuestionnaire"
+            class="btn"
+            :to="{ name: 'Fragebogen' }"
+          >
+            <span>Vorherigen Fragebogen laden</span>
+            <IconBack class="yellow--fill" />
+          </router-link>
         </div>
       </div>
       <router-link class="an-start__links" to="/legal"
@@ -137,7 +129,7 @@ export default {
         focusCancel: true,
         showCloseButton: true,
         customClass: {
-          container: 'specialDialog'
+          container: 'an-start__restart-dialog'
         }
       }).then(result => {
         if (result.isConfirmed) {
@@ -154,13 +146,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.icon-text-logo {
-  fill: white;
-  max-height: 2rem;
-  width: 100%; // Chrome won't show otherwise
-}
-
+<style lang="scss">
 .an-start {
   padding: 5vh 5vw;
   height: calc(var(--vh, 1vh) * 100);
@@ -194,97 +180,57 @@ export default {
     font-size: 2.2rem;
     text-transform: uppercase;
     font-weight: normal;
+
+    > svg {
+      fill: white;
+      max-height: 2rem;
+      width: 100%; // Chrome won't show otherwise
+    }
   }
 
   &__form {
-    border-radius: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -25px;
+    margin-right: -25px;
+    > * {
+      margin-left: 25px;
+      margin-right: 25px;
+    }
   }
 
-  &__an-btn-start {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-end;
-    float: left;
-    position: relative;
+  &__buttons {
     flex-grow: 1;
   }
 
-  &__startbutton {
-    font-weight: bold;
-    box-shadow: none;
+  &__buttons > * {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border: none;
     border-radius: 50px;
-    width: 320px;
+    margin: 0;
+    padding-left: $spacer * 2;
+    padding-right: 0;
     height: 60px;
-    display: flex;
-    padding: 0;
-    margin: 0 0 0 0;
-    background-color: #fff;
-    position: absolute;
-  }
+    max-width: 320px;
+    width: 100%;
+    font-weight: 700;
 
-  &__label_button_start {
-    width: 50px;
-    background-color: white;
-    border: none;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #000;
-    text-align: left;
-    vertical-align: middle;
-    margin: 10px;
-    padding-top: 10px;
-    padding-left: 7px;
-    padding-bottom: 10px;
-    position: relative;
-    cursor: pointer;
-  }
+    > svg {
+      margin-left: $spacer;
+      height: calc(100% + #{$spacer * 2});
+      flex-shrink: 0;
+      fill: $color-theme-yellow;
+    }
 
-  &__icon-start {
-    fill: $color-theme-yellow;
-    height: 100%;
-    position: relative;
-    left: 16.3em;
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
   }
 
   &__space {
     margin-top: 10px;
-  }
-
-  &__previousbutton {
-    font-weight: bold;
-    box-shadow: none;
-    border: none;
-    border-radius: 50px;
-    width: 320px;
-    height: 60px;
-    display: flex;
-    vertical-align: middle;
-    text-align: left;
-    padding: 0;
-    margin: 0 0 0 0;
-    background-color: #fff;
-    position: relative;
-  }
-
-  &__icon-back {
-    height: 100%;
-    position: absolute;
-    left: 16.3em;
-  }
-
-  &__label_button_previous {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #000;
-    text-align: left;
-    margin: 10px;
-    padding-top: 10px;
-    padding-left: 6px;
-    padding-bottom: 10px;
-    position: absolute;
   }
 
   &__background {
@@ -317,16 +263,13 @@ export default {
   }
 
   &__inputbackground {
-    margin-right: 50px;
     margin-bottom: 20px;
     display: block;
     flex-direction: column;
     padding: $spacer * 3;
-    border-radius: none;
     border: 1.5px solid $color-theme-lightgrey;
     background-color: white;
     width: 320px;
-    float: left;
   }
 
   &__inputwrapper {
@@ -365,20 +308,14 @@ export default {
     text-shadow: 0 0 10px black;
     margin-top: 15px;
   }
-}
-</style>
 
-<style lang="scss">
-.specialDialog {
-  font-family: 'Open Sans', sans-serif !important;
-
-  button {
+  &__restart-dialog button {
     color: $color-theme-darkgrey !important;
-  }
 
-  button:focus {
-    outline: none !important;
-    box-shadow: none !important;
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
   }
 }
 </style>
